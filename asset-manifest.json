@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/goosetrack-team-project-front/static/css/main.7acaea2f.css",
+    "main.js": "/goosetrack-team-project-front/static/js/main.12757e5a.js",
+    "index.html": "/goosetrack-team-project-front/index.html",
+    "main.7acaea2f.css.map": "/goosetrack-team-project-front/static/css/main.7acaea2f.css.map",
+    "main.12757e5a.js.map": "/goosetrack-team-project-front/static/js/main.12757e5a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.12757e5a.js"
+  ]
+}

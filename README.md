@@ -1,1 +1,0 @@
-# goosetrack-team-project-front

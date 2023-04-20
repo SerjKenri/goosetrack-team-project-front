@@ -1,0 +1,61 @@
+:root {
+  /* fonts */
+  --main-font: "Inter", sans-serif;
+  --secondary-font: "Coolvetica", sans-serif;
+
+  /* text */
+  --main-text-color: #111111;
+  --secondary-text-color: #616161;
+  --accent-text-color: #3e85f3;
+  --active-selection-color: #e3f3ff;
+  --btn-text-color: #ffffff;
+  --inactive-btn-text-color: #84828a;
+  --calendar-date-color: #343434;
+  --accent-color: #3e85f3;
+
+  /* backgroung */
+  --main-background-color: #ffffff;
+  --auth-background-color: #dcebf7;
+  --outlet-background-color: #f7f6f9;
+  --accent-background-color: #3e85f3;
+  --sidebar-background-color: #ffffff;
+
+  /* tasks */
+  --task-high-color: #ea3d65;
+  --task-med-color: #f3b249;
+  --task-low-color: #72c2f8;
+  --task-card-color: #dce3e5cc;
+  --task-field-color: #f6f6f6;
+  --task-cancel-color: #efefef;
+  --task-field-text-color: #616161;
+
+  /* calendar */
+  --priority-high-color: #ffd2dd;
+  --priority-med-color: #fcf0d4;
+  --priority-low-color: #ceeefd;
+
+  /* other */
+  --scrollbar-color: #e7e5e5;
+  --scrollbar-background-color: #f2f2f2;
+  --frame-border-color: #e1e7e9;
+}
+
+[dark] {
+  /* text */
+  --title-text-main-color: #ffffff;
+  --accent-text-color: #ffffff;
+  --inactive-btn-text-color: #ffffff;
+  --active-selection-color: #3e85f3;
+  --calendar-date-color: #ffffff;
+  --task-field-text-color: #ffffff;
+
+  /* backgroung */
+  --outlet-background-color: #171820;
+  --main-background-color: #21222c;
+  --sidebar-background-color: #13151a;
+
+  /* other */
+  --scrollbar-color: #2d3037;
+  --scrollbar-background-color: #21222c;
+  --frame-border-color: #42434c;
+}

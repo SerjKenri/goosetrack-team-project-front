@@ -1,13 +1,37 @@
 {
   "files": {
-    "main.css": "/goosetrack-team-project-front/static/css/main.7acaea2f.css",
-    "main.js": "/goosetrack-team-project-front/static/js/main.12757e5a.js",
+    "main.css": "/goosetrack-team-project-front/static/css/main.b7e632c6.css",
+    "main.js": "/goosetrack-team-project-front/static/js/main.9eccadb2.js",
+    "static/media/Inter-Bold.eot": "/goosetrack-team-project-front/static/media/Inter-Bold.7e9fff4114e0ea385c94.eot",
+    "static/media/Inter-Bold.ttf": "/goosetrack-team-project-front/static/media/Inter-Bold.44e2216a9e0d20ee04b6.ttf",
+    "static/media/Inter-SemiBold.eot": "/goosetrack-team-project-front/static/media/Inter-SemiBold.d7ced04b4dc4d21fd205.eot",
+    "static/media/Inter-SemiBold.ttf": "/goosetrack-team-project-front/static/media/Inter-SemiBold.62b226e9a47209d1bb66.ttf",
+    "static/media/Inter-Medium.eot": "/goosetrack-team-project-front/static/media/Inter-Medium.2417569c705e8200aae0.eot",
+    "static/media/Inter-Medium.ttf": "/goosetrack-team-project-front/static/media/Inter-Medium.dd13fe7e850bb701d163.ttf",
+    "static/media/Inter-Regular.eot": "/goosetrack-team-project-front/static/media/Inter-Regular.66c354028831375b8176.eot",
+    "static/media/Inter-Regular.ttf": "/goosetrack-team-project-front/static/media/Inter-Regular.9782abbb49bf3aaf986a.ttf",
+    "static/media/Inter-Bold.woff": "/goosetrack-team-project-front/static/media/Inter-Bold.d863298c035ae887b7d6.woff",
+    "static/media/Inter-SemiBold.woff": "/goosetrack-team-project-front/static/media/Inter-SemiBold.133ad17891ba17ce4b7e.woff",
+    "static/media/Inter-Medium.woff": "/goosetrack-team-project-front/static/media/Inter-Medium.5aebe1f6c4605768582d.woff",
+    "static/media/Inter-Regular.woff": "/goosetrack-team-project-front/static/media/Inter-Regular.16cbea275b2ab28453af.woff",
+    "static/media/Inter-Bold.woff2": "/goosetrack-team-project-front/static/media/Inter-Bold.33a5a4566bb3413901e3.woff2",
+    "static/media/Inter-SemiBold.woff2": "/goosetrack-team-project-front/static/media/Inter-SemiBold.f8f55aa9d497b7683ed5.woff2",
+    "static/media/Inter-Medium.woff2": "/goosetrack-team-project-front/static/media/Inter-Medium.3b9cdcf0bbb18875523f.woff2",
+    "static/media/CoolveticaRg-Italic.eot": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.01ce5bf9a3740f07644f.eot",
+    "static/media/CoolveticaRg-Italic.ttf": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.1b391ccf4bb030c85a18.ttf",
+    "static/media/Inter-Regular.woff2": "/goosetrack-team-project-front/static/media/Inter-Regular.582d8a8e254ad87ea376.woff2",
+    "static/media/CoolveticaRg-Regular.eot": "/goosetrack-team-project-front/static/media/CoolveticaRg-Regular.110b9f849bd56dba90bf.eot",
+    "static/media/CoolveticaRg-Regular.ttf": "/goosetrack-team-project-front/static/media/CoolveticaRg-Regular.519cfb32aa9363facf70.ttf",
+    "static/media/CoolveticaRg-Italic.woff": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.d2afb6348017cacb5a92.woff",
+    "static/media/CoolveticaRg-Regular.woff": "/goosetrack-team-project-front/static/media/CoolveticaRg-Regular.d7bc4174b8f5b1d10a2d.woff",
+    "static/media/CoolveticaRg-Italic.woff2": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.354b20eb1b8d25af62a1.woff2",
+    "static/media/CoolveticaRg-Regular.woff2": "/goosetrack-team-project-front/static/media/CoolveticaRg-Regular.3829e81cd606bef6e1e9.woff2",
     "index.html": "/goosetrack-team-project-front/index.html",
-    "main.7acaea2f.css.map": "/goosetrack-team-project-front/static/css/main.7acaea2f.css.map",
-    "main.12757e5a.js.map": "/goosetrack-team-project-front/static/js/main.12757e5a.js.map"
+    "main.b7e632c6.css.map": "/goosetrack-team-project-front/static/css/main.b7e632c6.css.map",
+    "main.9eccadb2.js.map": "/goosetrack-team-project-front/static/js/main.9eccadb2.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.12757e5a.js"
+    "static/css/main.b7e632c6.css",
+    "static/js/main.9eccadb2.js"
   ]
 }

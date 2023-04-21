@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/goosetrack-team-project-front/static/css/main.e1b753a6.css",
+    "main.css": "/goosetrack-team-project-front/static/css/main.d7f6e075.css",
     "main.js": "/goosetrack-team-project-front/static/js/main.a4fce460.js",
     "static/media/Inter-Bold.eot": "/goosetrack-team-project-front/static/media/Inter-Bold.7e9fff4114e0ea385c94.eot",
     "static/media/Inter-Bold.ttf": "/goosetrack-team-project-front/static/media/Inter-Bold.44e2216a9e0d20ee04b6.ttf",
@@ -27,11 +27,11 @@
     "static/media/CoolveticaRg-Italic.woff2": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.354b20eb1b8d25af62a1.woff2",
     "static/media/CoolveticaRg-Regular.woff2": "/goosetrack-team-project-front/static/media/CoolveticaRg-Regular.3829e81cd606bef6e1e9.woff2",
     "index.html": "/goosetrack-team-project-front/index.html",
-    "main.e1b753a6.css.map": "/goosetrack-team-project-front/static/css/main.e1b753a6.css.map",
+    "main.d7f6e075.css.map": "/goosetrack-team-project-front/static/css/main.d7f6e075.css.map",
     "main.a4fce460.js.map": "/goosetrack-team-project-front/static/js/main.a4fce460.js.map"
   },
   "entrypoints": [
-    "static/css/main.e1b753a6.css",
+    "static/css/main.d7f6e075.css",
     "static/js/main.a4fce460.js"
   ]
 }

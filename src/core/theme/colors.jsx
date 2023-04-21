@@ -16,6 +16,7 @@ const colorsLight = {
   outletBackgroundColor: '#f7f6f9',
   sidebarBackgroundColor: '#ffffff',
   accentBackgroundColor: '#3e85f3',
+  modalBorder:'#DCE3E5CC',
 
   /* tasks */
   taskHighColor: '#ea3d65',
@@ -53,6 +54,7 @@ const colorsDark = {
   outletBackgroundColor: "#171820",
   sidebarBackgroundColor: "#13151a",
   accentBackgroundColor: "#3e85f3",
+  modalBorder:'#DCE3E5CC',
 
   /* tasks */
   taskHighColor: "#ea3d65",

@@ -51,6 +51,7 @@ const colorsDark = {
   accentColor: "#3e85f3",
   labelColor: "#FAFAFA4D",
   iconColor: "#FFFFFF",
+
   /* backgroung */
   mainBackgroundColor: "#21222c",
   authBackgroundColor: "#dcebf7",
@@ -58,7 +59,6 @@ const colorsDark = {
   sidebarBackgroundColor: "#13151a",
   accentBackgroundColor: "#3e85f3",
   modalBorder: "#DCE3E5CC",
-  iconColor: "#FFFFFF",
 
   /* tasks */
   taskHighColor: "#ea3d65",

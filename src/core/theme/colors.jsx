@@ -49,6 +49,8 @@ const colorsDark = {
   calendarDateColor: "#ffffff",
   calendarCellColor: "#21222C",
   accentColor: "#3e85f3",
+  labelColor: "#FAFAFA4D",
+  iconColor: "#FFFFFF",
   /* backgroung */
   mainBackgroundColor: "#21222c",
   authBackgroundColor: "#dcebf7",
@@ -57,15 +59,17 @@ const colorsDark = {
   accentBackgroundColor: "#3e85f3",
   modalBorder: "#DCE3E5CC",
   iconColor: "#FFFFFF",
+
   /* tasks */
   taskHighColor: "#ea3d65",
   taskMedColor: "#f3b249",
   taskLowColor: "#72c2f8",
   taskCardColor: "#171820",
-  inputFieldColor: "#f6f6f6", // ?
+  inputFieldColor: "#171820",
   taskCancelColor: "#efefef",
-  inputFieldTextColor: "#616161",
-
+  inputFieldTextColor: "#FFFFFF",
+  inputBorderColor: "#FFFFFF26",
+  placeholderColor: "#DCE3E5",
   /* calendar */
   priorityHighColor: "#ffd2dd",
   priorityMedColor: "#fcf0d4",

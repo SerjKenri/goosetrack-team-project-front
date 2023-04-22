@@ -6,22 +6,22 @@ import Backend from "i18next-http-backend";
 const FRONTEND_BASE_URL = "http://localhost:3000";
 
 i18next
-  .use(initReactI18next)
-  .use(LanguageDetector)
-  .use(Backend)
-  .init({
-    backend: {
-      loadPath: `${FRONTEND_BASE_URL}/goosetrack-Frontend/locales/{{lng}}/translation.json`,
-    },
-    fallbackLng: "en",
-    whitelist: ["en", "uk"],
-    debug: false,
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .use(Backend)
+    .init({
+        backend: {
+            loadPath: `${FRONTEND_BASE_URL}/goosetrack-team-project-front/locales/{{lng}}/translation.json`,
+        },
+        fallbackLng: 'en',
+        whitelist: ['en', 'uk'],
+        debug: false,
 
-    detection: {
-      order: ["localStorage", "cookie"],
-    },
+        detection: {
+            order: ['localStorage', 'cookie'],
+        },
 
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+        interpolation: {
+            escapeValue: false,
+        },
+    });

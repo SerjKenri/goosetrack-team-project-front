@@ -14,9 +14,9 @@ const ManageThemeProvider = ({ children }) => {
   };
 
   const theme = isDarkMode ? darkTheme : lightTheme;
-
+  console.log(theme);
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ThemeContext.Provider>
   );

@@ -23,12 +23,10 @@ const Container = styled.div(({ theme, priority }) => ({
   textAlign: "center",
 }));
 
-const Chip = ({ priority }) => {
+export const Chip = ({ priority }) => {
   return <Container priority={priority}>{priority}</Container>;
 };
 
 Chip.propTypes = {
   priority: propTypes.oneOf(["Low", "Medium", "High"]).isRequired,
 };
-
-export default Chip;

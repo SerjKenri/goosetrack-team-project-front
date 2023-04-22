@@ -9,8 +9,7 @@ const colorsLight = {
   calendarDateColor: "#343434",
   calendarCellColor: "#FFFFFF",
   accentColor: "#3e85f3",
-  labelColor: "#343434CC",
-  iconColor: "#111111",
+
   /* backgroung */
   mainBackgroundColor: "#ffffff",
   authBackgroundColor: "#dcebf7",
@@ -27,8 +26,8 @@ const colorsLight = {
   inputFieldColor: "#f6f6f6",
   taskCancelColor: "#efefef",
   inputFieldTextColor: "#616161",
-  inputBorderColor: "transparent",
-  placeholderColor: "#DCE3E5",
+  iconColor: "#111111",
+
   /* calendar */
   priorityHighColor: "#ffd2dd",
   priorityMedColor: "#fcf0d4",
@@ -58,7 +57,8 @@ const colorsDark = {
   outletBackgroundColor: "#171820",
   sidebarBackgroundColor: "#13151a",
   accentBackgroundColor: "#3e85f3",
-  modalBorder: "transparent",
+  modalBorder: "#DCE3E5CC",
+  iconColor: "#FFFFFF",
 
   /* tasks */
   taskHighColor: "#ea3d65",
@@ -80,4 +80,4 @@ const colorsDark = {
   frameBorderColor: "#42434c",
 };
 
-export { colorsLight ,colorsDark}
+export { colorsLight, colorsDark };

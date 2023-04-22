@@ -1,8 +1,10 @@
-const { colorsLight } = require("./colors");
-const { font } = require("./fonts");
-const { space } = require("./space");
+import { space } from "./space";
+import { font } from "./fonts";
+import { breakpoints } from "./breakpoints";
+import { colorsLight } from "./colors";
 
 const lightTheme = {
+  breakpoints,
   space,
   font,
   color: colorsLight,

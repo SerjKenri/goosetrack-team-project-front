@@ -41,6 +41,7 @@ const colorsLight = {
     scrollbarColor: '#e7e5e5',
     scrollbarBackgroundColor: '#f2f2f2',
     frameBorderColor: '#e1e7e9',
+    navTitleColor: '#7E7D82',
 };
 
 const colorsDark = {

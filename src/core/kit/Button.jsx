@@ -40,6 +40,7 @@ const Button = ({
     textStyle,
     iconName,
     iconSize,
+    type,
 }) => {
     return (
         <Container>
@@ -48,6 +49,7 @@ const Button = ({
                 onClick={onClick}
                 disabled={disabled}
                 differentStyles={differentStyles}
+                type={type}
             >
                 {iconName && (
                     <IconContainer>
@@ -69,9 +71,9 @@ const Button = ({
 
 export { ButtonDifference, Button };
 Button.propTypes = {
-    differentStyles: propTypes.string.isRequired,
+    differentStyles: propTypes.string,
     title: propTypes.string.isRequired,
-    onClick: propTypes.func.isRequired,
+    onClick: propTypes.func,
     disabled: propTypes.bool,
     buttonStyle: propTypes.object,
     textStyle: propTypes.object,

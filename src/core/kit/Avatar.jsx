@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import { Icon } from './Icon';
 import { iconNames } from 'assets/icons/iconNames';
+import { TextH2 } from './text';
 
-export const Avatar = ({ size, plusIcon, disabled = false }) => {
+export const Avatar = ({ size, plusIcon, disabled = false, name }) => {
     const [value, setValue] = useState('');
 
     const handleChange = e => {
@@ -25,11 +26,15 @@ export const Avatar = ({ size, plusIcon, disabled = false }) => {
             <AvatarLabel htmlFor="file">
                 {!value ? (
                     <UserIconWrapper>
-                        <Icon
-                            name={iconNames.avatar}
-                            size="48px"
-                            stroke="none"
-                        />
+                        {disabled ? (
+                            <TextH2>{name}</TextH2>
+                        ) : (
+                            <Icon
+                                name={iconNames.avatar}
+                                size="48px"
+                                stroke="none"
+                            />
+                        )}
                     </UserIconWrapper>
                 ) : (
                     <AvatarImage src={value} alt="user avatar" />
@@ -47,6 +52,8 @@ export const Avatar = ({ size, plusIcon, disabled = false }) => {
 Avatar.propTypes = {
     size: PropTypes.string.isRequired,
     plusIcon: PropTypes.bool,
+    disabled: PropTypes.bool,
+    name: PropTypes.string,
 };
 
 const AvatarContainer = styled.div(({ size }) => ({

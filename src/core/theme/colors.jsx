@@ -10,6 +10,8 @@ const colorsLight = {
     calendarCellColor: '#FFFFFF',
     accentColor: '#3e85f3',
     hoverColor: '#7aaff3',
+    columnBackGroundColor: '#FFFFFF',
+    modalShadow:'#1111111A',
 
     /* backgroung */
     mainBackgroundColor: '#ffffff',
@@ -18,6 +20,7 @@ const colorsLight = {
     sidebarBackgroundColor: '#ffffff',
     accentBackgroundColor: '#3e85f3',
     modalBorder: '#DCE3E5CC',
+    
 
     /* tasks */
     taskHighColor: '#ea3d65',
@@ -53,6 +56,8 @@ const colorsDark = {
     labelColor: '#FAFAFA4D',
     iconColor: '#FFFFFF',
     hoverColor: '#7aaff3',
+    columnBackGroundColor: '#21222C',
+    modalShadow: '#1111111A',
 
     /* backgroung */
     mainBackgroundColor: '#21222c',
@@ -60,7 +65,7 @@ const colorsDark = {
     outletBackgroundColor: '#171820',
     sidebarBackgroundColor: '#13151a',
     accentBackgroundColor: '#3e85f3',
-    modalBorder: '#DCE3E5CC',
+    modalBorder: '#FFFFFF26',
 
     /* tasks */
     taskHighColor: '#ea3d65',

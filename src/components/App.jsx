@@ -12,7 +12,6 @@ export const App = () => {
         >
             goosetrack-team-project-front
 
-           
         </div>
     );
 };

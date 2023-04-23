@@ -125,7 +125,7 @@ const PriorityChecked = styled.span(({ theme, priority}) => ({
     borderColor:
             priority === 'Low'
             ? theme.color.taskLowColor
-            : priority === 'orange'
+            : priority === 'Medium'
             ? theme.color.taskMedColor
             : theme.color.taskHighColor,
             

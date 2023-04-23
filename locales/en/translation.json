@@ -56,7 +56,7 @@
         },
         "columns": {
             "title": {
-                "todo": "to do",
+                "toDo": "To do",
                 "inProgress": "In progress",
                 "done": "Done"
             }

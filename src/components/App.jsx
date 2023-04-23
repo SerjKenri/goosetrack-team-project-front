@@ -1,4 +1,3 @@
- feature/register-page-form
 import { RegisterPage } from 'pages/RegisterPage';
 import { Routes, Route } from 'react-router-dom';
 export const App = () => {
@@ -6,6 +5,5 @@ export const App = () => {
         <Routes>
             <Route path="/register" element={<RegisterPage />} />
         </Routes>
-
     );
 };

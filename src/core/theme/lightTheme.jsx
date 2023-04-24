@@ -2,12 +2,14 @@ import { space } from "./space";
 import { font } from "./fonts";
 import { breakpoints } from "./breakpoints";
 import { colorsLight } from "./colors";
+import { media } from "./mediaRules";
 
 const lightTheme = {
-  breakpoints,
-  space,
-  font,
-  color: colorsLight,
+    media,
+    breakpoints,
+    space,
+    font,
+    color: colorsLight,
 };
 
 export { lightTheme };

@@ -1,4 +1,4 @@
-import { LogOutButton } from 'components/LogoutBtn';
+import { LogOutButton } from 'components/LogoutBtn/LogOutButton';
 import { iconNames } from "assets/icons/iconNames";
 import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
@@ -115,7 +115,7 @@ const Container = styled.div(({ theme }) => ({
 
 const SideBarHeader = styled.div(({ theme }) => ({
     display: "flex",
-    width: '100%',
+    width: "max-content",
     justifyContent: 'space-between',
     alignItems: 'center'
 }));

@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { iconNames } from "assets/icons/iconNames";
 import { Button } from "core/kit/Button"
 import { ButtonDifference } from "core/kit/Button";

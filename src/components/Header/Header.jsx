@@ -95,6 +95,7 @@ const SideBarButton = styled.button(({ theme }) => ({
 }))
 
 const Container = styled.div(({ theme }) => ({
+    width: '100%',
     display: "flex",
     justifyContent: 'space-between',
 }));

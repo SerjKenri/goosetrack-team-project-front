@@ -3,12 +3,13 @@ import { iconNames } from "assets/icons/iconNames";
 import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
 import gooseimg from '../../assets/images/goose-sidebar@2x.png'
+import { UserNav } from 'components/UserNav/UserNav';
 
 
 export const SideBar = ({onClick}) => {
 
     return <Container>
-        <div>
+        <SecondaryContainer>
             <SideBarHeader>
                 <Logo>
                     <Image src={gooseimg} alt="goose"/>
@@ -18,11 +19,54 @@ export const SideBar = ({onClick}) => {
                     <Icon name={iconNames.cross} size={ '100%' } />
                 </CloseButton>
             </SideBarHeader>
-            <div>UserNav</div>
-        </div>
+            <UserPanelContainer>
+                <SecondaryTitle>User Panel</SecondaryTitle>
+                <UserNav />
+            </UserPanelContainer>
+        </SecondaryContainer>
         <LogOutButton/>
     </Container>
 }
+
+const Container = styled.div(({ theme }) => ({
+    height: '100vw',
+    display: "flex",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: '24px 20px', 
+    backgroundColor: theme.color.mainBackgroundColor,
+    position: 'absolute',
+
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        padding: '24px 32px'
+    },
+
+    [theme.media.up(`${theme.breakpoints.l}px`)]: {
+        padding: '32px 24px',
+        position: 'relative',
+    },
+}));
+
+const SecondaryContainer = styled.div(({ theme }) => ({
+    display: "flex",
+    flexDirection: 'column',
+    gap: "64px", 
+
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        gap: "50px",
+    },
+
+    [theme.media.up(`${theme.breakpoints.l}px`)]: {
+        gap: "32px",
+    },
+}))
+
+const SideBarHeader = styled.div(({ theme }) => ({
+    display: "flex",
+    width: "max-content",
+    justifyContent: 'space-between',
+    alignItems: 'center'
+}));
 
 const Logo = styled.div(({ theme }) => ({
     display: 'flex',
@@ -95,30 +139,30 @@ const CloseButton = styled.button(({ theme }) => ({
     },
 }))
 
-const Container = styled.div(({ theme }) => ({
+const UserPanelContainer = styled.div(({ theme }) => ({
     display: "flex",
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: '24px 20px', 
-    backgroundColor: theme.color.mainBackgroundColor,
-    position: 'absolute',
+    gap: "24px",
+    
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        gap: "32px",
+    },
+}))
+
+const SecondaryTitle = styled.p(({ theme }) => ({
+    color: theme.color.inactiveBtnTextColor,
+    fontSize: "12px",
+    lineHeight: '15px',
+    fontWeight: '600',
+
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        padding: '24px 32px'
-    },
+        fontSize: "14px",
+        lineHeight: '17px',
+    }
+}))
 
-    [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        padding: '32px 24px',
-        position: 'relative',
-    },
-}));
 
-const SideBarHeader = styled.div(({ theme }) => ({
-    display: "flex",
-    width: "max-content",
-    justifyContent: 'space-between',
-    alignItems: 'center'
-}));
 
 
 

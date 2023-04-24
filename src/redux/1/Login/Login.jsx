@@ -1,7 +1,7 @@
-import { useLoginUserMutation } from 'redux/auth/auth.api';
+import { useLoginMutation } from 'redux/auth/auth.api';
 
 export const Login = () => {
-    const [loginUser] = useLoginUserMutation();
+    const [loginUser] = useLoginMutation();
     // console.log(body);
     const onLogin = e => {
         e.preventDefault();

@@ -4,7 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
 // to do translaion.json
-// const FRONTEND_BASE_URL = 'http://localhost:3000';
+const FRONTEND_BASE_URL = 'http://localhost:3000';
 
 i18next
     .use(initReactI18next)
@@ -12,7 +12,7 @@ i18next
     .use(Backend)
     .init({
         backend: {
-            loadPath: `/goosetrack-team-project-front/locales/{{lng}}/translation.json`,
+            loadPath: `${FRONTEND_BASE_URL}/goosetrack-team-project-front/locales/{{lng}}/translation.json`,
         },
 
         fallbackLng: 'en',

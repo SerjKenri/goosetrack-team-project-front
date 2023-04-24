@@ -1,5 +1,5 @@
-import { validationSchema } from 'schemas/registerFormValidation';
 import { useTranslation } from 'react-i18next';
+import { useRegisterForm } from 'components/RegisterForm/useRegisterForm';
 
 import { Input } from 'core/kit/Input';
 import { Button } from 'core/kit/Button';
@@ -13,31 +13,30 @@ const LangaguesBar = () => {
     return (
         <div>
             <ul>
-                {LANGAGUES.map(langague => (
-                    <li key={langague}>
-                        <button
-                            id={
-                                i18n.resolvedLanguage === langague
-                                    ? 'selectedLang'
-                                    : 'langId'
-                            }
-                            onClick={() => i18n.changeLanguage(langague)}
-                        >
-                            {langague}
-                        </button>
-                    </li>
-                ))}
+                {LANGAGUES.map(langague => {
+                    console.log(langague);
+                    return (
+                        <li key={langague}>
+                            <button
+                                id={
+                                    i18n.resolvedLanguage === langague
+                                        ? 'selectedLang'
+                                        : 'langId'
+                                }
+                                onClick={() => i18n.changeLanguage(langague)}
+                            >
+                                {langague}
+                            </button>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
 };
 
 export const RegisterForm = () => {
-    const { t } = useTranslation();
-
-    const onSubmit = values => {
-        console.log(values);
-    };
+    const { t, onSubmit, validationSchema } = useRegisterForm();
 
     return (
         <>
@@ -64,8 +63,8 @@ export const RegisterForm = () => {
                         <Input
                             name="email"
                             type="text"
-                            labelTitle={t('labelTitleEmail')}
-                            placeholder={t('inputPlaceholderEmail')}
+                            labelTitle={t('signUpPage.labelTitleEmail')}
+                            placeholder={t('signUpPage.inputPlaceholderEmail')}
                             handleBlur={handleBlur}
                             onChange={handleChange}
                             value={values.email}
@@ -78,8 +77,8 @@ export const RegisterForm = () => {
                         <Input
                             name="name"
                             type="text"
-                            labelTitle={t('labelTitleName')}
-                            placeholder={t('inputPlaceholderName')}
+                            labelTitle={t('signUpPage.labelTitleName')}
+                            placeholder={t('signUpPage.inputPlaceholderName')}
                             handleBlur={handleBlur}
                             onChange={handleChange}
                             value={values.name}
@@ -91,8 +90,10 @@ export const RegisterForm = () => {
                         <Input
                             name="password"
                             type="password"
-                            labelTitle={t('labelTitlePassword')}
-                            placeholder={t('inputPlaceholderPassword')}
+                            labelTitle={t('signUpPage.labelTitlePassword')}
+                            placeholder={t(
+                                'signUpPage.inputPlaceholderPassword'
+                            )}
                             handleBlur={handleBlur}
                             onChange={handleChange}
                             value={values.password}
@@ -105,7 +106,11 @@ export const RegisterForm = () => {
                         <Button
                             type="submit"
                             disabled={!isValid}
-                            title={!isValid ? t('button') : t('btnSubmit')}
+                            title={
+                                !isValid
+                                    ? t('signUpPage.button')
+                                    : t('signUpPage.signUp')
+                            }
                         />
                     </form>
                 )}

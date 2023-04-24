@@ -1,0 +1,20 @@
+{
+    "signUpPage": {
+        "signUp": "Зареєструватися",
+        "login": "Авторизуватися",
+        "description": "Швиденько реєструйтесь, щоб ознайомитися з додатком!",
+        "button": "Вимкнена",
+        "btnSubmit": "Зареєструватися",
+        "labelTitleName": "Ім'я",
+        "labelTitlePassword": "Пароль",
+        "labelTitleEmail": "Імейл",
+        "inputPlaceholderEmail": "Введіть свою електронну адресу",
+        "inputPlaceholderName": "Введіть своє ім'я ",
+        "inputPlaceholderPassword": "Введіть свій пароль",
+        "errorRequired": "Необхідно",
+        "errorEmail": "Будь ласка, введіть валідний імейл",
+        "errorPassword": "Будь ласка, введіть надійніший пароль",
+        "minLengthName": "Ім'я повинно мати більше ніж 2 символи",
+        "minLengthPass": "Пароль повинен мати  більше ніж 5 символів"
+    }
+}

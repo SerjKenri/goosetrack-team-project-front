@@ -9,14 +9,14 @@ export const userApi = createApi({
     tagTypes: ['user'],
     endpoints: builder => ({
         getUser: builder.query({
-            query: body => {
-                return { url: '/current', method: 'get', body };
+            query: () => {
+                return { url: '/current', method: 'get' };
             },
             invalidatesTags: ['user'],
         }),
         logoutUser: builder.mutation({
-            query: body => {
-                return { url: '/logout', method: 'post', body };
+            query: () => {
+                return { url: '/logout', method: 'post' };
             },
             invalidatesTags: ['user'],
         }),

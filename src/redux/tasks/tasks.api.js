@@ -1,20 +1,20 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from '../store/axiosBaseQuery';
 
 export const tasksApi = createApi({
     reducerPath: 'tasksApi',
     baseQuery: axiosBaseQuery({
-        baseUrl: 'http://localhost:5000`/tasks`',
+        baseUrl: 'http://localhost:5000`/api/tasks`',
     }),
-    tagTypes: ['task'],
+    tagTypes: ['tasks'],
     endpoints: builder => ({
         getTasks: builder.query({
-            query: body => {
+            query: () => {
                 return { url: '/', method: 'get' };
             },
             invalidatesTags: ['task'],
         }),
-        addTasks: builder.mutation({
+        addTask: builder.mutation({
             query: body => {
                 return { url: '/', method: 'post', body };
             },
@@ -22,21 +22,24 @@ export const tasksApi = createApi({
         }),
         getTaskById: builder.mutation({
             query: id => {
-                return { url: `/${id}`, method: 'patch' };
+                return { url: `/${id}`, method: 'patch', id };
             },
-            invalidatesTags: ['task'],
+            providesTags: (result, error, id) => [{ type: 'tasks', id }],
+
+            // invalidatesTags: ['task'],
         }),
         deleteTaskById: builder.mutation({
             query: id => {
                 return { url: `/${id}`, method: 'delete' };
             },
-            invalidatesTags: ['task'],
+            providesTags: (result, error, id) => [{ type: 'tasks', id }],
+            // invalidatesTags: ['task'],
         }),
     }),
 });
 
 export const {
-    useAddTasksMutation,
+    useAddTaskMutation,
     useGetTasksQuery,
     useGetTaskByIdMutation,
     useDeleteTaskByIdMutation,

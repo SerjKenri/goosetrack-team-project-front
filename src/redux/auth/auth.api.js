@@ -18,9 +18,11 @@ export const authApi = createApi({
         loginUser: builder.mutation({
             query: body => {
                 console.log(body);
-                return { url: '/login', method: 'post', body };
+                return { url: '/login', method: 'post', body: { ...body } };
             },
             invalidatesTags: ['auth'],
+            transformResponse: (response, meta, arg) =>
+                console.log(response.data),
         }),
         verifyUser: builder.mutation({
             query: body => {

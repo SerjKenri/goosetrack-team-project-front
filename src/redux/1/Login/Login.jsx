@@ -8,8 +8,9 @@ export const Login = () => {
         const form = e.currentTarget;
         const email = form.elements.email.value;
         const password = form.elements.password.value;
-        const body = { email, password };
-
+        // const data = {
+        //     email: email,
+        // };
         loginUser({ password, email });
 
         form.reset();

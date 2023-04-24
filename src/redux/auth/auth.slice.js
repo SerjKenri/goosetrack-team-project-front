@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';

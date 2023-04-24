@@ -1,5 +1,3 @@
- feature/register-languages
-
 import { MainLayout } from 'pages/MainLayout/MainLayout';
 
 import { RegisterPage } from 'pages/RegisterPage';

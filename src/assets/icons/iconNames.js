@@ -12,4 +12,6 @@ export const iconNames = {
     trash: 'trash',
     user: 'user',
     cross: 'cross',
+    plusCircle: 'plus-circle',
+    avatar: 'ph_user',
 };

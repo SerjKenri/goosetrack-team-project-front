@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Outlet } from "react-router-dom";
 import { useState } from 'react';
+import { SideBar } from 'components/SideBar/SideBar';
+import { Header } from 'components/Header/Header';
 
 
 export const MainLayout = () => {
@@ -9,9 +11,9 @@ export const MainLayout = () => {
 
 
     return <LayoutContainer>
-            {/* {isOpen && <SideBar/>} */}
+            {isOpen && <SideBar/>}
             <SecondaryContainer>
-                {/* <Header onClick={ setIsOpen } /> */}
+                <Header onClick={ setIsOpen } />
                 <Outlet />
             </SecondaryContainer>
         </LayoutContainer>
@@ -21,43 +23,27 @@ export const MainLayout = () => {
 const LayoutContainer = styled.div(({ theme }) => ({
     display: "flex",
     backgroundColor: theme.color.outletBackgroundColor,
-    width: '100vw',
+    width: '100%',
     height: '100vw',
-
-    outline: "2px solid orange"
 }));
 
-const SecondaryContainer = styled.div`
-    padding: 24px 20px 20px 20px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 64px; 
-    width: 100%;
+const SecondaryContainer = styled.div(({ theme }) => ({
+    padding: "24px 20px 20px 20px", 
+    display: "flex",
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: '64px', 
 
-    @media screen and (min-width: 768px) {
-        padding: 24px 32px 32px 32px
-    }
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        padding: "24px 32px 32px 32px"
+    },
 
-    @media screen and (min-width: 1440px) {
-        padding: 40px 32px 32px 32px;
-        gap: 32px
-    }
-`;
-
-
-// const SecondaryContainer = styled.div(({ theme }) => ({
-//     padding: "24px 20px 20px 20px", /*     padding: "24px 32px 32px 32px"   padding: "40px 32px 32px 32px" */
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     gap: '64px', /* 64 32 */
-//     width: '100%',
+    [theme.media.up(`${theme.breakpoints.l}px`)]: {
+        padding: "24px 32px 32px 32px",
+        gap: '32px'
+    },
     
-
-//     outline: "2px solid green",
-// }));
+}));
 
 

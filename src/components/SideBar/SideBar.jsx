@@ -93,8 +93,6 @@ const CloseButton = styled.button(({ theme }) => ({
     '&:hover': {
         color: 'red'
     },
-
-
 }))
 
 const Container = styled.div(({ theme }) => ({
@@ -103,13 +101,15 @@ const Container = styled.div(({ theme }) => ({
     justifyContent: 'space-between',
     padding: '24px 20px', 
     backgroundColor: theme.color.mainBackgroundColor,
+    position: 'absolute',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         padding: '24px 32px'
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        padding: '32px 24px'
+        padding: '32px 24px',
+        position: 'relative',
     },
 }));
 

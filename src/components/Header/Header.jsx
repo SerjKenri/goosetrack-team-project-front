@@ -1,7 +1,8 @@
 import { iconNames } from "assets/icons/iconNames";
 import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
-import gooseimg from '../../assets/images/goose-motivate@2x.png'
+import gooseimg from 'assets/images/goose-motivate@2x.png';
+import {UserInfo} from 'components/UserInfo/UserInfo'
 
 
 export const Header = ({onClick}) => {
@@ -19,7 +20,7 @@ export const Header = ({onClick}) => {
         </LeftContainer>
         <RightContainer>
             <div>ThemeToggler</div>
-            <div>UserInfo</div>
+            <UserInfo/>
         </RightContainer>
     </Container>
 }
@@ -61,7 +62,7 @@ const Text = styled.p(({ theme }) => ({
 
 const RightContainer = styled.div(({ theme }) => ({
     display: 'flex',
-    gap: '6px', // 6 10
+    gap: '16px',
 }))
 
 const StyledText = styled.span(({ theme }) => ({

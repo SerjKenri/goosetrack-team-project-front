@@ -13,12 +13,13 @@ const userFormSchema = Yup.object().shape({
             return true;
         }
     ),
-    username: Yup.string()
-        .max(16, 'Максимальна довжина імені користувача - 16 символів')
-        .required("Це поле є обов'язковим"),
-    email: Yup.string()
-        .email('Електронна адреса повинна бути коректною')
-        .required("Це поле є обов'язковим"),
+    username: Yup.string().max(
+        16,
+        'Максимальна довжина імені користувача - 16 символів'
+    ),
+    // .required("Це поле є обов'язковим"),
+    email: Yup.string().email('Електронна адреса повинна бути коректною'),
+    // .required("Це поле є обов'язковим"),
     birthday: Yup.date().nullable(),
     phone: Yup.string()
         // .matches(

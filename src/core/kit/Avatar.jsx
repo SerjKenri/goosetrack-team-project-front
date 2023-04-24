@@ -41,8 +41,11 @@ export const Avatar = ({ size, plusIcon, disabled = false, name }) => {
                 )}
             </AvatarLabel>
             {plusIcon && (
-                <PlusIconWrapper>
-                    <Icon name={iconNames.plus} size="18px" />
+                <PlusIconWrapper size={size}>
+                    <Icon
+                        name={iconNames.plus}
+                        size={size === '72px' ? '14px' : '18px'}
+                    />
                 </PlusIconWrapper>
             )}
         </AvatarContainer>
@@ -96,7 +99,7 @@ const AvatarImage = styled.img({
 
     objectFit: 'cover',
 });
-const PlusIconWrapper = styled.div({
+const PlusIconWrapper = styled.div(({ size }) => ({
     position: 'absolute',
     bottom: '0',
     right: '10%',
@@ -105,10 +108,10 @@ const PlusIconWrapper = styled.div({
     alignItems: 'center',
     justifyContent: 'center',
 
-    width: '24px',
-    height: '24px',
+    width: size === '72px' ? '14px' : '24px',
+    height: size === '72px' ? '14px' : '24px',
     borderRadius: '50%',
 
     color: 'white',
     backgroundColor: '#3E85F3',
-});
+}));

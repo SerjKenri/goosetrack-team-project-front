@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 // import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from 'redux/store';
 import { App } from 'components/App';
+import { BrowserRouter } from 'react-router-dom';
 import { ManageThemeProvider } from 'core/theme/ThemeContext';
 import './stylesheet/global.css';
 import './core/i18n/i18n';
@@ -17,5 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </ManageThemeProvider>
             {/* </PersistGate> */}
         </Provider>
+
     </React.StrictMode>
 );

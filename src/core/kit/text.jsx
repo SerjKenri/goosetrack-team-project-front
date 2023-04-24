@@ -80,6 +80,14 @@ export const AuthFormTitle = styled.p(({ theme }) => ({
     color: theme.color.mainTextColor,
 }));
 
+export const UserInfoText = styled.p(({ theme }) => ({
+    fontSize: '14px',
+    lineHeight: '1.3',
+    fontWeight: '700',
+    fontFamaly: theme.font.mainFont,
+    color: theme.color.calendarDateColor,
+}));
+
 export const AuthFormTitleMobile = styled.p(({ theme }) => ({
     fontSize: '12px',
     lineHeight: '1.25',

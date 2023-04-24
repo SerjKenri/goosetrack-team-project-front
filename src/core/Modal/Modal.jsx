@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
+import propTypes from 'prop-types';
 
 const modalRoot = document.querySelector("#modal-root");
 
@@ -49,6 +50,15 @@ const Modal = ({
 
 export { Modal };
 
+  Modal.propTypes = {
+      modalWindowStyle: propTypes.object,
+      isVisible: propTypes.bool.isRequired,
+      setIsVisible: propTypes.func.isRequired,
+      children: propTypes.node.isRequired,
+      closeButton: propTypes.bool,
+      modalContentStyle: propTypes.object,
+  };
+  
 const Backdrop = styled.div(({ theme }) => ({
   width: "100vw",
   height: "100vh",

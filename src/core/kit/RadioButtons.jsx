@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from 'react';
+import propTypes from 'prop-types';
 
 const RadioButton = ({ value, onChange, checked, priority}) => {
     return (
@@ -20,8 +21,15 @@ const RadioButton = ({ value, onChange, checked, priority}) => {
     )
 }
 
+RadioButton.propTypes = {
+    priority: propTypes.oneOf(["Low", "Medium", "High"]).isRequired,
+    value: propTypes.string.isRequired,
+    checked:propTypes.bool.isRequired,
+    onChange:propTypes.func.isRequired,
+  };
+
 export const Priority = () => {
-    const [priority, setPriority] = useState({ low: true, medium: false, high:false });
+    const [priority, setPriority] = useState({ low: true });
     
     const handleChange = (event) => {
         const { name } = event.target
@@ -43,7 +51,6 @@ export const Priority = () => {
                 id="low"
                 value="low"
                 priority="Low"
-                color="blue"
                 onChange={handleChange}
                 checked={priority.low}
             />
@@ -52,7 +59,6 @@ export const Priority = () => {
                 id="medium"
                 value="medium"
                 priority="Medium"
-                color="orange"
                 onChange={handleChange}
                 checked={priority.medium}
             />
@@ -61,7 +67,6 @@ export const Priority = () => {
                 id="high"
                 value="high"
                 priority="High"
-                color="red"
                 onChange={handleChange}
                 checked={priority.high}
             />
@@ -97,8 +102,8 @@ const PriorityButton = styled.span(({theme, priority}) => ({
 }));
 
 const PriorityInput = styled.input`
-    width:10px;
-    height:10px;
+    width:0;
+    height:0;
     opacity:0;
     z-index:-1;
     position:absolute;
@@ -123,13 +128,11 @@ const PriorityChecked = styled.span(({ theme, priority}) => ({
     opacity: "0.5",
     border: "2px solid",
     borderColor:
-            priority === 'Low'
-            ? theme.color.taskLowColor
-            : priority === 'Medium'
-            ? theme.color.taskMedColor
-            : theme.color.taskHighColor,
-            
-            
+        priority === 'Low'
+        ? theme.color.taskLowColor
+        : priority === 'Medium'
+        ? theme.color.taskMedColor
+        : theme.color.taskHighColor
 }));
 
 const PriorityName = styled.p`
@@ -139,3 +142,4 @@ const PriorityName = styled.p`
     font-size: 12px;
     line-height: 1.17;
 `;
+

@@ -1,10 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from '../store/axiosBaseQuery';
-import axios from 'axios';
+// import axios from 'axios';
 
-const setAuthHeader = token => {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// const setAuthHeader = token => {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
 export const authApi = createApi({
     reducerPath: 'authApi',

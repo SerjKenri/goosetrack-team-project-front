@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const ColumnsTasksList = ({ tasks }) => {
     const height = window.innerHeight * 0.7;
     const [currentTasks, setTasks] = useState(tasks);
+    setTasks();
 
     return (
         <ScrollContainer innerHeight={height}>

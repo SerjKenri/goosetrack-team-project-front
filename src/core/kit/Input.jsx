@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import { Icon } from './Icon';
 import { iconNames } from 'assets/icons/iconNames';
 
+import { useTranslation } from 'react-i18next';
+
 // example
 // <Input placeholder={'red'} labelTitle={'hello'} ...etc/>
 
@@ -22,6 +24,8 @@ const Input = ({
     error,
     onChange,
 }) => {
+    const { t } = useTranslation();
+    console.log(error);
     return (
         <Label style={labelStyle}>
             {labelTitle && (
@@ -46,7 +50,7 @@ const Input = ({
                         <Icon name={iconNames.cross} size={20} />
                     </IconWrapper>
                 )}
-                {error && <p>{error}</p>}
+                {error && <p>{t(`signUpPage.${error}`)}</p>}
             </InputContainer>
         </Label>
     );

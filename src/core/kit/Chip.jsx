@@ -16,9 +16,9 @@ const Container = styled.div(({ theme, priority }) => ({
     gap: '149px',
     borderRadius: '4px',
     backgroundColor:
-        priority === 'low'
+        priority === chipPriority.low
             ? theme.color.taskLowColor
-            : priority === 'medium'
+            : priority === chipPriority.medium
             ? theme.color.taskMedColor
             : theme.color.taskHighColor,
     color: '#f7f6f9',

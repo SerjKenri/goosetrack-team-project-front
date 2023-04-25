@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userInitState } from './user.init-state';
-import { logoutUser, currentUser, updateUser } from '../operations';
+import { currentUser, updateUser } from '../operations';
 
 const handlePending = state => {
     state.tasks.isLoading = true;

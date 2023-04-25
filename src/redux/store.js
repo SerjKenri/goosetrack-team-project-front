@@ -1,23 +1,49 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query/react';
+import {
+    persistStore,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
 
-import { authApi } from './auth/auth.api';
-import { tasksApi } from './tasks/tasks.api';
-import { userApi } from './user/user.api';
+import { tasksInitState } from './tasks/tasks.init-state';
+import { taskReducer } from './tasks/tasks.slice';
+import { userInitState } from './user/user.init-state';
+import { userReducer } from './user/user.slice';
+import { initAuthData } from './auth/auth.intit-state';
+import { authPersistReducer } from './auth/auth.slice';
+
+const initState = {
+    tasks: tasksInitState,
+    auth: initAuthData,
+    user: userInitState,
+};
 
 export const store = configureStore({
+    preloadedState: initState,
     reducer: {
-        [authApi.reducerPath]: authApi.reducer,
-        [tasksApi.reducerPath]: tasksApi.reducer,
-        [userApi.reducerPath]: userApi.reducer,
+        tasks: taskReducer,
+        auth: authPersistReducer,
+        user: userReducer,
     },
     devTools: true,
-    middleware: getDefaultMiddleware => [
-        ...getDefaultMiddleware(),
-        authApi.middleware,
-        tasksApi.middleware,
-        userApi.middleware,
-    ],
+
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }),
 });
-setupListeners(store.dispatch);
-// export const persistor = persistStore(store);
+
+export const persistor = persistStore(store);

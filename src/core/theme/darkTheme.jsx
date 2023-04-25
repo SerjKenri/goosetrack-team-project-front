@@ -10,6 +10,7 @@ const darkTheme = {
     space,
     font,
     color: colorsDark,
+    themeName: 'darkTheme'
 };
 
 export { darkTheme };

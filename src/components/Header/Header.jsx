@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
 import gooseimg from 'assets/images/goose-motivate@2x.png';
 import {UserInfo} from 'components/UserInfo/UserInfo'
+import { ThemeToggler } from "components/ThemeToggler/ThemeToggler";
 
 
 export const Header = ({onClick}) => {
@@ -19,7 +20,7 @@ export const Header = ({onClick}) => {
             </TextContainer>
         </LeftContainer>
         <RightContainer>
-            <div>ThemeToggler</div>
+            <ThemeToggler/>
             <UserInfo/>
         </RightContainer>
     </Container>

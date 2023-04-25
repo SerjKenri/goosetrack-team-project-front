@@ -10,6 +10,7 @@ const lightTheme = {
     space,
     font,
     color: colorsLight,
+    themeName: 'lightTheme'
 };
 
 export { lightTheme };

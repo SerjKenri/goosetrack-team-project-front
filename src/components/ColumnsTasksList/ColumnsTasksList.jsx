@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const ColumnsTasksList = ({ tasks }) => {
     const height = window.innerHeight * 0.7;
-    const [currentTasks, setTasks] = useState(tasks)
+    const [currentTasks, setTasks] = useState(tasks);
 
     return (
         <ScrollContainer innerHeight={height}>
@@ -30,9 +30,18 @@ ColumnsTasksList.propTypes = {
     ),
 };
 
-const ScrollContainer = styled.div(({ innerHeight }) => ({
+const ScrollContainer = styled.div(({ theme, innerHeight }) => ({
     maxHeight: innerHeight + 'px',
     overflowY: 'auto',
+    '&::-webkit-scrollbar': {
+        width: '8px',
+        borderRadius: '8px',
+        backgroundColor: theme.color.scrollbarBackgroundColor,
+    },
+    '&::-webkit-scrollbar-thumb': {
+        borderRadius: '8px',
+        backgroundColor: theme.color.scrollbarColor,
+    },
 }));
 
 const TasksWrapper = styled.div(({ theme }) => ({

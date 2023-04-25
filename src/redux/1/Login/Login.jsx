@@ -1,21 +1,20 @@
-import { useLoginMutation } from 'redux/auth/auth.api';
+import { useDispatch } from 'react-redux';
+import { loginUser } from 'redux/operations';
 
 export const Login = () => {
-    const [loginUser] = useLoginMutation();
-    // console.log(body);
+    const dispatch = useDispatch();
+
     const onLogin = e => {
         e.preventDefault();
         const form = e.currentTarget;
-        const email = form.elements.email.value;
-        const password = form.elements.password.value;
-        // const data = {
-        //     email: email,
-        // };
-        loginUser({ password, email });
-
+        dispatch(
+            loginUser({
+                email: form.elements.email.value,
+                password: form.elements.password.value,
+            })
+        );
         form.reset();
     };
-
     return (
         <form onSubmit={onLogin}>
             <h2>Login</h2>

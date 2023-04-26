@@ -1,91 +1,96 @@
+import propTypes from 'prop-types';
 import { Icon } from 'core/kit/Icon';
 import { iconNames } from 'assets/icons/iconNames';
-import React from 'react';
 import styled from 'styled-components';
+import { usePeriodTitle } from 'core/hooks/usePeriodTitle';
+import { toPrevDate, toNextDate } from './tools/modifyDateByPeriod';
 
-const PeriodPaginator = () => {
+const PeriodPaginator = ({ periodType, date, setDate }) => {
+    const periodTitle = usePeriodTitle(periodType, date);
+
+    const handlePrevPeriod = () => {
+        const prevPeriodDate = toPrevDate(date, periodType);
+        setDate(prevPeriodDate);
+    };
+
+    const handleNextPeriod = () => {
+        const nextPeriodDate = toNextDate(date, periodType);
+        setDate(nextPeriodDate);
+    };
+
     return (
         <RootWrapper>
-            <DateContainer>
-                <DateButton>March 2023</DateButton>
-            </DateContainer>
-            <ArrowWrapper>
-                <PeriodPaginatorLeft>
-                    <Icon name={iconNames.chevronLeft} size="32" />
-                </PeriodPaginatorLeft>
-                <PeriodPaginatorRight>
-                    <Icon name={iconNames.chevronRight} size="32" />
-                </PeriodPaginatorRight>
-            </ArrowWrapper>
+            <DateParagraph>{periodTitle}</DateParagraph>
+            <BtnWrapper>
+                <PrevBtn onClick={handlePrevPeriod}>
+                    <Icon name={iconNames.chevronLeft} size="18" />
+                </PrevBtn>
+                <NextBtn onClick={handleNextPeriod}>
+                    <Icon name={iconNames.chevronRight} size="18" />
+                </NextBtn>
+            </BtnWrapper>
         </RootWrapper>
     );
 };
 
+PeriodPaginator.propTypes = {
+    periodType: propTypes.oneOf(['day', 'week', 'month', 'year']).isRequired,
+    date: propTypes.instanceOf(Date).isRequired,
+    setDate: propTypes.func.isRequired,
+};
+
 export { PeriodPaginator };
 
-const RootWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: flex-start;
-    flex: none;
-    gap: 8px;
-    box-sizing: border-box;
-`;
+const RootWrapper = styled.div(({ theme }) => ({
+    display: 'flex',
+    minWidth: '215px',
+    columnGap: '8px',
+}));
 
-const DateContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    flex: none;
-    gap: 149px;
-    border-radius: 8px;
-    background-color: rgb(62, 133, 243);
-    box-sizing: border-box;
-    padding: 8px 12px;
-`;
+const DateParagraph = styled.p(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '8px 12px',
+    backgroundColor: '#3E85F3',
+    borderRadius: '8px',
+    fontWeight: '700',
+    fontSize: '16px',
+    lineHeight: '18px',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#FFFFFF',
+}));
 
-const DateButton = styled.span`
-    color: white;
-    text-overflow: ellipsis;
-    font-size: 16px;
-    font-family: Inter, sans-serif;
-    font-weight: initial;
-    line-height: 18px;
-    text-align: center;
-    text-transform: uppercase;
-`;
+const BtnWrapper = styled.div(({ theme }) => ({
+    display: 'flex',
+    width: '76px',
+    height: '34px',
+}));
 
-const ArrowWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 8px;
-    width: 76px;
-    height: 34px;
-    background-color: white;
-    box-sizing: border-box;
-    padding: 8px 12px;
-    margin-left: 8px;
-`;
+const PrevBtn = styled.button(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: theme.color.mainBackgroundColor,
+    border: '1px solid #dce3e5cc',
+    height: '100%',
+    borderTopLeftRadius: '8px',
+    borderBottomLeftRadius: '8px',
+    cursor: 'pointer',
+}));
 
-const PeriodPaginatorLeft = styled.button`
-    height: 34px;
-    border: 1px solid rgba(220, 227, 229, 0.8);
-
-    border-radius: 8px 0px 0px 8px;
-    background-color: white;
-    cursor: pointer;
-`;
-
-const PeriodPaginatorRight = styled.button`
-    height: 34px;
-    border: 1px solid rgba(220, 227, 229, 0.8);
-    border: 1px solid rgba(220, 227, 229, 0.8);
-
-    border-radius: 0px 8px 8px 0px;
-    background-color: white;
-    cursor: pointer;
-`;
+const NextBtn = styled.button(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: theme.color.mainBackgroundColor,
+    border: '1px solid #dce3e5cc',
+    height: '100%',
+    borderTopRightRadius: '8px',
+    borderBottomRightRadius: '8px',
+    borderLeft: 'none',
+    cursor: 'pointer',
+}));

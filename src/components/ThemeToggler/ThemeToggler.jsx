@@ -9,7 +9,7 @@ export const ThemeToggler = () => {
     const iconType = theme.themeName === 'lightTheme' ? iconNames.moon : iconNames.sun
     
     return (
-        <IconButton onClick={toggleTheme} iconName={iconType} buttonSize = { window.innerWidth > 767 ? 24 : 32 }></IconButton>
+        <IconButton onClick={toggleTheme} iconName={iconType} buttonSize = { window.innerWidth > 768 ? 32 : 24 }></IconButton>
     )
 }
 

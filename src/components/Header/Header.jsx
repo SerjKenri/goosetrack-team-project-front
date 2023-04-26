@@ -4,9 +4,14 @@ import { Icon } from 'core/kit/Icon';
 import gooseimg from 'assets/images/goose-motivate@2x.png';
 import {UserInfo} from 'components/UserInfo/UserInfo'
 import { ThemeToggler } from "components/ThemeToggler/ThemeToggler";
+import { useLocation } from "react-router-dom";
 
 
 export const Header = ({onClick}) => {
+
+    const location = useLocation()
+    
+    const title = location.pathname === '/account' ? 'User Profile' : "Calendar"
 
     return <Container>
         <SideBarButton type='button' onClick={onClick}>
@@ -15,7 +20,7 @@ export const Header = ({onClick}) => {
         <LeftContainer>
             <Image src={gooseimg} alt="goose-motivate"/>
             <TextContainer>
-                <Title>TITLE</Title>
+                <Title>{title}</Title>
                 <Text><StyledText>Let go</StyledText> of the past and focus on the present!</Text>
             </TextContainer>
         </LeftContainer>
@@ -63,6 +68,7 @@ const Text = styled.p(({ theme }) => ({
 
 const RightContainer = styled.div(({ theme }) => ({
     display: 'flex',
+    alignItems: 'center',
     gap: '16px',
 }))
 

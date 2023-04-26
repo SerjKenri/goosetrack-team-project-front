@@ -61,6 +61,11 @@ const NavLinkStyled = styled(NavLink)(({ theme }) => ({
     "&:hover": {
         color: theme.color.accentTextColor,
         backgroundColor: theme.color.activeSelectionColor
+    },
+
+    "&.active": {
+        color: theme.color.accentTextColor,
+        backgroundColor: theme.color.activeSelectionColor
     }
 }));
 

@@ -1,17 +1,29 @@
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SideBar } from 'components/SideBar/SideBar';
 import { Header } from 'components/Header/Header';
+import { useDispatch } from 'react-redux';
+import { currentUser } from 'redux/operations';
 
 const MainLayout = () => {
-    const [isOpen, setIsOpen] = useState(true);
+
+    const [isOpen, setIsOpen] = useState(true)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(currentUser())
+    }, [dispatch])
+
+    const handleClose = () => {
+        setIsOpen(prev => !prev)
+    }
 
     return (
         <LayoutContainer>
-            {isOpen && <SideBar />}
+            {isOpen && <SideBar onClick={handleClose}/>}
             <SecondaryContainer>
-                <Header onClick={setIsOpen} />
+                <Header onClick={handleClose} />
                 <Outlet />
             </SecondaryContainer>
         </LayoutContainer>

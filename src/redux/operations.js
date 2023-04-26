@@ -69,35 +69,41 @@ export const refreshUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk(
     'user/logout',
-    async (_, thunkAPI) => {
+    async (_, { getState, rejectWithValue }) => {
         try {
+            const { auth } = getState()
+            setAuthHeader(auth.token);
             await axios.post('/auth/logout');
             clearAuthHeader();
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            return rejectWithValue(e.message);
         }
     }
 );
 export const currentUser = createAsyncThunk(
     'user/current',
-    async (_, thunkAPI) => {
+    async (_, { getState, rejectWithValue }) => {
         try {
+            const { auth } = getState()
+            setAuthHeader(auth.token);
             const response = await axios.get('/auth/current');
             return response.data;
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            return rejectWithValue(e.message);
         }
     }
 );
 
 export const updateUser = createAsyncThunk(
     'user/updUser',
-    async (userId, thunkAPI) => {
+    async (userId, { getState, rejectWithValue }) => {
         try {
+            const { auth } = getState()
+            setAuthHeader(auth.token);
             const response = await axios.patch(`/info/${userId}`);
             return response.data;
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            return rejectWithValue(e.message);
         }
     }
 );

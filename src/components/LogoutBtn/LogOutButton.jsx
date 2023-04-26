@@ -5,7 +5,7 @@ import { ButtonDifference } from "core/kit/Button";
 
 export const LogOutButton = ({size}) => {
     const handleLogout = () => {
-        console.log('log out')
+        console.log('log out', window.innerWidth)
     }
 
     return <Button 
@@ -14,6 +14,6 @@ export const LogOutButton = ({size}) => {
         title="Log out"
         onClick={handleLogout}
         iconName={iconNames.logout}
-        iconSize={'20px'}
+        iconSize={window.innerWidth > 767 ? '18px' : '20px'}
     />
 }

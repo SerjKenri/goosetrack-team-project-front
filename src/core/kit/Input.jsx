@@ -25,7 +25,7 @@ const Input = ({
     onChange,
 }) => {
     const { t } = useTranslation();
-    console.log(error);
+    // console.log(error);
     return (
         <Label style={labelStyle}>
             {labelTitle && (

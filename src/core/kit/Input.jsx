@@ -84,10 +84,15 @@ const LabelText = styled.p(({ theme }) => ({
     display: 'inline-flex',
     alignItems: 'center',
     margin: 0,
-    fontSize: '10px',
+    fontSize: '12px',
     lineHeight: '12px',
     fontWeight: 500,
     color: theme.color.labelColor,
+
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        fontSize:'14px',
+        lineHeight:'17px',
+    },
 }));
 
 const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
@@ -101,7 +106,7 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
     borderRadius: theme.space.x2,
     backgroundColor: theme.color.inputFieldColor,
     boxSizing: 'border-box',
-    fontSize: theme.space.x3 + 'px',
+    fontSize: theme.space.x4 + 'px',
     lineHeight: theme.space.x4 + 'px',
     fontWeight: 600,
     color: theme.color.inputFieldTextColor,
@@ -109,8 +114,11 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
     //   "&:focus-visible": {
     //     borderColor: theme.color.accentColor,
     //   },
+    
     '&::placeholder': {
         color: theme.color.popupBackground,
+        fontSize:theme.space.x4 + 'px',
+        lineHeight:theme.space.x5 + 'px',
     },
 }));
 

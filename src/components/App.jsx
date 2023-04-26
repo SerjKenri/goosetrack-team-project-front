@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-
+import { LoginForm } from './LoginForm/LoginForm';
 import MainLayout from 'pages/MainLayout/MainLayout';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage';

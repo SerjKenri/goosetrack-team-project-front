@@ -22,4 +22,4 @@ const ManageThemeProvider = ({ children }) => {
   );
 };
 
-export { useTheme, ManageThemeProvider, ThemeContext };
+export { useTheme, ManageThemeProvider };

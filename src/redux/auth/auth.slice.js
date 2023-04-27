@@ -1,13 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-import { initAuthData } from './auth.intit-state';
-import {
-    loginUser,
-    logoutUser,
-    refreshUser,
-    signUpUser,
-} from 'redux/operations';
+import { initUserState } from './auth.intit-state';
+import { loginUser, refreshUser, signUpUser } from 'redux/operations';
 const authHandlePending = state => {
     return state;
 };
@@ -18,7 +13,7 @@ const handleRejected = (state, action) => {
 };
 const authSlice = createSlice({
     name: 'auth',
-    initialState: initAuthData,
+    initialState: initUserState,
     extraReducers: builder => {
         builder
             .addCase(signUpUser.pending, state => {
@@ -43,14 +38,7 @@ const authSlice = createSlice({
                 console.log(storage);
                 console.log(state);
             });
-        builder
-            .addCase(logoutUser.pending, authHandlePending)
-            .addCase(logoutUser.rejected, handleRejected)
-            .addCase(logoutUser.fulfilled, state => {
-                state.isLoggedIn = false;
-                state.user = { name: null, email: null, token: null };
-                state.token = null;
-            });
+
         builder
             .addCase(refreshUser.pending, state => {
                 state.isRefreshing = true;

@@ -50,7 +50,7 @@ const Input = ({
                         <Icon name={iconNames.cross} size={20} />
                     </IconWrapper>
                 )}
-                {error && <p>{t(`signUpPage.${error}`)}</p>}
+                {error && <Error>{t(`signUpPage.${error}`)}</Error>}
             </InputContainer>
         </Label>
     );
@@ -117,6 +117,7 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
 const InputContainer = styled.div({
     position: 'relative',
     display: 'inline-flex',
+    flexDirection: 'column',
     alignItems: 'center',
 });
 
@@ -131,3 +132,8 @@ const IconWrapper = styled.div(({ theme, resetButton }) => ({
     right: resetButton ? 0 : '',
     transform: resetButton ? 'translate(-50%, -50%)' : '',
 }));
+
+const Error = styled.p`
+    color: tomato;
+    display: block;
+`;

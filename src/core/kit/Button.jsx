@@ -86,6 +86,7 @@ Button.propTypes = {
 const Container = styled.div({
     flexDirection: 'row',
     justifyContent: 'center',
+    display: 'flex',
 });
 
 const ButtonWrapper = styled.button(({ differentStyles, disabled, theme }) => ({

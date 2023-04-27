@@ -6,13 +6,21 @@ import { Header } from 'components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from 'redux/operations';
 import { selectUserState } from 'redux/auth/auth.selectors';
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 const MainLayout = () => {
 
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const dispatch = useDispatch()
 
     const user = useSelector(selectUserState)
+    const { isDesktop } = useMatchMedia();
+
+    useEffect(() => {
+        if (isDesktop) {
+            setIsOpen(true)
+        } else setIsOpen(false)
+    }, [isDesktop])
 
     useEffect(() => {
         if (user.name === null) {

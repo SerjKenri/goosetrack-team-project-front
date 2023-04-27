@@ -3,12 +3,12 @@ import { UserInfoText } from 'core/kit/text';
 import styled from 'styled-components';
 
 export const UserInfo = () => {
-    const name = 'Nadiia';
-    const mainLetter = name.substr(0, 1);
+    const username = 'Nadiia';
+    const mainLetter = username.substr(0, 1);
     return (
         <UserInfoContainer>
-            <UserInfoText>{name}</UserInfoText>
-            <Avatar size="32px" disabled name={mainLetter} />
+            <UserInfoText>{username}</UserInfoText>
+            <Avatar size="32px" username={mainLetter} avatar="" />
         </UserInfoContainer>
     );
 };

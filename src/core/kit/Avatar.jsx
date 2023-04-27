@@ -1,59 +1,29 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { Icon } from './Icon';
-import { iconNames } from 'assets/icons/iconNames';
 import { TextH2 } from './text';
 
-export const Avatar = ({ size, plusIcon, disabled = false, name }) => {
-    const [value, setValue] = useState('');
-
-    const handleChange = e => {
-        const file = e.target.files[0];
-        let blob = new Blob([file], { type: 'image/jpeg' });
-        const objURL = URL.createObjectURL(blob);
-        setValue(objURL);
-    };
+export const Avatar = ({ size, avatar, username }) => {
     return (
         <AvatarContainer size={size}>
-            <AvatarInput
-                id="file"
-                type="file"
-                onChange={handleChange}
-                disabled={disabled}
-            />
-            <AvatarLabel htmlFor="file">
-                {!value ? (
+            <AvatarInput id="avatar" type="file" disabled />
+            <AvatarLabel htmlFor="avatar">
+                {!avatar ? (
                     <UserIconWrapper>
-                        {disabled ? (
-                            <TextH2>{name}</TextH2>
-                        ) : (
-                            <Icon
-                                name={iconNames.avatar}
-                                size="48px"
-                                stroke="none"
-                            />
-                        )}
+                        <TextH2>{username}</TextH2>
                     </UserIconWrapper>
                 ) : (
-                    <AvatarImage src={value} alt="user avatar" />
+                    <AvatarImage src={avatar} alt="user avatar" />
                 )}
             </AvatarLabel>
-            {plusIcon && (
-                <PlusIconWrapper>
-                    <Icon name={iconNames.plus} size="18px" />
-                </PlusIconWrapper>
-            )}
         </AvatarContainer>
     );
 };
 
 Avatar.propTypes = {
     size: PropTypes.string.isRequired,
-    plusIcon: PropTypes.bool,
-    disabled: PropTypes.bool,
-    name: PropTypes.string,
+    avatar: PropTypes.string,
+    username: PropTypes.string,
 };
 
 const AvatarContainer = styled.div(({ size }) => ({
@@ -95,20 +65,4 @@ const AvatarImage = styled.img({
     borderRadius: '50%',
 
     objectFit: 'cover',
-});
-const PlusIconWrapper = styled.div({
-    position: 'absolute',
-    bottom: '0',
-    right: '10%',
-
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    width: '24px',
-    height: '24px',
-    borderRadius: '50%',
-
-    color: 'white',
-    backgroundColor: '#3E85F3',
 });

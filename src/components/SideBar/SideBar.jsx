@@ -6,7 +6,7 @@ import gooseimg from '../../assets/images/goose-sidebar@2x.png'
 import { UserNav } from 'components/UserNav/UserNav';
 
 
-export const SideBar = ({onClick, user}) => {
+export const SideBar = ({onClick}) => {
 
     return <Container>
         <SecondaryContainer>
@@ -24,7 +24,7 @@ export const SideBar = ({onClick, user}) => {
                 <UserNav />
             </UserPanelContainer>
         </SecondaryContainer>
-        <LogOutButton user={ user } />
+        <LogOutButton/>
     </Container>
 }
 
@@ -36,6 +36,7 @@ const Container = styled.div(({ theme }) => ({
     padding: '24px 20px', 
     backgroundColor: theme.color.mainBackgroundColor,
     position: 'absolute',
+    zIndex: 1,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         padding: '24px 32px'

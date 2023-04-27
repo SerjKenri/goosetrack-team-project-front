@@ -5,17 +5,27 @@ import { SideBar } from 'components/SideBar/SideBar';
 import { Header } from 'components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from 'redux/operations';
+import { selectUserState } from 'redux/auth/auth.selectors';
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 const MainLayout = () => {
 
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const dispatch = useDispatch()
 
-    const user = useSelector((state) => state.user)
+    const user = useSelector(selectUserState)
+    const { isDesktop } = useMatchMedia();
 
     useEffect(() => {
-        if (user.name === '') {
-        dispatch(currentUser())}
+        if (isDesktop) {
+            setIsOpen(true)
+        } else setIsOpen(false)
+    }, [isDesktop])
+
+    useEffect(() => {
+        if (user.name === null) {
+            dispatch(currentUser())
+        }
     }, [user.name, dispatch])
 
     const handleClose = () => {

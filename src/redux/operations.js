@@ -101,11 +101,13 @@ export const currentUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
     'user/updUser',
-    async (userId, { getState, rejectWithValue }) => {
+    async (userId, values, { getState, rejectWithValue }) => {
         try {
             const { auth } = getState();
             setAuthHeader(auth.token);
+
             const response = await axios.patch(`/user/info/${userId}`);
+
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);

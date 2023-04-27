@@ -36,6 +36,7 @@ const Container = styled.div(({ theme }) => ({
     padding: '24px 20px', 
     backgroundColor: theme.color.mainBackgroundColor,
     position: 'absolute',
+    zIndex: 1,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         padding: '24px 32px'

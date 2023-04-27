@@ -16,7 +16,7 @@ const handleRejected = (state, action) => {
 };
 
 const userSlice = createSlice({
-    name: 'user',
+    name: 'auth',
     initialState: initUserState,
     // reducers: {},
 
@@ -30,14 +30,14 @@ const userSlice = createSlice({
         builder
             .addCase(currentUser.pending, handlePending)
             .addCase(currentUser.rejected, handleRejected)
-            .addCase(currentUser.fulfilled, (state, action) => {
+            .addCase(currentUser.fulfilled, (state, { payload }) => {
+                console.log(state.user, payload.user)
                 // state.user.isLoading = true;
                 // state.user.error = null;
                 // state.user.items = state.user.items.filter(
                 //     user => user.id === action.payload.id
                 // );
-                state.user = action.payload;
-            });
+state.user = { ...state.user, ...payload.user }            });
         builder
             .addCase(logoutUser.pending, authHandlePending)
             .addCase(logoutUser.rejected, handleRejected)

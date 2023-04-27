@@ -19,6 +19,6 @@ export const Icon = ({ name, size, stroke }) => {
 
 Icon.propTypes = {
     name: propTypes.oneOf(Object.values(iconNames)).isRequired,
-    size: propTypes.string,
+    size: propTypes.string.isRequired,
     stroke: propTypes.string,
 };

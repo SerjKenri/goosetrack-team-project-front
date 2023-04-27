@@ -90,7 +90,7 @@ export const UserForm = () => {
                                     )}
                                 </AvatarLabel>
                                 <PlusIconWrapper onClick={handlePick}>
-                                    <Icon name={iconNames.plus} />
+                                    <Icon name={iconNames.plus} size="20px" />
                                 </PlusIconWrapper>
                             </AvatarContainer>
                         </AvatarWrapper>

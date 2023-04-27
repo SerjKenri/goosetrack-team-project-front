@@ -24,7 +24,7 @@ const Input = ({
     error,
     onChange,
 }) => {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
     // console.log(error);
     return (
         <Label style={labelStyle}>
@@ -47,7 +47,7 @@ const Input = ({
                 />
                 {resetButton && (
                     <IconWrapper onClick={resetValue} resetButton>
-                        <Icon name={iconNames.cross} size={20} />
+                        <Icon name={iconNames.cross} size={'20px'} />
                     </IconWrapper>
                 )}
                 {/* {error && <Error>{t(`signUpPage.${error}`)}</Error>} */}

@@ -13,4 +13,5 @@ export const initUserState = {
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
+    isLoading: false
 };

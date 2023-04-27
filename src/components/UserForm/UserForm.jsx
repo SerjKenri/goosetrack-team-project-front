@@ -12,7 +12,7 @@ import {
     selectUserBirthday,
     selectUserAvatar,
     selectUserTelegram,
-} from '../../redux/user/user.selectors';
+} from '../../redux/auth/auth.selectors';
 
 import { userFormSchema } from 'schemas/userFormValidation';
 import { Input } from 'core/kit/Input';

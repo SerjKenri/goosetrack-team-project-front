@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useRegisterForm } from 'components/RegisterForm/useRegisterForm';
 import styled from 'styled-components';
 import { Input } from 'core/kit/Input';
@@ -241,9 +241,7 @@ const SignUpImg = styled.img`
     bottom: -5px;
     display: block;
     left: 49px;
-    transform: rotate(-9.2deg); */
-
-   
+    transform: rotate(-9.2deg);
 `;
 
 const FormContainer = styled.div`

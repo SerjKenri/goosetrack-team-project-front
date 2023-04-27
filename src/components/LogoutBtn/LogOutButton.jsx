@@ -1,11 +1,16 @@
 import { iconNames } from "assets/icons/iconNames";
 import { Button } from "core/kit/Button"
 import { ButtonDifference } from "core/kit/Button";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "redux/operations";
 
 
-export const LogOutButton = ({size}) => {
+export const LogOutButton = () => {
+    
+    const dispatch = useDispatch()
+
     const handleLogout = () => {
-        console.log('log out', window.innerWidth)
+        dispatch(logoutUser())
     }
 
     return <Button 

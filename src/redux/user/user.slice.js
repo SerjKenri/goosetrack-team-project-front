@@ -3,12 +3,12 @@ import { userInitState } from './user.init-state';
 import { currentUser, updateUser } from '../operations';
 
 const handlePending = state => {
-    state.tasks.isLoading = true;
+    state.user.isLoading = true;
 };
 
 const handleRejected = (state, action) => {
-    state.tasks.isLoading = false;
-    state.tasks.error = action.payload;
+    state.user.isLoading = false;
+    state.user.error = action.payload;
 };
 
 const userSlice = createSlice({
@@ -21,9 +21,9 @@ const userSlice = createSlice({
             .addCase(updateUser.pending, handlePending)
             .addCase(updateUser.rejected, handleRejected)
             .addCase(updateUser.fulfilled, (state, action) => {
-                state.users.isLoading = false;
-                state.users.error = null;
-                state.users.items = state.users.items.filter(
+                state.user.isLoading = false;
+                state.user.error = null;
+                state.user.items = state.user.items.filter(
                     user => user.id !== action.payload.id
                 );
             });
@@ -31,9 +31,9 @@ const userSlice = createSlice({
             .addCase(currentUser.pending, handlePending)
             .addCase(currentUser.rejected, handleRejected)
             .addCase(currentUser.fulfilled, (state, action) => {
-                state.users.isLoading = true;
-                state.users.error = null;
-                state.users.items = state.users.items.filter(
+                state.user.isLoading = true;
+                state.user.error = null;
+                state.user.items = state.user.items.filter(
                     user => user.id === action.payload.id
                 );
             });

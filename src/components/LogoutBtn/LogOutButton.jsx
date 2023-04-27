@@ -14,6 +14,6 @@ export const LogOutButton = ({size}) => {
         title="Log out"
         onClick={handleLogout}
         iconName={iconNames.logout}
-        iconSize={window.innerWidth > 767 ? '18px' : '20px'}
+        iconSize={window.innerWidth > 768 ? '20px' : '18px'}
     />
 }

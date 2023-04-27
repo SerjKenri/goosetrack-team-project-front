@@ -5,17 +5,19 @@ import { SideBar } from 'components/SideBar/SideBar';
 import { Header } from 'components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from 'redux/operations';
+import { selectUserState } from 'redux/auth/auth.selectors';
 
 const MainLayout = () => {
 
     const [isOpen, setIsOpen] = useState(true)
     const dispatch = useDispatch()
 
-    const user = useSelector((state) => state.user)
+    const user = useSelector(selectUserState)
 
     useEffect(() => {
-        if (user.name === '') {
-        dispatch(currentUser())}
+        if (user.name === null) {
+            dispatch(currentUser())
+        }
     }, [user.name, dispatch])
 
     const handleClose = () => {

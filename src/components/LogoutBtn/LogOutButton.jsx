@@ -1,17 +1,19 @@
 import { iconNames } from "assets/icons/iconNames";
 import { Button } from "core/kit/Button"
 import { ButtonDifference } from "core/kit/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTokenState } from "redux/auth/auth.selectors";
 import { logoutUser } from "redux/operations";
 
 
-export const LogOutButton = ({user}) => {
+export const LogOutButton = () => {
 
     const dispatch = useDispatch()
 
+    const token = useSelector(selectTokenState)
+
     const handleLogout = () => {
         dispatch(logoutUser())
-        user = {avatarURL: "", birthDay: "", email: "", id: "", messenger: "", name: "", phone: ""}
     }
 
 
@@ -22,5 +24,6 @@ export const LogOutButton = ({user}) => {
         onClick={handleLogout}
         iconName={iconNames.logout}
         iconSize={window.innerWidth > 768 ? '20px' : '18px'}
+        disabled = {token ? false : true}
     />
 }

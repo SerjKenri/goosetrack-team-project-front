@@ -1,19 +1,25 @@
 import { iconNames } from "assets/icons/iconNames";
+import { useMatchMedia } from "core/hooks/use-match-media";
 import { Button } from "core/kit/Button"
 import { ButtonDifference } from "core/kit/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTokenState } from "redux/auth/auth.selectors";
 import { logoutUser } from "redux/operations";
 
 
-export const LogOutButton = ({user}) => {
+export const LogOutButton = () => {
 
     const dispatch = useDispatch()
 
+    const token = useSelector(selectTokenState)
+
     const handleLogout = () => {
         dispatch(logoutUser())
-        user = {avatarURL: "", birthDay: "", email: "", id: "", messenger: "", name: "", phone: ""}
     }
 
+    const { isMobile } = useMatchMedia()
+    
+    const size = isMobile ? '18px' : '20px'
 
     return <Button 
         type="button"
@@ -21,6 +27,7 @@ export const LogOutButton = ({user}) => {
         title="Log out"
         onClick={handleLogout}
         iconName={iconNames.logout}
-        iconSize={window.innerWidth > 768 ? '20px' : '18px'}
+        iconSize={size}
+        disabled = {token ? false : true}
     />
 }

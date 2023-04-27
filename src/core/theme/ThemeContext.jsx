@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useLocalStorage } from "react-use";
 import { ThemeProvider } from "styled-components";
 import { darkTheme } from "./darkTheme";
 import { lightTheme } from "./lightTheme";
@@ -7,11 +8,15 @@ const ThemeContext = createContext();
 const useTheme = () => useContext(ThemeContext);
 
 const ManageThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useLocalStorage("theme", false);
+
+  useEffect(() => {
+    setIsDarkMode(isDarkMode)
+  })
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
-  };
+  };  
 
   const theme = isDarkMode ? darkTheme : lightTheme;
 

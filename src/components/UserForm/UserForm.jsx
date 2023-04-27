@@ -1,8 +1,18 @@
 import { useState, useRef } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-// import { format } from 'date-fns';
+import { format } from 'date-fns';
 import styled from 'styled-components';
+
+import {
+    selectUserId,
+    selectUserName,
+    selectUserEmail,
+    selectUserPhone,
+    selectUserBirthday,
+    selectUserAvatar,
+    selectUserTelegram,
+} from '../../redux/user/user.selectors';
 
 import { userFormSchema } from 'schemas/userFormValidation';
 import { Input } from 'core/kit/Input';
@@ -11,17 +21,23 @@ import { ButtonDifference } from 'core/kit/Button';
 import { UserInfoText, PopupChip, Chip } from 'core/kit/text';
 import { Icon } from 'core/kit/Icon';
 import { iconNames } from 'assets/icons/iconNames';
+import { useSelector } from 'react-redux';
+import { updateUser } from 'redux/operations';
 
 export const UserForm = () => {
-    const [userImage, setUserImage] = useState('');
     const filePicker = useRef(null);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const id = useSelector(selectUserId);
+    const name = useSelector(selectUserName);
+    const email = useSelector(selectUserEmail);
+    const phone = useSelector(selectUserPhone);
+    const telegram = useSelector(selectUserTelegram);
+    const avatar = useSelector(selectUserAvatar);
+    const birthday = useSelector(selectUserBirthday) || Date.now();
 
+    const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
+    const [userImage, setUserImage] = useState(avatar);
     const formData = new FormData();
-
-    // const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
-
-    const currentDate = new Date().toISOString().substring(0, 10);
 
     const handleChangeAvatar = e => {
         const file = e.target.files[0];
@@ -43,11 +59,11 @@ export const UserForm = () => {
         <Container>
             <Formik
                 initialValues={{
-                    username: '',
-                    birthday: currentDate,
-                    email: '',
-                    phone: '',
-                    telegram: '',
+                    username: name,
+                    birthday: formattedDate,
+                    email: email,
+                    phone: phone,
+                    telegram: telegram,
                 }}
                 validationSchema={userFormSchema}
                 onSubmit={async (values, { setSubmitting }) => {
@@ -57,7 +73,9 @@ export const UserForm = () => {
                     formData.append('email', values.email);
                     formData.append('phone', values.phone);
                     formData.append('telegram', values.telegram);
-                    // dispatch to patch userinfo
+
+                    await dispatch(updateUser(id, formData)).unwrap();
+
                     setSubmitting(false);
                 }}
             >
@@ -67,13 +85,14 @@ export const UserForm = () => {
                             <AvatarContainer>
                                 <AvatarInput
                                     ref={filePicker}
-                                    id="avatarURL"
+                                    id="avatar"
                                     type="file"
                                     accept="image/*,.jpg"
-                                    name="avatarURL"
+                                    name="avatar"
                                     onChange={handleChangeAvatar}
+                                    value={avatar}
                                 />
-                                <AvatarLabel htmlFor="avatarURL">
+                                <AvatarLabel htmlFor="avatar">
                                     {!userImage ? (
                                         <UserIconWrapper>
                                             <Icon
@@ -90,7 +109,7 @@ export const UserForm = () => {
                                     )}
                                 </AvatarLabel>
                                 <PlusIconWrapper onClick={handlePick}>
-                                    <Icon name={iconNames.plus} />
+                                    <Icon name={iconNames.plus} size="100%" />
                                 </PlusIconWrapper>
                             </AvatarContainer>
                         </AvatarWrapper>
@@ -391,4 +410,5 @@ const PlusIconWrapper = styled.div(({ theme }) => ({
 const ErrorMessage = styled(Chip)(({ theme }) => ({
     color: theme.color.taskHighColor,
     fontSize: '12px',
+    marginTop: '-1%',
 }));

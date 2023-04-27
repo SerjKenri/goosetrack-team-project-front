@@ -77,7 +77,7 @@ export const logoutUser = createAsyncThunk(
         try {
             const { auth } = getState();
             setAuthHeader(auth.token);
-            await axios.post('/auth/logout');
+            await axios.post('/user/logout');
             clearAuthHeader();
         } catch (e) {
             return rejectWithValue(e.message);
@@ -90,7 +90,8 @@ export const currentUser = createAsyncThunk(
         try {
             const { auth } = getState();
             setAuthHeader(auth.token);
-            const response = await axios.get('/auth/current');
+            const response = await axios.get('/user/current');
+            console.log(response.data)
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);
@@ -104,7 +105,9 @@ export const updateUser = createAsyncThunk(
         try {
             const { auth } = getState();
             setAuthHeader(auth.token);
-            const response = await axios.patch(`/info/${userId}`, values);
+
+            const response = await axios.patch(`/user/info/${userId}`);
+
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);

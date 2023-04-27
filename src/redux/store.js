@@ -11,7 +11,7 @@ import {
 
 import { tasksInitState } from './tasks/tasks.init-state';
 import { taskReducer } from './tasks/tasks.slice';
-import { userReducer } from './user/user.slice';
+// import { userReducer } from './user/user.slice';
 import { initUserState } from './auth/auth.intit-state';
 import { authPersistReducer } from './auth/auth.slice';
 
@@ -26,7 +26,7 @@ export const store = configureStore({
     reducer: {
         tasks: taskReducer,
         auth: authPersistReducer,
-        user: userReducer,
+        // user: userReducer,
     },
     devTools: true,
 

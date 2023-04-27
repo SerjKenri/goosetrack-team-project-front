@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { Icon } from './Icon';
 import { iconNames } from 'assets/icons/iconNames';
 
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 // example
 // <Input placeholder={'red'} labelTitle={'hello'} ...etc/>
@@ -90,8 +90,8 @@ const LabelText = styled.p(({ theme }) => ({
     color: theme.color.labelColor,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        fontSize:'14px',
-        lineHeight:'17px',
+        fontSize: '14px',
+        lineHeight: '17px',
     },
 }));
 
@@ -114,11 +114,11 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
     //   "&:focus-visible": {
     //     borderColor: theme.color.accentColor,
     //   },
-    
+
     '&::placeholder': {
         color: theme.color.popupBackground,
-        fontSize:theme.space.x4 + 'px',
-        lineHeight:theme.space.x5 + 'px',
+        fontSize: theme.space.x4 + 'px',
+        lineHeight: theme.space.x5 + 'px',
     },
 
     // '&:hover': {
@@ -146,7 +146,7 @@ const IconWrapper = styled.div(({ theme, resetButton }) => ({
 }));
 
 const Error = styled.p`
-    color: #E74A3B;
+    color: #e74a3b;
     display: block;
-    font-size:12px;
+    font-size: 12px;
 `;

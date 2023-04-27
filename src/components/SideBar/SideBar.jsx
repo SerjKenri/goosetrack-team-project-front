@@ -6,7 +6,7 @@ import gooseimg from '../../assets/images/goose-sidebar@2x.png'
 import { UserNav } from 'components/UserNav/UserNav';
 
 
-export const SideBar = ({onClick}) => {
+export const SideBar = ({onClick, user}) => {
 
     return <Container>
         <SecondaryContainer>
@@ -24,7 +24,7 @@ export const SideBar = ({onClick}) => {
                 <UserNav />
             </UserPanelContainer>
         </SecondaryContainer>
-        <LogOutButton/>
+        <LogOutButton user={ user } />
     </Container>
 }
 

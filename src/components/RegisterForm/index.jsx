@@ -9,6 +9,9 @@ import GooseRegister from '../../assets/images/goose-register.png';
 import GooseRegister2x from '../../assets/images/goose-register@2x.png';
 
 import { Formik } from 'formik';
+import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
+import { ROUTING } from 'core/utils/constantsRouting';
+
 
 // const LangaguesBar = () => {
 //     const LANGAGUES = ['en', 'ua'];
@@ -88,8 +91,8 @@ export const RegisterForm = () => {
                                         inputStyle={{
                                             border:
                                                 touched.email && errors.email
-                                                    ? '1px solid tomato'
-                                                    : '1px solid #DCE3E5',
+                                                    ? '1px solid #E74A3B'
+                                                    : '1px solid rgba(220, 227, 229, 0.6)',
 
                                             backgroundColor: '#ffff',
                                         }}
@@ -116,8 +119,8 @@ export const RegisterForm = () => {
                                         inputStyle={{
                                             border:
                                                 touched.email && errors.email
-                                                    ? '1px solid tomato'
-                                                    : '1px solid #DCE3E5',
+                                                ? '1px solid #E74A3B'
+                                                : '1px solid rgba(220, 227, 229, 0.6)',
 
                                             backgroundColor: '#ffff',
                                         }}
@@ -172,7 +175,7 @@ export const RegisterForm = () => {
                                     iconSize="15"
                                 ></Button>
                             </Form>
-
+                            <AuthNavigate route={ROUTING.LOGIN} content="Log In" />
                             <SignUpImg
                                 srcset={`${GooseRegister} 1x , ${GooseRegister2x} 2x`}
                                 src={`${GooseRegister}`}

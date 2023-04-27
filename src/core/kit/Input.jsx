@@ -24,7 +24,7 @@ const Input = ({
     error,
     onChange,
 }) => {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
     // console.log(error);
     return (
         <Label style={labelStyle}>
@@ -50,7 +50,7 @@ const Input = ({
                         <Icon name={iconNames.cross} size={20} />
                     </IconWrapper>
                 )}
-                {error && <Error>{t(`signUpPage.${error}`)}</Error>}
+                {error && <Error>{error}</Error>}
             </InputContainer>
         </Label>
     );
@@ -120,6 +120,10 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
         fontSize:theme.space.x4 + 'px',
         lineHeight:theme.space.x5 + 'px',
     },
+
+    // '&:hover': {
+    //     outline: '1px solid #111111'
+    // },
 }));
 
 const InputContainer = styled.div({
@@ -142,6 +146,7 @@ const IconWrapper = styled.div(({ theme, resetButton }) => ({
 }));
 
 const Error = styled.p`
-    color: tomato;
+    color: #E74A3B;
     display: block;
+    font-size:12px;
 `;

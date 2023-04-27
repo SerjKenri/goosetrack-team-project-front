@@ -43,7 +43,7 @@ return (
         handleSubmit,
         handleBlur,
         handleChange,
-        isValid,
+        // isValid,
     }) => (
         <LoginFormWrap>
             <LoginFormContainer>
@@ -57,13 +57,16 @@ return (
                     labelTextStyle={{
                         fontWeight:'600',
                         lineHeight:'15px',
-                        marginBottom:'2px'
+                        marginBottom:'2px',
+                        marginTop:"32px"
                     }}
                     inputStyle={{
-                        marginBottom:'24px',
                         borderRadius:'8px',
-                        border:'1px solid rgba(220, 227, 229, 0.6)',
-                        height:'46px'
+                        height:'46px',
+                        border:
+                            touched.email && errors.email
+                                ? '1px solid #E74A3B'
+                                : '1px solid rgba(220, 227, 229, 0.6)',
                     }}
                     handleBlur={handleBlur}
                     onChange={handleChange}
@@ -82,13 +85,16 @@ return (
                         fontWeight:'600',
                         lineHeight:'15px',
                         marginBottom:'2px',
+                        marginTop:"24px"
                     }}
                     inputStyle={{
-                        marginBottom:'24px',
                         borderRadius:'8px',
-                        border:'1px solid rgba(220, 227, 229, 0.6)',
                         height:'46px',
-                        
+                        border:
+                            touched.email && errors.email
+                                ? '1px solid #E74A3B'
+                                : '1px solid rgba(220, 227, 229, 0.6)',
+                            
                     }}
                     handleBlur={handleBlur}
                     onChange={handleChange}
@@ -101,16 +107,15 @@ return (
                 <Button
                     type="submit"
                     differentStyles={ButtonDifference.primary}
-                    // disabled={isValid}
+                    // disabled={!isValid}
                     title= "Log In"
-                    // onClick
-                    icon
+                    
                     buttonStyle={{
                         backgroundColor: '#3e85f3', 
                         paddingLeft: '10px',
                         width: '287px',
                         height: '46px',
-                        marginTop:'8px'
+                        marginTop:'32px'
                     }}
                     // textStyle
                     iconName={iconNames.loginIcon}
@@ -120,7 +125,7 @@ return (
 
             </Form>
             <AuthNavigate route={ROUTING.REGISTER} content="Sign up" />
-            <LoginGooseImg
+            <LoginImg
                 srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                 src={`${GooseLogIn}`}
                 alt="goose"
@@ -173,7 +178,7 @@ const LoginFormTitle = styled.h1`
         color: ${theme.color.accentTextColor};
         text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07)
         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-bottom: 32px;
+        margin-bottom: 8px;
         
         @media (min-width: 768px) {
             font-size:24px;
@@ -181,7 +186,7 @@ const LoginFormTitle = styled.h1`
     }
 `;
 
-const LoginGooseImg = styled.img`
+const LoginImg = styled.img`
     display: none;
 
     @media (min-width: 1440px) {

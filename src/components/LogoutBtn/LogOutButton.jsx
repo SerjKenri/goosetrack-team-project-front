@@ -5,13 +5,15 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "redux/operations";
 
 
-export const LogOutButton = () => {
-    
+export const LogOutButton = ({user}) => {
+
     const dispatch = useDispatch()
 
     const handleLogout = () => {
         dispatch(logoutUser())
+        user = {avatarURL: "", birthDay: "", email: "", id: "", messenger: "", name: "", phone: ""}
     }
+
 
     return <Button 
         type="button"

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { SideBar } from 'components/SideBar/SideBar';
 import { Header } from 'components/Header/Header';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from 'redux/operations';
 
 const MainLayout = () => {
@@ -11,9 +11,12 @@ const MainLayout = () => {
     const [isOpen, setIsOpen] = useState(true)
     const dispatch = useDispatch()
 
+    const user = useSelector((state) => state.user)
+
     useEffect(() => {
-        dispatch(currentUser())
-    }, [dispatch])
+        if (user.name === '') {
+        dispatch(currentUser())}
+    }, [user.name, dispatch])
 
     const handleClose = () => {
         setIsOpen(prev => !prev)
@@ -21,7 +24,7 @@ const MainLayout = () => {
 
     return (
         <LayoutContainer>
-            {isOpen && <SideBar onClick={handleClose}/>}
+            {isOpen && <SideBar onClick={handleClose} user={user} />}
             <SecondaryContainer>
                 <Header onClick={handleClose} />
                 <Outlet />

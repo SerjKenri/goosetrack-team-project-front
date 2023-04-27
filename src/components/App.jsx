@@ -8,7 +8,7 @@ import CalendarDayPage from 'pages/CalendarDayPage/CalendarDayPage';
 import CalendarMonthPage from 'pages/CalendarMonthPage/CalendarMonthPage';
 import AccountPage from 'pages/AccountPage/AccountPage';
 
-import PublicRoute from './authRoutes/PublicRoute';
+// import PublicRoute from './authRoutes/PublicRoute';
 // import PrivateRoute from './authRoutes/PrivateRoute';
 import { ROUTING } from 'core/utils/constantsRouting';
 

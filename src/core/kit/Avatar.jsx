@@ -6,8 +6,8 @@ import { TextH2 } from './text';
 export const Avatar = ({ size, avatar, username }) => {
     return (
         <AvatarContainer size={size}>
-            <AvatarInput id="avatar" type="file" disabled />
-            <AvatarLabel htmlFor="avatar">
+            <AvatarInput id="file" type="file" disabled />
+            <AvatarLabel htmlFor="file">
                 {!avatar ? (
                     <UserIconWrapper>
                         <TextH2>{username}</TextH2>

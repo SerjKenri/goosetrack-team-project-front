@@ -9,6 +9,7 @@ import GooseRegister from '../../assets/images/goose-register.png';
 import GooseRegister2x from '../../assets/images/goose-register@2x.png';
 
 import { Formik } from 'formik';
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 // const LangaguesBar = () => {
 //     const LANGAGUES = ['en', 'ua'];
@@ -41,7 +42,7 @@ import { Formik } from 'formik';
 
 export const RegisterForm = () => {
     const { t, onSubmit, validationSchema } = useRegisterForm();
-
+    const { isDesktop } = useMatchMedia();
     return (
         <>
             {/* <LangaguesBar /> */}
@@ -167,17 +168,18 @@ export const RegisterForm = () => {
                                         marginTop: '40px',
                                         flex: '1 1 auto',
                                     }}
-                                    textStyle
                                     iconName={iconNames.loginIcon}
                                     iconSize="15"
                                 ></Button>
                             </Form>
 
-                            <SignUpImg
-                                srcset={`${GooseRegister} 1x , ${GooseRegister2x} 2x`}
-                                src={`${GooseRegister}`}
-                                alt="goose"
-                            />
+                            {isDesktop && (
+                                <SignUpImg
+                                    srcset={`${GooseRegister} 1x , ${GooseRegister2x} 2x`}
+                                    src={`${GooseRegister}`}
+                                    alt="goose"
+                                />
+                            )}
                         </FormContainer>
                     </SignUpFormWrap>
                 )}
@@ -187,6 +189,7 @@ export const RegisterForm = () => {
 };
 
 const Form = styled.form`
+    z-index: 10;
     display: flex;
     flex-direction: column;
     padding: 40px 24px;
@@ -234,6 +237,7 @@ const SignUpLabel = styled.label(({ theme, p }) => ({
 }));
 
 const SignUpImg = styled.img`
+    z-index: 1;
     position: fixed;
     max-width: 353px;
     max-height: 330px;

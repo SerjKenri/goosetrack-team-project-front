@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-import { initAuthData } from './auth.intit-state';
+import { initUserState } from './auth.intit-state';
 import {
     loginUser,
     logoutUser,
@@ -18,7 +18,7 @@ const handleRejected = (state, action) => {
 };
 const authSlice = createSlice({
     name: 'auth',
-    initialState: initAuthData,
+    initialState: initUserState,
     extraReducers: builder => {
         builder
             .addCase(signUpUser.pending, state => {

@@ -11,15 +11,14 @@ import {
 
 import { tasksInitState } from './tasks/tasks.init-state';
 import { taskReducer } from './tasks/tasks.slice';
-import { userInitState } from './user/user.init-state';
 import { userReducer } from './user/user.slice';
-import { initAuthData } from './auth/auth.intit-state';
+import { initUserState } from './auth/auth.intit-state';
 import { authPersistReducer } from './auth/auth.slice';
 
 const initState = {
     tasks: tasksInitState,
-    auth: initAuthData,
-    user: userInitState,
+    auth: initUserState,
+    user: initUserState,
 };
 
 export const store = configureStore({

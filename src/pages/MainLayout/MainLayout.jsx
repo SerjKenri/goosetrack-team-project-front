@@ -7,20 +7,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from 'redux/operations';
 
 const MainLayout = () => {
+    const [isOpen, setIsOpen] = useState(true);
+    const dispatch = useDispatch();
 
-    const [isOpen, setIsOpen] = useState(true)
-    const dispatch = useDispatch()
-
-    const user = useSelector((state) => state.user)
+    const user = useSelector(state => state.user);
 
     useEffect(() => {
         if (user.name === '') {
-        dispatch(currentUser())}
-    }, [user.name, dispatch])
+            dispatch(currentUser());
+        }
+    }, [user.name, dispatch]);
 
     const handleClose = () => {
-        setIsOpen(prev => !prev)
-    }
+        setIsOpen(prev => !prev);
+    };
 
     return (
         <LayoutContainer>

@@ -70,7 +70,7 @@ export const RegisterForm = () => {
                                 <SignUpLabel>
                                     <Input
                                         name="email"
-                                        type="text"
+                                        type="email"
                                         labelTitle={t(
                                             'signUpPage.labelTitleEmail'
                                         )}
@@ -98,7 +98,7 @@ export const RegisterForm = () => {
                                 <SignUpLabel>
                                     <Input
                                         name="name"
-                                        type="text"
+                                        type="name"
                                         labelTitle={t(
                                             'signUpPage.labelTitleName'
                                         )}
@@ -224,7 +224,7 @@ const SignUpFormWrap = styled.div(({ theme }) => ({
 const SignUpLabel = styled.label(({ theme, p }) => ({
     display: 'flex',
     flexDirection: 'column',
-    marginBotton: '8px',
+    marginBottom: '8px',
     fontFamily: 'Inter',
     fontStyle: 'normal',
     fontWeight: '600',

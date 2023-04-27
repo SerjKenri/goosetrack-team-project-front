@@ -11,12 +11,12 @@ import './core/i18n/i18n';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <BrowserRouter basename='goosetrack-team-project-front'>
+        <BrowserRouter basename="goosetrack-team-project-front">
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                <ManageThemeProvider>
-                    <App />
-                </ManageThemeProvider>
+                    <ManageThemeProvider>
+                        <App />
+                    </ManageThemeProvider>
                 </PersistGate>
             </Provider>
         </BrowserRouter>

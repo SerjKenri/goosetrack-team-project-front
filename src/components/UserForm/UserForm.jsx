@@ -29,14 +29,14 @@ export const UserForm = () => {
         const objURL = URL.createObjectURL(blob);
         setUserImage(objURL);
     };
-    const handleUpload = async () => {
+    const handleUpload = () => {
         if (!setUserImage) {
             alert('Please select a file');
             return;
         }
         formData.append('file', userImage);
     };
-    const handlePick = () => {
+    const handlePick = async () => {
         filePicker.current.click();
     };
     return (

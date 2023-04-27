@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userInitState } from './user.init-state';
+import { initUserState } from '../auth/auth.intit-state';
+
 import { currentUser, updateUser } from '../operations';
 
 const handlePending = state => {
-    state.user.isLoading = true;
+    return state;
 };
 
 const handleRejected = (state, action) => {
-    state.user.isLoading = false;
-    state.user.error = action.payload;
+    // state.user.isLoading = false;
+    state.error = action.payload;
 };
 
 const userSlice = createSlice({
     name: 'user',
-    initialState: userInitState,
+    initialState: initUserState,
     // reducers: {},
 
     extraReducers: builder => {
@@ -21,9 +22,9 @@ const userSlice = createSlice({
             .addCase(updateUser.pending, handlePending)
             .addCase(updateUser.rejected, handleRejected)
             .addCase(updateUser.fulfilled, (state, action) => {
-                state.user.isLoading = false;
-                state.user.error = null;
-                state.user.items = state.user.items.filter(
+                state.isLoading = true;
+                state.error = null;
+                state.user = state.user.filter(
                     user => user.id !== action.payload.id
                 );
             });
@@ -31,9 +32,9 @@ const userSlice = createSlice({
             .addCase(currentUser.pending, handlePending)
             .addCase(currentUser.rejected, handleRejected)
             .addCase(currentUser.fulfilled, (state, action) => {
-                state.user.isLoading = true;
-                state.user.error = null;
-                state.user.items = state.user.items.filter(
+                state.isLoading = true;
+                state.error = null;
+                state.user = state.user.filter(
                     user => user.id === action.payload.id
                 );
             });

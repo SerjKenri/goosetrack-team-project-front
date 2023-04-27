@@ -50,7 +50,7 @@ const Input = ({
                         <Icon name={iconNames.cross} size={20} />
                     </IconWrapper>
                 )}
-                {error && <Error>{t(`signUpPage.${error}`)}</Error>}
+                {/* {error && <Error>{t(`signUpPage.${error}`)}</Error>} */}
             </InputContainer>
         </Label>
     );
@@ -90,8 +90,8 @@ const LabelText = styled.p(({ theme }) => ({
     color: theme.color.labelColor,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        fontSize:'14px',
-        lineHeight:'17px',
+        fontSize: '14px',
+        lineHeight: '17px',
     },
 }));
 
@@ -114,11 +114,11 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
     //   "&:focus-visible": {
     //     borderColor: theme.color.accentColor,
     //   },
-    
+
     '&::placeholder': {
         color: theme.color.popupBackground,
-        fontSize:theme.space.x4 + 'px',
-        lineHeight:theme.space.x5 + 'px',
+        fontSize: theme.space.x4 + 'px',
+        lineHeight: theme.space.x5 + 'px',
     },
 }));
 

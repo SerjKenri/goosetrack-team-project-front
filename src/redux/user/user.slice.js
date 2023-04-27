@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userInitState } from './user.init-state';
-import { currentUser, updateUser } from '../operations';
+import { initUserState } from '../auth/auth.intit-state';
+import { currentUser, updateUser, logoutUser } from '../operations';
+
+const authHandlePending = state => {
+    return state;
+};
 
 const handlePending = state => {
     state.user.isLoading = true;
@@ -13,29 +17,44 @@ const handleRejected = (state, action) => {
 
 const userSlice = createSlice({
     name: 'user',
-    initialState: userInitState,
+    initialState: initUserState,
     // reducers: {},
 
     extraReducers: builder => {
         builder
             .addCase(updateUser.pending, handlePending)
             .addCase(updateUser.rejected, handleRejected)
-            .addCase(updateUser.fulfilled, (state, action) => {
-                state.user.isLoading = false;
-                state.user.error = null;
-                state.user.items = state.user.items.filter(
-                    user => user.id !== action.payload.id
-                );
+            .addCase(updateUser.fulfilled, ({ user }, { payload }) => {
+                user = { ...user, payload };
             });
         builder
             .addCase(currentUser.pending, handlePending)
             .addCase(currentUser.rejected, handleRejected)
             .addCase(currentUser.fulfilled, (state, action) => {
-                state.user.isLoading = true;
-                state.user.error = null;
-                state.user.items = state.user.items.filter(
-                    user => user.id === action.payload.id
-                );
+                // state.user.isLoading = true;
+                // state.user.error = null;
+                // state.user.items = state.user.items.filter(
+                //     user => user.id === action.payload.id
+                // );
+                state.user = action.payload;
+            });
+        builder
+            .addCase(logoutUser.pending, authHandlePending)
+            .addCase(logoutUser.rejected, handleRejected)
+            .addCase(logoutUser.fulfilled, state => {
+                state.isLoggedIn = false;
+                state.user = {
+                    name: null,
+                    email: null,
+                    token: null,
+                    verify: null,
+                    id: '',
+                    avatarURL: '',
+                    birthDay: '',
+                    phone: '',
+                    messenger: '',
+                };
+                state.token = null;
             });
     },
 });

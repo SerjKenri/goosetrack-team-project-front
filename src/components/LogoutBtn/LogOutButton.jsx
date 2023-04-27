@@ -1,4 +1,5 @@
 import { iconNames } from "assets/icons/iconNames";
+import { useMatchMedia } from "core/hooks/use-match-media";
 import { Button } from "core/kit/Button"
 import { ButtonDifference } from "core/kit/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,9 @@ export const LogOutButton = () => {
         dispatch(logoutUser())
     }
 
+    const { isMobile } = useMatchMedia()
+    
+    const size = isMobile ? '18px' : '20px'
 
     return <Button 
         type="button"
@@ -23,7 +27,7 @@ export const LogOutButton = () => {
         title="Log out"
         onClick={handleLogout}
         iconName={iconNames.logout}
-        iconSize={window.innerWidth > 768 ? '20px' : '18px'}
+        iconSize={size}
         disabled = {token ? false : true}
     />
 }

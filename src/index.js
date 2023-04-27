@@ -13,11 +13,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter basename='goosetrack-team-project-front'>
             <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
+                {/* <PersistGate loading={null} persistor={persistor}> */}
                 <ManageThemeProvider>
                     <App />
                 </ManageThemeProvider>
-                </PersistGate>
+                {/* </PersistGate> */}
             </Provider>
         </BrowserRouter>
     </React.StrictMode>

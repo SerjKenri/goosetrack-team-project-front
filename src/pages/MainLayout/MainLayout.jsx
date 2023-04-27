@@ -15,8 +15,6 @@ const MainLayout = () => {
 
     const user = useSelector(selectUserState)
     
-console.log(user)
-
     const { isDesktop } = useMatchMedia();
 
     useEffect(() => {
@@ -26,10 +24,7 @@ console.log(user)
     }, [isDesktop])
 
     useEffect(() => {
-        console.log('huy')
         if (user.name === null) {
-                    console.log('huy2')
-
             dispatch(currentUser())
         }
     }, [user.name, dispatch])

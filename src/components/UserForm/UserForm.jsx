@@ -37,6 +37,7 @@ export const UserForm = () => {
     const birthday = useSelector(selectUserBirthday) || Date.now();
 
     const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
+
     const [userImage, setUserImage] = useState(avatarURL);
     const [avatar, setAvatar] = useState(avatarURL);
 
@@ -71,18 +72,24 @@ export const UserForm = () => {
                 }}
                 validationSchema={userFormSchema}
                 onSubmit={async (values, { setSubmitting }) => {
-                    console.log('values ', values);
                     if (userImage) {
                         formData.append('avatarURL', userImage);
                     }
-                    formData.append('name', name);
-                    formData.append('email', email);
-                    if (phone) {
-                        formData.append('phone', phone);
+                    if (values.name) {
+                        formData.append('name', values.name);
                     }
-                    formData.append('birthDay', birthday);
-                    if (telegram) {
-                        formData.append('messenger', telegram);
+                    if (values.email) {
+                        formData.append('email', values.email);
+                    }
+
+                    if (values.phone) {
+                        formData.append('phone', values.phone);
+                    }
+                    if (values.birthday) {
+                        formData.append('birthDay', values.birthday);
+                    }
+                    if (values.telegram) {
+                        formData.append('messenger', values.telegram);
                     }
                     await dispatch(updateUser(formData)).unwrap();
 
@@ -217,7 +224,7 @@ const Container = styled.div(({ theme, isTablet, isDesktop }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     position: 'relative',
-    backgroundColor: theme.color.btnTextColor,
+    backgroundColor: theme.color.calendarCellColor,
     paddingTop: '40px',
     paddingBottom: isTablet ? '40px' : '60px',
     paddingLeft: 'auto',
@@ -293,6 +300,7 @@ const UserRoleText = styled(PopupChip)(({ theme }) => ({
         fontSize: '14px',
         fontWeight: '1.3',
     },
+    color: theme.color.labelColor,
 }));
 
 const InputWrapper = styled.div(({ theme }) => ({
@@ -323,7 +331,7 @@ const FormInput = styled(Input).attrs(({ theme }) => ({
     inputStyle: {
         outline: 'none',
         border: '1px solid' + theme.color.modalBorder,
-        backgroundColor: theme.color.btnTextColor,
+        backgroundColor: theme.color.calendarCellColor,
         width: '299px',
         height: '42px',
         fontSize: '14px',
@@ -353,7 +361,7 @@ const AvatarContainer = styled.div(({ theme }) => ({
     height: '100%',
 
     borderRadius: '50%',
-    border: `2px solid ${theme.color.accentTextColor}`,
+    border: `2px solid ${theme.color.accentColor}`,
 }));
 
 const AvatarInput = styled.input({
@@ -406,7 +414,7 @@ const PlusIconWrapper = styled.div(({ theme }) => ({
     borderRadius: '50%',
 
     color: theme.color.btnTextColor,
-    backgroundColor: theme.color.accentTextColor,
+    backgroundColor: theme.color.accentColor,
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         width: '24px',
         height: '24px',

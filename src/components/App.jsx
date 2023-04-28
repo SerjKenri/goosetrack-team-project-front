@@ -10,30 +10,42 @@ import AccountPage from 'pages/AccountPage/AccountPage';
 import PublicRoute from './authRoutes/PublicRoute';
 import PrivateRoute from './authRoutes/PrivateRoute';
 import { ROUTING } from 'core/utils/constantsRouting';
+import { Suspense } from 'react';
 
 export const App = () => {
     return (
-        <Routes>
-            <Route path="" element={<PublicRoute />}>
-                <Route index element={<LoginPage />} />
-                <Route path={ROUTING.LOGIN} element={<LoginPage />} />
-                <Route path={ROUTING.REGISTER} element={<RegisterPage />} />
-            </Route>
-            <Route path="" element={<PrivateRoute />}>
-                <Route path="/" element={<MainLayout />}>
-                    <Route index element={<Navigate to={ROUTING.ACCOUNT} />} />
-                    <Route path={ROUTING.ACCOUNT} element={<AccountPage />} />
-                    <Route path={ROUTING.CALENDAR} element={<CalendarPage />} />
-                    <Route
-                        path={ROUTING.CURRENT_DAY}
-                        element={<CalendarDayPage />}
-                    />
-                    <Route
-                        path={ROUTING.CURRENT_MONTH}
-                        element={<CalendarMonthPage />}
-                    />
+        <Suspense>
+            <Routes>
+                <Route path="" element={<PublicRoute />}>
+                    <Route index element={<LoginPage />} />
+                    <Route path={ROUTING.LOGIN} element={<LoginPage />} />
+                    <Route path={ROUTING.REGISTER} element={<RegisterPage />} />
                 </Route>
-            </Route>
-        </Routes>
+                <Route path="" element={<PrivateRoute />}>
+                    <Route path="/" element={<MainLayout />}>
+                        <Route
+                            index
+                            element={<Navigate to={ROUTING.ACCOUNT} />}
+                        />
+                        <Route
+                            path={ROUTING.ACCOUNT}
+                            element={<AccountPage />}
+                        />
+                        <Route
+                            path={ROUTING.CALENDAR}
+                            element={<CalendarPage />}
+                        />
+                        <Route
+                            path={ROUTING.CURRENT_DAY}
+                            element={<CalendarDayPage />}
+                        />
+                        <Route
+                            path={ROUTING.CURRENT_MONTH}
+                            element={<CalendarMonthPage />}
+                        />
+                    </Route>
+                </Route>
+            </Routes>
+        </Suspense>
     );
 };

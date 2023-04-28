@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://localhost:3001/api';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -91,7 +91,7 @@ export const currentUser = createAsyncThunk(
             const { auth } = getState();
             setAuthHeader(auth.token);
             const response = await axios.get('/user/current');
-            console.log(response.data)
+            console.log(response.data);
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);
@@ -101,12 +101,12 @@ export const currentUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
     'user/updUser',
-    async (userId, values, { getState, rejectWithValue }) => {
+    async (values, { getState, rejectWithValue }) => {
         try {
             const { auth } = getState();
             setAuthHeader(auth.token);
 
-            const response = await axios.patch(`/user/info/${userId}`);
+            const response = await axios.patch(`/user/info`, values);
 
             return response.data;
         } catch (e) {

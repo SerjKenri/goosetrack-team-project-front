@@ -1,15 +1,15 @@
 const media = {
     up: (breakpoint, vertical = false) =>
-        `@media (min${
-            vertical ? 'Height' : 'Width'
+        `@media (min-${
+            vertical ? 'height' : 'width'
         }: calc(${breakpoint} + 0.02px))`,
     down: (breakpoint, vertical = false) =>
-        `@media (max${vertical ? 'Height' : 'Width'}: ${breakpoint})`,
+        `@media (max-${vertical ? 'height' : 'width'}: ${breakpoint})`,
     between: (breakpointMin, breakpointMax, vertical = false) =>
-        `@media (max${
-            vertical ? 'Height' : 'Width'
-        }: ${breakpointMax}) and (min${
-            vertical ? 'Height' : 'Width'
+        `@media (max-${
+            vertical ? 'height' : 'width'
+        }: ${breakpointMax}) and (min-${
+            vertical ? 'height' : 'width'
         }: calc(${breakpointMin} + 0.02px))`,
 };
 

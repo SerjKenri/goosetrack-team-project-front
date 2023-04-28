@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import styled from 'styled-components';
 
 import {
-    selectUserId,
     selectUserName,
     selectUserEmail,
     selectUserPhone,
@@ -22,59 +21,70 @@ import { UserInfoText, PopupChip, Chip } from 'core/kit/text';
 import { Icon } from 'core/kit/Icon';
 import { iconNames } from 'assets/icons/iconNames';
 import { useSelector } from 'react-redux';
+// import { useMatchMedia } from 'core/hooks/useMatchMedia';
 import { updateUser } from 'redux/operations';
 
 export const UserForm = () => {
-    const filePicker = useRef(null);
+    const filePicker = useRef('');
     const dispatch = useDispatch();
-    const id = useSelector(selectUserId);
+    // const { isDesktop, isTablet, isMobile } = useMatchMedia();
+
     const name = useSelector(selectUserName);
     const email = useSelector(selectUserEmail);
     const phone = useSelector(selectUserPhone);
     const telegram = useSelector(selectUserTelegram);
-    const avatar = useSelector(selectUserAvatar);
+    const avatarURL = useSelector(selectUserAvatar);
     const birthday = useSelector(selectUserBirthday) || Date.now();
 
     const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
-    const [userImage, setUserImage] = useState(avatar);
+    const [userImage, setUserImage] = useState(avatarURL);
+    const [avatar, setAvatar] = useState(avatarURL);
+
     const formData = new FormData();
 
     const handleChangeAvatar = e => {
         const file = e.target.files[0];
-        let blob = new Blob([file], { type: 'image/jpeg' });
-        const objURL = URL.createObjectURL(blob);
-        setUserImage(objURL);
+        const objURL = URL.createObjectURL(file);
+        setAvatar(objURL);
+        setUserImage(file);
     };
     const handleUpload = async () => {
         if (!setUserImage) {
             alert('Please select a file');
             return;
         }
-        formData.append('file', userImage);
     };
     const handlePick = () => {
         filePicker.current.click();
     };
+
     return (
         <Container>
             <Formik
                 initialValues={{
-                    username: name,
+                    avatarURL,
+                    name,
                     birthday: formattedDate,
-                    email: email,
-                    phone: phone,
-                    telegram: telegram,
+                    email,
+                    phone,
+                    telegram,
                 }}
                 validationSchema={userFormSchema}
                 onSubmit={async (values, { setSubmitting }) => {
                     console.log('values ', values);
-                    formData.append('username', values.username);
-                    formData.append('birthday', values.birthday);
-                    formData.append('email', values.email);
-                    formData.append('phone', values.phone);
-                    formData.append('telegram', values.telegram);
-
-                    await dispatch(updateUser(id, formData)).unwrap();
+                    if (userImage) {
+                        formData.append('avatarURL', userImage);
+                    }
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    if (phone) {
+                        formData.append('phone', phone);
+                    }
+                    formData.append('birthDay', birthday);
+                    if (telegram) {
+                        formData.append('messenger', telegram);
+                    }
+                    await dispatch(updateUser(formData)).unwrap();
 
                     setSubmitting(false);
                 }}
@@ -88,12 +98,11 @@ export const UserForm = () => {
                                     id="avatar"
                                     type="file"
                                     accept="image/*,.jpg"
-                                    name="avatar"
+                                    name="avatarURL"
                                     onChange={handleChangeAvatar}
-                                    value={avatar}
                                 />
                                 <AvatarLabel htmlFor="avatar">
-                                    {!userImage ? (
+                                    {!avatar ? (
                                         <UserIconWrapper>
                                             <Icon
                                                 name={iconNames.avatar}
@@ -103,7 +112,7 @@ export const UserForm = () => {
                                         </UserIconWrapper>
                                     ) : (
                                         <AvatarImage
-                                            src={userImage}
+                                            src={avatar}
                                             alt="user avatar"
                                         />
                                     )}
@@ -114,22 +123,21 @@ export const UserForm = () => {
                             </AvatarContainer>
                         </AvatarWrapper>
                         <NameWrapper>
-                            <NameText>Nadiia</NameText>
+                            <NameText>{name}</NameText>
                             <UserRoleText>User</UserRoleText>
                         </NameWrapper>
                         <InputWrapper>
                             <FormInput
                                 labelTitle="User Name"
-                                name="username"
+                                name="name"
                                 placeholder="Enter your name"
                                 onChange={formik.handleChange}
-                                value={formik.values.username}
-                                {...formik.getFieldProps('username')}
+                                value={formik.values.name}
+                                {...formik.getFieldProps('name')}
                             />
-                            {formik.touched.username &&
-                            formik.errors.username ? (
+                            {formik.touched.name && formik.errors.name ? (
                                 <ErrorMessage>
-                                    {formik.errors.username}
+                                    {formik.errors.name}
                                 </ErrorMessage>
                             ) : null}
 
@@ -167,11 +175,7 @@ export const UserForm = () => {
                                 name="phone"
                                 placeholder="Enter your phone"
                                 onChange={formik.handleChange}
-                                value={
-                                    !formik.values.phone
-                                        ? ''
-                                        : formik.values.phone
-                                }
+                                value={formik.values.phone}
                                 {...formik.getFieldProps('phone')}
                             />
                             {formik.touched.phone && formik.errors.phone ? (
@@ -184,11 +188,7 @@ export const UserForm = () => {
                                 name="telegram"
                                 placeholder="Enter your telegram"
                                 onChange={formik.handleChange}
-                                value={
-                                    !formik.values.telegram
-                                        ? ''
-                                        : formik.values.telegram
-                                }
+                                value={formik.values.telegram}
                                 {...formik.getFieldProps('telegram')}
                             />
                             {formik.touched.telegram &&
@@ -212,14 +212,14 @@ export const UserForm = () => {
     );
 };
 
-const Container = styled.div(({ theme }) => ({
+const Container = styled.div(({ theme, isTablet, isDesktop }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     position: 'relative',
     backgroundColor: theme.color.btnTextColor,
     paddingTop: '40px',
-    paddingBottom: '60px',
+    paddingBottom: isTablet ? '40px' : '60px',
     paddingLeft: 'auto',
     paddingRight: 'auto',
     width: '335px',
@@ -357,7 +357,13 @@ const AvatarContainer = styled.div(({ theme }) => ({
 }));
 
 const AvatarInput = styled.input({
-    visibility: 'hidden',
+    opacity: '0',
+    height: '0',
+    width: '0',
+    lineHeight: '0',
+    overflow: 'hidden',
+    padding: '0',
+    margin: '0',
 });
 const AvatarLabel = styled.label({
     position: 'absolute',

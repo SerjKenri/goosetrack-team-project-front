@@ -9,36 +9,35 @@ import { selectUserState } from 'redux/auth/auth.selectors';
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 const MainLayout = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
 
-    const [isOpen, setIsOpen] = useState(false)
-    const dispatch = useDispatch()
+    const user = useSelector(selectUserState);
 
-    const user = useSelector(selectUserState)
-    
     const { isDesktop } = useMatchMedia();
 
     useEffect(() => {
         if (isDesktop) {
-            setIsOpen(true)
-        } else setIsOpen(false)
-    }, [isDesktop])
+            setIsOpen(true);
+        } else setIsOpen(false);
+    }, [isDesktop]);
 
     useEffect(() => {
         if (user.name === null) {
-            dispatch(currentUser())
+            dispatch(currentUser());
         }
-    }, [user.name, dispatch])
+    }, [user.name, dispatch]);
 
     const handleClose = () => {
-        setIsOpen(prev => !prev)
-    }
+        setIsOpen(prev => !prev);
+    };
 
     return (
         <LayoutContainer>
             {isOpen && <SideBar onClick={handleClose} user={user} />}
             <SecondaryContainer>
                 <Header onClick={handleClose} />
-                <Outlet />
+                {user.name && <Outlet />}
             </SecondaryContainer>
         </LayoutContainer>
     );

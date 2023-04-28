@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initUserState } from '../auth/auth.intit-state';
 import { currentUser, updateUser, logoutUser } from '../operations';
+// import { createEntityAdapter } from '@reduxjs/toolkit';
 
 const handlePending = state => {
     state.user.isLoading = true;
@@ -51,3 +52,26 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
+
+// const userAdapter = createEntityAdapter();
+
+// const userSlice = createSlice({
+//     name: 'user',
+//     initialState: initUserState,
+//     reducers: {},
+//     extraReducers: builder => {
+//         builder
+//             .addCase(currentUser.fulfilled, (state, { payload }) => {
+//                 userAdapter.addOne(state, payload);
+//             })
+//             .addCase(updateUser.fulfilled, (state, { payload }) => {
+//                 userAdapter.updateOne(state, {
+//                     id: payload.id,
+//                     changes: payload,
+//                 });
+//             })
+//             .addCase(logoutUser.fulfilled, (state, { payload }) => {
+//                 userAdapter.removeOne(state, payload);
+//             });
+//     },
+// });

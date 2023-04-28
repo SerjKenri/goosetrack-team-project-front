@@ -10,6 +10,7 @@ import {
     updateUser,
     logoutUser,
 } from 'redux/operations';
+// import { createEntityAdapter } from '@reduxjs/toolkit';
 
 const handlePending = state => {
     state.isLoading = true;
@@ -85,3 +86,23 @@ const persistConfig = {
 };
 
 export const authPersistReducer = persistReducer(persistConfig, authReducer);
+
+// const authAdapter = createEntityAdapter();
+
+// const authSlice = createSlice({
+//     name: 'auth',
+//     initialState: initUserState,
+//     reducers: {},
+//     extraReducers: builder => {
+//         builder
+//             .addCase(signUpUser.fulfilled, (state, action) => {
+//                 authAdapter.addOne(state, action.payload);
+//             })
+//             .addCase(loginUser.fulfilled, (state, action) => {
+//                 authAdapter.addOne(state, action.payload);
+//             })
+//             .addCase(refreshUser.fulfilled, (state, action) => {
+//                 authAdapter.addOne(state, action.payload);
+//             });
+//     },
+// });

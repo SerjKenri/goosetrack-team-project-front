@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { tasksInitState } from './tasks.init-state';
 import { fetchTasks, addTask, delTask, updateTask } from '../operations';
+// import { createEntityAdapter } from '@reduxjs/toolkit';
 
 const handlePending = state => {
     state.tasks.isLoading = true;
@@ -53,3 +54,29 @@ const taskSlice = createSlice({
 });
 
 export const taskReducer = taskSlice.reducer;
+
+// const tasksAdapter = createEntityAdapter();
+
+// const tasksSlice = createSlice({
+//     name: 'tasks',
+//     initialState: tasksInitState,
+//     reducers: {},
+//     extraReducers: builder => {
+//         builder
+//             .addCase(fetchTasks.fulfilled, (state, { payload }) => {
+//                 tasksAdapter.addMany(state, payload);
+//             })
+//             .addCase(addTask.fulfilled, (state, { payload }) => {
+//                 tasksAdapter.addOne(state, payload);
+//             })
+//             .addCase(updateTask.fulfilled, (state, { payload }) => {
+//                 tasksAdapter.updateOne(state, {
+//                     id: payload.id,
+//                     changes: payload,
+//                 });
+//             })
+//             .addCase(delTask.fulfilled, (state, { payload }) => {
+//                 tasksAdapter.removeOne(state, payload);
+//             });
+//     },
+// });

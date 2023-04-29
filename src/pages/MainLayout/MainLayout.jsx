@@ -46,14 +46,15 @@ const MainLayout = () => {
 const LayoutContainer = styled.div(({ theme }) => ({
     display: 'flex',
     backgroundColor: theme.color.outletBackgroundColor,
-    width: '100%',
-    height: '100vw',
+    width: '100vw',
+    height: '100%',
 }));
 
 const SecondaryContainer = styled.div(({ theme }) => ({
     padding: '24px 20px 20px 20px',
     display: 'flex',
     width: '100%',
+    minHeight: '100vh',
     flexDirection: 'column',
     alignItems: 'center',
     gap: '64px',

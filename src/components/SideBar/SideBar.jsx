@@ -29,7 +29,7 @@ export const SideBar = ({onClick}) => {
 }
 
 const Container = styled.div(({ theme }) => ({
-    height: '100vw',
+    height: '100vh',
     display: "flex",
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -43,6 +43,7 @@ const Container = styled.div(({ theme }) => ({
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
+        height: 'initial',
         padding: '32px 24px',
         position: 'relative',
     },

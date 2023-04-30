@@ -11,6 +11,7 @@ import PublicRoute from './authRoutes/PublicRoute';
 import PrivateRoute from './authRoutes/PrivateRoute';
 import { ROUTING } from 'core/utils/constantsRouting';
 import { Suspense } from 'react';
+import ChangePassPage from 'pages/ChangePassPage/ChangeUserPassPage';
 
 export const App = () => {
     return (
@@ -30,6 +31,10 @@ export const App = () => {
                         <Route
                             path={ROUTING.ACCOUNT}
                             element={<AccountPage />}
+                        />
+                        <Route
+                            path={ROUTING.CHANGE_PASS}
+                            element={<ChangePassPage />}
                         />
                         <Route
                             path={ROUTING.CALENDAR}

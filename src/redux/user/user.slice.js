@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initUserState } from '../auth/auth.intit-state';
-import { currentUser, updateUser, logoutUser } from '../operations';
+import { currentUser, updateUser, logoutUser, changePass } from '../operations';
 // import { createEntityAdapter } from '@reduxjs/toolkit';
 
 const handlePending = state => {
@@ -47,6 +47,12 @@ const userSlice = createSlice({
                     messenger: '',
                 };
                 state.token = null;
+            })
+            .addCase(changePass.pending, handlePending)
+            .addCase(changePass.rejected, handleRejected)
+            .addCase(changePass.fulfilled, (state, { payload }) => {
+                state.user.isLoading = false;
+                state.user.error = null;
             });
     },
 });

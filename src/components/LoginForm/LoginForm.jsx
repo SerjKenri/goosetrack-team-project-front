@@ -109,14 +109,20 @@ export const LoginForm = () => {
                             <Button
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-                                // disabled={true}
+
+                                // disabled={!isValid}
                                 title="Log In"
                                 buttonStyle={{
+                                    backgroundColor: '#3e85f3',
+
                                     paddingLeft: '10px',
                                     width: '287px',
                                     height: '46px',
                                     marginTop: '32px',
                                 }}
+
+                                // textStyle
+
                                 iconName={iconNames.loginIcon}
                                 iconSize="15"
                             ></Button>

@@ -23,6 +23,8 @@ import { iconNames } from 'assets/icons/iconNames';
 import { useSelector } from 'react-redux';
 // import { useMatchMedia } from 'core/hooks/useMatchMedia';
 import { updateUser } from 'redux/operations';
+import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
+import { ROUTING } from 'core/utils/constantsRouting';
 
 export const UserForm = () => {
     const filePicker = useRef('');
@@ -215,6 +217,11 @@ export const UserForm = () => {
                     </Form>
                 )}
             </Formik>
+            {/* тимчасово, переробити на нормальне */}
+            <AuthNavigate
+                route={`/${ROUTING.CHANGE_PASS}`}
+                content="Change password"
+            />
         </Container>
     );
 };

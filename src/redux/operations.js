@@ -114,6 +114,22 @@ export const updateUser = createAsyncThunk(
         }
     }
 );
+
+export const changePass = createAsyncThunk(
+    'user/updPass',
+    async (userPassData, thunkAPI) => {
+        try {
+            const resp = await axios.patch('/user/update-pass', userPassData);
+            setAuthHeader(resp.data.user.token);
+            alert('Password is successfully updated');
+            console.log('pass resnonse resp.data', resp.data);
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
 // ===============================================================
 // TASKS
 // ===============================================================

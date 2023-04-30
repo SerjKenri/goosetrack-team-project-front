@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import { Button, ButtonDifference } from 'core/kit/Button';
 import { changePass } from 'redux/operations';
 import { Input } from 'core/kit/Input';
+import { useTranslation } from 'react-i18next';
 import { userUpdPassSchema } from 'schemas/userPassUpdValidation';
 
 export const ChangeUserPass = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const onSubmit = (values, { resetForm }) => {
@@ -44,12 +46,16 @@ export const ChangeUserPass = () => {
                     // <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
-                            <LoginFormTitle>Change password</LoginFormTitle>
+                            <LoginFormTitle>
+                                {t('chengePassPage.labelTitleName')}
+                            </LoginFormTitle>
                             <Input
                                 name="currentPassword"
                                 type="password"
-                                labelTitle="Current password"
-                                placeholder="Enter your old password"
+                                labelTitle={t('chengePassPage.oldPassword')}
+                                placeholder={t(
+                                    'chengePassPage.oldPassPlaceholder'
+                                )}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -77,8 +83,10 @@ export const ChangeUserPass = () => {
                             <Input
                                 name="newPassword"
                                 type="password"
-                                labelTitle="New password"
-                                placeholder="Enter your new password"
+                                labelTitle={t('chengePassPage.newPassword')}
+                                placeholder={t(
+                                    'chengePassPage.newPassPlaceholder'
+                                )}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -105,8 +113,10 @@ export const ChangeUserPass = () => {
                             <Input
                                 name="confirmPassword"
                                 type="password"
-                                labelTitle="Confirm password"
-                                placeholder="Confirm your new password"
+                                labelTitle={t('chengePassPage.confNewPass')}
+                                placeholder={t(
+                                    'chengePassPage.confPassPlaceholder'
+                                )}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -140,12 +150,14 @@ export const ChangeUserPass = () => {
                                         ? false
                                         : true
                                 }
-                                title="Change Password"
+                                title={t('chengePassPage.labelTitleName')}
                                 buttonStyle={{
                                     backgroundColor: '#3e85f3',
                                     width: '287px',
                                     height: '46px',
                                     marginTop: '32px',
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto',
                                 }}
                                 textStyle={{
                                     margin: '0',

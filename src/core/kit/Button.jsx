@@ -1,6 +1,11 @@
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-
+import {
+    primaryButton,
+    secondaryButton,
+    addTaskButton,
+    cancelButton,
+} from './text';
 import { Icon } from './Icon.jsx';
 
 const ButtonDifference = {
@@ -12,13 +17,16 @@ const ButtonDifference = {
 
     // Для кнопки:Cancel:
     cancel: 'cancel',
+
+    // Для кнопки:Cancel:
+    addTask: 'addTask',
 };
 
 // ===========================================================
 
 // EXAMPLE:
 // копі-паст це:
-// import { ButtonDifference } from "core/kit/Button/Button.styled";
+// import { ButtonDifference } from "core/kit/Button/Button";
 // прописати сюди:
 // //  <Button
 //       differentStyles={ButtonDifference.secondary}
@@ -42,6 +50,14 @@ const Button = ({
     iconSize,
     type,
 }) => {
+    const Title =
+        differentStyles === ButtonDifference.primary
+            ? primaryButton
+            : differentStyles === ButtonDifference.secondary
+            ? secondaryButton
+            : differentStyles === ButtonDifference.cancel
+            ? cancelButton
+            : addTaskButton;
     return (
         <Container>
             <ButtonWrapper
@@ -108,26 +124,34 @@ const ButtonWrapper = styled.button(({ differentStyles, disabled, theme }) => ({
     paddingTop: theme.space.x4,
     paddingBottom: theme.space.x4,
 
-    background: disabled
-        ? theme.color.taskCancelColor
-        : theme.color.accentBackgroundColor,
-    border: 'none',
-    cursor: 'pointer',
+    background:
+        disabled || differentStyles === ButtonDifference.cancel
+            ? theme.color.taskCancelColor
+            : differentStyles === ButtonDifference.primary ||
+              differentStyles === ButtonDifference.secondary
+            ? theme.color.accentBackgroundColor
+            : theme.color.activeSelectionColor,
+    border:
+        differentStyles === ButtonDifference.addTask
+            ? `1px dashed ${theme.color.accentColor}`
+            : 'none',
+    cursor: disabled ? 'default' : 'pointer',
     fill: 'white',
 
-    boxShadow:
-        differentStyles === ButtonDifference.primary
-            ? '4px 2px 16px rgba(136, 165, 191, 0.48)'
-            : 'none',
+    boxShadow: disabled
+        ? 'none'
+        : differentStyles === ButtonDifference.primary
+        ? '4px 2px 16px rgba(136, 165, 191, 0.48)'
+        : 'none',
 
-    '&:hover': {
+    '&:hover': !disabled && {
         background:
             differentStyles === ButtonDifference.primary
                 ? theme.color.hoverColor
                 : theme.color.hoverColor,
         transition: '0.2s ease-in',
     },
-    '&:active': {
+    '&:active': !disabled && {
         transition: '0.2s ease-in',
         border:
             differentStyles === ButtonDifference.primary
@@ -135,29 +159,6 @@ const ButtonWrapper = styled.button(({ differentStyles, disabled, theme }) => ({
                 : `2px solid ${theme.color.btnTextColor}`,
     },
 }));
-
-const Title = styled.p(({ differentStyles, disabled, theme }) => {
-    return {
-        fontFamily: theme.font.mainFont,
-        fontStyle: 'normal',
-        fontWeight: '600',
-        fontSize:
-            differentStyles === ButtonDifference.primary ? '18px' : '14px',
-        lineHeight:
-            differentStyles === ButtonDifference.primary ? '133%' : '129%',
-        letterSpacing: '-0.02em',
-        margin:
-            differentStyles === ButtonDifference.primary
-                ? '0 11px 0 0'
-                : ' 0 0  0 8px',
-        padding: 0,
-        color: disabled
-            ? theme.color.inactiveBtnTextColor
-            : differentStyles === ButtonDifference.cancel
-            ? '#111111'
-            : theme.color.btnTextColor,
-    };
-});
 
 const IconContainer = styled.div(({ theme }) => ({
     color: theme.color.btnTextColor,

@@ -13,6 +13,7 @@ import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
+import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
     const dispatch = useDispatch();
@@ -109,7 +110,6 @@ export const LoginForm = () => {
                             <Button
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-
                                 // disabled={!isValid}
                                 title="Log In"
                                 buttonStyle={{
@@ -120,7 +120,6 @@ export const LoginForm = () => {
                                     height: '46px',
                                     marginTop: '32px',
                                 }}
-
                                 // textStyle
 
                                 iconName={iconNames.loginIcon}
@@ -131,6 +130,9 @@ export const LoginForm = () => {
                             route={ROUTING.REGISTER}
                             content="Sign up"
                         />
+                        <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
+                            Forgot password?
+                        </NavToRestorePass>
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                             src={`${GooseLogIn}`}
@@ -202,4 +204,31 @@ const LoginImg = styled.img`
         bottom: 20px;
         display: block;
     }
+`;
+
+//////////////
+export const NavToRestorePass = styled(Link)`
+    ${({ theme }) => `
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        border-bottom: 1px solid ${theme.color.accentTextColor};
+        color: ${theme.color.accentTextColor};
+        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
+        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+        margin-top: 8px;
+    
+        &:hover,
+        :focus {
+            color: blue;
+            border-color: blue;
+        }
+    
+        @media (min-width: 768px) {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    `}
 `;

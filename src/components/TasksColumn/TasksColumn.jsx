@@ -1,28 +1,57 @@
-import { AddTaskBtn } from 'components/AddTaskBtn/AddTaskBtn';
-import { ColumnHeadBar } from 'components/ColumnHeadBar/ColumnHeadBar';
-import { ColumnsTasksList } from 'components/ColumnsTasksList/ColumnsTasksList';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-// import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
 
-const TasksColumn = ({ title, tasksCollection }) => {
-    // console.log(title, tasksCollection);
+import { ColumnHeadBar } from 'components/ColumnHeadBar/ColumnHeadBar';
+import { AddTaskBtn } from 'components/AddTaskBtn/AddTaskBtn';
+import {ColumnsTasksList} from 'components/ColumnsTasksList/ColumnsTasksList';
+import { TaskModal } from 'components/TaskModal/TaskModal';
+
+const TasksColumn = props => {
+    const title = props.title;
+    const tasks = props.tasks;
+    const index = props.index;
+    // console.log(props);
+    const [isShow, setIsShow] = useState(false);
+
+    const handleCloseModal = () => {
+        setIsShow(false);
+    };
     return (
-        <TaskColumn>
-            <ColumnHeadBar
-                title={title}
-                onClick={() => console.log('create to do')}
-            />
-            <ColumnsTasksList tasks={tasksCollection} />
-            <AddTaskBtn onClick={() => console.log('create to do')} />
-        </TaskColumn>
+        <Draggable draggableId={title} index={index}>
+            {(provided, snapshot) => (
+                <TaskColumn
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                >
+                    <ColumnHeadBar
+                        isDragging={snapshot.isDragging}
+                        {...provided.dragHandleProps}
+                        title={title}
+                    />
+                    <ColumnsTasksList
+                        listId={title}
+                        listType="TASK"
+                        tasks={tasks}
+                        internalScroll={props.isScrollable}
+                        isCombineEnabled={Boolean(props.isCombineEnabled)}
+                        useClone={Boolean(props.useClone)}
+                    />
+                    <AddTaskBtn onClick={() => setIsShow(true)} />
+                    <TaskModal isShow={isShow} closeModal={handleCloseModal} />
+                </TaskColumn>
+            )}
+        </Draggable>
     );
 };
 
-export { TasksColumn };
+export default TasksColumn;
 
-const TaskColumn = styled.div(({ theme }) => ({
+const TaskColumn = styled.li(({ theme }) => ({
+    minWidth: '340px',
+    width: '100%',
     display: 'grid',
-    gridTemplateRows: `${theme.space.x9}px minmax(0, max-content)`,
+    gridTemplateRows: `${theme.space.x9}px minmax(0, max-content) ${theme.space.x9}px`,
     padding: `${theme.space.x7}px ${theme.space.x5}px ${theme.space.x3}px`,
     gap: `${theme.space.x4}px`,
     alignSelf: 'self-start',

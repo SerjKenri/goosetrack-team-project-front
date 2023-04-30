@@ -9,7 +9,7 @@ const { t } = useTranslation();
     return (
         <Button
             onClick={onClick}
-            differentStyles={ButtonDifference.secondary}
+            differentStyles={ButtonDifference.addTask}
             iconName={iconNames.plus}
             iconSize={'20px'}
             title={t('calendarPage.action.add')}

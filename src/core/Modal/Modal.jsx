@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import propTypes from 'prop-types';
+import { Icon } from "core/kit/Icon";
+import { iconNames } from 'assets/icons/iconNames';
+import { IconButton } from "core/kit/IconButton";
 
 const modalRoot = document.querySelector("#modal-root");
 
@@ -33,16 +36,18 @@ const Modal = ({
   };
 
   const modal = (
-    <Backdrop onClick={handleCloseModal}>
-      <ModalWindow style={modalWindowStyle}>
-        {closeButton && (
-          <ModalButton type="button" onClick={setIsVisible}>
-            icon
-          </ModalButton>
-        )}
-        <ModalContent style={modalContentStyle}>{children}</ModalContent>
-      </ModalWindow>
-    </Backdrop>
+      <Backdrop onClick={handleCloseModal}>
+          <ModalWindow style={modalWindowStyle}>
+              {closeButton && (
+                  <ModalButton
+                      iconName={iconNames.cross}
+                      type="button"
+                      onClick={setIsVisible}
+                  />
+              )}
+              <ModalContent style={modalContentStyle}>{children}</ModalContent>
+          </ModalWindow>
+      </Backdrop>
   );
 
   return isVisible ? createPortal(modal, modalRoot) : null;
@@ -90,19 +95,27 @@ const ModalContent = styled.div(({ theme }) => ({
   padding: `${theme.space.x10}px ${theme.space.x7}px`,
 }));
 
-const ModalButton = styled.button(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "30px",
-  height: "30px",
-  padding: 0,
-  position: "absolute",
-  top: theme.space.x3,
-  right: theme.space.x3,
-  color: "black",
-  backgroundColor: "transparent",
-  borderRadius: "50%",
-  border: "1px solid transparent",
-  cursor: "pointer",
-}));
+const ModalButton = styled(IconButton).attrs(({theme})=>({
+    buttonStyle: {
+        position: 'absolute',
+        top: theme.space.x3,
+        right: theme.space.x3,
+    },
+}))({});
+
+// const ModalButton1 = styled(IconButton)(({ theme }) => ({
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     width: '30px',
+//     height: '30px',
+//     padding: 0,
+//     position: 'absolute',
+//     top: theme.space.x3,
+//     right: theme.space.x3,
+//     color: 'black',
+//     backgroundColor: 'transparent',
+//     borderRadius: '50%',
+//     border: '1px solid transparent',
+//     cursor: 'pointer',
+// }));

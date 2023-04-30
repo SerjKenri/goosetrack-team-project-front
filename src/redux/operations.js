@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -120,9 +120,11 @@ export const updateUser = createAsyncThunk(
 
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchAll',
-    async (_, thunkAPI) => {
+    async (getParams, thunkAPI) => {
+        // console.log('getParams=>', getParams);
         try {
-            const response = await axios.get('/tasks');
+            const response = await axios.get('/tasks', { params: getParams });
+            console.log('response=>>', response);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -132,9 +134,10 @@ export const fetchTasks = createAsyncThunk(
 
 export const addTask = createAsyncThunk(
     'tasks/addTask',
-    async (text, thunkAPI) => {
+    async (body, thunkAPI) => {
+        console.log(body);
         try {
-            const response = await axios.post('/tasks', text);
+            const response = await axios.post('/tasks', body);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -144,9 +147,11 @@ export const addTask = createAsyncThunk(
 
 export const updateTask = createAsyncThunk(
     'tasks/updTask',
-    async (taskId, thunkAPI) => {
+    async (task, thunkAPI) => {
+        const { _id, owner, ...update } = task;
+
         try {
-            const response = await axios.patch(`/tasks/${taskId}`);
+            const response = await axios.patch(`/tasks/${_id}`, update);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);

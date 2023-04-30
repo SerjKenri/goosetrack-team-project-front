@@ -74,7 +74,7 @@
         "popup": {
             "todoName": { "title": "title", "placeholder": "enter text" },
             "period": { "start": "start", "end": "end" },
-            "actions": { "add": "add", "cancel": "cancel" }
+            "actions": { "add": "add","edit":"edit", "cancel": "cancel" }
         }
     },
     "userRoles": {

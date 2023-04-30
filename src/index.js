@@ -10,7 +10,7 @@ import './stylesheet/global.css';
 import './core/i18n/i18n';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <BrowserRouter basename="goosetrack-team-project-front">
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
@@ -20,5 +20,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </PersistGate>
             </Provider>
         </BrowserRouter>
-    </React.StrictMode>
+    // </React.StrictMode>
 );

@@ -77,7 +77,7 @@
                 "placeholder": "введіть текст"
             },
             "period": { "start": "початок", "end": "кінець" },
-            "actions": { "add": "додати", "cancel": "скасувати" }
+            "actions": { "add": "додати", "edit":"редагувати","cancel": "скасувати" }
         }
     },
     "userRoles": {

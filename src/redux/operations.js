@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -140,7 +140,7 @@ export const fetchTasks = createAsyncThunk(
         // console.log('getParams=>', getParams);
         try {
             const response = await axios.get('/tasks', { params: getParams });
-            console.log('response=>>', response);
+
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -164,7 +164,7 @@ export const addTask = createAsyncThunk(
 export const updateTask = createAsyncThunk(
     'tasks/updTask',
     async (task, thunkAPI) => {
-        const { _id, owner, ...update } = task;
+        const { _id, ...update } = task;
 
         try {
             const response = await axios.patch(`/tasks/${_id}`, update);
@@ -180,6 +180,39 @@ export const delTask = createAsyncThunk(
     async (taskId, thunkAPI) => {
         try {
             const response = await axios.delete(`/tasks/${taskId}`);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const fetchColumns = createAsyncThunk(
+    'columns/fetchColumns',
+    async (_, thunkAPI) => {
+        try {
+            const { auth } = thunkAPI.getState();
+            setAuthHeader(auth.token);
+            const response = await axios.get(`/columns`);
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const updateColumns = createAsyncThunk(
+    'columns/updateColumns',
+    async (body, thunkAPI) => {
+        // console.log('body', body);
+        try {
+            const { auth } = thunkAPI.getState();
+            setAuthHeader(auth.token);
+            const response = await axios.patch(
+                `/columns/${body.source.id}`,
+                body
+            );
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);

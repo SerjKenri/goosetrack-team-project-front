@@ -1,5 +1,10 @@
 export const reorder = (list, startIndex, endIndex) => {
+    // console.log('reorder', list);
+    // console.log('startIndex', startIndex);
+    // console.log('endIndex', endIndex);
     const result = Array.from(list);
+    // const result = list.map(item => item.columnName);
+ 
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
 
@@ -7,12 +12,14 @@ export const reorder = (list, startIndex, endIndex) => {
 };
 
 export const reorderedTasksMap = ({ tasksMap, source, destination }) => {
+
     const current = [...tasksMap[source.droppableId]];
     const next = [...tasksMap[destination.droppableId]];
     const target = current[source.index];
-
+    // console.log('tasksMap', tasksMap);
     // moving to same list
     if (source.droppableId === destination.droppableId) {
+
         const reordered = reorder(current, source.index, destination.index);
         const result = {
             ...tasksMap,
@@ -24,12 +31,13 @@ export const reorderedTasksMap = ({ tasksMap, source, destination }) => {
     }
 
     // moving to different list
-
     // remove from original
     current.splice(source.index, 1);
     // insert into next
     next.splice(destination.index, 0, target);
-
+            // console.log('current', current);
+            // console.log('target', target);
+            // console.log('next', next);
     const result = {
         ...tasksMap,
         [source.droppableId]: current,
@@ -38,6 +46,7 @@ export const reorderedTasksMap = ({ tasksMap, source, destination }) => {
 
     return {
         tasksMap: result,
+        options:{current,target,next}
     };
 };
 

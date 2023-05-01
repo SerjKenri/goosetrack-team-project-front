@@ -35,7 +35,7 @@ function TaskColumnCard({
     return (
         <>
             <TaskContainer
-                href={task.id}
+                href={task._id}
                 isDragging={isDragging}
                 isGroupedOver={isGroupedOver}
                 isClone={isClone}
@@ -67,6 +67,7 @@ function TaskColumnCard({
                 </GroupsWrapper>
             </TaskContainer>
             <TaskModal
+                columnId={task.columnId}
                 currentTask={task}
                 closeModal={handleCloseModal}
                 isShow={isShow}

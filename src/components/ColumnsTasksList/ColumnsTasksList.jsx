@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskColumnCard from 'components/TaskColumnCard/TaskColumnCard';
 
-const InnerQuoteList = React.memo(function InnerQuoteList({tasks}) {
+const InnerQuoteList = React.memo(function InnerQuoteList({ tasks }) {
+
     return tasks.map((task, index) => (
         <Draggable key={task._id} draggableId={task._id} index={index}>
             {(dragProvided, dragSnapshot) => (
@@ -36,7 +37,7 @@ export function ColumnsTasksList({
     scrollContainerStyle,
     isDropDisabled,
     isCombineEnabled,
-    listId = 'LIST',
+    listId ,
     listType,
     tasks,
     title,

@@ -15,7 +15,7 @@ const handleRejected = (state, action) => {
 const handleFulfilled = (state, action) => {
     state.tasks.isLoading = false;
     state.tasks.error = null;
-    state.tasks.items = action.payload;
+    state.tasks.items = [...action.payload];
 };
 
 const taskSlice = createSlice({
@@ -37,8 +37,8 @@ const taskSlice = createSlice({
             .addCase(updateTask.rejected, handleRejected)
             .addCase(updateTask.fulfilled, (state, { payload }) => {
                 const index = state.tasks.items.findIndex(
-                    task => task.id === payload.id
-                );
+                    task => task._id === payload._id
+                    );
                 if (index !== -1) {
                     state.tasks.items[index] = payload;
                 }
@@ -47,7 +47,7 @@ const taskSlice = createSlice({
             .addCase(delTask.rejected, handleRejected)
             .addCase(delTask.fulfilled, (state, { payload }) => {
                 state.tasks.items = state.tasks.items.filter(
-                    task => task.id !== payload.id
+                    task => task._id !== payload._id
                 );
             });
     },

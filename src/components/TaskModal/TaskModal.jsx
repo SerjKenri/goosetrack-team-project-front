@@ -1,12 +1,17 @@
-const { TaskForm } = require("components/TaskForm/TaskForm");
-const { Modal } = require("core/Modal/Modal");
+const { TaskForm } = require('components/TaskForm/TaskForm');
+const { Modal } = require('core/Modal/Modal');
 
-const TaskModal = ({ isShow, closeModal, currentTask }) => {
-    return (
+const TaskModal = ({ columnId, isShow, closeModal, currentTask }) => {
+
+    return columnId && (
         <Modal setIsVisible={closeModal} isVisible={isShow}>
-            <TaskForm currentTask={currentTask} closeModal={closeModal} />
+            <TaskForm
+                columnId={columnId}
+                currentTask={currentTask }
+                closeModal={closeModal}
+            />
         </Modal>
     );
 };
 
-export {TaskModal}
+export { TaskModal };

@@ -2,13 +2,12 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
 
-export const CalendarTable = () => {
-    const startWeek = moment().startOf('month').startOf('isoweek');
+export const CalendarTable = ({startDay, today}) => {
+    let day = moment(startDay).startOf('month').startOf('isoweek');
     const endWeek = moment().endOf('month').endOf('isoweek');
-
-    const calendarDays = [];
-    let day = startWeek;
-
+    
+    const calendarDays=[];
+    
     while (day <= endWeek) {
         for (let i = 0; i < 7; i++) {
             calendarDays.push(moment(day));
@@ -62,6 +61,7 @@ export const CalendarTable = () => {
                 ))}
             </CalendarWrapper>
         </CalendarContainer>
+        
     );
 };
 
@@ -110,9 +110,13 @@ const DayItem = styled.li`
 const CalendarWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    // grid-template-rows: repeat(6, 1fr);
+    // grid-column-gap: 1px;
+    // // grid-row-gap: 1px;
 
-    background: #ffffff;
-    border: 1px solid rgba(220, 227, 229, 0.5);
+    background: #FFFFFF;
+    border: 1px solid rgba(220, 227, 229, 0.8);
+
     border-radius: 8px;
     font-style: normal;
     font-weight: 700;
@@ -130,7 +134,7 @@ const CalendarDay = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 1.125;
-    text-transform: uppercase;
+    text-transform: uppercase;    
 `;
 
 const CalendarCell = styled.div`

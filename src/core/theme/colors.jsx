@@ -11,7 +11,7 @@ const colorsLight = {
     accentColor: '#3e85f3',
     hoverColor: '#7aaff3',
     columnBackGroundColor: '#FFFFFF',
-    modalShadow:'#1111111A',
+    modalShadow: '#1111111A',
 
     /* backgroung */
     mainBackgroundColor: '#ffffff',
@@ -20,7 +20,6 @@ const colorsLight = {
     sidebarBackgroundColor: '#ffffff',
     accentBackgroundColor: '#3e85f3',
     modalBorder: '#DCE3E5CC',
-    
 
     /* tasks */
     taskHighColor: '#ea3d65',
@@ -42,6 +41,7 @@ const colorsLight = {
     scrollbarBackgroundColor: '#f2f2f2',
     frameBorderColor: '#e1e7e9',
     navTitleColor: '#7E7D82',
+    strPgBackgroundColor: '#FFFFFF',
 };
 
 const colorsDark = {

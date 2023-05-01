@@ -7,7 +7,6 @@ import { reorder, reorderedTasksMap } from './utils';
 import TasksColumn from 'components/TasksColumn/TasksColumn';
 import { useDispatch } from 'react-redux';
 import { updateTask } from 'redux/operations';
-
 // TasksColumnsList = board
 const TasksColumnsList = ({
     isCombineEnabled,

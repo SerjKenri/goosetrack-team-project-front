@@ -142,7 +142,19 @@ export const changePass = createAsyncThunk(
     }
 );
 
-// ===============================================================
+export const sendMailForPass = createAsyncThunk(
+    'user/restorePass',
+    async (userMailData, thunkAPI) => {
+        try {
+            const resp = await axios.post('/auth/restore-pass', userMailData);
+            alert('Email is successfully send');
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+/// ===============================================================
 // TASKS
 // ===============================================================
 

@@ -1,40 +1,38 @@
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
-import { validationSchema } from 'schemas/loginFormValidation';
+import styled from 'styled-components';
 
-import { ButtonDifference, Button } from '../../core/kit/Button';
-import { Input } from '../../core/kit/Input';
-import { iconNames } from 'assets/icons/iconNames';
-
-import GooseLogIn from '../../assets/images/goose-login.png';
-import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
-
+import { Button, ButtonDifference } from 'core/kit/Button';
+import { sendMailForPass } from 'redux/operations';
+import { Input } from 'core/kit/Input';
+import { useTranslation } from 'react-i18next';
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
-import { Link } from 'react-router-dom';
+import GooseLogIn from '../../assets/images/goose-login.png';
+import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
+import { userForgetPassSchema } from 'schemas/userForgetPassValidation';
+import { useNavigate } from 'react-router-dom';
 
-export const LoginForm = () => {
+export const SendMailForgetPass = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const onSubmit = (values, { resetForm }) => {
         dispatch(
-            loginUser({
+            sendMailForPass({
                 email: values.email,
-                password: values.password,
             })
         );
         resetForm();
+        navigate('/');
     };
-
     return (
         <Formik
             initialValues={{
                 email: '',
-                password: '',
             }}
+            validationSchema={userForgetPassSchema}
             onSubmit={onSubmit}
-            validationSchema={validationSchema}
         >
             {({
                 errors,
@@ -43,22 +41,34 @@ export const LoginForm = () => {
                 handleSubmit,
                 handleBlur,
                 handleChange,
-                // isValid,
             }) => (
                 <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
-                            <LoginFormTitle>Log in</LoginFormTitle>
+                            <LoginFormTitle>
+                                Title
+                                {t('sendMailForgetPass.labelTitleName')}
+                            </LoginFormTitle>
+                            <LoginFormInfoTextBold>
+                                {t('sendMailForgetPass.textInstruction')}
+                            </LoginFormInfoTextBold>
+                            <LoginFormInfoText>
+                                {t('sendMailForgetPass.text')}
+                            </LoginFormInfoText>
                             <Input
                                 name="email"
                                 type="email"
-                                labelTitle="Email"
-                                placeholder="Enter your email"
+                                labelTitle={t(
+                                    'sendMailForgetPass.labelTitleEmail'
+                                )}
+                                placeholder={t(
+                                    'sendMailForgetPass.inputPlaceholderEmail'
+                                )}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
                                     marginBottom: '2px',
-                                    marginTop: '32px',
+                                    marginTop: '24px',
                                 }}
                                 inputStyle={{
                                     borderRadius: '8px',
@@ -78,59 +88,25 @@ export const LoginForm = () => {
                                 }
                             />
 
-                            <Input
-                                name="password"
-                                type="password"
-                                labelTitle="Password"
-                                placeholder="Enter your password"
-                                labelTextStyle={{
-                                    fontWeight: '600',
-                                    lineHeight: '15px',
-                                    marginBottom: '2px',
-                                    marginTop: '24px',
-                                }}
-                                inputStyle={{
-                                    borderRadius: '8px',
-                                    height: '46px',
-                                    border:
-                                        touched.email && errors.email
-                                            ? '1px solid #E74A3B'
-                                            : '1px solid rgba(220, 227, 229, 0.6)',
-                                }}
-                                handleBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.password}
-                                error={
-                                    touched.password && errors.password
-                                        ? errors.password
-                                        : ''
-                                }
-                            />
-
                             <Button
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-                                // disabled={!isValid}
-                                title="Log In"
+                                disabled={!values.email}
+                                title={t('sendMailForgetPass.sendEmail')}
                                 buttonStyle={{
-                                    paddingLeft: '10px',
+                                    backgroundColor: '#3e85f3',
                                     width: '287px',
                                     height: '46px',
-                                    margin: '32px auto 0px',
+                                    marginTop: '32px',
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto',
                                 }}
-                                // textStyle
-
-                                iconName={iconNames.loginIcon}
-                                iconSize="15"
+                                textStyle={{
+                                    margin: '0',
+                                }}
                             ></Button>
                         </Form>
-                        <AuthNavigate
-                            route={ROUTING.REGISTER}
-                            content="Sign up"
-                        />
-                        <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
-                            Forgot password?
-                        </NavToRestorePass>
+                        <AuthNavigate route={ROUTING.LOGIN} content="Log In" />
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                             src={`${GooseLogIn}`}
@@ -184,11 +160,21 @@ const LoginFormTitle = styled.h1`
         color: ${theme.color.accentTextColor};
         text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07)
         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-bottom: 8px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 24px;
         
         @media (min-width: 768px) {
             font-size:24px;
         }`}
+`;
+
+const LoginFormInfoTextBold = styled.p`
+    font-weight: 600;
+    font-size: 14px;
+`;
+const LoginFormInfoText = styled.p`
+    font-size: 14px;
 `;
 
 const LoginImg = styled.img`
@@ -202,31 +188,4 @@ const LoginImg = styled.img`
         bottom: 20px;
         display: block;
     }
-`;
-
-//////////////
-export const NavToRestorePass = styled(Link)`
-    ${({ theme }) => `
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 14px;
-        border-bottom: 1px solid ${theme.color.accentTextColor};
-        color: ${theme.color.accentTextColor};
-        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
-        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-top: 8px;
-    
-        &:hover,
-        :focus {
-            color: blue;
-            border-color: blue;
-        }
-    
-        @media (min-width: 768px) {
-            font-size: 18px;
-            line-height: 24px;
-        }
-    `}
 `;

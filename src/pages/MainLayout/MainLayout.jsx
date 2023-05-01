@@ -64,7 +64,7 @@ const SecondaryContainer = styled.div(({ theme }) => ({
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        padding: '24px 32px 32px 32px',
+        padding: '24px 32px 32px 276px',
         gap: '32px',
     },
 }));

@@ -37,7 +37,7 @@ const Container = styled.div(({ theme }) => ({
     justifyContent: 'space-between',
     padding: '24px 20px',
     backgroundColor: theme.color.mainBackgroundColor,
-    position: 'absolute',
+    position: 'fixed',
     zIndex: 1,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
@@ -45,9 +45,9 @@ const Container = styled.div(({ theme }) => ({
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        height: 'initial',
+        // height: 'initial',
         padding: '32px 24px',
-        position: 'relative',
+        // position: 'relative',
     },
 }));
 

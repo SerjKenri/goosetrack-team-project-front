@@ -19,9 +19,9 @@
         "signUp": "Sign up"
     },
     "loginPage": {
-        "login": "log in",
-        "email": "email",
-        "password": "password",
+        "login": "Log in",
+        "email": "Email",
+        "password": "Password",
         "signUp": "Sign up",
         "description": "Quickly come in and write down your tasks for the day!"
     },

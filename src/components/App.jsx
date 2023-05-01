@@ -18,7 +18,6 @@ import VerifyPage from 'pages/VerifyPage/VerifyPage';
 
 import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
 
-
 export const App = () => {
     return (
         <Suspense>
@@ -34,7 +33,6 @@ export const App = () => {
                         path={ROUTING.RESTORE_PASS}
                         element={<UserForgotPassPage />}
                     />
-
                 </Route>
                 <Route path="" element={<PrivateRoute />}>
                     <Route path="/" element={<MainLayout />}>

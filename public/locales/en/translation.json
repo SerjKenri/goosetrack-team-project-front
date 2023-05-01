@@ -85,11 +85,28 @@
     "userProfilePage": {
         "title": "User Profile",
         "userName": "User Name",
+        "userNamePlaceholder": "Enter your name",
         "phone": "Phone",
+        "userPhonePlaceholder": "Enter your phone",
         "birthday": "Birthday",
+        "userBirthdayPlaceholder": "Enter your birthday",
         "telegram": "Telegram",
+        "userTelegramPlaceholder": "Enter your telegram",
         "email": "Email",
-        "saveChanges": "Save changes"
+        "userEmailPlaceholder": "Enter your email",
+        "saveChanges": "Save changes",
+        "changePassword": "Do you want to change password?",
+        "modal": {
+            "titleButton": "OK",
+            "description": " In connection with the change of e-mail, it is necessary to verify the new address. Our letter has already been sent to your new email address."
+        },
+        "validation": {
+            "validName": "The max length of the username is 16 characters",
+            "validEmail": "The mail was entered incorrectly",
+            "validPhone": "The phone number must be in the format 380xxxxxxxxx",
+            "validTelegram": "The max length of the Telegram username is 16 characters",
+            "required": " This field is required"
+        }
     },
     "calendarPage": {
         "title": "Calendar",

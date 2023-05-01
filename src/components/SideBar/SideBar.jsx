@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
 import gooseimg from '../../assets/images/goose-sidebar@2x.png';
 import { UserNav } from 'components/UserNav/UserNav';
+import { useTranslation } from 'react-i18next';
 
 export const SideBar = ({ onClick }) => {
+    const { t } = useTranslation()
+
     return (
         <Container>
             <SecondaryContainer>
@@ -21,7 +24,7 @@ export const SideBar = ({ onClick }) => {
                     </CloseButton>
                 </SideBarHeader>
                 <UserPanelContainer>
-                    <SecondaryTitle>User Panel</SecondaryTitle>
+                    <SecondaryTitle>{t('sidebar.userPanel')}</SecondaryTitle>
                     <UserNav />
                 </UserPanelContainer>
             </SecondaryContainer>
@@ -139,7 +142,7 @@ const CloseButton = styled.button(({ theme }) => ({
     },
 
     '&:hover': {
-        color: 'red',
+        color: theme.color.hoverColor,
     },
 }));
 

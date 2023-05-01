@@ -39,15 +39,22 @@ export const App = () => {
                         <Route
                             path={ROUTING.CALENDAR}
                             element={<CalendarPage />}
-                        />
-                        <Route
-                            path={ROUTING.CURRENT_DAY}
-                            element={<CalendarDayPage />}
-                        />
-                        <Route
-                            path={ROUTING.CURRENT_MONTH}
-                            element={<CalendarMonthPage />}
-                        />
+                        >
+                            <Route
+                                index
+                                element={
+                                    <Navigate to={ROUTING.CURRENT_MONTH} />
+                                }
+                            />
+                            <Route
+                                path={ROUTING.CURRENT_DAY}
+                                element={<CalendarDayPage />}
+                            />
+                            <Route
+                                path={ROUTING.CURRENT_MONTH}
+                                element={<CalendarMonthPage />}
+                            />
+                        </Route>
                     </Route>
                 </Route>
             </Routes>

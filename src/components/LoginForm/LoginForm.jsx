@@ -112,8 +112,6 @@ export const LoginForm = () => {
                                 // disabled={!isValid}
                                 title="Log In"
                                 buttonStyle={{
-                                    backgroundColor: '#3e85f3',
-
                                     paddingLeft: '10px',
                                     width: '287px',
                                     height: '46px',

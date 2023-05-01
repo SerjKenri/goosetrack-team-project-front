@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import icons from '../../assets/icons/icons.svg';
 import { iconNames } from 'assets/icons/iconNames';
 
-const NewIcon = styled.svg(({ stroke }) => ({
+const NewIcon = styled.svg(({ stroke, size, name }) => ({
     stroke: stroke || 'currentcolor',
 }));
 

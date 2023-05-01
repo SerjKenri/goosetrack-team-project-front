@@ -11,6 +11,7 @@ const IconButton = ({
     iconName,
     buttonStyle,
     buttonSize = 16,
+    stroke,
 }) => {
     return (
         <>
@@ -20,7 +21,7 @@ const IconButton = ({
                 disabled={disabled}
                 buttonSize={buttonSize}
             >
-                <Icon name={iconName} size={'100%'} />
+                <Icon name={iconName} size={'100%'} stroke={stroke} />
             </ButtonWrapper>
         </>
     );
@@ -34,6 +35,7 @@ IconButton.propTypes = {
     iconName: propTypes.oneOf(Object.values(iconNames)).isRequired,
     buttonStyle: propTypes.object,
     buttonSize: propTypes.number,
+    stroke: propTypes.string,
 };
 
 const ButtonWrapper = styled.button(({ theme, buttonSize }) => ({

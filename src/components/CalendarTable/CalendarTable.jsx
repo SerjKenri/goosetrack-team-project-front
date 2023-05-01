@@ -16,14 +16,14 @@ export const CalendarTable = () => {
         }
     }
 
-    const currentDay = (day) => {
+    const currentDay = day => {
         return moment().isSame(day, 'day');
     };
 
-    const isSelectedMonth = (month) => {
+    const isSelectedMonth = month => {
         const today = moment();
         return today.isSame(month, 'month');
-      };
+    };
 
     const isMobileView = window.innerWidth < 768;
 
@@ -32,29 +32,27 @@ export const CalendarTable = () => {
             <DayList>
                 {[...Array(7)].map((_, idx) => (
                     <DayItem key={idx}>
-                        <CalendarDay >
+                        <CalendarDay>
                             {isMobileView
                                 ? moment()
-                                    .day(idx + 1)
-                                    .format('ddd')
-                                    .slice(0, 1)
+                                      .day(idx + 1)
+                                      .format('ddd')
+                                      .slice(0, 1)
                                 : moment()
-                                    .day(idx + 1)
-                                    .format('ddd')
-                                    .toUpperCase()}
+                                      .day(idx + 1)
+                                      .format('ddd')
+                                      .toUpperCase()}
                         </CalendarDay>
                     </DayItem>
                 ))}
             </DayList>
             <CalendarWrapper>
-                {calendarDays.map((day) => (
+                {calendarDays.map(day => (
                     <CalendarLink
-                        to={`/user/calendar/day/${day.format('YYYY-MM-DD')}`}
+                        to={`/calendar/day/${day.format('YYYY-MM-DD')}`}
                         key={day.format('DD-MM-YY')}
                     >
-                        <CalendarCell 
-                            isSelectedMonth={isSelectedMonth(day)} 
-                        >
+                        <CalendarCell isSelectedMonth={isSelectedMonth(day)}>
                             <CalendarDate currentDay={currentDay(day)}>
                                 {day.format('D')}
                             </CalendarDate>
@@ -62,7 +60,6 @@ export const CalendarTable = () => {
                         </CalendarCell>
                     </CalendarLink>
                 ))}
-                
             </CalendarWrapper>
         </CalendarContainer>
     );
@@ -80,7 +77,7 @@ const CalendarContainer = styled.div`
         padding-bottom: 32px;
         padding-left: 32px;
         padding-right: 32px;
-}
+    }
 `;
 
 const DayList = styled.ul`
@@ -90,7 +87,6 @@ const DayList = styled.ul`
     align-items: center;
     margin-bottom: 15px;
     padding: 14px 0;
-
 
     font-weight: 600;
     font-size: 14px;
@@ -104,17 +100,17 @@ const DayItem = styled.li`
     align-items: center;
     gap: 4px;
     color: #616161;
-    
+
     &:nth-child(n + 6) {
-        color: #3E85F3;
-    };
+        color: #3e85f3;
+    }
 `;
 
 const CalendarWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(220, 227, 229, 0.5);
     border-radius: 8px;
     font-style: normal;
@@ -137,7 +133,7 @@ const CalendarDay = styled.div`
 `;
 
 const CalendarCell = styled.div`
-    display:flex;
+    display: flex;
     justify-content: flex-end;
     min-width: 100%;
     min-height: 94px;
@@ -150,9 +146,10 @@ const CalendarDate = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width:22px;
-    height:22px;
-    color: ${({ currentDay }) => currentDay ? 'white' : 'black'};
-    border-radius: ${({ currentDay }) => currentDay ? '6px' : 'none'};
-    background-color: ${({ currentDay }) => currentDay ? 'blue' : 'transparent'};
+    width: 22px;
+    height: 22px;
+    color: ${({ currentDay }) => (currentDay ? 'white' : 'black')};
+    border-radius: ${({ currentDay }) => (currentDay ? '6px' : 'none')};
+    background-color: ${({ currentDay }) =>
+        currentDay ? 'blue' : 'transparent'};
 `;

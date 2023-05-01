@@ -53,6 +53,14 @@
         "errorPassword": "Please, enter stronger passwod",
         "minLengthPass": "Password should contain more then 5 characters"
     },
+    "sendMailForgetPass": {
+        "labelTitleName": "Forgot your password?",
+        "textInstruction": "Type in the email you used to register in GooseTrack.",
+        "text": "We'll send you a link to create your new password.",
+        "labelTitleEmail": "Email",
+        "inputPlaceholderEmail": "Enter your email",
+        "sendEmail": "Send email"
+    },
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "User Panel",

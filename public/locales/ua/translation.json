@@ -53,6 +53,14 @@
         "errorPassword": "Будь ласка, введіть більш надійний пароль",
         "minLengthPass": "Пароль повинен містити більше ніж 5 символів"
     },
+    "sendMailForgetPass": {
+        "labelTitleName": "Забули свій пароль?",
+        "textInstruction": "Введіть електронну пошту, яку ви використовували при реєстрації на GooseTrack.",
+        "text": "Ми надішлемо вам посилання, щоб створити новий пароль.",
+        "labelTitleEmail": "Електронна пошта",
+        "inputPlaceholderEmail": "Введіть свою електронну пошту",
+        "sendEmail": "Надіслати листа"
+    },
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "Панель користувача",

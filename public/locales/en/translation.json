@@ -68,9 +68,16 @@
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "User Panel",
-        "myAcc": "My account",
-        "calendar": "Calendar",
+        "userNav": {
+            "myAcc": "My account",
+            "calendar": "Calendar"},
         "logout": "Log out"
+    },
+    "header": {
+        "pageTitleFirst": "User Profile",
+        "pageTitleSecond": "Calendar",
+        "motivateFirst": "Let go",
+        "motivateSecond": " of the past and focus on the present!"
     },
     "userProfilePage": {
         "title": "User Profile",

@@ -69,9 +69,16 @@
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "Панель користувача",
-        "myAcc": "Мій аккаунт",
-        "calendar": "Календар",
+        "userNav": {
+            "myAcc": "Мій аккаунт",
+            "calendar": "Календар"},
         "logout": "Вийти"
+    },
+    "header": {
+        "pageTitleFirst": "Профіль користувача",
+        "pageTitleSecond": "Календар",
+        "motivateFirst": "Відпусти",
+        "motivateSecond": " минуле і зосередьтеся на сьогоденні!"
     },
     "userProfilePage": {
         "title": "Профіль користувача",

@@ -5,13 +5,15 @@ import gooseimg from 'assets/images/goose-motivate@2x.png';
 import {UserInfo} from 'components/UserInfo/UserInfo'
 import { ThemeToggler } from "components/ThemeToggler/ThemeToggler";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 export const Header = ({onClick}) => {
 
     const location = useLocation()
+    const { t } = useTranslation()
     
-    const title = location.pathname === '/account' ? 'User Profile' : "Calendar"
+    const title = location.pathname === '/account' ? `${t('header.pageTitleFirst')}` : `${t('header.pageTitleSecond')}`
 
     return <Container>
         <SideBarButton type='button' onClick={onClick}>
@@ -21,7 +23,7 @@ export const Header = ({onClick}) => {
             <Image src={gooseimg} alt="goose-motivate"/>
             <TextContainer>
                 <Title>{title}</Title>
-                <Text><StyledText>Let go</StyledText> of the past and focus on the present!</Text>
+                <Text><StyledText>{t('header.motivateFirst')}</StyledText>{t('header.motivateSecond')}</Text>
             </TextContainer>
         </LeftContainer>
         <RightContainer>
@@ -89,7 +91,7 @@ const SideBarButton = styled.button(({ theme }) => ({
     cursor: 'pointer',
 
     '&:hover': {
-        color: 'red'
+        color: theme.color.hoverColor,
     },
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {

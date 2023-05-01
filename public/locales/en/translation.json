@@ -1,7 +1,8 @@
 {
     "startPage": {
         "calendarView": {
-            "title": "calendar view",
+            "title": "calendar",
+            "subTitle": "view",
             "description": "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout."
         },
         "sidebar": {
@@ -10,9 +11,9 @@
         },
         "allInOne": {
             "title": "all in one",
+            "one": "one",
             "description": "GooseTrack is an all-in-one productivity tool that helps you stay on top of your tasks, events, and deadlines. Say goodbye to scattered to-do lists and hello to streamlined productivity with GooseTrack."
         },
-        "heroTitle": "GooseTrack",
         "subtitle": "Reviews",
         "login": "Log in",
         "signUp": "Sign up"
@@ -56,7 +57,8 @@
     "VerifySuccessPage": {
         "labelTitleName": "Email is verified!",
         "description": "Congratulations! Your email has been successfully verified! Please login to continue using our application.",
-        "btnTitle": "Go to Login"},
+        "btnTitle": "Go to Login"
+    },
     "sendMailForgetPass": {
         "labelTitleName": "Forgot your password?",
         "textInstruction": "Type in the email you used to register in GooseTrack.",
@@ -70,7 +72,8 @@
         "userPanel": "User Panel",
         "userNav": {
             "myAcc": "My account",
-            "calendar": "Calendar"},
+            "calendar": "Calendar"
+        },
         "logout": "Log out"
     },
     "header": {

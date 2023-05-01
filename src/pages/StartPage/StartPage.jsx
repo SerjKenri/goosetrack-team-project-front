@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import gooseimg from '../../assets/images/goose-sidebar@2x.png';
 import ImageCalendar1 from '../../assets/images/startPage/Calendar1.jpg';
@@ -12,6 +13,7 @@ import ImageDay from '../../assets/images/startPage/Day.jpg';
 import { Icon } from 'core/kit/Icon';
 
 const StartPage = () => {
+    const { t } = useTranslation();
     return (
         <Container>
             <Hero>
@@ -25,10 +27,12 @@ const StartPage = () => {
                 </Title>
                 <LinkBox>
                     <LoginLink to="/login">
-                        <LoginTxt>Log in</LoginTxt>
+                        <LoginTxt>{t('startPage.login')}</LoginTxt>
                         <Icon name="loginIcon" size="13.5px" />
                     </LoginLink>
-                    <SignupLink to="/register">Sign up</SignupLink>
+                    <SignupLink to="/register">
+                        {t('startPage.signUp')}
+                    </SignupLink>
                 </LinkBox>
             </Hero>
 
@@ -36,14 +40,11 @@ const StartPage = () => {
                 <ContentItem>
                     <ContentBox>
                         <Number>1.</Number>
-                        <Category>Calendar</Category>
-                        <SubTitle>View</SubTitle>
-                        <Txt>
-                            GooseTrack's Calendar view provides a comprehensive
-                            overview of your schedule, displaying all your
-                            tasks, events, and appointments in a visually
-                            appealing and intuitive layout.
-                        </Txt>
+                        <Category>{t('startPage.calendarView.title')}</Category>
+                        <SubTitle>
+                            {t('startPage.calendarView.subTitle')}
+                        </SubTitle>
+                        <Txt>{t('startPage.calendarView.description')}</Txt>
                     </ContentBox>
                     <ImageBox>
                         <ImageEllipse className="calendar" />
@@ -58,15 +59,8 @@ const StartPage = () => {
                 <ContentItem>
                     <ContentBox>
                         <Number>2.</Number>
-                        <SubTitle>SIDEBAR</SubTitle>
-                        <Txt>
-                            GooseTrack offers easy access to your account
-                            settings, calendar, and filters. The "My Account"
-                            section allows you to manage your profile
-                            information and preferences, while the calendar
-                            provides a quick and convenient way to view your
-                            upcoming events and tasks.
-                        </Txt>
+                        <SubTitle>{t('startPage.sidebar.title')}</SubTitle>
+                        <Txt>{t('startPage.sidebar.description')}</Txt>
                     </ContentBox>
                     <ImageBox>
                         <ImageEllipse className="sidebar" />
@@ -83,14 +77,9 @@ const StartPage = () => {
                 <ContentItem>
                     <ContentBox>
                         <Number>3.</Number>
-                        <Category>all in</Category>
-                        <SubTitle>one</SubTitle>
-                        <Txt>
-                            GooseTrack is an all-in-one productivity tool that
-                            helps you stay on top of your tasks, events, and
-                            deadlines. Say goodbye to scattered to-do lists and
-                            hello to streamlined productivity with GooseTrack.
-                        </Txt>
+                        <Category>{t('startPage.allInOne.title')}</Category>
+                        <SubTitle>{t('startPage.allInOne.one')}</SubTitle>
+                        <Txt>{t('startPage.allInOne.description')}</Txt>
                     </ContentBox>
                     <ImageBox>
                         <ImageEllipse className="day" />

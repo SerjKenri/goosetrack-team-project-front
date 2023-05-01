@@ -85,11 +85,28 @@
     "userProfilePage": {
         "title": "Профіль користувача",
         "userName": "Ім'я користувача",
+        "userNamePlaceholder": "Введіть ваше ім'я",
         "phone": "Телефон",
+        "userPhonePlaceholder": "Введіть ваш номер телефону",
         "birthday": "День народження",
+        "userBirthdayPlaceholder": "Вкажіть дату народження",
         "telegram": "Телеграм",
+        "userTelegramPlaceholder": "Введіть ваш телеграм",
         "email": "Електронна пошта",
-        "saveChanges": "Зберегти зміни"
+        "userEmailPlaceholder": "Введіть вашу електронну пошту",
+        "saveChanges": "Зберегти зміни",
+        "changePassword": "Ви бажаєте змінити пароль ?",
+        "modal": {
+            "titleButton": "OK",
+            "description": " У зв'язку зі зміною електронної пошти необхідно вериікувати нову адресу. Наш лист вже надісланий вам на нову адресу електронної пошти."
+        },
+        "validation": {
+            "validName": "Максимальна довжина імені користувача - 16 символів",
+            "validEmail": "Пошта введена некоректно",
+            "validPhone": "Номер телефону повинен бути в форматі 380xxxxxxxxx",
+            "validTelegram": "Максимальна довжина імені користувача Telegram - 16 символів",
+            "required": " Це поле є обов'язковим"
+        }
     },
     "calendarPage": {
         "title": "Календар",

@@ -14,5 +14,5 @@ export const iconNames = {
     cross: 'cross',
     plusCircle: 'plus-circle',
     avatar: 'ph_user',
-    burgerMenu: 'burger-menu'
+    burgerMenu: 'burger-menu',
 };

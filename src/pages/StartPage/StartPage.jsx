@@ -155,6 +155,7 @@ export const LinkBox = styled.div(({ theme }) => ({
 export const LoginLink = styled(NavLink)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     margin: '0 auto 208px',
     width: '131px',
     padding: '14px 32px',

@@ -13,6 +13,7 @@ import { ROUTING } from 'core/utils/constantsRouting';
 import { Suspense } from 'react';
 import ChangePassPage from 'pages/ChangePassPage/ChangeUserPassPage';
 import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
+import ResetPassPage from 'pages/ResetPassPage/ResetPassPage';
 
 export const App = () => {
     return (
@@ -25,6 +26,10 @@ export const App = () => {
                     <Route
                         path={ROUTING.RESTORE_PASS}
                         element={<UserForgotPassPage />}
+                    />
+                    <Route
+                        path={ROUTING.RESET_PASS}
+                        element={<ResetPassPage />}
                     />
                 </Route>
                 <Route path="" element={<PrivateRoute />}>
@@ -64,6 +69,5 @@ export const App = () => {
                 </Route>
             </Routes>
         </Suspense>
-        
     );
 };

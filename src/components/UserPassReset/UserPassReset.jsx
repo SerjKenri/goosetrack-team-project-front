@@ -1,87 +1,59 @@
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
 import { Button, ButtonDifference } from 'core/kit/Button';
-import { changePass } from 'redux/operations';
+import { resetNewPass } from 'redux/operations';
 import { Input } from 'core/kit/Input';
 import { useTranslation } from 'react-i18next';
-import { userUpdPassSchema } from 'schemas/userPassUpdValidation';
+import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
+import { ROUTING } from 'core/utils/constantsRouting';
+import GooseLogIn from '../../assets/images/goose-login.png';
+import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
+import { useNavigate } from 'react-router-dom';
+import { userPassResetSchema } from 'schemas/userPassResetSchema';
 
-export const ChangeUserPass = () => {
+export const UserPassReset = () => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { passToken } = useParams();
 
     const onSubmit = (values, { resetForm }) => {
+        console.log('verificationToken', passToken);
         dispatch(
-            changePass({
-                currentPassword: values.currentPassword,
+            resetNewPass({
                 newPassword: values.newPassword,
+                passToken: passToken,
             })
         );
         resetForm();
-        navigate('/account');
+        navigate('/');
     };
     return (
-        <Container>
-            <Formik
-                initialValues={{
-                    currentPassword: '',
-                    newPassword: '',
-                    confirmPassword: '',
-                }}
-                validationSchema={userUpdPassSchema}
-                onSubmit={onSubmit}
-            >
-                {({
-                    errors,
-                    touched,
-                    values,
-                    handleSubmit,
-                    handleBlur,
-                    handleChange,
-                }) => (
-                    // <LoginFormWrap>
+        <Formik
+            initialValues={{
+                newPassword: '',
+                confirmPassword: '',
+            }}
+            validationSchema={userPassResetSchema}
+            onSubmit={onSubmit}
+        >
+            {({
+                errors,
+                touched,
+                values,
+                handleSubmit,
+                handleBlur,
+                handleChange,
+            }) => (
+                <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
                             <LoginFormTitle>
                                 {t('chengePassPage.labelTitleName')}
                             </LoginFormTitle>
-                            <Input
-                                name="currentPassword"
-                                type="password"
-                                labelTitle={t('chengePassPage.oldPassword')}
-                                placeholder={t(
-                                    'chengePassPage.oldPassPlaceholder'
-                                )}
-                                labelTextStyle={{
-                                    fontWeight: '600',
-                                    lineHeight: '15px',
-                                    marginBottom: '2px',
-                                    marginTop: '24px',
-                                }}
-                                inputStyle={{
-                                    borderRadius: '8px',
-                                    height: '46px',
-                                    border:
-                                        touched.currentPassword &&
-                                        errors.currentPassword
-                                            ? '1px solid #E74A3B'
-                                            : '1px solid rgba(220, 227, 229, 0.6)',
-                                }}
-                                handleBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.currentPassword}
-                                error={
-                                    touched.currentPassword &&
-                                    errors.currentPassword
-                                        ? errors.currentPassword
-                                        : ''
-                                }
-                            />
-
                             <Input
                                 name="newPassword"
                                 type="password"
@@ -169,22 +141,30 @@ export const ChangeUserPass = () => {
                                 }}
                             ></Button>
                         </Form>
-                        {/* <AuthNavigate
+                        <AuthNavigate
                             route={ROUTING.REGISTER}
                             content="Sign up"
-                        /> */}
-                        {/* <LoginImg
-                                srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
-                                src={`${GooseLogIn}`}
-                                alt="goose"
-                            /> */}
+                        />
+                        <LoginImg
+                            srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
+                            src={`${GooseLogIn}`}
+                            alt="goose"
+                        />
                     </LoginFormContainer>
-                    /* </LoginFormWrap> */
-                )}
-            </Formik>
-        </Container>
+                </LoginFormWrap>
+            )}
+        </Formik>
     );
 };
+
+const LoginFormWrap = styled.div(({ theme }) => ({
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.color.authBackgroundColor,
+}));
 
 const LoginFormContainer = styled.div`
     display: flex;
@@ -212,45 +192,38 @@ const Form = styled.form(({ theme }) => ({
 
 const LoginFormTitle = styled.h1`
     ${({ theme }) => `
-    margin: auto;
         font-weight: 600;
         font-size: 18px;
         line-height: 24px;
         color: ${theme.color.accentTextColor};
         text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07)
         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-bottom: 8px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 24px;
         
         @media (min-width: 768px) {
             font-size:24px;
         }`}
 `;
 
-const Container = styled.div(({ theme, isTablet, isDesktop }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    position: 'relative',
-    backgroundColor: theme.color.calendarCellColor,
-    paddingTop: '40px',
-    paddingBottom: isTablet ? '40px' : '60px',
-    paddingLeft: 'auto',
-    paddingRight: 'auto',
-    width: '335px',
-    height: '653px',
-    borderRadius: '16px',
-    [theme.media.between(
-        `${theme.breakpoints.m}px`,
-        `${theme.breakpoints.l}px`
-    )]: {
-        width: '704px',
-        height: '854px',
-        paddingBottom: '40px',
-    },
-    [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        width: '1087px',
-        height: '752px',
-        paddingTop: '60px',
-        paddingBottom: '60px',
-    },
-}));
+const LoginFormInfoTextBold = styled.p`
+    font-weight: 600;
+    font-size: 14px;
+`;
+const LoginFormInfoText = styled.p`
+    font-size: 14px;
+`;
+
+const LoginImg = styled.img`
+    display: none;
+
+    @media (min-width: 1440px) {
+        position: fixed;
+        width: 368px;
+        height: 521px;
+        right: 20px;
+        bottom: 20px;
+        display: block;
+    }
+`;

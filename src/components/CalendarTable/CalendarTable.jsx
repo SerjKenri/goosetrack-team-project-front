@@ -87,7 +87,8 @@ const DayList = styled.ul`
     align-items: center;
     margin-bottom: 15px;
     padding: 14px 0;
-
+    border: 1px solid rgba(220, 227, 229, 0.8);
+    border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
     line-height: 1.286;

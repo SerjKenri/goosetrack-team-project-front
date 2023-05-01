@@ -41,6 +41,18 @@
         "minLengthName": "Ім'я повинно містити більше ніж 2 символи",
         "minLengthPass": "Пароль повинен містити більше ніж 5 символів"
     },
+    "chengePassPage": {
+        "labelTitleName": "Змінити пароль",
+        "oldPassword": "Поточний пароль",
+        "oldPassPlaceholder": "Введіть поточний пароль",
+        "newPassword": "Новий пароль",
+        "newPassPlaceholder": "Введіть новий пароль",
+        "confNewPass": "Підтвердіть пароль",
+        "confPassPlaceholder": "Підтвердіть новий пароль",
+        "errorRequired": "Обов'язково",
+        "errorPassword": "Будь ласка, введіть більш надійний пароль",
+        "minLengthPass": "Пароль повинен містити більше ніж 5 символів"
+    },
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "Панель користувача",
@@ -77,7 +89,11 @@
                 "placeholder": "введіть текст"
             },
             "period": { "start": "початок", "end": "кінець" },
-            "actions": { "add": "додати", "cancel": "скасувати" }
+            "actions": {
+                "add": "додати",
+                "edit": "редагувати",
+                "cancel": "скасувати"
+            }
         }
     },
     "userRoles": {

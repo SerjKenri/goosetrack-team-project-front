@@ -1,119 +1,121 @@
 import { LogOutButton } from 'components/LogoutBtn/LogOutButton';
-import { iconNames } from "assets/icons/iconNames";
+import { iconNames } from 'assets/icons/iconNames';
 import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
-import gooseimg from '../../assets/images/goose-sidebar@2x.png'
+import gooseimg from '../../assets/images/goose-sidebar@2x.png';
 import { UserNav } from 'components/UserNav/UserNav';
 
-
-export const SideBar = ({onClick}) => {
-
-    return <Container>
-        <SecondaryContainer>
-            <SideBarHeader>
-                <Logo>
-                    <Image src={gooseimg} alt="goose"/>
-                    <Title>G<Italic>oo</Italic>seTrack</Title>
-                </Logo>
-                <CloseButton type='button' onClick={onClick}>
-                    <Icon name={iconNames.cross} size={ '100%' } />
-                </CloseButton>
-            </SideBarHeader>
-            <UserPanelContainer>
-                <SecondaryTitle>User Panel</SecondaryTitle>
-                <UserNav />
-            </UserPanelContainer>
-        </SecondaryContainer>
-        <LogOutButton/>
-    </Container>
-}
+export const SideBar = ({ onClick }) => {
+    return (
+        <Container>
+            <SecondaryContainer>
+                <SideBarHeader>
+                    <Logo>
+                        <Image src={gooseimg} alt="goose" />
+                        <Title>
+                            G<Italic>oo</Italic>seTrack
+                        </Title>
+                    </Logo>
+                    <CloseButton type="button" onClick={onClick}>
+                        <Icon name={iconNames.cross} size={'100%'} />
+                    </CloseButton>
+                </SideBarHeader>
+                <UserPanelContainer>
+                    <SecondaryTitle>User Panel</SecondaryTitle>
+                    <UserNav />
+                </UserPanelContainer>
+            </SecondaryContainer>
+            <LogOutButton />
+        </Container>
+    );
+};
 
 const Container = styled.div(({ theme }) => ({
     height: '100vh',
-    display: "flex",
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: '24px 20px', 
+    padding: '24px 20px',
     backgroundColor: theme.color.mainBackgroundColor,
-    position: 'absolute',
+    position: 'fixed',
     zIndex: 1,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        padding: '24px 32px'
+        padding: '24px 32px',
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        height: 'initial',
+        // height: 'initial',
         padding: '32px 24px',
-        position: 'relative',
+        // position: 'relative',
     },
 }));
 
 const SecondaryContainer = styled.div(({ theme }) => ({
-    display: "flex",
+    display: 'flex',
     flexDirection: 'column',
-    gap: "64px", 
+    gap: '64px',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        gap: "50px",
+        gap: '50px',
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        gap: "32px",
+        gap: '32px',
     },
-}))
+}));
 
 const SideBarHeader = styled.div(({ theme }) => ({
-    display: "flex",
-    width: "max-content",
+    display: 'flex',
+    width: 'max-content',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
 }));
 
 const Logo = styled.div(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    gap: '6px', 
-    
+    gap: '6px',
+
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        gap: '10px'
+        gap: '10px',
     },
-}))
+}));
 
 const Image = styled.img(({ theme }) => ({
     width: '36px',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-       width: '60px'
+        width: '60px',
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        width: '71px'
+        width: '71px',
     },
-    
-}))
+}));
 
 const Title = styled.p(({ theme }) => ({
     font: theme.font.secondaryFont,
-    fontSize: '16px', 
-    lineHeight: '22px', 
+    fontSize: '16px',
+    lineHeight: '22px',
     color: theme.color.accentTextColor,
     fontWeight: '600',
-    textShadow: '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
+    textShadow:
+        '0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        fontSize: '18px', 
-        lineHeight: '24px', 
+        fontSize: '18px',
+        lineHeight: '24px',
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        fontSize: '24px', 
+        fontSize: '24px',
     },
-}))
+}));
 
 const Italic = styled.span(({ theme }) => ({
-    fontStyle: 'italic'
-}))
+    fontStyle: 'italic',
+}));
 
 const CloseButton = styled.button(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -122,49 +124,43 @@ const CloseButton = styled.button(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '24px', 
-    height: '24px', 
+    width: '24px',
+    height: '24px',
     color: theme.color.calendarDateColor,
     cursor: 'pointer',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         width: '33px',
-        height: '33px'
+        height: '33px',
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        display: 'none'
+        display: 'none',
     },
 
     '&:hover': {
-        color: 'red'
+        color: 'red',
     },
-}))
+}));
 
 const UserPanelContainer = styled.div(({ theme }) => ({
-    display: "flex",
+    display: 'flex',
     flexDirection: 'column',
-    gap: "24px",
-    
+    gap: '24px',
+
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        gap: "32px",
+        gap: '32px',
     },
-}))
+}));
 
 const SecondaryTitle = styled.p(({ theme }) => ({
     color: theme.color.inactiveBtnTextColor,
-    fontSize: "12px",
+    fontSize: '12px',
     lineHeight: '15px',
     fontWeight: '600',
 
-
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        fontSize: "14px",
+        fontSize: '14px',
         lineHeight: '17px',
-    }
-}))
-
-
-
-
-
+    },
+}));

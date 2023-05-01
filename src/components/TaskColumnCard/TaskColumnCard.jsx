@@ -1,81 +1,86 @@
 import { iconNames } from 'assets/icons/iconNames';
+import { TaskModal } from 'components/TaskModal/TaskModal';
 import { Chip } from 'core/kit/Chip';
-import { Icon } from 'core/kit/Icon';
 import { IconButton } from 'core/kit/IconButton';
-import propTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectUserAvatar } from 'redux/auth/auth.selectors';
+import { delTask } from 'redux/operations';
 import styled from 'styled-components';
 
-const TaskColumnCard = ({ task }) => {
+function TaskColumnCard({
+    task,
+    isDragging,
+    isGroupedOver,
+    provided,
+    isClone,
+    index,
+}) {
+    const userURL = useSelector(selectUserAvatar);
     const [isShow, setIsShow] = useState(false);
-
-    const handleMoveTask = () => {
-        console.log('move task');
-        return 'hello';
-    };
-
-    const handleDeleteTask = () => {
-        console.log('delete');
-        return 'hello';
+    const dispatch = useDispatch();
+    const handleDeleteTask = id => {
+        dispatch(delTask(id));
+        return;
     };
 
     const handleEditTask = () => {
-        console.log('edit');
-        return 'hello';
+        setIsShow(true);
+        return;
     };
-    
+    const handleCloseModal = () => {
+        setIsShow(false);
+    };
     return (
-        <TaskContainer>
-            <Text>{task.title}</Text>
-            <GroupsWrapper>
-                <InfoGroup>
-                    <Image src={task.userURL} alt="user avatar" />
-                    <Chip priority={task.priority} />
-                </InfoGroup>
-                <ButtonGroup>
-                    <IconButton
-                        iconName={iconNames.arrowCircle}
-                        onClick={() => setIsShow(prev => !prev)}
-                    />
-                    <IconButton
-                        iconName={iconNames.pencil}
-                        onClick={handleEditTask}
-                    />
-                    <IconButton
-                        iconName={iconNames.trash}
-                        onClick={handleDeleteTask}
-                    />
-                    <Popup isShow={isShow}>
-                        <TagWrapper onClick={handleMoveTask}>
-                            <TextTag>in progress</TextTag>
-                            <Icon name={iconNames.arrowCircle} size={'16'} />
-                        </TagWrapper>
-                        <TagWrapper onClick={handleMoveTask}>
-                            <TextTag>done</TextTag>
-                            <Icon name={iconNames.arrowCircle} size={'16'} />
-                        </TagWrapper>
-                    </Popup>
-                </ButtonGroup>
-            </GroupsWrapper>
-        </TaskContainer>
+        <>
+            <TaskContainer
+                href={task.id}
+                isDragging={isDragging}
+                isGroupedOver={isGroupedOver}
+                isClone={isClone}
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                data-is-dragging={isDragging}
+                data-testid={task.id}
+                data-index={index}
+            >
+                <Text>{task.title}</Text>
+                <GroupsWrapper>
+                    <InfoGroup>
+                        <Image src={userURL} alt="user avatar" />
+                        <Chip priority={task.priority} />
+                    </InfoGroup>
+                    <ButtonGroup>
+                        <IconButton
+                            buttonSize={24}
+                            iconName={iconNames.pencil}
+                            onClick={handleEditTask}
+                        />
+                        <IconButton
+                            buttonSize={24}
+                            iconName={iconNames.trash}
+                            onClick={() => handleDeleteTask(task._id)}
+                        />
+                    </ButtonGroup>
+                </GroupsWrapper>
+            </TaskContainer>
+            <TaskModal
+                currentTask={task}
+                closeModal={handleCloseModal}
+                isShow={isShow}
+            />
+        </>
     );
-};
+}
 
-export { TaskColumnCard };
-
-TaskColumnCard.propTypes = {
-    task: propTypes.shape({
-        text: propTypes.string,
-        userURL: propTypes.string,
-        priority: propTypes.string,
-    }),
-};
+export default React.memo(TaskColumnCard);
 
 const TaskContainer = styled.div(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    // width: '300px',
     height: '110px',
     backgroundColor: theme.color.taskCardColor,
     borderRadius: theme.space.x2 + 'px',
@@ -113,23 +118,23 @@ const ButtonGroup = styled.div(({ theme }) => ({
     gap: theme.space.x2,
 }));
 
-const Popup = styled.div(({ theme, isShow }) => ({
-    display: 'grid',
-    width: '150px',
-    position: 'absolute',
-    zIndex: 100,
-    top: '150%',
-    left: '-130%',
-    backgroundColor: theme.color.outletBackgroundColor,
-    padding: `${theme.space.x5}px ${theme.space.x6}px`,
-    gap: theme.space.x3 + 'px',
-    borderRadius: theme.space.x3,
-    transform: isShow ? 'scale(1)' : 'scale(0)',
-    opacity: isShow ? 1 : 0,
-    boxShadow: ' 0px 4px 16px 0px' + theme.color.modalShadow,
-    border: '1px solid ' + theme.color.modalBorder,
-    pointerEvents: isShow ? 'all' : 'none',
-}));
+// const Popup = styled.div(({ theme, isShow }) => ({
+//     display: 'grid',
+//     width: '150px',
+//     position: 'absolute',
+//     zIndex: 100,
+//     top: '150%',
+//     left: '-130%',
+//     backgroundColor: theme.color.outletBackgroundColor,
+//     padding: `${theme.space.x5}px ${theme.space.x6}px`,
+//     gap: theme.space.x3 + 'px',
+//     borderRadius: theme.space.x3,
+//     transform: isShow ? 'scale(1)' : 'scale(0)',
+//     opacity: isShow ? 1 : 0,
+//     boxShadow: ' 0px 4px 16px 0px' + theme.color.modalShadow,
+//     border: '1px solid ' + theme.color.modalBorder,
+//     pointerEvents: isShow ? 'all' : 'none',
+// }));
 
 const GroupsWrapper = styled.div(({ theme }) => ({
     display: 'flex',
@@ -137,21 +142,21 @@ const GroupsWrapper = styled.div(({ theme }) => ({
     alignItems: 'baseline',
 }));
 
-const TextTag = styled.p(({ theme }) => ({
-    fontSize: theme.space.x4 + 'px',
-    lineHeight: theme.space.x5 + 'px',
-    fontWeight: 500,
-}));
+// const TextTag = styled.p(({ theme }) => ({
+//     fontSize: theme.space.x4 + 'px',
+//     lineHeight: theme.space.x5 + 'px',
+//     fontWeight: 500,
+// }));
 
-const TagWrapper = styled.div(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    color: theme.color.secondaryTextColor,
-    cursor: 'pointer',
-    transition: 'color linear 200ms',
+// const TagWrapper = styled.div(({ theme }) => ({
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     color: theme.color.secondaryTextColor,
+//     cursor: 'pointer',
+//     transition: 'color linear 200ms',
 
-    '&:hover': {
-        color: theme.color.accentColor,
-    },
-}));
+//     '&:hover': {
+//         color: theme.color.accentColor,
+//     },
+// }));

@@ -59,7 +59,7 @@ const Button = ({
             ? cancelButton
             : addTaskButton;
     return (
-        <Container>
+        <>
             <ButtonWrapper
                 style={buttonStyle}
                 onClick={onClick}
@@ -81,7 +81,7 @@ const Button = ({
                     {title}
                 </Title>
             </ButtonWrapper>
-        </Container>
+        </>
     );
 };
 

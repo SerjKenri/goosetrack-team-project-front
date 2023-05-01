@@ -11,7 +11,7 @@ const titles = {
     done: 'Done',
 };
 
-const ColumnHeadBar = ({ title, onClick }) => {
+const ColumnHeadBar = ({ title, onClick ,...rest}) => {
     const { t } = useTranslation();
     const primaryKeys = Object.keys(titles);
     const columnTitle = primaryKeys.includes(title)
@@ -19,7 +19,7 @@ const ColumnHeadBar = ({ title, onClick }) => {
         : title;
 
     return (
-        <Wrapper>
+        <Wrapper {...rest}>
             <TextH2>{columnTitle}</TextH2>
             <IconButton
                 onClick={onClick}
@@ -37,12 +37,18 @@ ColumnHeadBar.propTypes = {
     title: propTypes.string.isRequired,
 };
 
-const Wrapper = styled.div(({ theme }) => ({
-    // width: '100%',
+const Wrapper = styled.div(({ theme, isDragging }) => ({
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: `${theme.space.x2}px ${theme.space.x0}px`,
+    // backgroundColor: isDragging ? theme.color.accentColor:'transparent',
+    transition: 'background-color 0.2s ease',
+
+    // '&:hover': {
+    //     backgroundColor: theme.color.accentColor,
+    // },
 }));
 
 const TextH2 = styled.h2(({ theme }) => ({

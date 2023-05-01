@@ -53,6 +53,11 @@
         "errorPassword": "Please, enter stronger passwod",
         "minLengthPass": "Password should contain more then 5 characters"
     },
+    "VerifySuccessPage": {
+        "labelTitleName": "Email is verified!",
+        "description": "Congratulations! Your email has been successfully verified! Please login to continue using our application.",
+        "btnTitle": "Go to Login"
+    },
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "User Panel",

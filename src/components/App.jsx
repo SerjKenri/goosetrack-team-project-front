@@ -12,6 +12,7 @@ import PrivateRoute from './authRoutes/PrivateRoute';
 import { ROUTING } from 'core/utils/constantsRouting';
 import { Suspense } from 'react';
 import ChangePassPage from 'pages/ChangePassPage/ChangeUserPassPage';
+import VerifyPage from 'pages/VerifyPage/VerifyPage';
 
 export const App = () => {
     return (
@@ -21,6 +22,7 @@ export const App = () => {
                     <Route index element={<LoginPage />} />
                     <Route path={ROUTING.LOGIN} element={<LoginPage />} />
                     <Route path={ROUTING.REGISTER} element={<RegisterPage />} />
+                    <Route path={ROUTING.VERIFY} element={<VerifyPage />} />
                 </Route>
                 <Route path="" element={<PrivateRoute />}>
                     <Route path="/" element={<MainLayout />}>
@@ -59,6 +61,5 @@ export const App = () => {
                 </Route>
             </Routes>
         </Suspense>
-        
     );
 };

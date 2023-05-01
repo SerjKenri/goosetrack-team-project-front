@@ -8,4 +8,5 @@ export const ROUTING = {
     CURRENT_MONTH: 'month/:currentDate',
     LOGIN: '/login',
     REGISTER: '/register',
+    VERIFY: 'verify/:verificationToken',
 };

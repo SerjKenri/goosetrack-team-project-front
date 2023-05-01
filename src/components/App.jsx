@@ -16,7 +16,7 @@ import ChangePassPage from 'pages/ChangePassPage/ChangeUserPassPage';
 import VerifyPage from 'pages/VerifyPage/VerifyPage';
 
 import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
-
+import ResendVerifyEmailPage from 'pages/ResendVerifyEmailPage/ResendVerifyEmailPage';
 
 export const App = () => {
     return (
@@ -30,10 +30,14 @@ export const App = () => {
                     <Route path={ROUTING.VERIFY} element={<VerifyPage />} />
 
                     <Route
+                        path={ROUTING.RESEND_VERIFY}
+                        element={<ResendVerifyEmailPage />}
+                    />
+
+                    <Route
                         path={ROUTING.RESTORE_PASS}
                         element={<UserForgotPassPage />}
                     />
-
                 </Route>
                 <Route path="" element={<PrivateRoute />}>
                     <Route path="/" element={<MainLayout />}>

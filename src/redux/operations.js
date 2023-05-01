@@ -44,6 +44,25 @@ export const verifyUser = createAsyncThunk(
     }
 );
 
+export const sendMailForVerify = createAsyncThunk(
+    'auth/resend-verify',
+    async (userMailData, thunkAPI) => {
+        try {
+            const resp = await axios.post('/auth/verify', userMailData);
+
+            // const resp = await axios.post(
+            //     'http://localhost:4000/api/auth/verify',
+            //     userMailData
+            // );
+
+            alert('Email is successfully send');
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
 export const loginUser = createAsyncThunk(
     'auth/login',
     async (userRegData, thunkAPI) => {

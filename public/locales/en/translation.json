@@ -56,7 +56,16 @@
     "VerifySuccessPage": {
         "labelTitleName": "Email is verified!",
         "description": "Congratulations! Your email has been successfully verified! Please login to continue using our application.",
-        "btnTitle": "Go to Login"},
+        "btnTitle": "Go to Login"
+    },
+    "ResendVerifyEmailForm": {
+        "labelTitleName": "You didn't pass email verification",
+        "textInstruction": "Type in the email you used to register in GooseTrack.",
+        "text": "We'll send you a link to finish you verification.",
+        "labelTitleEmail": "Email",
+        "inputPlaceholderEmail": "Enter your email",
+        "sendEmail": "Send email"
+    },
     "sendMailForgetPass": {
         "labelTitleName": "Forgot your password?",
         "textInstruction": "Type in the email you used to register in GooseTrack.",

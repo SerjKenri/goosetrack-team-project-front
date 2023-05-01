@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import styled from 'styled-components';
 
 import { Button, ButtonDifference } from 'core/kit/Button';
-import { sendMailForPass } from 'redux/operations';
+import { sendMailForVerify } from 'redux/operations';
 import { Input } from 'core/kit/Input';
 import { useTranslation } from 'react-i18next';
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
@@ -13,13 +13,13 @@ import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 import { userForgetPassSchema } from 'schemas/userForgetPassValidation';
 import { useNavigate } from 'react-router-dom';
 
-export const SendMailForgetPass = () => {
+export const ResendVerifyEmailForm = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onSubmit = (values, { resetForm }) => {
         dispatch(
-            sendMailForPass({
+            sendMailForVerify({
                 email: values.email,
             })
         );
@@ -46,22 +46,22 @@ export const SendMailForgetPass = () => {
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
                             <LoginFormTitle>
-                                {t('sendMailForgetPass.labelTitleName')}
+                                {t('ResendVerifyEmailForm.labelTitleName')}
                             </LoginFormTitle>
                             <LoginFormInfoTextBold>
-                                {t('sendMailForgetPass.textInstruction')}
+                                {t('ResendVerifyEmailForm.textInstruction')}
                             </LoginFormInfoTextBold>
                             <LoginFormInfoText>
-                                {t('sendMailForgetPass.text')}
+                                {t('ResendVerifyEmailForm.text')}
                             </LoginFormInfoText>
                             <Input
                                 name="email"
                                 type="email"
                                 labelTitle={t(
-                                    'sendMailForgetPass.labelTitleEmail'
+                                    'ResendVerifyEmailForm.labelTitleEmail'
                                 )}
                                 placeholder={t(
-                                    'sendMailForgetPass.inputPlaceholderEmail'
+                                    'ResendVerifyEmailForm.inputPlaceholderEmail'
                                 )}
                                 labelTextStyle={{
                                     fontWeight: '600',
@@ -91,7 +91,7 @@ export const SendMailForgetPass = () => {
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
                                 disabled={!values.email}
-                                title={t('sendMailForgetPass.sendEmail')}
+                                title={t('ResendVerifyEmailForm.sendEmail')}
                                 buttonStyle={{
                                     backgroundColor: '#3e85f3',
                                     width: '287px',

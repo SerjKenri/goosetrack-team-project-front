@@ -1,9 +1,15 @@
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
-const userForgetPassSchema = Yup.object().shape({
-    email: Yup.string()
-        .email('Invalid email address')
-        .required('Email is a required field'),
-});
+export const useForgetPassSchema = () => {
+    const { t } = useTranslation();
 
-export { userForgetPassSchema };
+    const userForgetPassSchema = Yup.object().shape({
+        email: Yup.string()
+            .email(`${t('signUpPage.errorEmail')}`)
+            .required(`${t('userProfilePage.validation.required')}`),
+    });
+    return {
+        userForgetPassSchema,
+    };
+};

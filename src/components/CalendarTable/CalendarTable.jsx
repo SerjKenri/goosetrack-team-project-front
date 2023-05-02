@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+import { selectTasks } from 'redux/tasks/tasks.selectors';
 
-export const CalendarTable = () => {
-    const startWeek = moment().startOf('month').startOf('isoweek');
+export const CalendarTable = ({startDay, today}) => {
+    let day = moment(startDay).startOf('month').startOf('isoweek');
     const endWeek = moment().endOf('month').endOf('isoweek');
-
-    const calendarDays = [];
-    let day = startWeek;
-
+    
+    const calendarDays=[];
+    
     while (day <= endWeek) {
         for (let i = 0; i < 7; i++) {
             calendarDays.push(moment(day));
@@ -23,7 +24,10 @@ export const CalendarTable = () => {
     const isSelectedMonth = (month) => {
         const today = moment();
         return today.isSame(month, 'month');
-      };
+    };
+    
+    const tasks = useSelector(selectTasks);
+
 
     const isMobileView = window.innerWidth < 768;
 
@@ -58,25 +62,32 @@ export const CalendarTable = () => {
                             <CalendarDate currentDay={currentDay(day)}>
                                 {day.format('D')}
                             </CalendarDate>
-                            {/* <TaskList></TaskList> */}
+                            <TaskList>
+                                {tasks.map(task => 
+                                    <li key={task._id}>
+                                        task={task}
+                                    </li>)}
+
+                            </TaskList>
                         </CalendarCell>
                     </CalendarLink>
                 ))}
                 
             </CalendarWrapper>
         </CalendarContainer>
+        
     );
 };
 
 const CalendarContainer = styled.div`
     width: 100%;
     padding-top: 12px;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     padding-left: 20px;
     padding-right: 20px;
 
     @media screen and (min-width: 768px) {
-        padding-top: 16px;
+        padding-top: 16px 32px 32px;
         padding-bottom: 32px;
         padding-left: 32px;
         padding-right: 32px;
@@ -90,8 +101,8 @@ const DayList = styled.ul`
     align-items: center;
     margin-bottom: 15px;
     padding: 14px 0;
-
-
+    border: 1px solid rgba(220, 227, 229, 0.8);
+    border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
     line-height: 1.286;
@@ -113,9 +124,9 @@ const DayItem = styled.li`
 const CalendarWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-
+    
     background: #FFFFFF;
-    border: 1px solid rgba(220, 227, 229, 0.5);
+    border: 1px solid rgba(220, 227, 229, 0.8);
     border-radius: 8px;
     font-style: normal;
     font-weight: 700;
@@ -133,7 +144,7 @@ const CalendarDay = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 1.125;
-    text-transform: uppercase;
+    text-transform: uppercase;    
 `;
 
 const CalendarCell = styled.div`
@@ -156,3 +167,13 @@ const CalendarDate = styled.div`
     border-radius: ${({ currentDay }) => currentDay ? '6px' : 'none'};
     background-color: ${({ currentDay }) => currentDay ? 'blue' : 'transparent'};
 `;
+
+export const TaskList = styled.ul`
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    list-style-position: inside;
+    padding-left: 4px;
+    gap: 2px;
+`;
+

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import 'moment/locale/uk';
 import { useState } from 'react';
-import { useParams } from 'react-router';
+// import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { addTask, updateTask } from 'redux/operations';
 import { Button, ButtonDifference } from 'core/kit/Button';
@@ -14,10 +14,10 @@ import { selectUserId } from 'redux/auth/auth.selectors';
 
 const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const { t } = useTranslation();
-    const { current } = useParams();
+    // const { current } = useParams();
     const dispatch = useDispatch();
     const PRIORITY = ['low', 'medium', 'high'];
-    const taskDay = currentTask?.date ? currentTask.date : current;
+    // const taskDay = currentTask?.date ? currentTask.date : current;
     const currentDay = moment(Date.now()).format('YYYY-MM-DD');
     // const userId = useSelector(selectUser)
     const taskCreateTime = currentTask?.start
@@ -32,11 +32,11 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const [end, setEnd] = useState(currentTask?.end ?? defaultEndTime);
     const [priority, setPriority] = useState(currentTask?.priority ?? 'low');
 
-    const isValidStartTime = (day, time) => {
-        if (day === currentDay && time >= taskCreateTime) return true;
-        if (day > currentDay) return true;
-    };
-    const isValidEndTime = start <= end;
+    // const isValidStartTime = (day, time) => {
+    //     if (day === currentDay && time >= taskCreateTime) return true;
+    //     if (day > currentDay) return true;
+    // };
+    // const isValidEndTime = start <= end;
 
     const onSubmit = e => {
         e.preventDefault();

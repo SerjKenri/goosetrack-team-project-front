@@ -6,24 +6,20 @@ const dateFormat = {
     day: 'day',
 };
 
-const intervalMap = {
-    [dateFormat.month]: 'months',
-    [dateFormat.week]: 'weeks',
-    [dateFormat.day]: 'day',
-};
-
-const dateFormatString = 'YYYY-MM-DD';
-
 const toPrevDate = (date, periodType) => {
-    const interval = intervalMap[periodType] || 'day';
-    const newDate = moment(date).subtract(1, interval);
-    return newDate.format(dateFormatString);
+    return periodType === dateFormat.month
+        ? moment(date).subtract(1, 'months').format('YYYY-MM-DD')
+        : periodType === dateFormat.week
+        ? moment(date).subtract(1, 'weeks').format('YYYY-MM-DD')
+        : moment(date).subtract(1, 'days').format('YYYY-MM-DD');
 };
 
 const toNextDate = (date, periodType) => {
-    const interval = intervalMap[periodType] || 'day';
-    const newDate = moment(date).add(1, interval);
-    return newDate.format(dateFormatString);
+    return periodType === dateFormat.month
+        ? moment(date).add(1, 'months').format('YYYY-MM-DD')
+        : periodType === dateFormat.week
+        ? moment(date).add(1, 'weeks').format('YYYY-MM-DD')
+        : moment(date).add(1, 'days').format('YYYY-MM-DD');
 };
 
 export { toPrevDate, toNextDate };

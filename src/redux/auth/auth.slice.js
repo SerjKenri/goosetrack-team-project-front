@@ -9,6 +9,7 @@ import {
     currentUser,
     updateUser,
     logoutUser,
+    sendMailForVerify,
 } from 'redux/operations';
 // import { createEntityAdapter } from '@reduxjs/toolkit';
 
@@ -33,6 +34,16 @@ const authSlice = createSlice({
                 state.token = actions.payload.user.token;
                 state.isLoggedIn = true;
             })
+            /////////////////////////////
+
+            .addCase(sendMailForVerify.pending, handlePending)
+            .addCase(sendMailForVerify.rejected, handleRejected)
+            .addCase(sendMailForVerify.fulfilled, (state, { payload }) => {
+                state.user.isLoading = false;
+                state.user.error = null;
+            })
+
+            ////////////////////////////////////
             .addCase(loginUser.pending, handlePending)
             .addCase(loginUser.rejected, handleRejected)
             .addCase(loginUser.fulfilled, (state, actions) => {

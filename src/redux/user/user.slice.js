@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initUserState } from '../auth/auth.intit-state';
-import { currentUser, updateUser, logoutUser, changePass } from '../operations';
+import {
+    currentUser,
+    updateUser,
+    logoutUser,
+    changePass,
+    sendMailForPass,
+    resetNewPass,
+} from '../operations';
 // import { createEntityAdapter } from '@reduxjs/toolkit';
 
 const handlePending = state => {
@@ -51,6 +58,18 @@ const userSlice = createSlice({
             .addCase(changePass.pending, handlePending)
             .addCase(changePass.rejected, handleRejected)
             .addCase(changePass.fulfilled, (state, { payload }) => {
+                state.user.isLoading = false;
+                state.user.error = null;
+            })
+            .addCase(sendMailForPass.pending, handlePending)
+            .addCase(sendMailForPass.rejected, handleRejected)
+            .addCase(sendMailForPass.fulfilled, (state, { payload }) => {
+                state.user.isLoading = false;
+                state.user.error = null;
+            })
+            .addCase(resetNewPass.pending, handlePending)
+            .addCase(resetNewPass.rejected, handleRejected)
+            .addCase(resetNewPass.fulfilled, (state, { payload }) => {
                 state.user.isLoading = false;
                 state.user.error = null;
             });

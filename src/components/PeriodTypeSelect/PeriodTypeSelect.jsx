@@ -1,23 +1,28 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 export const PeriodTypeSelect = () => {
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     return (
         <PeriodTypeSelectWrap>
             <PeriodTypeSelectBtn
                 type="button"
-                onClick={() => navigate("/calendar/month/")}
+                onClick={() => navigate('/calendar/month/')}
             >
-                Month
+                {t('calendarPage.toggleButton.month')}
             </PeriodTypeSelectBtn>
             <PeriodTypeSelectBtn
                 type="button"
-                onClick={() => navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)}
-                style={{borderRadius: '0px 8px 8px 0px'}}
+                onClick={() =>
+                    navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)
+                }
+                style={{ borderRadius: '0px 8px 8px 0px' }}
             >
-                Day
+                {t('calendarPage.toggleButton.day')}
             </PeriodTypeSelectBtn>
         </PeriodTypeSelectWrap>
     );
@@ -29,7 +34,7 @@ const PeriodTypeSelectWrap = styled.div`
 `;
 
 const PeriodTypeSelectBtn = styled.button(({ theme }) => ({
-    width:'76px',
+    width: '76px',
     padding: '8px 16px',
     border: 'none',
     borderRadius: '8px 0px 0px 8px',
@@ -55,8 +60,8 @@ const PeriodTypeSelectBtn = styled.button(({ theme }) => ({
     },
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        width:'82px',
-        fontSize:'16px',
-        lineHeight:'1.12',
+        width: '82px',
+        fontSize: '16px',
+        lineHeight: '1.12',
     },
 }));

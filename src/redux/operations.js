@@ -32,6 +32,37 @@ export const signUpUser = createAsyncThunk(
     }
 );
 
+export const verifyUser = createAsyncThunk(
+    'auth/verify',
+    async (verificationToken, thunkAPI) => {
+        try {
+            const resp = await axios.get(`/auth/verify/${verificationToken}`);
+            return resp;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
+export const sendMailForVerify = createAsyncThunk(
+    'auth/resend-verify',
+    async (userMailData, thunkAPI) => {
+        try {
+            const resp = await axios.post('/auth/verify', userMailData);
+
+            // const resp = await axios.post(
+            //     'http://localhost:4000/api/auth/verify',
+            //     userMailData
+            // );
+
+            alert('Email is successfully send');
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
 export const loginUser = createAsyncThunk(
     'auth/login',
     async (userRegData, thunkAPI) => {
@@ -130,7 +161,43 @@ export const changePass = createAsyncThunk(
     }
 );
 
-// ===============================================================
+export const sendMailForPass = createAsyncThunk(
+    'user/restorePass',
+    async (userMailData, thunkAPI) => {
+        try {
+            // const resp = await axios.post(
+            //     'http://localhost:4000/api/auth/restore-pass',
+            //     userMailData
+            // );
+            const resp = await axios.post('/auth/restore-pass', userMailData);
+            alert('Email is successfully send');
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+export const resetNewPass = createAsyncThunk(
+    'user/reset-pass',
+    async (userMailData, thunkAPI) => {
+        try {
+            const { newPassword, passToken } = userMailData;
+
+            // const resp = await axios.patch(
+            //     `http://localhost:4000/api/auth/reset-pass/${passToken}`,
+            //     { newPassword: newPassword }
+            // );
+            const resp = await axios.patch(`/auth/reset-pass/${passToken}`, {
+                newPassword: newPassword,
+            });
+            alert('Password is successfully updated');
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+/// ===============================================================
 // TASKS
 // ===============================================================
 

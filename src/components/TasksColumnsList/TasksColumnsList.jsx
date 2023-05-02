@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TasksColumn from 'components/TasksColumn/TasksColumn';
+
 import { useDispatch } from 'react-redux';
 import {
     fetchColumns,
@@ -19,6 +20,7 @@ import { Loader } from 'components/Loader/Loader';
 //     tasks={tasks}
 //     withScrollableColumns
 // />;
+
 // TasksColumnsList = board
 const TasksColumnsList = ({
     currentDate,
@@ -30,9 +32,11 @@ const TasksColumnsList = ({
 }) => {
     const [columns, setColumns] = useState(null);
     const [ordered, setOrdered] = useState([]);
+
     const [isReadyRender, setIsreadyRender] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
+
     const height = window.innerHeight * 0.7;
     const initialColumns = useSelector(state => state.columns.columns.items);
 

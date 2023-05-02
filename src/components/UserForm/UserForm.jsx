@@ -13,23 +13,27 @@ import {
     selectUserTelegram,
 } from '../../redux/auth/auth.selectors';
 
-import { userFormSchema } from 'schemas/userFormValidation';
+import { useFormValidation } from 'schemas/userFormValidation';
 import { Input } from 'core/kit/Input';
 import { Button } from 'core/kit/Button';
 import { ButtonDifference } from 'core/kit/Button';
-import { UserInfoText, PopupChip, Chip } from 'core/kit/text';
+import { UserInfoText, PopupChip, Chip, TextBold } from 'core/kit/text';
 import { Icon } from 'core/kit/Icon';
 import { iconNames } from 'assets/icons/iconNames';
 import { useSelector } from 'react-redux';
-// import { useMatchMedia } from 'core/hooks/useMatchMedia';
-import { updateUser } from 'redux/operations';
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
+import { logoutUser, updateUser } from 'redux/operations';
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
+import { Modal } from 'core/Modal/Modal';
+import { useTranslation } from 'react-i18next';
 
 export const UserForm = () => {
     const filePicker = useRef('');
     const dispatch = useDispatch();
-    // const { isDesktop, isTablet, isMobile } = useMatchMedia();
+    const { isDesktop, isTablet, isMobile } = useMatchMedia();
+    const { t } = useTranslation();
+    const { userFormSchema } = useFormValidation();
 
     const name = useSelector(selectUserName);
     const email = useSelector(selectUserEmail);
@@ -42,9 +46,12 @@ export const UserForm = () => {
 
     const [userImage, setUserImage] = useState(avatarURL);
     const [avatar, setAvatar] = useState(avatarURL);
-
+    const [isShow, setIsShow] = useState(false);
     const formData = new FormData();
-
+    const handleCloseModal = () => {
+        setIsShow(false);
+        dispatch(logoutUser());
+    };
     const handleChangeAvatar = e => {
         const file = e.target.files[0];
         const objURL = URL.createObjectURL(file);
@@ -62,169 +69,249 @@ export const UserForm = () => {
     };
 
     return (
-        <Container>
-            <Formik
-                initialValues={{
-                    avatarURL,
-                    name,
-                    birthday: formattedDate,
-                    email,
-                    phone,
-                    telegram,
-                }}
-                validationSchema={userFormSchema}
-                onSubmit={async (values, { setSubmitting }) => {
-                    if (userImage) {
-                        formData.append('avatarURL', userImage);
-                    }
-                    if (values.name) {
-                        formData.append('name', values.name);
-                    }
-                    if (values.email) {
-                        formData.append('email', values.email);
-                    }
+        <>
+            <Container>
+                <Formik
+                    initialValues={{
+                        avatarURL,
+                        name,
+                        birthday: formattedDate,
+                        email,
+                        phone,
+                        telegram,
+                    }}
+                    validationSchema={userFormSchema}
+                    onSubmit={async (values, { setSubmitting }) => {
+                        if (email === values.email) {
+                            if (userImage) {
+                                formData.append('avatarURL', userImage);
+                            }
+                            if (values.name) {
+                                formData.append('name', values.name);
+                            }
+                            formData.append('email', values.email);
+                            if (values.phone) {
+                                formData.append('phone', values.phone);
+                            }
+                            if (values.birthday) {
+                                formData.append('birthDay', values.birthday);
+                            }
+                            if (values.telegram) {
+                                formData.append('messenger', values.telegram);
+                            }
+                            console.log(formData);
+                            await dispatch(updateUser(formData)).unwrap();
+                        } else {
+                            setIsShow(true);
+                            formData.append('email', values.email);
+                            if (userImage) {
+                                formData.append('avatarURL', userImage);
+                            }
+                            if (values.name) {
+                                formData.append('name', values.name);
+                            }
+                            if (values.phone) {
+                                formData.append('phone', values.phone);
+                            }
+                            if (values.birthday) {
+                                formData.append('birthDay', values.birthday);
+                            }
+                            if (values.telegram) {
+                                formData.append('messenger', values.telegram);
+                            }
+                            await dispatch(updateUser(formData)).unwrap();
+                        }
 
-                    if (values.phone) {
-                        formData.append('phone', values.phone);
-                    }
-                    if (values.birthday) {
-                        formData.append('birthDay', values.birthday);
-                    }
-                    if (values.telegram) {
-                        formData.append('messenger', values.telegram);
-                    }
-                    await dispatch(updateUser(formData)).unwrap();
-
-                    setSubmitting(false);
-                }}
-            >
-                {formik => (
-                    <Form onSubmit={formik.handleSubmit} autoComplete="off">
-                        <AvatarWrapper>
-                            <AvatarContainer>
-                                <AvatarInput
-                                    ref={filePicker}
-                                    id="avatar"
-                                    type="file"
-                                    accept="image/*,.jpg"
-                                    name="avatarURL"
-                                    onChange={handleChangeAvatar}
-                                />
-                                <AvatarLabel htmlFor="avatar">
-                                    {!avatar ? (
-                                        <UserIconWrapper>
-                                            <Icon
-                                                name={iconNames.avatar}
-                                                size="48px"
-                                                stroke="none"
+                        setSubmitting(false);
+                    }}
+                >
+                    {formik => (
+                        <Form onSubmit={formik.handleSubmit} autoComplete="off">
+                            <AvatarWrapper>
+                                <AvatarContainer>
+                                    <AvatarInput
+                                        ref={filePicker}
+                                        id="avatar"
+                                        type="file"
+                                        accept="image/*,.jpg"
+                                        name="avatarURL"
+                                        onChange={handleChangeAvatar}
+                                    />
+                                    <AvatarLabel htmlFor="avatar">
+                                        {!avatar ? (
+                                            <UserIconWrapper>
+                                                <Icon
+                                                    name={iconNames.avatar}
+                                                    size="48px"
+                                                    stroke="none"
+                                                />
+                                            </UserIconWrapper>
+                                        ) : (
+                                            <AvatarImage
+                                                src={avatar}
+                                                alt="user avatar"
                                             />
-                                        </UserIconWrapper>
-                                    ) : (
-                                        <AvatarImage
-                                            src={avatar}
-                                            alt="user avatar"
+                                        )}
+                                    </AvatarLabel>
+                                    <PlusIconWrapper onClick={handlePick}>
+                                        <Icon
+                                            name={iconNames.plus}
+                                            size="100%"
                                         />
+                                    </PlusIconWrapper>
+                                </AvatarContainer>
+                            </AvatarWrapper>
+                            <NameWrapper>
+                                <NameText>{name}</NameText>
+                                <UserRoleText>User</UserRoleText>
+                            </NameWrapper>
+                            <InputWrapper
+                                isMobile={isMobile}
+                                isDesktop={isDesktop}
+                            >
+                                <FormInput
+                                    labelTitle={t('userProfilePage.userName')}
+                                    name="name"
+                                    placeholder={t(
+                                        'userProfilePage.userNamePlaceholder'
                                     )}
-                                </AvatarLabel>
-                                <PlusIconWrapper onClick={handlePick}>
-                                    <Icon name={iconNames.plus} size="100%" />
-                                </PlusIconWrapper>
-                            </AvatarContainer>
-                        </AvatarWrapper>
-                        <NameWrapper>
-                            <NameText>{name}</NameText>
-                            <UserRoleText>User</UserRoleText>
-                        </NameWrapper>
-                        <InputWrapper>
-                            <FormInput
-                                labelTitle="User Name"
-                                name="name"
-                                placeholder="Enter your name"
-                                onChange={formik.handleChange}
-                                value={formik.values.name}
-                                {...formik.getFieldProps('name')}
-                            />
-                            {formik.touched.name && formik.errors.name ? (
-                                <ErrorMessage>
-                                    {formik.errors.name}
-                                </ErrorMessage>
-                            ) : null}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.name}
+                                    {...formik.getFieldProps('name')}
+                                    isMobile={isMobile}
+                                    touched={formik.touched}
+                                    errors={formik.errors}
+                                />
+                                {formik.touched.name && formik.errors.name ? (
+                                    <ErrorMessage>
+                                        {formik.errors.name}
+                                    </ErrorMessage>
+                                ) : null}
 
-                            <FormInput
-                                type="date"
-                                labelTitle="Birthday"
-                                name="birthday"
-                                placeholder="25.04.2023"
-                                onChange={formik.handleChange}
-                                value={formik.values.birthday}
-                                {...formik.getFieldProps('birthday')}
+                                <FormInput
+                                    type="date"
+                                    labelTitle={t('userProfilePage.birthday')}
+                                    name="birthday"
+                                    placeholder={t(
+                                        'userProfilePage.userBirthdayPlaceholder'
+                                    )}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.birthday}
+                                    {...formik.getFieldProps('birthday')}
+                                    isMobile={isMobile}
+                                    touched={formik.touched}
+                                    errors={formik.errors}
+                                />
+                                {formik.touched.birthday &&
+                                formik.errors.birthday ? (
+                                    <ErrorMessage>
+                                        {formik.errors.birthday}
+                                    </ErrorMessage>
+                                ) : null}
+                                <FormInput
+                                    labelTitle={t('userProfilePage.email')}
+                                    name="email"
+                                    placeholder={t(
+                                        'userProfilePage.userEmailPlaceholder'
+                                    )}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    {...formik.getFieldProps('email')}
+                                    isMobile={isMobile}
+                                    touched={formik.touched}
+                                    errors={formik.errors}
+                                />
+                                {formik.touched.email && formik.errors.email ? (
+                                    <ErrorMessage>
+                                        {formik.errors.email}
+                                    </ErrorMessage>
+                                ) : null}
+                                <FormInput
+                                    type="phone"
+                                    labelTitle={t('userProfilePage.phone')}
+                                    name="phone"
+                                    placeholder={t(
+                                        'userProfilePage.userPhonePlaceholder'
+                                    )}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.phone}
+                                    {...formik.getFieldProps('phone')}
+                                    isMobile={isMobile}
+                                    touched={formik.touched}
+                                    errors={formik.errors}
+                                />
+                                {formik.touched.phone && formik.errors.phone ? (
+                                    <ErrorMessage>
+                                        {formik.errors.phone}
+                                    </ErrorMessage>
+                                ) : null}
+                                <FormInput
+                                    labelTitle={t('userProfilePage.telegram')}
+                                    name="telegram"
+                                    placeholder={t(
+                                        'userProfilePage.userTelegramPlaceholder'
+                                    )}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.telegram}
+                                    {...formik.getFieldProps('telegram')}
+                                    isMobile={isMobile}
+                                    touched={formik.touched}
+                                    errors={formik.errors}
+                                />
+                                {formik.touched.telegram &&
+                                formik.errors.telegram ? (
+                                    <ErrorMessage>
+                                        {formik.errors.telegram}
+                                    </ErrorMessage>
+                                ) : null}
+                            </InputWrapper>
+                            <SaveButton
+                                differentStyles={ButtonDifference.secondary}
+                                title={t('userProfilePage.saveChanges')}
+                                type="submit"
+                                onSubmit={handleUpload}
+                                disabled={formik.isSubmitting}
+                                isMobile={isMobile}
+                                isTablet={isTablet}
                             />
-                            {formik.touched.birthday &&
-                            formik.errors.birthday ? (
-                                <ErrorMessage>
-                                    {formik.errors.birthday}
-                                </ErrorMessage>
-                            ) : null}
-                            <FormInput
-                                labelTitle="Email"
-                                name="email"
-                                placeholder="Enter your email"
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                                {...formik.getFieldProps('email')}
-                            />
-                            {formik.touched.email && formik.errors.email ? (
-                                <ErrorMessage>
-                                    {formik.errors.email}
-                                </ErrorMessage>
-                            ) : null}
-                            <FormInput
-                                type="phone"
-                                labelTitle="Phone"
-                                name="phone"
-                                placeholder="Enter your phone"
-                                onChange={formik.handleChange}
-                                value={formik.values.phone}
-                                {...formik.getFieldProps('phone')}
-                            />
-                            {formik.touched.phone && formik.errors.phone ? (
-                                <ErrorMessage>
-                                    {formik.errors.phone}
-                                </ErrorMessage>
-                            ) : null}
-                            <FormInput
-                                labelTitle="Telegram"
-                                name="telegram"
-                                placeholder="Enter your telegram"
-                                onChange={formik.handleChange}
-                                value={formik.values.telegram}
-                                {...formik.getFieldProps('telegram')}
-                            />
-                            {formik.touched.telegram &&
-                            formik.errors.telegram ? (
-                                <ErrorMessage>
-                                    {formik.errors.telegram}
-                                </ErrorMessage>
-                            ) : null}
-                        </InputWrapper>
-                        <SaveButton
-                            differentStyles={ButtonDifference.secondary}
-                            title="Save changes"
-                            type="submit"
-                            onSubmit={handleUpload}
-                            disabled={formik.isSubmitting}
-                        />
-                    </Form>
-                )}
-            </Formik>
-            {/* тимчасово, переробити на нормальне */}
-            <AuthNavigate
-                route={`/${ROUTING.CHANGE_PASS}`}
-                content="Change password"
-            />
-        </Container>
+                        </Form>
+                    )}
+                </Formik>
+
+                <ChangePassword
+                    route={`/${ROUTING.CHANGE_PASS}`}
+                    content={t('userProfilePage.changePassword')}
+                />
+            </Container>
+            <Modal
+                setIsVisible={handleCloseModal}
+                isVisible={isShow}
+                closeButton={false}
+            >
+                <div>
+                    <TextBold style={{ textAlign: 'center' }}>
+                        {t('userProfilePage.modal.description')}
+                    </TextBold>
+
+                    <Button
+                        differentStyles={ButtonDifference.secondary}
+                        onClick={handleCloseModal}
+                        title={t('userProfilePage.modal.titleButton')}
+                        buttonStyle={{
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: '30px',
+                        }}
+                    />
+                </div>
+            </Modal>
+        </>
     );
 };
+
+const ChangePassword = styled(AuthNavigate).attrs(({ theme }) => ({
+    navStyle: { marginTop: '20px' },
+}))({});
 
 const Container = styled.div(({ theme, isTablet, isDesktop }) => ({
     display: 'flex',
@@ -274,15 +361,11 @@ const AvatarWrapper = styled.div(({ theme }) => ({
     },
 }));
 
-const SaveButton = styled(Button).attrs(({ theme }) => ({
+const SaveButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
     buttonStyle: {
-        width: '195px',
-        height: '46px',
+        width: isMobile ? '195px' : isTablet ? '262px' : '262px',
+        height: isMobile ? '46px' : isTablet ? '48px' : '48px',
         borderRadius: '16px',
-        [theme.media.up(`${theme.breakpoints.m}px`)]: {
-            width: '262px',
-            height: '48px',
-        },
     },
 }))({});
 
@@ -310,57 +393,39 @@ const UserRoleText = styled(PopupChip)(({ theme }) => ({
     color: theme.color.labelColor,
 }));
 
-const InputWrapper = styled.div(({ theme }) => ({
+const InputWrapper = styled.div(({ theme, isMobile, isDesktop }) => ({
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
     flexDirection: 'column',
-    gap: '18px',
-    marginBottom: '40px',
-
-    width: '299px',
-
-    [theme.media.between(
-        `${theme.breakpoints.m}px`,
-        `${theme.breakpoints.l}px`
-    )]: {
-        gap: '24px',
-    },
-    [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        gap: '24px',
-        width: '758px',
-        height: '264px',
-        marginBottom: '88px',
-    },
+    gap: isMobile ? '18px' : '24px',
+    marginBottom: !isDesktop ? '40px' : '88px',
+    width: !isDesktop ? '299px' : '758px',
+    height: isDesktop && '264px',
 }));
 
-const FormInput = styled(Input).attrs(({ theme }) => ({
-    inputStyle: {
-        outline: 'none',
-        border: '1px solid' + theme.color.modalBorder,
-        backgroundColor: theme.color.calendarCellColor,
-        width: '299px',
-        height: '42px',
-        fontSize: '14px',
-        lineHeight: '1.3',
-        color: theme.color.mainTextColor,
-        [theme.media.up(`${theme.breakpoints.m}px`)]: {
-            fontSize: '16px',
-            lineHeight: '1.125',
-            width: '354px',
-            height: '46px',
+const FormInput = styled(Input).attrs(
+    ({ theme, isMobile, errors, touched }) => ({
+        inputStyle: {
+            outline: 'none',
+            border:
+                !errors && !touched
+                    ? '1px solid' + theme.color.taskHighColor
+                    : '1px solid' + theme.color.modalBorder,
+            backgroundColor: theme.color.calendarCellColor,
+            width: isMobile ? '299px' : '354px',
+            height: isMobile ? '42px' : '46px',
+            fontSize: isMobile ? '14px' : '16px',
+            lineHeight: isMobile ? '1.3' : '1.125',
+            color: theme.color.mainTextColor,
         },
-    },
-    labelTextStyle: {
-        fontSize: '12px',
-        lineHeight: '1.16',
-        fontWeight: '400',
-        [theme.media.up(`${theme.breakpoints.m}px`)]: {
-            fontSize: '14px',
-            lineHeight: '1.3',
+        labelTextStyle: {
+            fontSize: isMobile ? '12px' : '14px',
+            lineHeight: isMobile ? '1.16' : '1.3',
+            fontWeight: '400',
         },
-    },
-}))({});
+    })
+)({});
 const AvatarContainer = styled.div(({ theme }) => ({
     position: 'relative',
 

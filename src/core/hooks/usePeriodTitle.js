@@ -2,43 +2,39 @@ import moment from 'moment';
 import { useMemo } from 'react';
 import propTypes from 'prop-types';
 
-const dateFormat = {
+export const dateFormat = {
     month: 'month',
     week: 'week',
     day: 'day',
 };
 
-const formatString = {
-    [dateFormat.month]: 'MMMM YYYY',
-    [dateFormat.week]: 'DD MMMM YYYY',
-    [dateFormat.day]: 'DD MMMM YYYY',
-};
-
 const usePeriodTitle = (periodType, date) => {
-    const formattedDate = useMemo(() => moment.utc(date), [date]);
-
     const period = useMemo(() => {
-        const formatter = formatString[periodType];
-        if (!formatter) return;
+        switch (periodType) {
+            case dateFormat.month:
+                return moment(date).utc().format('MMMM YYYY');
+            case dateFormat.week:
+                const [firstDayYear, firstDayMonth, firstDayDate] = moment(date)
+                    .utc()
+                    .weekday(1)
+                    .format('YYYY-MMMM-DD')
+                    .split('-');
+                const [lastDayYear, lastDayMonth, lastDayDate] = moment(date)
+                    .utc()
+                    .weekday(7)
+                    .format('YYYY-MMMM-DD')
+                    .split('-');
 
-        if (periodType === dateFormat.month || periodType === dateFormat.week) {
-            const startOfWeek = formattedDate.weekday(1);
-            const endOfWeek = formattedDate.weekday(7);
-            const startOfMonth = formattedDate.startOf('month');
-            const endOfMonth = formattedDate.endOf('month');
-
-            const startDate =
-                periodType === dateFormat.month ? startOfMonth : startOfWeek;
-            const endDate =
-                periodType === dateFormat.month ? endOfMonth : endOfWeek;
-
-            const isSameMonth = startDate.isSame(endDate, 'month');
-            const format = isSameMonth ? 'DD - ' : 'DD MMMM - ';
-            return `${startDate.format(format)}${endDate.format(formatter)}`;
-        } else {
-            return formattedDate.format(formatter);
+                return firstDayYear !== lastDayYear ||
+                    firstDayMonth !== lastDayMonth
+                    ? `${firstDayDate} ${firstDayMonth} ${firstDayYear} - ${lastDayDate} ${lastDayMonth} ${lastDayYear}`
+                    : `${firstDayDate} - ${lastDayDate} ${lastDayMonth} ${firstDayYear}`;
+            case dateFormat.day:
+                return moment(date).format('DD MMMM YYYY');
+            default:
+                return;
         }
-    }, [formattedDate, periodType]);
+    }, [periodType, date]);
 
     return period;
 };

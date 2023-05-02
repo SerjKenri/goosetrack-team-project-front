@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
 import { validationSchema } from 'schemas/loginFormValidation';
+import { useTranslation } from 'react-i18next';
 
 import { ButtonDifference, Button } from '../../core/kit/Button';
 import { Input } from '../../core/kit/Input';
@@ -13,8 +14,11 @@ import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
+import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
+    const {t} = useTranslation();
+
     const dispatch = useDispatch();
     const onSubmit = (values, { resetForm }) => {
         dispatch(
@@ -47,12 +51,12 @@ export const LoginForm = () => {
                 <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
-                            <LoginFormTitle>Log in</LoginFormTitle>
+                            <LoginFormTitle>{t('loginPage.login')}</LoginFormTitle>
                             <Input
                                 name="email"
                                 type="email"
-                                labelTitle="Email"
-                                placeholder="Enter your email"
+                                labelTitle={t('loginPage.email')}
+                                placeholder={t('signUpPage.inputPlaceholderEmail')}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -80,8 +84,8 @@ export const LoginForm = () => {
                             <Input
                                 name="password"
                                 type="password"
-                                labelTitle="Password"
-                                placeholder="Enter your password"
+                                labelTitle={t('loginPage.password')}
+                                placeholder={t('signUpPage.inputPlaceholderPassword')}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -109,18 +113,14 @@ export const LoginForm = () => {
                             <Button
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-
                                 // disabled={!isValid}
-                                title="Log In"
+                                title={t('loginPage.login')}
                                 buttonStyle={{
-                                    backgroundColor: '#3e85f3',
-
                                     paddingLeft: '10px',
                                     width: '287px',
                                     height: '46px',
-                                    marginTop: '32px',
+                                    margin: '32px auto 0px',
                                 }}
-
                                 // textStyle
 
                                 iconName={iconNames.loginIcon}
@@ -129,8 +129,11 @@ export const LoginForm = () => {
                         </Form>
                         <AuthNavigate
                             route={ROUTING.REGISTER}
-                            content="Sign up"
+                            content={t('signUpPage.signUp')}
                         />
+                        <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
+                            {t('sendMailForgetPass.labelTitleName')}
+                        </NavToRestorePass>
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                             src={`${GooseLogIn}`}
@@ -202,4 +205,31 @@ const LoginImg = styled.img`
         bottom: 20px;
         display: block;
     }
+`;
+
+//////////////
+export const NavToRestorePass = styled(Link)`
+    ${({ theme }) => `
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        border-bottom: 1px solid ${theme.color.accentTextColor};
+        color: ${theme.color.accentTextColor};
+        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
+        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+        margin-top: 8px;
+    
+        &:hover,
+        :focus {
+            color: blue;
+            border-color: blue;
+        }
+    
+        @media (min-width: 768px) {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    `}
 `;

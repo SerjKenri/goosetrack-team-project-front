@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
 import gooseimg from '../../assets/images/goose-sidebar@2x.png';
 import { UserNav } from 'components/UserNav/UserNav';
+import { useTranslation } from 'react-i18next';
 
 export const SideBar = ({ onClick }) => {
+    const { t } = useTranslation()
+
     return (
         <Container>
             <SecondaryContainer>
@@ -21,7 +24,7 @@ export const SideBar = ({ onClick }) => {
                     </CloseButton>
                 </SideBarHeader>
                 <UserPanelContainer>
-                    <SecondaryTitle>User Panel</SecondaryTitle>
+                    <SecondaryTitle>{t('sidebar.userPanel')}</SecondaryTitle>
                     <UserNav />
                 </UserPanelContainer>
             </SecondaryContainer>
@@ -37,6 +40,7 @@ const Container = styled.div(({ theme }) => ({
     justifyContent: 'space-between',
     padding: '24px 20px',
     backgroundColor: theme.color.mainBackgroundColor,
+    boxShadow: 'rgba(136, 165, 191, 0.48) 4px 2px 16px',
     position: 'fixed',
     zIndex: 1,
 
@@ -67,6 +71,7 @@ const SecondaryContainer = styled.div(({ theme }) => ({
 
 const SideBarHeader = styled.div(({ theme }) => ({
     display: 'flex',
+    gap: '36px',
     width: 'max-content',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -139,7 +144,7 @@ const CloseButton = styled.button(({ theme }) => ({
     },
 
     '&:hover': {
-        color: 'red',
+        color: theme.color.hoverColor,
     },
 }));
 

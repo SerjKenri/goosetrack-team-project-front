@@ -12,7 +12,7 @@ export const CalendarToolbar = ({ handlePrevPeriod, handleNextPeriod }) => {
 
     const periodType = usePeriodModule();
     const date = new Date();
-    const startPeiodType = dateFormat.day;
+    const startPeiodType = dateFormat.month;
 
     const { currentDate } = useParams();
 
@@ -22,6 +22,7 @@ export const CalendarToolbar = ({ handlePrevPeriod, handleNextPeriod }) => {
 
         navigate({ pathname: pathnameArr.join('/') });
     };
+
     return (
         <ToolbarWrap>
             <PeriodPaginator

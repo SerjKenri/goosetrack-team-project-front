@@ -12,9 +12,7 @@ import { Formik } from 'formik';
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
 
-
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
-
 
 // const LangaguesBar = () => {
 //     const LANGAGUES = ['en', 'ua'];
@@ -72,7 +70,9 @@ export const RegisterForm = () => {
                     <SignUpFormWrap>
                         <FormContainer>
                             <Form onSubmit={handleSubmit} autoComplete="off">
-                                <SignUpFormTitle>Sign Up</SignUpFormTitle>
+                                <SignUpFormTitle>
+                                    {t('signUpPage.signUp')}
+                                </SignUpFormTitle>
                                 <SignUpLabel>
                                     <Input
                                         name="email"
@@ -122,8 +122,8 @@ export const RegisterForm = () => {
                                         inputStyle={{
                                             border:
                                                 touched.email && errors.email
-                                                ? '1px solid #E74A3B'
-                                                : '1px solid rgba(220, 227, 229, 0.6)',
+                                                    ? '1px solid #E74A3B'
+                                                    : '1px solid rgba(220, 227, 229, 0.6)',
 
                                             backgroundColor: '#ffff',
                                         }}
@@ -178,8 +178,11 @@ export const RegisterForm = () => {
                                 ></Button>
                             </Form>
 
-                            <AuthNavigate route={ROUTING.LOGIN} content="Log In" />
-                            
+                            <AuthNavigate
+                                route={ROUTING.LOGIN}
+                                content="Log In"
+                            />
+
                             {isDesktop && (
                                 <SignUpImg
                                     srcset={`${GooseRegister} 1x , ${GooseRegister2x} 2x`}
@@ -187,7 +190,6 @@ export const RegisterForm = () => {
                                     alt="goose"
                                 />
                             )}
-
                         </FormContainer>
                     </SignUpFormWrap>
                 )}

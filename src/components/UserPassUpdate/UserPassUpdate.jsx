@@ -8,11 +8,16 @@ import { changePass } from 'redux/operations';
 import { Input } from 'core/kit/Input';
 import { useTranslation } from 'react-i18next';
 import { userUpdPassSchema } from 'schemas/userPassUpdValidation';
+import { TextH2 } from 'core/kit/text';
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 export const ChangeUserPass = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const { isDesktop, isTablet, isMobile } = useMatchMedia();
+
 
     const onSubmit = (values, { resetForm }) => {
         dispatch(
@@ -46,16 +51,17 @@ export const ChangeUserPass = () => {
                     // <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
-                            <LoginFormTitle>
+                            <TextH2>
                                 {t('chengePassPage.labelTitleName')}
-                            </LoginFormTitle>
-                            <Input
+                            </TextH2>
+                            <FormInput
                                 name="currentPassword"
                                 type="password"
                                 labelTitle={t('chengePassPage.oldPassword')}
                                 placeholder={t(
                                     'chengePassPage.oldPassPlaceholder'
                                 )}
+
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -71,6 +77,10 @@ export const ChangeUserPass = () => {
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
                                 }}
+
+                                isMobile={isMobile}
+                                isDesktop={isDesktop}
+
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.currentPassword}
@@ -80,15 +90,18 @@ export const ChangeUserPass = () => {
                                         ? errors.currentPassword
                                         : ''
                                 }
+                                touched={touched}
+                                errors={errors}
                             />
 
-                            <Input
+                            <FormInput
                                 name="newPassword"
                                 type="password"
                                 labelTitle={t('chengePassPage.newPassword')}
                                 placeholder={t(
                                     'chengePassPage.newPassPlaceholder'
                                 )}
+
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -104,6 +117,10 @@ export const ChangeUserPass = () => {
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
                                 }}
+
+                                isMobile={isMobile}
+                                isDesktop={isDesktop}
+
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.newPassword}
@@ -112,14 +129,17 @@ export const ChangeUserPass = () => {
                                         ? errors.newPassword
                                         : ''
                                 }
+                                touched={touched}
+                                errors={errors}
                             />
-                            <Input
+                            <FormInput
                                 name="confirmPassword"
                                 type="password"
                                 labelTitle={t('chengePassPage.confNewPass')}
                                 placeholder={t(
                                     'chengePassPage.confPassPlaceholder'
                                 )}
+
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -135,6 +155,10 @@ export const ChangeUserPass = () => {
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
                                 }}
+
+                                isMobile={isMobile}
+                                isDesktop={isDesktop}
+
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.confirmPassword}
@@ -144,10 +168,13 @@ export const ChangeUserPass = () => {
                                         ? errors.confirmPassword
                                         : ''
                                 }
+                                touched={touched}
+                                errors={errors}
                             />
-                            <Button
+
+                            <SaveButton
                                 type="submit"
-                                differentStyles={ButtonDifference.primary}
+                                differentStyles={ButtonDifference.secondary}
                                 disabled={
                                     values.newPassword.length > 0 &&
                                     values.newPassword ===
@@ -155,19 +182,10 @@ export const ChangeUserPass = () => {
                                         ? false
                                         : true
                                 }
+                                isMobile={isMobile}
+                                isTablet={isTablet}
                                 title={t('chengePassPage.labelTitleName')}
-                                buttonStyle={{
-                                    backgroundColor: '#3e85f3',
-                                    width: '287px',
-                                    height: '46px',
-                                    marginTop: '32px',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto',
-                                }}
-                                textStyle={{
-                                    margin: '0',
-                                }}
-                            ></Button>
+                            />
                         </Form>
                         {/* <AuthNavigate
                             route={ROUTING.REGISTER}
@@ -192,6 +210,7 @@ const LoginFormContainer = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
 `;
 
 const Form = styled.form(({ theme }) => ({
@@ -210,22 +229,6 @@ const Form = styled.form(({ theme }) => ({
     },
 }));
 
-const LoginFormTitle = styled.h1`
-    ${({ theme }) => `
-    margin: auto;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 24px;
-        color: ${theme.color.accentTextColor};
-        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07)
-        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-bottom: 8px;
-        
-        @media (min-width: 768px) {
-            font-size:24px;
-        }`}
-`;
-
 const Container = styled.div(({ theme, isTablet, isDesktop }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -237,20 +240,52 @@ const Container = styled.div(({ theme, isTablet, isDesktop }) => ({
     paddingLeft: 'auto',
     paddingRight: 'auto',
     width: '335px',
-    height: '653px',
+    height: '501px',
     borderRadius: '16px',
-    [theme.media.between(
-        `${theme.breakpoints.m}px`,
-        `${theme.breakpoints.l}px`
-    )]: {
-        width: '704px',
-        height: '854px',
-        paddingBottom: '40px',
-    },
-    [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        width: '1087px',
-        height: '752px',
+
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        width: '480px',
+        height: '569px',
         paddingTop: '60px',
         paddingBottom: '60px',
     },
 }));
+
+const SaveButton = styled(Button).attrs(({ theme, isMobile, isTablet }) => ({
+    buttonStyle: {
+        width: isMobile ? '195px' : isTablet ? '262px' : '262px',
+        height: isMobile ? '46px' : isTablet ? '48px' : '48px',
+        borderRadius: '16px',
+        backgroundColor: theme.color.accentColor,
+        marginTop: '60px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+}))({});
+
+const FormInput = styled(Input).attrs(
+    ({ theme, isMobile, isDesktop, touched, errors }) => ({
+        labelTextStyle: {
+            fontSize: isMobile ? '12px' : '14px',
+            lineHeight: isMobile ? '1.16' : '1.3',
+            fontWeight: '400',
+            marginBottom: '2px',
+            marginTop: '24px',
+        },
+        inputStyle: {
+            position: 'relative',
+            outline: 'none',
+            backgroundColor: theme.color.calendarCellColor,
+            width: isMobile ? '299px' : '354px',
+            height: isMobile ? '42px' : '46px',
+            fontSize: isMobile ? '14px' : '16px',
+            lineHeight: isMobile ? '1.3' : '1.125',
+            color: theme.color.mainTextColor,
+            marginLeft: isDesktop ? '-13%' : '0',
+            border:
+                touched.email && errors.email
+                    ? '1px solid' + theme.color.taskHighColor
+                    : '1px solid' + theme.color.modalBorder,
+        },
+    })
+)({});

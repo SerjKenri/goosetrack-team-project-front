@@ -12,17 +12,32 @@ import PrivateRoute from './authRoutes/PrivateRoute';
 import { ROUTING } from 'core/utils/constantsRouting';
 import { Suspense } from 'react';
 import ChangePassPage from 'pages/ChangePassPage/ChangeUserPassPage';
+import { StartPage } from 'pages/StartPage/StartPage';
+
+import VerifyPage from 'pages/VerifyPage/VerifyPage';
+
 import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
+
 import ResetPassPage from 'pages/ResetPassPage/ResetPassPage';
+import ResendVerifyEmailPage from 'pages/ResendVerifyEmailPage/ResendVerifyEmailPage';
+
 
 export const App = () => {
     return (
         <Suspense>
             <Routes>
                 <Route path="" element={<PublicRoute />}>
-                    <Route index element={<LoginPage />} />
+                    <Route index element={<StartPage />} />
                     <Route path={ROUTING.LOGIN} element={<LoginPage />} />
                     <Route path={ROUTING.REGISTER} element={<RegisterPage />} />
+
+                    <Route path={ROUTING.VERIFY} element={<VerifyPage />} />
+
+                    <Route
+                        path={ROUTING.RESEND_VERIFY}
+                        element={<ResendVerifyEmailPage />}
+                    />
+
                     <Route
                         path={ROUTING.RESTORE_PASS}
                         element={<UserForgotPassPage />}

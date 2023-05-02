@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
 import { validationSchema } from 'schemas/loginFormValidation';
+import { useTranslation } from 'react-i18next';
 
 import { ButtonDifference, Button } from '../../core/kit/Button';
 import { Input } from '../../core/kit/Input';
@@ -16,6 +17,8 @@ import { ROUTING } from 'core/utils/constantsRouting';
 import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
+    const {t} = useTranslation();
+
     const dispatch = useDispatch();
     const onSubmit = (values, { resetForm }) => {
         dispatch(
@@ -48,12 +51,12 @@ export const LoginForm = () => {
                 <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
-                            <LoginFormTitle>Log in</LoginFormTitle>
+                            <LoginFormTitle>{t('loginPage.login')}</LoginFormTitle>
                             <Input
                                 name="email"
                                 type="email"
-                                labelTitle="Email"
-                                placeholder="Enter your email"
+                                labelTitle={t('loginPage.email')}
+                                placeholder={t('signUpPage.inputPlaceholderEmail')}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -81,8 +84,8 @@ export const LoginForm = () => {
                             <Input
                                 name="password"
                                 type="password"
-                                labelTitle="Password"
-                                placeholder="Enter your password"
+                                labelTitle={t('loginPage.password')}
+                                placeholder={t('signUpPage.inputPlaceholderPassword')}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -111,7 +114,7 @@ export const LoginForm = () => {
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
                                 // disabled={!isValid}
-                                title="Log In"
+                                title={t('loginPage.login')}
                                 buttonStyle={{
                                     paddingLeft: '10px',
                                     width: '287px',
@@ -126,10 +129,10 @@ export const LoginForm = () => {
                         </Form>
                         <AuthNavigate
                             route={ROUTING.REGISTER}
-                            content="Sign up"
+                            content={t('signUpPage.signUp')}
                         />
                         <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
-                            Forgot password?
+                            {t('sendMailForgetPass.labelTitleName')}
                         </NavToRestorePass>
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}

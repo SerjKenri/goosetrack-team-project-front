@@ -1,10 +1,13 @@
 import { iconNames } from 'assets/icons/iconNames';
 import { Icon } from 'core/kit/Icon';
 import { NavLink } from 'react-router-dom';
-
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
 
 export const UserNav = () => {
+    const { t } = useTranslation()
+
     return (
         <UserNavContainer>
             <LinkWrapper>
@@ -12,7 +15,7 @@ export const UserNav = () => {
                     <IconWrapper>
                         <Icon name={iconNames.user} size={'100%'} />
                     </IconWrapper>
-                    My account
+                    {t('sidebar.userNav.myAcc')}
                 </NavLinkStyled>
             </LinkWrapper>
             <LinkWrapper>
@@ -20,7 +23,7 @@ export const UserNav = () => {
                     <IconWrapper>
                         <Icon name={iconNames.calendar} size={'100%'} />
                     </IconWrapper>
-                    Calendar
+                    {t('sidebar.userNav.calendar')}
                 </NavLinkStyled>
             </LinkWrapper>
         </UserNavContainer>

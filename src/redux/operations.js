@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -28,6 +28,37 @@ export const signUpUser = createAsyncThunk(
         } catch (e) {
             alert(e.message);
             return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const verifyUser = createAsyncThunk(
+    'auth/verify',
+    async (verificationToken, thunkAPI) => {
+        try {
+            const resp = await axios.get(`/auth/verify/${verificationToken}`);
+            return resp;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
+export const sendMailForVerify = createAsyncThunk(
+    'auth/resend-verify',
+    async (userMailData, thunkAPI) => {
+        try {
+            const resp = await axios.post('/auth/verify', userMailData);
+
+            // const resp = await axios.post(
+            //     'http://localhost:4000/api/auth/verify',
+            //     userMailData
+            // );
+
+            alert('Email is successfully send');
+            return resp.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );

@@ -1,7 +1,8 @@
 {
     "startPage": {
         "calendarView": {
-            "title": "calendar view",
+            "title": "calendar",
+            "subTitle": "view",
             "description": "GooseTrack's Calendar view provides a comprehensive overview of your schedule, displaying all your tasks, events, and appointments in a visually appealing and intuitive layout."
         },
         "sidebar": {
@@ -10,17 +11,17 @@
         },
         "allInOne": {
             "title": "all in one",
+            "one": "one",
             "description": "GooseTrack is an all-in-one productivity tool that helps you stay on top of your tasks, events, and deadlines. Say goodbye to scattered to-do lists and hello to streamlined productivity with GooseTrack."
         },
-        "heroTitle": "GooseTrack",
         "subtitle": "Reviews",
         "login": "Log in",
         "signUp": "Sign up"
     },
     "loginPage": {
-        "login": "log in",
-        "email": "email",
-        "password": "password",
+        "login": "Log in",
+        "email": "Email",
+        "password": "Password",
         "signUp": "Sign up",
         "description": "Quickly come in and write down your tasks for the day!"
     },
@@ -53,6 +54,19 @@
         "errorPassword": "Please, enter stronger passwod",
         "minLengthPass": "Password should contain more then 5 characters"
     },
+    "VerifySuccessPage": {
+        "labelTitleName": "Email is verified!",
+        "description": "Congratulations! Your email has been successfully verified! Please login to continue using our application.",
+        "btnTitle": "Go to Login"
+    },
+    "ResendVerifyEmailForm": {
+        "labelTitleName": "You didn't pass email verification",
+        "textInstruction": "Type in the email you used to register in GooseTrack.",
+        "text": "We'll send you a link to finish you verification.",
+        "labelTitleEmail": "Email",
+        "inputPlaceholderEmail": "Enter your email",
+        "sendEmail": "Send email"
+    },
     "sendMailForgetPass": {
         "labelTitleName": "Forgot your password?",
         "textInstruction": "Type in the email you used to register in GooseTrack.",
@@ -64,18 +78,43 @@
     "sidebar": {
         "logoTitle": "GooseTrack",
         "userPanel": "User Panel",
-        "myAcc": "My account",
-        "calendar": "Calendar",
+        "userNav": {
+            "myAcc": "My account",
+            "calendar": "Calendar"
+        },
         "logout": "Log out"
+    },
+    "header": {
+        "pageTitleFirst": "User Profile",
+        "pageTitleSecond": "Calendar",
+        "motivateFirst": "Let go",
+        "motivateSecond": " of the past and focus on the present!"
     },
     "userProfilePage": {
         "title": "User Profile",
         "userName": "User Name",
+        "userNamePlaceholder": "Enter your name",
         "phone": "Phone",
+        "userPhonePlaceholder": "Enter your phone",
         "birthday": "Birthday",
+        "userBirthdayPlaceholder": "Enter your birthday",
         "telegram": "Telegram",
+        "userTelegramPlaceholder": "Enter your telegram",
         "email": "Email",
-        "saveChanges": "Save changes"
+        "userEmailPlaceholder": "Enter your email",
+        "saveChanges": "Save changes",
+        "changePassword": "Do you want to change password?",
+        "modal": {
+            "titleButton": "OK",
+            "description": " In connection with the change of e-mail, it is necessary to verify the new address. Our letter has already been sent to your new email address."
+        },
+        "validation": {
+            "validName": "The max length of the username is 16 characters",
+            "validEmail": "The mail was entered incorrectly",
+            "validPhone": "The phone number must be in the format 380xxxxxxxxx",
+            "validTelegram": "The max length of the Telegram username is 16 characters",
+            "required": " This field is required"
+        }
     },
     "calendarPage": {
         "title": "Calendar",

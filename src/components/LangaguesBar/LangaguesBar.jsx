@@ -58,7 +58,7 @@ const StyledButton = styled.button`
     font-weight: 700;
     border-color: #3498db;
     color: rgb(255, 255, 255);
-    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+    box-shadow: 0 0 15px 15px #3498db inset, 0 0 0 0 #3498db;
     -webkit-transition: all 150ms ease-in-out;
     transition: all 150ms ease-in-out;
     font-family: Georgia;
@@ -66,7 +66,7 @@ const StyledButton = styled.button`
     :focus,
     :active {
         color: #3498db;
-        box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+        box-shadow: 0 0 5px 0 #3498db inset, 0 0 5px 2px #3498db;
     }
 `;
 

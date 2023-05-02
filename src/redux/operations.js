@@ -204,7 +204,7 @@ export const resetNewPass = createAsyncThunk(
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchAll',
     async (getParams, thunkAPI) => {
-        // console.log('getParams=>', getParams);
+        console.log('getParams=>', getParams);
         try {
             const response = await axios.get('/tasks', { params: getParams });
             console.log('response=>>', response);

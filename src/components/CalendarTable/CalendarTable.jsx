@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
-import { selectTasks } from 'redux/tasks/tasks.selectors';
+// import { useSelector } from 'react-redux';
+// import { selectTasks } from 'redux/tasks/tasks.selectors';
 
-export const CalendarTable = ({startDay, today}) => {
+export const CalendarTable = ({ startDay, today, tasks }) => {
     let day = moment(startDay).startOf('month').startOf('isoweek');
     const endWeek = moment().endOf('month').endOf('isoweek');
-    
-    const calendarDays=[];
-    
+
+    const calendarDays = [];
+
     while (day <= endWeek) {
         for (let i = 0; i < 7; i++) {
             calendarDays.push(moment(day));
@@ -17,17 +17,16 @@ export const CalendarTable = ({startDay, today}) => {
         }
     }
 
-    const currentDay = (day) => {
+    const currentDay = day => {
         return moment().isSame(day, 'day');
     };
 
-    const isSelectedMonth = (month) => {
+    const isSelectedMonth = month => {
         const today = moment();
         return today.isSame(month, 'month');
     };
-    
-    const tasks = useSelector(selectTasks);
 
+    // const tasks = useSelector(selectTasks);
 
     const isMobileView = window.innerWidth < 768;
 
@@ -36,46 +35,50 @@ export const CalendarTable = ({startDay, today}) => {
             <DayList>
                 {[...Array(7)].map((_, idx) => (
                     <DayItem key={idx}>
-                        <CalendarDay >
+                        <CalendarDay>
                             {isMobileView
                                 ? moment()
-                                    .day(idx + 1)
-                                    .format('ddd')
-                                    .slice(0, 1)
+                                      .day(idx + 1)
+                                      .format('ddd')
+                                      .slice(0, 1)
                                 : moment()
-                                    .day(idx + 1)
-                                    .format('ddd')
-                                    .toUpperCase()}
+                                      .day(idx + 1)
+                                      .format('ddd')
+                                      .toUpperCase()}
                         </CalendarDay>
                     </DayItem>
                 ))}
             </DayList>
             <CalendarWrapper>
-                {calendarDays.map((day) => (
-                    <CalendarLink
-                        to={`/user/calendar/day/${day.format('YYYY-MM-DD')}`}
-                        key={day.format('DD-MM-YY')}
-                    >
-                        <CalendarCell 
-                            isSelectedMonth={isSelectedMonth(day)} 
+                {calendarDays.map(day => {
+                    console.log(tasks);
+                    const dayTasks = tasks.filter(
+                        task => task.date === day.format('YYYY-MM-DD')
+                    );
+                    console.log(dayTasks, day.format('YYYY-MM-DD'));
+                    return (
+                        <CalendarLink
+                            to={`/calendar/day/${day.format('YYYY-MM-DD')}`}
+                            key={day.format('DD-MM-YY')}
                         >
-                            <CalendarDate currentDay={currentDay(day)}>
-                                {day.format('D')}
-                            </CalendarDate>
-                            <TaskList>
-                                {tasks.map(task => 
-                                    <li key={task._id}>
-                                        task={task}
-                                    </li>)}
-
-                            </TaskList>
-                        </CalendarCell>
-                    </CalendarLink>
-                ))}
-                
+                            <CalendarCell
+                                isSelectedMonth={isSelectedMonth(day)}
+                            >
+                                <CalendarDate currentDay={currentDay(day)}>
+                                    {day.format('D')}
+                                    <p>{dayTasks.title}</p>
+                                </CalendarDate>
+                                {/* <TaskList>
+                                {tasks.map(task => (
+                                    <li key={task._id}>task={task}</li>
+                                ))}
+                            </TaskList> */}
+                            </CalendarCell>
+                        </CalendarLink>
+                    );
+                })}
             </CalendarWrapper>
         </CalendarContainer>
-        
     );
 };
 
@@ -91,7 +94,7 @@ const CalendarContainer = styled.div`
         padding-bottom: 32px;
         padding-left: 32px;
         padding-right: 32px;
-}
+    }
 `;
 
 const DayList = styled.ul`
@@ -115,17 +118,17 @@ const DayItem = styled.li`
     align-items: center;
     gap: 4px;
     color: #616161;
-    
+
     &:nth-child(n + 6) {
-        color: #3E85F3;
-    };
+        color: #3e85f3;
+    }
 `;
 
 const CalendarWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    
-    background: #FFFFFF;
+
+    background: #ffffff;
     border: 1px solid rgba(220, 227, 229, 0.8);
     border-radius: 8px;
     font-style: normal;
@@ -144,11 +147,11 @@ const CalendarDay = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 1.125;
-    text-transform: uppercase;    
+    text-transform: uppercase;
 `;
 
 const CalendarCell = styled.div`
-    display:flex;
+    display: flex;
     justify-content: flex-end;
     min-width: 100%;
     min-height: 94px;
@@ -161,11 +164,12 @@ const CalendarDate = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width:22px;
-    height:22px;
-    color: ${({ currentDay }) => currentDay ? 'white' : 'black'};
-    border-radius: ${({ currentDay }) => currentDay ? '6px' : 'none'};
-    background-color: ${({ currentDay }) => currentDay ? 'blue' : 'transparent'};
+    width: 22px;
+    height: 22px;
+    color: ${({ currentDay }) => (currentDay ? 'white' : 'black')};
+    border-radius: ${({ currentDay }) => (currentDay ? '6px' : 'none')};
+    background-color: ${({ currentDay }) =>
+        currentDay ? 'blue' : 'transparent'};
 `;
 
 export const TaskList = styled.ul`
@@ -176,4 +180,3 @@ export const TaskList = styled.ul`
     padding-left: 4px;
     gap: 2px;
 `;
-

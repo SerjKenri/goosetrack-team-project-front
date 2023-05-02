@@ -2,13 +2,23 @@ import TasksColumnsList from 'components/TasksColumnsList/TasksColumnsList';
 import { NavLink, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { selectTasks } from 'redux/tasks/tasks.selectors';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchTasks } from 'redux/operations';
 
 export const ChoosedDay = () => {
+    const tasks = useSelector(selectTasks);
+    const dispatch = useDispatch();
     const { currentDay } = useParams();
-    console.log(currentDay);
+
     const date = currentDay.slice(8, 10);
+    const currentYear = currentDay.slice(0, 4);
+    const currentMonth = currentDay.slice(5, 7);
     const chooseDay = moment().day(date - 3);
     const chooseWeek = [];
+
     let day = chooseDay;
     while (day <= chooseDay) {
         for (let i = chooseDay; i < chooseDay + 7; i++) {
@@ -16,6 +26,12 @@ export const ChoosedDay = () => {
             day = moment(day).add(1, 'day');
         }
     }
+
+    useEffect(() => {
+        dispatch(fetchTasks({ year: currentYear, month: currentMonth }));
+    }, [currentMonth, currentYear, dispatch]);
+
+    const currentTasks = tasks.filter(task => task.date === currentDay);
 
     const isMobileView = window.innerWidth < 768;
     return (
@@ -50,7 +66,7 @@ export const ChoosedDay = () => {
                     })}
                 </CalendarWrapper>
             </CalendarContainer>
-            <TasksColumnsList />
+            <TasksColumnsList tasks={currentTasks} />
         </>
     );
 };

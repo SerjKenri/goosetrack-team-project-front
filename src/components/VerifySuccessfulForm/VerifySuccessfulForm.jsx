@@ -5,7 +5,7 @@ import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 import { ROUTING } from 'core/utils/constantsRouting';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { verifyUser } from 'redux/operations';
 import { Button, ButtonDifference } from 'core/kit/Button';
 

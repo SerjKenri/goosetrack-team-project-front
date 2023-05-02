@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { reorder, reorderedTasksMap } from './utils';
 import TasksColumn from 'components/TasksColumn/TasksColumn';
-import { useDispatch } from 'react-redux';
-import { updateTask } from 'redux/operations';
+// import { useDispatch } from 'react-redux';
+// import { updateTask } from 'redux/operations';
 // TasksColumnsList = board
 const TasksColumnsList = ({
     isCombineEnabled,
@@ -18,7 +18,7 @@ const TasksColumnsList = ({
     const [columns, setColumns] = useState([]);
     const [ordered, setOrdered] = useState([]);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const height = window.innerHeight * 0.7;
     // console.log(columns);
     useEffect(() => {

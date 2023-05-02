@@ -207,13 +207,13 @@ const LoginFormTitle = styled.h1`
         }`}
 `;
 
-const LoginFormInfoTextBold = styled.p`
-    font-weight: 600;
-    font-size: 14px;
-`;
-const LoginFormInfoText = styled.p`
-    font-size: 14px;
-`;
+// const LoginFormInfoTextBold = styled.p`
+//     font-weight: 600;
+//     font-size: 14px;
+// `;
+// const LoginFormInfoText = styled.p`
+//     font-size: 14px;
+// `;
 
 const LoginImg = styled.img`
     display: none;

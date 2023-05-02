@@ -57,7 +57,7 @@ const StyledButton = styled.button`
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     border-color: #3498db;
-    color: rgb(255, 255, 255);
+    color: ${props => props.theme.color.iconColor};
     box-shadow: 0 0 15px 15px #3498db inset, 0 0 0 0 #3498db;
     -webkit-transition: all 150ms ease-in-out;
     transition: all 150ms ease-in-out;

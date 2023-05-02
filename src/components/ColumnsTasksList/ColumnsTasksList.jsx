@@ -4,12 +4,13 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskColumnCard from 'components/TaskColumnCard/TaskColumnCard';
 
 const InnerQuoteList = React.memo(function InnerQuoteList({ tasks }) {
-console.log(tasks);
+// console.log(tasks);
+    
     return tasks.map((task, index) => (
-        <Draggable key={task._id} draggableId={task._id} index={index}>
+        <Draggable key={task?._id} draggableId={task?._id} index={task.position}>
             {(dragProvided, dragSnapshot) => (
                 <TaskColumnCard
-                    key={task._id}
+                    key={task?._id}
                     task={task}
                     isDragging={dragSnapshot.isDragging}
                     isGroupedOver={Boolean(dragSnapshot.combineTargetFor)}

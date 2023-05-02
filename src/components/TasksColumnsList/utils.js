@@ -12,7 +12,7 @@ export const reorder = (list, startIndex, endIndex) => {
 };
 
 export const reorderedTasksMap = ({ tasksMap, source, destination }) => {
-
+console.log('tasksMap', tasksMap);
     const current = [...tasksMap[source.droppableId]];
     const next = [...tasksMap[destination.droppableId]];
     const target = current[source.index];

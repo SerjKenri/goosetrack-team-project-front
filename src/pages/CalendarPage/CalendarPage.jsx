@@ -8,16 +8,15 @@ import { selectTasks } from "redux/tasks/tasks.selectors";
 const CalendarPage = () => {
     const dispatch = useDispatch()
     const tasks = useSelector(selectTasks)
-    const columns = useSelector(state=>state.columns.columns.items)
     useEffect(() => {
         dispatch(fetchTasks({ year: '2023', month: '05' }));
-        dispatch(fetchColumns());
+
     }, [dispatch]);
 
-    return columns.length > 0 && tasks.length > 0 && (
+    return tasks  && (
         <>
             <TasksColumnsList
-                initialColumns={columns}
+
                 tasks={tasks}
                 withScrollableColumns
             />

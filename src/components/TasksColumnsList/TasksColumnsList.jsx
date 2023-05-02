@@ -6,57 +6,67 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { reorder, reorderedTasksMap } from './utils';
 import TasksColumn from 'components/TasksColumn/TasksColumn';
 import { useDispatch } from 'react-redux';
-import { updateColumns, updateTask } from 'redux/operations';
+import { fetchColumns, updateColumns, updateTask } from 'redux/operations';
+import { useSelector } from 'react-redux';
 
 // TasksColumnsList = board
 const TasksColumnsList = ({
     isCombineEnabled,
     tasks,
-    initialColumns,
     useClone,
     containerHeight,
     withScrollableColumns,
 }) => {
     const [columns, setColumns] = useState(null);
     const [ordered, setOrdered] = useState([]);
-    // console.log('columns', columns);
-    // console.log('ordered', ordered);
+    const [isReadyRender, setIsreadyRender] = useState(false);
     const dispatch = useDispatch();
     const height = window.innerHeight * 0.7;
-    // console.log(columns);
+    const initialColumns = useSelector(state => state.columns.columns.items);
+
     useEffect(() => {
-        // const uniqColumns = tasks.map(task => task.category);
-        // const defaultColumns = ['toDo', 'inProgress', 'done'];
+        dispatch(fetchColumns());
+        // console.log(isReadyRender);
+    }, [dispatch]);
 
-        // const allColumns = [...defaultColumns, ...uniqColumns].filter(
-        //     (task, i, array) => array.indexOf(task) === i
-        // );
+    useEffect(() => {
+        console.log('hello');
 
-        const columns = {};
-        initialColumns
+        const columns = initialColumns
             .map(column => column.columnName)
-            .forEach(col => {
-                columns[col] = [];
-            });
+            .reduce((acc, col) => {
+                acc[col] = [];
+                return acc;
+            }, {});
 
         tasks.forEach(task => {
-            columns[task.category].push(task);
-        });
+            const columnName = initialColumns.find(
+                column => column?._id === task.columnId
+            )?.columnName;
 
+            if (columnName) {
+                columns[columnName].push(task);
+            }
+        });
+        // console.log(ordered);
         function reorderArray(arr) {
             const reorderedArr = new Array(arr.length);
             for (let i = 0; i < arr.length; i++) {
-                reorderedArr[arr[i].position - 1] = arr[i];
+                reorderedArr[arr[i].position] = arr[i];
             }
             // console.log('reorderedArr', reorderedArr);
             return reorderedArr;
         }
         setColumns(columns);
         setOrdered([...reorderArray(initialColumns)]); // set uniq columns
-    }, []);
+        console.log('there');
+        setIsreadyRender(true);
+    }, [initialColumns, tasks, isReadyRender]);
 
     const onDragEnd = result => {
-console.log(columns);
+        console.log('start');
+
+        setIsreadyRender(false);
         const columnDestinationId = ordered.filter(
             el => el.columnName === result.destination.droppableId
         )[0]?._id;
@@ -110,11 +120,11 @@ console.log(columns);
                     operationType: 'replaceColumn',
                     source: {
                         id: result.draggableId,
-                        position: result.source.index + 1,
+                        position: result.source.index,
                     },
                     destination: {
                         id: taskToReplace._id,
-                        position: result.destination.index + 1,
+                        position: result.destination.index,
                     },
                 })
             );
@@ -136,11 +146,11 @@ console.log(columns);
                     _id: sourceId,
                     source: {
                         id: sourceId,
-                        position: result.source.index + 1,
+                        position: result.source.index,
                     },
                     destination: {
                         id: destinationId,
-                        position: result.destination.index + 1,
+                        position: result.destination.index,
                     },
                 })
             );
@@ -151,6 +161,7 @@ console.log(columns);
             });
 
             setColumns(data.tasksMap);
+            setIsreadyRender(true)
             return;
         }
 
@@ -167,12 +178,12 @@ console.log(columns);
                 _id: sourceId,
                 source: {
                     id: sourceId,
-                    position: result.source.index + 1,
+                    position: result.source.index,
                     columnId: columnSourceId,
                 },
                 destination: {
                     id: destinationId,
-                    position: result.destination.index + 1,
+                    position: result.destination.index,
                     columnId: columnDestinationId,
                 },
             })
@@ -185,11 +196,12 @@ console.log(columns);
         });
 
         setColumns(data.tasksMap);
+        console.log('finish');
+        setIsreadyRender(true);
     };
 
     return (
-        ordered.length > 0 &&
-        columns && (
+        isReadyRender && (
             <>
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable
@@ -215,12 +227,14 @@ console.log(columns);
                                     // console.log('column', column);
                                     return (
                                         <TasksColumn
-                                            key={column._id}
+                                            key={column?._id}
                                             index={index}
-                                            columnId={column._id}
+                                            columnId={column?._id}
                                             title={column.columnName}
-                                            tasks={[...columns[column.columnName]].sort((a, b) => {
-                                                return a.position - b.position
+                                            tasks={columns[
+                                                column.columnName
+                                            ].sort((a, b) => {
+                                                return a.position - b.position;
                                             })}
                                             isScrollable={withScrollableColumns}
                                             isCombineEnabled={isCombineEnabled}

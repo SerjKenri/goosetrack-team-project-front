@@ -18,6 +18,7 @@ const TasksColumn = props => {
         setIsShow(false);
     };
 // console.log('props',props);
+    // index here
     return (
         <Draggable draggableId={props.columnId} index={index}>
             {(provided, snapshot) => (

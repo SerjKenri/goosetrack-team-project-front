@@ -1,6 +1,7 @@
 import { iconNames } from 'assets/icons/iconNames';
 import { TaskModal } from 'components/TaskModal/TaskModal';
 import { Chip } from 'core/kit/Chip';
+import { Icon } from 'core/kit/Icon';
 import { IconButton } from 'core/kit/IconButton';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -49,7 +50,11 @@ function TaskColumnCard({
                 <Text>{task.title}</Text>
                 <GroupsWrapper>
                     <InfoGroup>
-                        <Image src={userURL} alt="user avatar" />
+                        {userURL ? (
+                            <Image src={userURL} alt="user avatar" />
+                        ) : (
+                            <Icon size={30} name={iconNames.avatar} />
+                        )}
                         <Chip priority={task.priority} />
                     </InfoGroup>
                     <ButtonGroup>

@@ -56,6 +56,14 @@ const TasksColumnsList = ({
     }, []);
 
     const onDragEnd = result => {
+console.log(columns);
+        const columnDestinationId = ordered.filter(
+            el => el.columnName === result.destination.droppableId
+        )[0]?._id;
+        const columnSourceId = ordered.filter(
+            el => el.columnName === result.source.droppableId
+        )[0]?._id;
+
         if (result.combine) {
             if (result.type === 'COLUMN') {
                 const shallow = [...ordered];
@@ -125,6 +133,7 @@ const TasksColumnsList = ({
             dispatch(
                 updateTask({
                     operationType: 'replaceTask',
+                    _id: sourceId,
                     source: {
                         id: sourceId,
                         position: result.source.index + 1,
@@ -155,13 +164,16 @@ const TasksColumnsList = ({
         dispatch(
             updateTask({
                 operationType: 'replaceColumnsTask',
+                _id: sourceId,
                 source: {
                     id: sourceId,
                     position: result.source.index + 1,
+                    columnId: columnSourceId,
                 },
                 destination: {
                     id: destinationId,
                     position: result.destination.index + 1,
+                    columnId: columnDestinationId,
                 },
             })
         );
@@ -207,7 +219,9 @@ const TasksColumnsList = ({
                                             index={index}
                                             columnId={column._id}
                                             title={column.columnName}
-                                            tasks={columns[column.columnName]}
+                                            tasks={[...columns[column.columnName]].sort((a, b) => {
+                                                return a.position - b.position
+                                            })}
                                             isScrollable={withScrollableColumns}
                                             isCombineEnabled={isCombineEnabled}
                                             useClone={useClone}

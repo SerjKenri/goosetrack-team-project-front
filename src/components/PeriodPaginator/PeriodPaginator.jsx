@@ -35,7 +35,7 @@ const PeriodPaginator = ({ periodType, date, setDate }) => {
 
 PeriodPaginator.propTypes = {
     periodType: propTypes.oneOf(['day', 'week', 'month', 'year']).isRequired,
-    date: propTypes.instanceOf(Date).isRequired,
+    date: propTypes.string.isRequired,
     setDate: propTypes.func.isRequired,
 };
 

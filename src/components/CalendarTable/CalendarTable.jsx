@@ -1,10 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
-import { selectTasks } from 'redux/tasks/tasks.selectors';
+// import { useSelector } from 'react-redux';
+// import { selectTasks } from 'redux/tasks/tasks.selectors';
 
-export const CalendarTable = ({ startDay, today }) => {
+
+export const CalendarTable = ({ startDay, today, tasks }) => {
+
     let day = moment(startDay).startOf('month').startOf('isoweek');
     const endWeek = moment().endOf('month').endOf('isoweek');
 
@@ -26,7 +28,9 @@ export const CalendarTable = ({ startDay, today }) => {
         return today.isSame(month, 'month');
     };
 
-    const tasks = useSelector(selectTasks);
+
+    // const tasks = useSelector(selectTasks);
+
 
     const isMobileView = window.innerWidth < 768;
 
@@ -50,23 +54,35 @@ export const CalendarTable = ({ startDay, today }) => {
                 ))}
             </DayList>
             <CalendarWrapper>
-                {calendarDays.map(day => (
-                    <CalendarLink
-                        to={`/user/calendar/day/${day.format('YYYY-MM-DD')}`}
-                        key={day.format('DD-MM-YY')}
-                    >
-                        <CalendarCell isSelectedMonth={isSelectedMonth(day)}>
-                            <CalendarDate currentDay={currentDay(day)}>
-                                {day.format('D')}
-                            </CalendarDate>
-                            <TaskList>
+
+                {calendarDays.map(day => {
+                    console.log(tasks);
+                    const dayTasks = tasks.filter(
+                        task => task.date === day.format('YYYY-MM-DD')
+                    );
+                    console.log(dayTasks, day.format('YYYY-MM-DD'));
+                    return (
+                        <CalendarLink
+                            to={`/calendar/day/${day.format('YYYY-MM-DD')}`}
+                            key={day.format('DD-MM-YY')}
+                        >
+                            <CalendarCell
+                                isSelectedMonth={isSelectedMonth(day)}
+                            >
+                                <CalendarDate currentDay={currentDay(day)}>
+                                    {day.format('D')}
+                                    <p>{dayTasks.title}</p>
+                                </CalendarDate>
+                                {/* <TaskList>
                                 {tasks.map(task => (
                                     <li key={task._id}>task={task}</li>
                                 ))}
-                            </TaskList>
-                        </CalendarCell>
-                    </CalendarLink>
-                ))}
+                            </TaskList> */}
+                            </CalendarCell>
+                        </CalendarLink>
+                    );
+                })}
+
             </CalendarWrapper>
         </CalendarContainer>
     );

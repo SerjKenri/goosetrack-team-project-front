@@ -71,6 +71,7 @@ const SecondaryContainer = styled.div(({ theme }) => ({
 
 const SideBarHeader = styled.div(({ theme }) => ({
     display: 'flex',
+    gap: '36px',
     width: 'max-content',
     justifyContent: 'space-between',
     alignItems: 'center',

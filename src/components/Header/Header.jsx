@@ -7,15 +7,22 @@ import { ThemeToggler } from 'components/ThemeToggler/ThemeToggler';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LangaguesBar } from 'components/LangaguesBar/LangaguesBar';
+import { useSelector } from 'react-redux';
+import { selectTasks } from 'redux/tasks/tasks.selectors';
 
 export const Header = ({ onClick }) => {
     const location = useLocation();
     const { t } = useTranslation();
 
+    const tasks = useSelector(selectTasks);
+
     const title =
         location.pathname === '/account'
             ? `${t('header.pageTitleFirst')}`
             : `${t('header.pageTitleSecond')}`;
+    
+
+    const motivation = (location.pathname.startsWith('/calendar/day') && tasks.length > 0) ? true : false
 
     return (
         <Container>
@@ -26,10 +33,10 @@ export const Header = ({ onClick }) => {
                 <Image src={gooseimg} alt="goose-motivate" />
                 <TextContainer>
                     <Title>{title}</Title>
-                    <Text>
+                    {motivation && <Text>
                         <StyledText>{t('header.motivateFirst')}</StyledText>
                         {t('header.motivateSecond')}
-                    </Text>
+                    </Text>}
                 </TextContainer>
             </LeftContainer>
             <RightContainer>

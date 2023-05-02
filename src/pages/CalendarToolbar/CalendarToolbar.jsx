@@ -4,15 +4,18 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { PeriodPaginator } from 'components/PeriodPaginator/PeriodPaginator';
 import { PeriodTypeSelect } from 'components/PeriodTypeSelect/PeriodTypeSelect';
 import { usePeriodModule } from 'core/hooks/usePeriodModule';
+import { dateFormat } from 'core/hooks/usePeriodTitle';
 
 export const CalendarToolbar = ({ handlePrevPeriod, handleNextPeriod }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
     const periodType = usePeriodModule();
+    const date = new Date();
+    const startPeiodType = dateFormat.day;
 
     const { currentDate } = useParams();
-    console.log(currentDate);
+
     const setDate = date => {
         const pathnameArr = location.pathname.split('/');
         pathnameArr[pathnameArr.length - 1] = date;
@@ -22,8 +25,8 @@ export const CalendarToolbar = ({ handlePrevPeriod, handleNextPeriod }) => {
     return (
         <ToolbarWrap>
             <PeriodPaginator
-                periodType={periodType}
-                date={currentDate}
+                periodType={periodType ? periodType : startPeiodType}
+                date={currentDate !== ':currentDate' ? currentDate : date}
                 setDate={setDate}
             />
             <PeriodTypeSelect />

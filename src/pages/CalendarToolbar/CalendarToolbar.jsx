@@ -11,8 +11,8 @@ export const CalendarToolbar = ({ handlePrevPeriod, handleNextPeriod }) => {
 
     const periodType = usePeriodModule();
 
-    const { curDate } = useParams();
-    console.log(curDate);
+    const { currentDate } = useParams();
+    console.log(currentDate);
     const setDate = date => {
         const pathnameArr = location.pathname.split('/');
         pathnameArr[pathnameArr.length - 1] = date;
@@ -23,7 +23,7 @@ export const CalendarToolbar = ({ handlePrevPeriod, handleNextPeriod }) => {
         <ToolbarWrap>
             <PeriodPaginator
                 periodType={periodType}
-                date={curDate}
+                date={currentDate}
                 setDate={setDate}
             />
             <PeriodTypeSelect />

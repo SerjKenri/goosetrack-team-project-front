@@ -9,7 +9,6 @@ const LangaguesBar = () => {
         <div>
             <Wrapper>
                 {LANGAGUES.map(langague => {
-                    console.log(langague);
                     return (
                         <li key={langague}>
                             <StyledButton

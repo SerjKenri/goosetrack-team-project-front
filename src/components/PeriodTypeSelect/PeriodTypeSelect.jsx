@@ -8,14 +8,16 @@ export const PeriodTypeSelect = () => {
         <PeriodTypeSelectWrap>
             <PeriodTypeSelectBtn
                 type="button"
-                onClick={() => navigate("/calendar/month/")}
+                onClick={() => navigate('/calendar/month/')}
             >
                 Month
             </PeriodTypeSelectBtn>
             <PeriodTypeSelectBtn
                 type="button"
-                onClick={() => navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)}
-                style={{borderRadius: '0px 8px 8px 0px'}}
+                onClick={() =>
+                    navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)
+                }
+                style={{ borderRadius: '0px 8px 8px 0px' }}
             >
                 Day
             </PeriodTypeSelectBtn>
@@ -29,7 +31,7 @@ const PeriodTypeSelectWrap = styled.div`
 `;
 
 const PeriodTypeSelectBtn = styled.button(({ theme }) => ({
-    width:'76px',
+    width: '76px',
     padding: '8px 16px',
     border: 'none',
     borderRadius: '8px 0px 0px 8px',
@@ -55,8 +57,8 @@ const PeriodTypeSelectBtn = styled.button(({ theme }) => ({
     },
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        width:'82px',
-        fontSize:'16px',
-        lineHeight:'1.12',
+        width: '82px',
+        fontSize: '16px',
+        lineHeight: '1.12',
     },
 }));

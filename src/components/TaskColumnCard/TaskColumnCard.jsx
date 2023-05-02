@@ -1,10 +1,10 @@
 import { iconNames } from 'assets/icons/iconNames';
 import { TaskModal } from 'components/TaskModal/TaskModal';
 import { Chip } from 'core/kit/Chip';
+import { Icon } from 'core/kit/Icon';
 import { IconButton } from 'core/kit/IconButton';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserAvatar } from 'redux/auth/auth.selectors';
 import { delTask } from 'redux/operations';
 import styled from 'styled-components';
@@ -20,9 +20,14 @@ function TaskColumnCard({
     const userURL = useSelector(selectUserAvatar);
     const [isShow, setIsShow] = useState(false);
     const dispatch = useDispatch();
+
     const handleDeleteTask = id => {
-        dispatch(delTask(id));
-        return;
+        console.log(id);
+        if (id) {
+            dispatch(delTask(id));
+
+            return;
+        }
     };
 
     const handleEditTask = () => {
@@ -35,7 +40,7 @@ function TaskColumnCard({
     return (
         <>
             <TaskContainer
-                href={task.id}
+                href={task._id}
                 isDragging={isDragging}
                 isGroupedOver={isGroupedOver}
                 isClone={isClone}
@@ -49,7 +54,11 @@ function TaskColumnCard({
                 <Text>{task.title}</Text>
                 <GroupsWrapper>
                     <InfoGroup>
-                        <Image src={userURL} alt="user avatar" />
+                        {userURL ? (
+                            <Image src={userURL} alt="user avatar" />
+                        ) : (
+                            <Icon size={'30'} name={iconNames.avatar} />
+                        )}
                         <Chip priority={task.priority} />
                     </InfoGroup>
                     <ButtonGroup>
@@ -67,6 +76,7 @@ function TaskColumnCard({
                 </GroupsWrapper>
             </TaskContainer>
             <TaskModal
+                columnId={task.columnId}
                 currentTask={task}
                 closeModal={handleCloseModal}
                 isShow={isShow}

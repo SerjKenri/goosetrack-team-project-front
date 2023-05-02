@@ -17,14 +17,17 @@ const TasksColumn = props => {
     const handleCloseModal = () => {
         setIsShow(false);
     };
+// console.log('props',props);
+    // index here
     return (
-        <Draggable draggableId={title} index={index}>
+        <Draggable draggableId={props.columnId} index={index}>
             {(provided, snapshot) => (
                 <TaskColumn
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                 >
                     <ColumnHeadBar
+                        onClick={() => setIsShow(true)}
                         isDragging={snapshot.isDragging}
                         {...provided.dragHandleProps}
                         title={title}
@@ -38,7 +41,11 @@ const TasksColumn = props => {
                         useClone={Boolean(props.useClone)}
                     />
                     <AddTaskBtn onClick={() => setIsShow(true)} />
-                    <TaskModal isShow={isShow} closeModal={handleCloseModal} />
+                    <TaskModal
+                        columnId={props.columnId}
+                        isShow={isShow}
+                        closeModal={handleCloseModal}
+                    />
                 </TaskColumn>
             )}
         </Draggable>

@@ -17,6 +17,8 @@ import { StartPage } from 'pages/StartPage/StartPage';
 import VerifyPage from 'pages/VerifyPage/VerifyPage';
 
 import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
+
+import ResetPassPage from 'pages/ResetPassPage/ResetPassPage';
 import ResendVerifyEmailPage from 'pages/ResendVerifyEmailPage/ResendVerifyEmailPage';
 
 
@@ -39,6 +41,10 @@ export const App = () => {
                     <Route
                         path={ROUTING.RESTORE_PASS}
                         element={<UserForgotPassPage />}
+                    />
+                    <Route
+                        path={ROUTING.RESET_PASS}
+                        element={<ResetPassPage />}
                     />
                 </Route>
                 <Route path="" element={<PrivateRoute />}>
@@ -78,6 +84,5 @@ export const App = () => {
                 </Route>
             </Routes>
         </Suspense>
-        
     );
 };

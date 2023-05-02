@@ -45,9 +45,10 @@ const taskSlice = createSlice({
             })
             .addCase(delTask.pending, handlePending)
             .addCase(delTask.rejected, handleRejected)
-            .addCase(delTask.fulfilled, (state, { payload }) => {
+            .addCase(delTask.fulfilled, (state, action) => {
+                console.log('action', action);
                 state.tasks.items = state.tasks.items.filter(
-                    task => task._id !== payload._id
+                    task => task._id !== action.payload
                 );
             });
     },

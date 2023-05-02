@@ -179,8 +179,8 @@ export const delTask = createAsyncThunk(
     'tasks/delTask',
     async (taskId, thunkAPI) => {
         try {
-            const response = await axios.delete(`/tasks/${taskId}`);
-            return response.data;
+            await axios.delete(`/tasks/${taskId}`);
+            return taskId;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }

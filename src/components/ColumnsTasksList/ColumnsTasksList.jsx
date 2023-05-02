@@ -7,7 +7,7 @@ const InnerQuoteList = React.memo(function InnerQuoteList({ tasks }) {
 // console.log(tasks);
     
     return tasks.map((task, index) => (
-        <Draggable key={task?._id} draggableId={task?._id} index={task.position}>
+        <Draggable key={task?._id} draggableId={task?._id} index={task?.position}>
             {(dragProvided, dragSnapshot) => (
                 <TaskColumnCard
                     key={task?._id}

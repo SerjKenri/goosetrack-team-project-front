@@ -3,14 +3,25 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { reorder, reorderedTasksMap } from './utils';
 import TasksColumn from 'components/TasksColumn/TasksColumn';
 import { useDispatch } from 'react-redux';
-import { fetchColumns, updateColumns, updateTask } from 'redux/operations';
+import {
+    fetchColumns,
+    fetchTasks,
+    updateColumns,
+    updateTask,
+} from 'redux/operations';
 import { useSelector } from 'react-redux';
+import { Loader } from 'components/Loader/Loader';
 
+// <TasksColumnsList
+//     currentDate={{ year: '2023', month: '05' }} // u should use date here
+//     tasks={tasks}
+//     withScrollableColumns
+// />;
 // TasksColumnsList = board
 const TasksColumnsList = ({
+    currentDate,
     isCombineEnabled,
     tasks,
     useClone,
@@ -20,6 +31,7 @@ const TasksColumnsList = ({
     const [columns, setColumns] = useState(null);
     const [ordered, setOrdered] = useState([]);
     const [isReadyRender, setIsreadyRender] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
     const height = window.innerHeight * 0.7;
     const initialColumns = useSelector(state => state.columns.columns.items);
@@ -30,7 +42,7 @@ const TasksColumnsList = ({
     }, [dispatch]);
 
     useEffect(() => {
-        console.log('hello');
+        // console.log('hello');
 
         const columns = initialColumns
             .map(column => column.columnName)
@@ -58,14 +70,13 @@ const TasksColumnsList = ({
             return reorderedArr;
         }
         setColumns(columns);
-        setOrdered([...reorderArray(initialColumns)]); // set uniq columns
-        console.log('there');
+        setOrdered(reorderArray(initialColumns)); // set uniq columns
+        // console.log('there');
         setIsreadyRender(true);
     }, [initialColumns, tasks, isReadyRender]);
 
-    const onDragEnd = result => {
-        console.log('start');
-
+    const onDragEnd = async result => {
+        setIsLoading(true);
         setIsreadyRender(false);
         const columnDestinationId = ordered.filter(
             el => el.columnName === result.destination.droppableId
@@ -114,8 +125,10 @@ const TasksColumnsList = ({
         // reordering column
         if (result.type === 'COLUMN') {
             const taskToReplace = ordered[result.destination.index];
-
-            dispatch(
+            // console.log('column', ordered);
+            // console.log('source', source.index);
+            // console.log('destination', destination.index);
+            await dispatch(
                 updateColumns({
                     operationType: 'replaceColumn',
                     source: {
@@ -128,9 +141,11 @@ const TasksColumnsList = ({
                     },
                 })
             );
-            const reordered = reorder(ordered, source.index, destination.index);
+            await dispatch(fetchColumns());
+            await dispatch(fetchTasks(currentDate));
+            // const reordered = reorder(ordered, source.index, destination.index);
 
-            setOrdered(reordered);
+            // setOrdered(reordered);
 
             return;
         }
@@ -140,7 +155,15 @@ const TasksColumnsList = ({
             const destinationId =
                 columns[source.droppableId][result.destination.index]['_id'];
 
-            dispatch(
+            // const data = reorderedTasksMap({
+            //     tasksMap: columns,
+            //     source,
+            //     destination,
+            // });
+
+            // setColumns(data.tasksMap);
+
+            await dispatch(
                 updateTask({
                     operationType: 'replaceTask',
                     _id: sourceId,
@@ -154,14 +177,10 @@ const TasksColumnsList = ({
                     },
                 })
             );
-            const data = reorderedTasksMap({
-                tasksMap: columns,
-                source,
-                destination,
-            });
+            await dispatch(fetchColumns());
+            await dispatch(fetchTasks(currentDate));
+            setIsreadyRender(true);
 
-            setColumns(data.tasksMap);
-            setIsreadyRender(true)
             return;
         }
 
@@ -172,7 +191,7 @@ const TasksColumnsList = ({
             ? columns[destination.droppableId][result.destination.index]?._id
             : null;
 
-        dispatch(
+        await dispatch(
             updateTask({
                 operationType: 'replaceColumnsTask',
                 _id: sourceId,
@@ -188,21 +207,28 @@ const TasksColumnsList = ({
                 },
             })
         );
+        await dispatch(fetchColumns());
+        await dispatch(fetchTasks(currentDate));
 
-        const data = reorderedTasksMap({
-            tasksMap: columns,
-            source,
-            destination,
-        });
+        // const data = reorderedTasksMap({
+        //     tasksMap: columns,
+        //     source,
+        //     destination,
+        // });
+        // setColumns(data.tasksMap);
 
-        setColumns(data.tasksMap);
-        console.log('finish');
+        setIsLoading(false);
         setIsreadyRender(true);
     };
 
     return (
         isReadyRender && (
             <>
+                {isLoading && (
+                    <Backdrop>
+                        <Loader />
+                    </Backdrop>
+                )}
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable
                         droppableId="board"
@@ -217,18 +243,11 @@ const TasksColumnsList = ({
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                             >
-                                {ordered.map((column, index) => {
-                                    // console.log('column', column);
-                                    // console.log(
-                                    //     'columns[column.columnName]',
-                                    //     columns[column.columnName]
-                                    // );
-                                    // console.log(columns);
-                                    // console.log('column', column);
+                                {ordered.map(column => {
                                     return (
                                         <TasksColumn
                                             key={column?._id}
-                                            index={index}
+                                            index={column?.position}
                                             columnId={column?._id}
                                             title={column.columnName}
                                             tasks={columns[
@@ -297,3 +316,18 @@ const TasksColumnsListContainer = styled.ul(({ theme }) => ({
         gap: theme.space.x7,
     },
 }));
+
+const Backdrop = styled.div({
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    opacity: 1,
+    transform: 'scale(1)',
+    /* transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1), */
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+});

@@ -6,6 +6,7 @@ import {
     logoutUser,
     changePass,
     sendMailForPass,
+    resetNewPass,
 } from '../operations';
 // import { createEntityAdapter } from '@reduxjs/toolkit';
 
@@ -63,6 +64,12 @@ const userSlice = createSlice({
             .addCase(sendMailForPass.pending, handlePending)
             .addCase(sendMailForPass.rejected, handleRejected)
             .addCase(sendMailForPass.fulfilled, (state, { payload }) => {
+                state.user.isLoading = false;
+                state.user.error = null;
+            })
+            .addCase(resetNewPass.pending, handlePending)
+            .addCase(resetNewPass.rejected, handleRejected)
+            .addCase(resetNewPass.fulfilled, (state, { payload }) => {
                 state.user.isLoading = false;
                 state.user.error = null;
             });

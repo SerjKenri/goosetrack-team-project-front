@@ -1,14 +1,11 @@
 import * as Yup from 'yup';
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
-const userUpdPassSchema = Yup.object().shape({
-    currentPassword: Yup.string()
-        .min(5, 'Password should contain more then 5 characters')
-        .matches(passwordRules, 'errorPassword')
-        .required('Required'),
+
+const userPassResetSchema = Yup.object().shape({
     newPassword: Yup.string()
         .min(5, 'Password should contain more then 5 characters')
-        .matches(passwordRules, 'Please, enter stronger passwod')
+        .matches(passwordRules, 'errorPassword')
         .required('Required'),
     confirmPassword: Yup.string()
         .min(5, 'Password should contain more then 5 characters')
@@ -16,4 +13,4 @@ const userUpdPassSchema = Yup.object().shape({
         .required('Required'),
 });
 
-export { userUpdPassSchema };
+export { userPassResetSchema };

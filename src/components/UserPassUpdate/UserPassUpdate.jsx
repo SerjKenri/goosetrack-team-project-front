@@ -15,14 +15,15 @@ export const ChangeUserPass = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const { isDesktop, isTablet, isMobile } = useMatchMedia();
+
 
     const onSubmit = (values, { resetForm }) => {
         dispatch(
             changePass({
                 currentPassword: values.currentPassword,
                 newPassword: values.newPassword,
-                // confirmPassword: values.confirmPassword,
             })
         );
         resetForm();
@@ -60,14 +61,33 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.oldPassPlaceholder'
                                 )}
+
+                                labelTextStyle={{
+                                    fontWeight: '600',
+                                    lineHeight: '15px',
+                                    marginBottom: '2px',
+                                    marginTop: '24px',
+                                }}
+                                inputStyle={{
+                                    borderRadius: '8px',
+                                    height: '46px',
+                                    border:
+                                        touched.currentPassword &&
+                                        errors.currentPassword
+                                            ? '1px solid #E74A3B'
+                                            : '1px solid rgba(220, 227, 229, 0.6)',
+                                }}
+
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
+
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.currentPassword}
                                 error={
-                                    touched.password && errors.password
-                                        ? errors.password
+                                    touched.currentPassword &&
+                                    errors.currentPassword
+                                        ? errors.currentPassword
                                         : ''
                                 }
                                 touched={touched}
@@ -81,14 +101,32 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.newPassPlaceholder'
                                 )}
+
+                                labelTextStyle={{
+                                    fontWeight: '600',
+                                    lineHeight: '15px',
+                                    marginBottom: '2px',
+                                    marginTop: '24px',
+                                }}
+                                inputStyle={{
+                                    borderRadius: '8px',
+                                    height: '46px',
+                                    border:
+                                        touched.newPassword &&
+                                        errors.newPassword
+                                            ? '1px solid #E74A3B'
+                                            : '1px solid rgba(220, 227, 229, 0.6)',
+                                }}
+
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
+
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.newPassword}
                                 error={
-                                    touched.password && errors.password
-                                        ? errors.password
+                                    touched.newPassword && errors.newPassword
+                                        ? errors.newPassword
                                         : ''
                                 }
                                 touched={touched}
@@ -101,14 +139,33 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.confPassPlaceholder'
                                 )}
+
+                                labelTextStyle={{
+                                    fontWeight: '600',
+                                    lineHeight: '15px',
+                                    marginBottom: '2px',
+                                    marginTop: '24px',
+                                }}
+                                inputStyle={{
+                                    borderRadius: '8px',
+                                    height: '46px',
+                                    border:
+                                        touched.confirmPassword &&
+                                        errors.confirmPassword
+                                            ? '1px solid #E74A3B'
+                                            : '1px solid rgba(220, 227, 229, 0.6)',
+                                }}
+
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
+
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.confirmPassword}
                                 error={
-                                    touched.password && errors.password
-                                        ? errors.password
+                                    touched.confirmPassword &&
+                                    errors.confirmPassword
+                                        ? errors.confirmPassword
                                         : ''
                                 }
                                 touched={touched}

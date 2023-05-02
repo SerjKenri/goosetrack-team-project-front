@@ -119,8 +119,8 @@
     "calendarPage": {
         "title": "Календар",
         "toggleButton": {
-            "mounth": "місяць",
-            "day": "день"
+            "month": "Mісяць",
+            "day": "Lень"
         },
         "columns": {
             "title": {

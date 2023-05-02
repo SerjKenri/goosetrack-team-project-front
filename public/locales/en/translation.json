@@ -119,8 +119,8 @@
     "calendarPage": {
         "title": "Calendar",
         "toggleButton": {
-            "mounth": "mounth",
-            "day": "day"
+            "month": "Month",
+            "day": "Day"
         },
         "columns": {
             "title": {

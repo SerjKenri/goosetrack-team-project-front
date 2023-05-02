@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 export const PeriodTypeSelect = () => {
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     return (
         <PeriodTypeSelectWrap>
@@ -10,7 +13,7 @@ export const PeriodTypeSelect = () => {
                 type="button"
                 onClick={() => navigate('/calendar/month/')}
             >
-                Month
+                {t('calendarPage.toggleButton.month')}
             </PeriodTypeSelectBtn>
             <PeriodTypeSelectBtn
                 type="button"
@@ -19,7 +22,7 @@ export const PeriodTypeSelect = () => {
                 }
                 style={{ borderRadius: '0px 8px 8px 0px' }}
             >
-                Day
+                {t('calendarPage.toggleButton.day')}
             </PeriodTypeSelectBtn>
         </PeriodTypeSelectWrap>
     );

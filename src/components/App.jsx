@@ -24,65 +24,67 @@ import ResendVerifyEmailPage from 'pages/ResendVerifyEmailPage/ResendVerifyEmail
 
 export const App = () => {
     return (
-        <Suspense>
-            <Routes>
-                <Route path="" element={<PublicRoute />}>
-                    <Route index element={<StartPage />} />
-                    <Route path={ROUTING.LOGIN} element={<LoginPage />} />
-                    <Route path={ROUTING.REGISTER} element={<RegisterPage />} />
+        // <Suspense>
+        //     <Routes>
+        //         <Route path="" element={<PublicRoute />}>
+        //             <Route index element={<StartPage />} />
+        //             <Route path={ROUTING.LOGIN} element={<LoginPage />} />
+        //             <Route path={ROUTING.REGISTER} element={<RegisterPage />} />
 
-                    <Route path={ROUTING.VERIFY} element={<VerifyPage />} />
+        //             <Route path={ROUTING.VERIFY} element={<VerifyPage />} />
 
-                    <Route
-                        path={ROUTING.RESEND_VERIFY}
-                        element={<ResendVerifyEmailPage />}
-                    />
+        //             <Route
+        //                 path={ROUTING.RESEND_VERIFY}
+        //                 element={<ResendVerifyEmailPage />}
+        //             />
 
-                    <Route
-                        path={ROUTING.RESTORE_PASS}
-                        element={<UserForgotPassPage />}
-                    />
-                    <Route
-                        path={ROUTING.RESET_PASS}
-                        element={<ResetPassPage />}
-                    />
-                </Route>
-                <Route path="" element={<PrivateRoute />}>
-                    <Route path="/" element={<MainLayout />}>
-                        <Route
-                            index
-                            element={<Navigate to={ROUTING.ACCOUNT} />}
-                        />
-                        <Route
-                            path={ROUTING.ACCOUNT}
-                            element={<AccountPage />}
-                        />
-                        <Route
-                            path={ROUTING.CHANGE_PASS}
-                            element={<ChangePassPage />}
-                        />
-                        <Route
-                            path={ROUTING.CALENDAR}
-                            element={<CalendarPage />}
-                        >
-                            <Route
-                                index
-                                element={
-                                    <Navigate to={ROUTING.CURRENT_MONTH} />
-                                }
-                            />
-                            <Route
-                                path={ROUTING.CURRENT_DAY}
-                                element={<CalendarDayPage />}
-                            />
-                            <Route
-                                path={ROUTING.CURRENT_MONTH}
-                                element={<CalendarMonthPage />}
-                            />
-                        </Route>
-                    </Route>
-                </Route>
-            </Routes>
-        </Suspense>
+        //             <Route
+        //                 path={ROUTING.RESTORE_PASS}
+        //                 element={<UserForgotPassPage />}
+        //             />
+        //             <Route
+        //                 path={ROUTING.RESET_PASS}
+        //                 element={<ResetPassPage />}
+        //             />
+        //         </Route>
+        //         <Route path="" element={<PrivateRoute />}>
+        //             <Route path="/" element={<MainLayout />}>
+        //                 <Route
+        //                     index
+        //                     element={<Navigate to={ROUTING.ACCOUNT} />}
+        //                 />
+        //                 <Route
+        //                     path={ROUTING.ACCOUNT}
+        //                     element={<AccountPage />}
+        //                 />
+        //                 <Route
+        //                     path={ROUTING.CHANGE_PASS}
+        //                     element={<ChangePassPage />}
+        //                 />
+        //                 <Route
+        //                     path={ROUTING.CALENDAR}
+        //                     element={<CalendarPage />}
+        //                 >
+        //                     <Route
+        //                         index
+        //                         element={
+        //                             <Navigate to={ROUTING.CURRENT_MONTH} />
+        //                         }
+        //                     />
+        //                     <Route
+        //                         path={ROUTING.CURRENT_DAY}
+        //                         element={<CalendarDayPage />}
+        //                     />
+        //                     <Route
+        //                         path={ROUTING.CURRENT_MONTH}
+        //                         element={<CalendarMonthPage />}
+        //                     />
+        //                 </Route>
+        //             </Route>
+        //         </Route>
+        //     </Routes>
+        // </Suspense>
+        <CalendarPage/>
+        
     );
 };

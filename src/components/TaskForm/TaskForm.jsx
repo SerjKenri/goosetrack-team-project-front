@@ -9,20 +9,23 @@ import { useDispatch } from 'react-redux';
 import { addTask, updateTask } from 'redux/operations';
 import { Button, ButtonDifference } from 'core/kit/Button';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { selectUserId } from 'redux/auth/auth.selectors';
 
-const TaskForm = ({ currentTask, closeModal }) => {
+const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const { t } = useTranslation();
     // const { current } = useParams();
     const dispatch = useDispatch();
     const PRIORITY = ['low', 'medium', 'high'];
     // const taskDay = currentTask?.date ? currentTask.date : current;
     const currentDay = moment(Date.now()).format('YYYY-MM-DD');
-
+    // const userId = useSelector(selectUser)
     const taskCreateTime = currentTask?.start
         ? currentTask?.start
         : moment(Date.now()).format('HH:mm');
     const addMinutes = minutes => Date.now() + minutes * 60 * 1000;
     const defaultEndTime = moment(addMinutes(60)).format('HH:mm');
+    const columns = useSelector(state => state.columns.columns.items);
 
     const [title, setTitle] = useState(currentTask?.title ?? '');
     const [start, setStart] = useState(currentTask?.start ?? taskCreateTime);
@@ -37,18 +40,30 @@ const TaskForm = ({ currentTask, closeModal }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const taskToUpdate = { title, start, end, priority };
+
         if (currentTask) {
-            dispatch(updateTask({ ...currentTask, ...taskToUpdate }));
+            const taskToUpdate = { title, start, end, priority };
+
+            dispatch(
+                updateTask({
+                    operationType: 'updateTask',
+                    ...currentTask,
+                    ...taskToUpdate,
+                })
+            );
             closeModal();
             return;
         } else {
+            const currentColumn = columns.filter(
+                col => col['_id'] === columnId
+            );
             const taskToAdd = {
+                columnId,
                 title,
                 start,
                 end,
                 priority,
-                category: 'toDo',
+                category: currentColumn[0].columnName,
                 date: currentDay,
             };
 

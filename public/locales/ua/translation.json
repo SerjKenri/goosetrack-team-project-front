@@ -36,7 +36,7 @@
         "inputPlaceholderEmail": "Введіть свою електронну пошту",
         "inputPlaceholderName": "Введіть своє ім'я",
         "inputPlaceholderPassword": "Введіть свій пароль",
-        "errorRequired": "Обов'язково",
+        "errorRequired": "Обов'язковe поле",
         "errorEmail": "Будь ласка, введіть дійсну електронну пошту",
         "errorPassword": "Будь ласка, введіть більш надійний пароль",
         "minLengthName": "Ім'я повинно містити більше ніж 2 символи",
@@ -68,7 +68,7 @@
         "sendEmail": "Надіслати листа"
     },
     "sendMailForgetPass": {
-        "labelTitleName": "Забули свій пароль?",
+        "labelTitleName": "Забули пароль?",
         "textInstruction": "Введіть електронну пошту, яку ви використовували при реєстрації на GooseTrack.",
         "text": "Ми надішлемо вам посилання, щоб створити новий пароль.",
         "labelTitleEmail": "Електронна пошта",

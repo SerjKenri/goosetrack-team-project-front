@@ -2,8 +2,9 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
-import { validationSchema } from 'schemas/loginFormValidation';
+import { useValidationSchema } from 'schemas/loginFormValidation';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import { ButtonDifference, Button } from '../../core/kit/Button';
 import { Input } from '../../core/kit/Input';
@@ -20,24 +21,33 @@ export const LoginForm = () => {
     const {t} = useTranslation();
 
     const dispatch = useDispatch();
-    const onSubmit = (values, { resetForm }) => {
-        dispatch(
-            loginUser({
-                email: values.email,
-                password: values.password,
-            })
-        );
-        resetForm();
-    };
-
+    const { validationSchema } = useValidationSchema();
+   
     return (
         <Formik
             initialValues={{
                 email: '',
                 password: '',
             }}
-            onSubmit={onSubmit}
             validationSchema={validationSchema}
+            onSubmit={async (values, { setSubmitting, resetForm }) => {
+                try {
+                    const result = await dispatch(
+                        loginUser({
+                            email: values.email,
+                            password: values.password,
+                        })
+                    );
+                    if (result) {
+                        toast.success('Login is successful');
+                        setSubmitting(false);
+                        resetForm();
+                    }
+                } catch (error) {
+                    toast.error('Email or password is wrong');
+                }
+            }}
+            
         >
             {({
                 errors,
@@ -46,7 +56,7 @@ export const LoginForm = () => {
                 handleSubmit,
                 handleBlur,
                 handleChange,
-                // isValid,
+                isSubmitting,
             }) => (
                 <LoginFormWrap>
                     <LoginFormContainer>
@@ -56,7 +66,7 @@ export const LoginForm = () => {
                                 name="email"
                                 type="email"
                                 labelTitle={t('loginPage.email')}
-                                placeholder={t('signUpPage.inputPlaceholderEmail')}
+                                placeholder={'example@gmail.com'}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -96,9 +106,10 @@ export const LoginForm = () => {
                                     borderRadius: '8px',
                                     height: '46px',
                                     border:
-                                        touched.email && errors.email
+                                        touched.password && errors.password
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
+                                    
                                 }}
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
@@ -113,13 +124,13 @@ export const LoginForm = () => {
                             <Button
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-                                // disabled={!isValid}
+                                disabled={isSubmitting}
                                 title={t('loginPage.login')}
                                 buttonStyle={{
                                     paddingLeft: '10px',
                                     width: '287px',
                                     height: '46px',
-                                    margin: '32px auto 0px',
+                                    margin: '40px auto 0px',
                                 }}
                                 // textStyle
 

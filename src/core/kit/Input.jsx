@@ -75,9 +75,9 @@ Input.propTypes = {
 };
 
 const Label = styled.label(({ theme }) => ({
-    display: 'inline-flex',
+    display: 'flex',
     flexDirection: 'column',
-    gap: theme.space.x2,
+    gap: theme.space.x2,  
 }));
 
 const LabelText = styled.p(({ theme }) => ({
@@ -116,9 +116,10 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
     //   },
 
     '&::placeholder': {
-        color: theme.color.popupBackground,
+        color: theme.color.modalBorder,
         fontSize: theme.space.x4 + 'px',
         lineHeight: theme.space.x5 + 'px',
+        fontWeight: 400,
     },
 
     // '&:hover': {
@@ -147,6 +148,8 @@ const IconWrapper = styled.div(({ theme, resetButton }) => ({
 
 const Error = styled.p`
     color: #e74a3b;
-    display: block;
     font-size: 12px;
+    height:24px;
+    position: absolute;
+    bottom:-28px;
 `;

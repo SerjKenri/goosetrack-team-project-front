@@ -40,6 +40,7 @@ const Container = styled.div(({ theme }) => ({
     justifyContent: 'space-between',
     padding: '24px 20px',
     backgroundColor: theme.color.mainBackgroundColor,
+    boxShadow: 'rgba(136, 165, 191, 0.48) 4px 2px 16px',
     position: 'fixed',
     zIndex: 1,
 

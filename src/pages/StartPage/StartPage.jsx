@@ -105,10 +105,7 @@ const Hero = styled.div(({ theme }) => ({
     padding: '232px 0 88px',
     backgroundColor: theme.color.accentBackgroundColor,
     color: theme.color.btnTextColor,
-    [theme.media.between(
-        `${theme.breakpoints.m}px`,
-        `${theme.breakpoints.l}px`
-    )]: {
+    [theme.media.up(`${theme.breakpoints.m}px`, `${theme.breakpoints.l}px`)]: {
         minHeight: '1024px',
         padding: '320px 0',
     },
@@ -122,7 +119,7 @@ const LogoImg = styled.img(({ theme }) => ({
     margin: '0 auto',
     width: '142px',
     height: '142px',
-    [theme.media.between(`${theme.breakpoints.m}px`)]: {
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
         width: '150px',
         height: '149px',
     },

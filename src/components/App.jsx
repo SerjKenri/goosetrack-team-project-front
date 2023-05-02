@@ -21,7 +21,6 @@ import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
 import ResetPassPage from 'pages/ResetPassPage/ResetPassPage';
 import ResendVerifyEmailPage from 'pages/ResendVerifyEmailPage/ResendVerifyEmailPage';
 
-
 export const App = () => {
     return (
         <Suspense>
@@ -51,7 +50,7 @@ export const App = () => {
                     <Route path="/" element={<MainLayout />}>
                         <Route
                             index
-                            element={<Navigate to={ROUTING.ACCOUNT} />}
+                            element={<Navigate to={ROUTING.CALENDAR} />}
                         />
                         <Route
                             path={ROUTING.ACCOUNT}
@@ -84,7 +83,5 @@ export const App = () => {
                 </Route>
             </Routes>
         </Suspense>
-        
-        
     );
 };

@@ -11,6 +11,7 @@ import {
     selectUserBirthday,
     selectUserAvatar,
     selectUserTelegram,
+    selectUserState,
 } from '../../redux/auth/auth.selectors';
 
 import { useFormValidation } from 'schemas/userFormValidation';
@@ -43,7 +44,6 @@ export const UserForm = () => {
     const telegram = useSelector(selectUserTelegram);
     const avatarURL = useSelector(selectUserAvatar);
     const birthday = useSelector(selectUserBirthday) || Date.now();
-
     const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
 
     const [userImage, setUserImage] = useState(avatarURL);
@@ -54,12 +54,14 @@ export const UserForm = () => {
         setIsShow(false);
         dispatch(logoutUser());
     };
+
     const handleChangeAvatar = e => {
         const file = e.target.files[0];
         const objURL = URL.createObjectURL(file);
         setAvatar(objURL);
         setUserImage(file);
     };
+
     const handleUpload = async () => {
         if (!setUserImage) {
             toast.warning('Please select a file');
@@ -83,7 +85,7 @@ export const UserForm = () => {
                         telegram,
                     }}
                     validationSchema={userFormSchema}
-                    onSubmit={async (values, { setSubmitting }) => {
+                    onSubmit={(values, { setSubmitting }) => {
                         if (email === values.email) {
                             if (userImage) {
                                 formData.append('avatarURL', userImage);
@@ -101,9 +103,9 @@ export const UserForm = () => {
                             if (values.telegram) {
                                 formData.append('messenger', values.telegram);
                             }
-                            console.log(formData);
-                            await dispatch(updateUser(formData)).unwrap();
-                            window.location.reload();
+
+                            dispatch(updateUser(formData));
+                            // window.location.reload();
                         } else {
                             setIsShow(true);
                             formData.append('email', values.email);
@@ -122,7 +124,7 @@ export const UserForm = () => {
                             if (values.telegram) {
                                 formData.append('messenger', values.telegram);
                             }
-                            await dispatch(updateUser(formData)).unwrap();
+                            dispatch(updateUser(formData));
                             // location.reload();
                         }
 

@@ -180,7 +180,7 @@ export const RegisterForm = () => {
 
                             <AuthNavigate
                                 route={ROUTING.LOGIN}
-                                content="Log In"
+                                content={t('loginPage.login')}
                             />
 
                             {isDesktop && (

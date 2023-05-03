@@ -33,13 +33,15 @@ const authSlice = createSlice({
                 state.user = actions.payload.user;
                 state.token = actions.payload.user.token;
                 state.isLoggedIn = true;
+                state.isLoading = false;
+
             })
             /////////////////////////////
 
             .addCase(sendMailForVerify.pending, handlePending)
             .addCase(sendMailForVerify.rejected, handleRejected)
             .addCase(sendMailForVerify.fulfilled, (state, { payload }) => {
-                state.user.isLoading = false;
+                state.isLoading = false;
                 state.user.error = null;
             })
 
@@ -50,23 +52,28 @@ const authSlice = createSlice({
                 state.user = actions.payload.user;
                 state.token = actions.payload.user.token;
                 state.isLoggedIn = true;
+                state.isLoading = false;
+
             })
             .addCase(refreshUser.pending, handlePending)
             .addCase(refreshUser.rejected, handleRejected)
             .addCase(refreshUser.fulfilled, (state, action) => {
-                state.user = action.payload;
+                state.user = action.payload.user;
                 state.isLoggedIn = true;
                 state.isRefreshing = false;
+                state.isLoading = false;
             })
             .addCase(updateUser.pending, handlePending)
             .addCase(updateUser.rejected, handleRejected)
             .addCase(updateUser.fulfilled, (state, { payload }) => {
                 state.user = { ...state.user, ...payload.user };
+                state.isLoading = false;
             })
             .addCase(currentUser.pending, handlePending)
             .addCase(currentUser.rejected, handleRejected)
             .addCase(currentUser.fulfilled, (state, { payload }) => {
                 state.user = { ...state.user, ...payload.user };
+                state.isLoading = false;
             })
             .addCase(logoutUser.pending, handlePending)
             .addCase(logoutUser.rejected, handleRejected)
@@ -84,6 +91,7 @@ const authSlice = createSlice({
                     messenger: '',
                 };
                 state.token = null;
+                state.isLoading = false;
             });
     },
 });

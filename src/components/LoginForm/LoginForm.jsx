@@ -1,26 +1,27 @@
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
 import { useValidationSchema } from 'schemas/loginFormValidation';
-
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import { ButtonDifference, Button } from '../../core/kit/Button';
 import { Input } from '../../core/kit/Input';
 import { iconNames } from 'assets/icons/iconNames';
+import { LangaguesBar } from 'components/LangaguesBar/LangaguesBar';
 
 import GooseLogIn from '../../assets/images/goose-login.png';
 import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
-import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
     const { t } = useTranslation();
-
+    const { isTablet, isMobile } = useMatchMedia();
+    const theme = useTheme();
     const dispatch = useDispatch();
     const { validationSchema } = useValidationSchema();
 
@@ -41,11 +42,13 @@ export const LoginForm = () => {
                     );
                     if (result) {
                         // toast.success('Login is successful');
+                        // toast.success(`${t('loginPage.toastSuccess')}`);
                         setSubmitting(false);
                         resetForm();
                     }
                 } catch (error) {
-                    toast.error('Email or password is wrong');
+                    // toast.error('Email or password is wrong');
+                    toast.error(`${t('loginPage.toastError')}`);
                 }
             }}
         >
@@ -61,6 +64,9 @@ export const LoginForm = () => {
                 <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
+                            <LangWrap>
+                                <LangaguesBar />
+                            </LangWrap>
                             <LoginFormTitle>
                                 {t('loginPage.login')}
                             </LoginFormTitle>
@@ -78,6 +84,8 @@ export const LoginForm = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.email && errors.email
                                             ? '1px solid #E74A3B'
@@ -109,6 +117,8 @@ export const LoginForm = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.password && errors.password
                                             ? '1px solid #E74A3B'
@@ -124,33 +134,29 @@ export const LoginForm = () => {
                                 }
                             />
 
-                            <Button
+                            <LoginButton
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
                                 disabled={isSubmitting}
                                 title={t('loginPage.login')}
-                                buttonStyle={{
-                                    paddingLeft: '10px',
-                                    width: '287px',
-                                    height: '46px',
-                                    margin: '40px auto 0px',
-                                }}
-                                // textStyle
-
+                                isMobile={isMobile}
+                                isTablet={isTablet}
                                 iconName={iconNames.loginIcon}
                                 iconSize="15"
-                            ></Button>
+                            ></LoginButton>
                         </Form>
                         <AuthNavigate
                             route={ROUTING.REGISTER}
                             content={t('signUpPage.signUp')}
                         />
-                        <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
-                            {t('sendMailForgetPass.labelTitleName')}
-                        </NavToRestorePass>
-                        <NavToRestorePass to={`/${ROUTING.RESEND_VERIFY}`}>
-                            {t('ResendVerifyEmailForm.resendEmail')}
-                        </NavToRestorePass>
+                        <AuthNavigate
+                            route={`/${ROUTING.RESTORE_PASS}`}
+                            content={t('sendMailForgetPass.labelTitleName')}
+                        />
+                        <AuthNavigate
+                            route={`/${ROUTING.RESEND_VERIFY}`}
+                            content={t('ResendVerifyEmailForm.resendEmail')}
+                        />
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                             src={`${GooseLogIn}`}
@@ -183,14 +189,14 @@ const LoginFormContainer = styled.div`
 const Form = styled.form(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    padding: '40px 24px',
+    padding: '20px 24px 40px 24px',
     width: '335px',
     marginBottom: '18px',
     backgroundColor: theme.color.mainBackgroundColor,
     borderRadius: '8px',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
-        padding: '40px',
+        padding: '20px 40px 40px 40px',
         width: '480px',
         marginBottom: '24px',
     },
@@ -224,29 +230,20 @@ const LoginImg = styled.img`
     }
 `;
 
-//////////////
-export const NavToRestorePass = styled(Link)`
-    ${({ theme }) => `
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 14px;
-        border-bottom: 1px solid ${theme.color.accentTextColor};
-        color: ${theme.color.accentTextColor};
-        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
-        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-top: 8px;
-    
-        &:hover,
-        :focus {
-            color: blue;
-            border-color: blue;
-        }
-    
-        @media (min-width: 768px) {
-            font-size: 18px;
-            line-height: 24px;
-        }
-    `}
+const LoginButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
+    buttonStyle: {
+        width: isMobile ? '287px' : isTablet ? '400px' : '400px',
+        paddingLeft: '10px',
+        height: '46px',
+        margin: '40px auto 0px',
+    },
+}))({});
+
+const LangWrap = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
 `;
+
+
+
+

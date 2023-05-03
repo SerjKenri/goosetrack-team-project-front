@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { Button, ButtonDifference } from 'core/kit/Button';
 import { sendMailForPass } from 'redux/operations';
@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const SendMailForgetPass = () => {
     const { t } = useTranslation();
+    const theme = useTheme();
     const { userForgetPassSchema } = useForgetPassSchema();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -73,6 +74,8 @@ export const SendMailForgetPass = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.email && errors.email
                                             ? '1px solid #E74A3B'

@@ -27,6 +27,7 @@ import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
 import { Modal } from 'core/Modal/Modal';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 export const UserForm = () => {
     const filePicker = useRef('');
@@ -61,7 +62,7 @@ export const UserForm = () => {
     };
     const handleUpload = async () => {
         if (!setUserImage) {
-            alert('Please select a file');
+            toast.warning('Please select a file');
             return;
         }
     };

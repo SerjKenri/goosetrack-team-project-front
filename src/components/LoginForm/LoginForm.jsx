@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
 import { useValidationSchema } from 'schemas/loginFormValidation';
@@ -20,7 +20,7 @@ import { ROUTING } from 'core/utils/constantsRouting';
 export const LoginForm = () => {
     const { t } = useTranslation();
     const { isTablet, isMobile } = useMatchMedia();
-    
+    const theme = useTheme();
     const dispatch = useDispatch();
     const { validationSchema } = useValidationSchema();
 
@@ -78,6 +78,8 @@ export const LoginForm = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.email && errors.email
                                             ? '1px solid #E74A3B'
@@ -109,6 +111,8 @@ export const LoginForm = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.password && errors.password
                                             ? '1px solid #E74A3B'
@@ -242,13 +246,13 @@ const LoginButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
 //         text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
 //         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
 //         margin-top: 8px;
-    
+
 //         &:hover,
 //         :focus {
 //             color: blue;
 //             border-color: blue;
 //         }
-    
+
 //         @media (min-width: 768px) {
 //             font-size: 18px;
 //             line-height: 24px;

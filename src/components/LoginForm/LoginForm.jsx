@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
 import { useValidationSchema } from 'schemas/loginFormValidation';
@@ -21,7 +21,7 @@ import { ROUTING } from 'core/utils/constantsRouting';
 export const LoginForm = () => {
     const { t } = useTranslation();
     const { isTablet, isMobile } = useMatchMedia();
-    
+    const theme = useTheme();
     const dispatch = useDispatch();
     const { validationSchema } = useValidationSchema();
 
@@ -84,6 +84,8 @@ export const LoginForm = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.email && errors.email
                                             ? '1px solid #E74A3B'
@@ -115,6 +117,8 @@ export const LoginForm = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.password && errors.password
                                             ? '1px solid #E74A3B'
@@ -239,5 +243,7 @@ const LangWrap = styled.div`
     display: flex;
     flex-direction: row-reverse;
 `;
+
+
 
 

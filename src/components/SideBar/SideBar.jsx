@@ -42,7 +42,7 @@ const Container = styled.div(({ theme }) => ({
     backgroundColor: theme.color.mainBackgroundColor,
     boxShadow: 'rgba(136, 165, 191, 0.48) 4px 2px 16px',
     position: 'fixed',
-    zIndex: 1,
+    zIndex: 5,
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         padding: '24px 32px',

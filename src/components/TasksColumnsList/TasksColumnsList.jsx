@@ -228,11 +228,7 @@ const TasksColumnsList = ({
     return (
         isReadyRender && (
             <>
-                {isLoading && (
-                    <Backdrop>
-                        <Loader />
-                    </Backdrop>
-                )}
+                {isLoading && <Loader />}
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable
                         droppableId="board"
@@ -321,17 +317,17 @@ const TasksColumnsListContainer = styled.ul(({ theme }) => ({
     },
 }));
 
-const Backdrop = styled.div({
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    opacity: 1,
-    transform: 'scale(1)',
-    /* transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1), */
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-});
+// const Backdrop = styled.div({
+//     position: 'fixed',
+//     top: 0,
+//     left: 0,
+//     width: '100%',
+//     height: '100%',
+//     backgroundColor: 'rgba(0, 0, 0, 0.2)',
+//     opacity: 1,
+//     transform: 'scale(1)',
+//     /* transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1), */
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+// });

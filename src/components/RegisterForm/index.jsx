@@ -1,9 +1,11 @@
 // import { useTranslation } from 'react-i18next';
 import { useRegisterForm } from 'components/RegisterForm/useRegisterForm';
-import styled from 'styled-components';
+import styled, {useTheme} from 'styled-components';
 import { Input } from 'core/kit/Input';
 import { Button, ButtonDifference } from 'core/kit/Button';
 import { iconNames } from 'assets/icons/iconNames';
+import { LangaguesBar } from 'components/LangaguesBar/LangaguesBar';
+import { LangWrap } from 'components/LoginForm/LoginForm';
 
 import GooseRegister from '../../assets/images/goose-register.png';
 import GooseRegister2x from '../../assets/images/goose-register@2x.png';
@@ -14,41 +16,13 @@ import { ROUTING } from 'core/utils/constantsRouting';
 
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
-// const LangaguesBar = () => {
-//     const LANGAGUES = ['en', 'ua'];
-//     const { i18n } = useTranslation();
-
-//     return (
-//         <div>
-//             <ul>
-//                 {LANGAGUES.map(langague => {
-//                     console.log(langague);
-//                     return (
-//                         <li key={langague}>
-//                             <button
-//                                 id={
-//                                     i18n.resolvedLanguage === langague
-//                                         ? 'selectedLang'
-//                                         : 'langId'
-//                                 }
-//                                 onClick={() => i18n.changeLanguage(langague)}
-//                             >
-//                                 {langague}
-//                             </button>
-//                         </li>
-//                     );
-//                 })}
-//             </ul>
-//         </div>
-//     );
-// };
-
 export const RegisterForm = () => {
     const { t, onSubmit, validationSchema } = useRegisterForm();
-    const { isDesktop } = useMatchMedia();
+    const { isDesktop, isMobile, isTablet } = useMatchMedia();
+    const theme = useTheme();
+
     return (
         <>
-            {/* <LangaguesBar /> */}
             <Formik
                 initialValues={{
                     email: '',
@@ -70,6 +44,9 @@ export const RegisterForm = () => {
                     <SignUpFormWrap>
                         <FormContainer>
                             <Form onSubmit={handleSubmit} autoComplete="off">
+                                <LangWrap>
+                                    <LangaguesBar />
+                                </LangWrap>
                                 <SignUpFormTitle>
                                     {t('signUpPage.signUp')}
                                 </SignUpFormTitle>
@@ -83,6 +60,12 @@ export const RegisterForm = () => {
                                         placeholder={t(
                                             'signUpPage.inputPlaceholderEmail'
                                         )}
+                                        labelTextStyle={{
+                                            fontWeight: '600',
+                                            lineHeight: '15px',
+                                            marginBottom: '2px',
+                                            marginTop: '32px',
+                                        }}
                                         handleBlur={handleBlur}
                                         onChange={handleChange}
                                         value={values.email}
@@ -92,12 +75,13 @@ export const RegisterForm = () => {
                                                 : ''
                                         }
                                         inputStyle={{
+                                            fontWeight:'400',
+                                            height: '46px',
                                             border:
                                                 touched.email && errors.email
                                                     ? '1px solid #E74A3B'
                                                     : '1px solid rgba(220, 227, 229, 0.6)',
-
-                                            backgroundColor: '#ffff',
+                                            backgroundColor: theme.color.calendarCellColor,
                                         }}
                                     />
                                 </SignUpLabel>
@@ -111,6 +95,12 @@ export const RegisterForm = () => {
                                         placeholder={t(
                                             'signUpPage.inputPlaceholderName'
                                         )}
+                                        labelTextStyle={{
+                                            fontWeight: '600',
+                                            lineHeight: '15px',
+                                            marginBottom: '2px',
+                                            marginTop: '24px',
+                                        }}
                                         handleBlur={handleBlur}
                                         onChange={handleChange}
                                         value={values.name}
@@ -120,12 +110,13 @@ export const RegisterForm = () => {
                                                 : ''
                                         }
                                         inputStyle={{
+                                            fontWeight:'400',
+                                            height: '46px',
                                             border:
                                                 touched.email && errors.email
                                                     ? '1px solid #E74A3B'
                                                     : '1px solid rgba(220, 227, 229, 0.6)',
-
-                                            backgroundColor: '#ffff',
+                                            backgroundColor: theme.color.calendarCellColor,
                                         }}
                                     />
                                 </SignUpLabel>
@@ -139,6 +130,12 @@ export const RegisterForm = () => {
                                         placeholder={t(
                                             'signUpPage.inputPlaceholderPassword'
                                         )}
+                                        labelTextStyle={{
+                                            fontWeight: '600',
+                                            lineHeight: '15px',
+                                            marginBottom: '2px',
+                                            marginTop: '24px',
+                                        }}
                                         handleBlur={handleBlur}
                                         onChange={handleChange}
                                         value={values.password}
@@ -148,24 +145,21 @@ export const RegisterForm = () => {
                                                 : ''
                                         }
                                         inputStyle={{
+                                            fontWeight:'400',
+                                            height: '46px',
                                             border:
                                                 touched.email && errors.email
                                                     ? '1px solid tomato'
                                                     : '1px solid #DCE3E5',
-
-                                            backgroundColor: '#ffff',
+                                            backgroundColor: theme.color.calendarCellColor,
                                         }}
                                     />
                                 </SignUpLabel>
-                                <Button
+                                <SignButton
                                     type="submit"
                                     differentStyles={ButtonDifference.primary}
-                                    disabled={!isValid}
-                                    title={
-                                        !isValid
-                                            ? t('signUpPage.button')
-                                            : t('signUpPage.signUp')
-                                    }
+                                    disabled={!values.email || !values.password || !values.name}
+                                    title={t('signUpPage.signUp')}
                                     buttonStyle={{
                                         backgroundColor: '#3e85f3',
                                         paddingLeft: '10px',
@@ -173,9 +167,11 @@ export const RegisterForm = () => {
                                         marginTop: '40px',
                                         flex: '1 1 auto',
                                     }}
+                                    isMobile={isMobile}
+                                    isTablet={isTablet}
                                     iconName={iconNames.loginIcon}
                                     iconSize="15"
-                                ></Button>
+                                ></SignButton>
                             </Form>
 
                             <AuthNavigate
@@ -202,7 +198,7 @@ const Form = styled.form`
     z-index: 10;
     display: flex;
     flex-direction: column;
-    padding: 40px 24px;
+    padding: 20px 24px 40px;
     width: 335px;
     margin-bottom: 18px;
     background-color: #ffffff;
@@ -219,10 +215,9 @@ const SignUpFormTitle = styled.h1(({ theme }) => ({
     fontFamily: 'Inter',
     fontStyle: 'normal',
     fontWeight: '600',
-    fontSize: '24px',
-    lineHeight: '24px',
+    fontSize: '18px',
+    lineHeight: 1.33,
     color: theme.color.accentTextColor,
-    marginBottom: '22px',
 }));
 
 const SignUpFormWrap = styled.div(({ theme }) => ({
@@ -243,7 +238,6 @@ const SignUpLabel = styled.label(({ theme, p }) => ({
     fontWeight: '600',
     fontSize: '12px',
     lineHeight: '15px',
-    marginTop: '15px',
 }));
 
 const SignUpImg = styled.img`
@@ -254,7 +248,6 @@ const SignUpImg = styled.img`
     left: 49px;
     bottom: -5px;
     display: block;
-    left: 49px;
     transform: rotate(-9.2deg);
 `;
 
@@ -265,3 +258,12 @@ const FormContainer = styled.div`
     justify-content: center;
     width: 100%;
 `;
+
+const SignButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
+    buttonStyle: {
+        width: isMobile ? '287px' : isTablet ? '400px' : '400px',
+        paddingLeft: '10px',
+        height: '46px',
+        margin: '48px auto 0px',
+    },
+}))({});

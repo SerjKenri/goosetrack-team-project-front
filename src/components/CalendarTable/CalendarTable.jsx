@@ -1,8 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
-// import { useSelector } from 'react-redux';
-// import { selectTasks } from 'redux/tasks/tasks.selectors';
 
 export const CalendarTable = ({ startDay, today, tasks }) => {
     let day = moment(startDay).startOf('month').startOf('isoweek');
@@ -25,8 +23,6 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
         const today = moment();
         return today.isSame(month, 'month');
     };
-
-    // const tasks = useSelector(selectTasks);
 
     const isMobileView = window.innerWidth < 768;
 
@@ -55,7 +51,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                     const dayTasks = tasks.filter(
                         task => task.date === day.format('YYYY-MM-DD')
                     );
-                    // console.log(dayTasks, day.format('YYYY-MM-DD'));
+                    console.log(dayTasks, day.format('YYYY-MM-DD'));
                     return (
                         <CalendarLink
                             to={`/calendar/day/${day.format('YYYY-MM-DD')}`}
@@ -66,13 +62,16 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                             >
                                 <CalendarDate currentDay={currentDay(day)}>
                                     {day.format('D')}
-                                    <p>{dayTasks.title}</p>
                                 </CalendarDate>
-                                {/* <TaskList>
-                                {tasks.map(task => (
-                                    <li key={task._id}>task={task}</li>
-                                ))}
-                            </TaskList> */}
+                                <DayTasks>
+                                    {dayTasks !== [] ? (
+                                        dayTasks.map(dayTask => (
+                                            <p>{dayTask.title}</p>
+                                        ))
+                                    ) : (
+                                        <p></p>
+                                    )}
+                                </DayTasks>
                             </CalendarCell>
                         </CalendarLink>
                     );
@@ -149,9 +148,16 @@ const CalendarDay = styled.div`
     line-height: 1.125;
     text-transform: uppercase;
 `;
-
+const DayTasks = styled.div`
+    text-align: center;
+    font-weight: 600;
+    font-size: 6px;
+    line-height: 1.125;
+    text-transform: uppercase;
+`;
 const CalendarCell = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     min-width: 100%;
     min-height: 94px;

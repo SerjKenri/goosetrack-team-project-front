@@ -10,10 +10,10 @@ import { addTask, updateTask } from 'redux/operations';
 import { Button, ButtonDifference } from 'core/kit/Button';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// import { selectUserId } from 'redux/auth/auth.selectors';
+import { selectUserId } from 'redux/auth/auth.selectors';
 
 import { Formik } from 'formik';
-// import { useMatchMedia } from 'core/hooks/useMatchMedia';
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const { t } = useTranslation();
@@ -42,7 +42,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     // const isValidEndTime = start <= end;
 
     const onSubmit = e => {
-        e.preventDefault();
+        // e.preventDefault();
 
         if (currentTask) {
             const taskToUpdate = { title, start, end, priority };

@@ -4,7 +4,7 @@ import { Icon } from 'core/kit/Icon';
 import gooseimg from 'assets/images/goose-motivate@2x.png';
 import { UserInfo } from 'components/UserInfo/UserInfo';
 import { ThemeToggler } from 'components/ThemeToggler/ThemeToggler';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LangaguesBar } from 'components/LangaguesBar/LangaguesBar';
 import { useSelector } from 'react-redux';
@@ -16,13 +16,20 @@ export const Header = ({ onClick }) => {
 
     const tasks = useSelector(selectTasks);
 
+        const { currentDay } = useParams();
+
+
     const title =
         location.pathname === '/account'
             ? `${t('header.pageTitleFirst')}`
             : `${t('header.pageTitleSecond')}`;
     
+    let todayTasks = []
 
-    const motivation = (location.pathname.startsWith('/calendar/day') && tasks.length > 0) ? true : false
+    if (currentDay) todayTasks = tasks.filter((task) => task.date === currentDay)
+
+    const motivation = (currentDay && todayTasks.length > 0) ? true : false
+
 
     return (
         <Container>

@@ -34,6 +34,8 @@ export const ChoosedDay = () => {
     const currentTasks = tasks.filter(task => task.date === currentDay);
 
     const isMobileView = window.innerWidth < 768;
+
+    console.log(day.format('YYYY-MM-DD'))
     return (
         <>
             <CalendarContainer>

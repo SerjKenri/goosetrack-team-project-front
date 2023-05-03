@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
 import { useValidationSchema } from 'schemas/loginFormValidation';
-
+import { useMatchMedia } from 'core/hooks/useMatchMedia';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
@@ -16,10 +16,10 @@ import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
-import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
     const { t } = useTranslation();
+    const { isTablet, isMobile } = useMatchMedia();
     
     const dispatch = useDispatch();
     const { validationSchema } = useValidationSchema();
@@ -126,33 +126,29 @@ export const LoginForm = () => {
                                 }
                             />
 
-                            <Button
+                            <LoginButton
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
                                 disabled={isSubmitting}
                                 title={t('loginPage.login')}
-                                buttonStyle={{
-                                    paddingLeft: '10px',
-                                    width: '287px',
-                                    height: '46px',
-                                    margin: '40px auto 0px',
-                                }}
-                                // textStyle
-
+                                isMobile={isMobile}
+                                isTablet={isTablet}
                                 iconName={iconNames.loginIcon}
                                 iconSize="15"
-                            ></Button>
+                            ></LoginButton>
                         </Form>
                         <AuthNavigate
                             route={ROUTING.REGISTER}
                             content={t('signUpPage.signUp')}
                         />
-                        <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
-                            {t('sendMailForgetPass.labelTitleName')}
-                        </NavToRestorePass>
-                        <NavToRestorePass to={`/${ROUTING.RESEND_VERIFY}`}>
-                            {t('ResendVerifyEmailForm.resendEmail')}
-                        </NavToRestorePass>
+                        <AuthNavigate
+                            route={`/${ROUTING.RESTORE_PASS}`}
+                            content={t('sendMailForgetPass.labelTitleName')}
+                        />
+                        <AuthNavigate
+                            route={`/${ROUTING.RESEND_VERIFY}`}
+                            content={t('ResendVerifyEmailForm.resendEmail')}
+                        />
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                             src={`${GooseLogIn}`}
@@ -226,29 +222,38 @@ const LoginImg = styled.img`
     }
 `;
 
+const LoginButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
+    buttonStyle: {
+        width: isMobile ? '287px' : isTablet ? '400px' : '400px',
+        paddingLeft: '10px',
+        height: '46px',
+        margin: '40px auto 0px',
+    },
+}))({});
+
 //////////////
-export const NavToRestorePass = styled(Link)`
-    ${({ theme }) => `
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 14px;
-        border-bottom: 1px solid ${theme.color.accentTextColor};
-        color: ${theme.color.accentTextColor};
-        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
-        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
-        margin-top: 8px;
+// export const NavToRestorePass = styled(Link)`
+//     ${({ theme }) => `
+//         font-family: Inter;
+//         font-style: normal;
+//         font-weight: 600;
+//         font-size: 12px;
+//         line-height: 14px;
+//         border-bottom: 1px solid ${theme.color.accentTextColor};
+//         color: ${theme.color.accentTextColor};
+//         text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07),
+//         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
+//         margin-top: 8px;
     
-        &:hover,
-        :focus {
-            color: blue;
-            border-color: blue;
-        }
+//         &:hover,
+//         :focus {
+//             color: blue;
+//             border-color: blue;
+//         }
     
-        @media (min-width: 768px) {
-            font-size: 18px;
-            line-height: 24px;
-        }
-    `}
-`;
+//         @media (min-width: 768px) {
+//             font-size: 18px;
+//             line-height: 24px;
+//         }
+//     `}
+// `;

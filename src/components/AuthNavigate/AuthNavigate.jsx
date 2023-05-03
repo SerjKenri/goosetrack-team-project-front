@@ -9,20 +9,17 @@ export const AuthNavigate = ({ route, content, navStyle }) => (
 );
 
 export const AuthNav = styled(Link)(({ theme }) => ({
-    borderBottom: `1px solid ${theme.color.calendarDateColor}`,
-    color: theme.color.accentTextColor,
+    textDecoration:'none',
+    color: theme.color.accentColor,
     textShadow:
         ' 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px, rgba(0, 0, 0, 0.035)',
+    
     ' &:hover': {
-        borderColor: theme.color.accentColor,
+        textDecoration:'underline',
         
     },
-    ':focus ': {
-        borderColor: theme.color.accentColor,
-    },
 
-    [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        fontSize: '18px',
-        lineHeight: '24px',
+    ':focus ': {
+        textDecoration:'underline',
     },
 }));

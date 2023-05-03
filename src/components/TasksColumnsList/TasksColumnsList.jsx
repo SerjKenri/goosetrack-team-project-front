@@ -14,6 +14,8 @@ import {
 } from 'redux/operations';
 import { useSelector } from 'react-redux';
 import { Loader } from 'components/Loader/Loader';
+import { selectIsLoadingColumns } from 'redux/columns/columns.selectors';
+import { selectIsLoadingTasks } from 'redux/tasks/tasks.selectors';
 
 // <TasksColumnsList
 //     currentDate={{ year: '2023', month: '05' }} // u should use date here
@@ -33,8 +35,13 @@ const TasksColumnsList = ({
     const [columns, setColumns] = useState(null);
     const [ordered, setOrdered] = useState([]);
 
-    const [isReadyRender, setIsreadyRender] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const loadingColumns = useSelector(selectIsLoadingColumns)
+    const loadingTasks = useSelector(selectIsLoadingTasks)
+
+    console.log(loadingColumns, loadingTasks)
+
+    // const [isReadyRender, setIsreadyRender] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
     const height = window.innerHeight * 0.7;
@@ -76,12 +83,12 @@ const TasksColumnsList = ({
         setColumns(columns);
         setOrdered(reorderArray(initialColumns)); // set uniq columns
         // console.log('there');
-        setIsreadyRender(true);
-    }, [initialColumns, tasks, isReadyRender]);
+        // setIsreadyRender(true);
+    }, [initialColumns, tasks]);
 
     const onDragEnd = async result => {
-        setIsLoading(true);
-        setIsreadyRender(false);
+        // setIsLoading(true);
+        // setIsreadyRender(false);
         const columnDestinationId = ordered.filter(
             el => el.columnName === result.destination.droppableId
         )[0]?._id;
@@ -183,7 +190,7 @@ const TasksColumnsList = ({
             );
             await dispatch(fetchColumns());
             await dispatch(fetchTasks(currentDate));
-            setIsreadyRender(true);
+            // setIsreadyRender(true);
 
             return;
         }
@@ -221,14 +228,14 @@ const TasksColumnsList = ({
         // });
         // setColumns(data.tasksMap);
 
-        setIsLoading(false);
-        setIsreadyRender(true);
+        // setIsLoading(false);
+        // setIsreadyRender(true);
     };
 
     return (
-        isReadyRender && (
+        (
             <>
-                {isLoading && <Loader />}
+                {(loadingColumns || loadingTasks) && <Loader />}
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable
                         droppableId="board"

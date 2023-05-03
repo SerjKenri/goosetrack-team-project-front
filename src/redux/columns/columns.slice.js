@@ -33,7 +33,13 @@ const columnsSlice = createSlice({
             .addCase(fetchColumns.pending, handlePending)
             .addCase(fetchColumns.rejected, handleRejected)
             .addCase(fetchColumns.fulfilled, handleFulfilled)
-        .addCase(updateColumns.fulfilled,(state,action)=>{})
+            .addCase(updateColumns.pending, handlePending)
+            .addCase(updateColumns.rejected, handleRejected)
+            .addCase(updateColumns.fulfilled, (state) => {
+                state.columns.isLoading = false;
+                state.columns.error = null;
+            })
+            // .addCase(updateColumns.fulfilled,(state,action)=>{})
             // .addCase(addTask.pending, handlePending)
             // .addCase(addTask.rejected, handleRejected)
             // .addCase(addTask.fulfilled, (state, { payload }) => {

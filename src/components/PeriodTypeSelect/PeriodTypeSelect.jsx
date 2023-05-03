@@ -11,7 +11,9 @@ export const PeriodTypeSelect = () => {
         <PeriodTypeSelectWrap>
             <PeriodTypeSelectBtn
                 type="button"
-                onClick={() => navigate('/calendar/month/')}
+                onClick={() =>
+                    navigate(`/calendar/month/${moment().format('YYYY-MM-DD')}`)
+                }
             >
                 {t('calendarPage.toggleButton.month')}
             </PeriodTypeSelectBtn>

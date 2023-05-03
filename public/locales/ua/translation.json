@@ -38,7 +38,7 @@
         "inputPlaceholderEmail": "Введіть свою електронну пошту",
         "inputPlaceholderName": "Введіть своє ім'я",
         "inputPlaceholderPassword": "Введіть свій пароль",
-        "errorRequired": "Обов'язкове поле",
+        "errorRequired": "Це поле є обов'язковим",
         "errorEmail": "Будь ласка, введіть дійсну електронну пошту",
         "errorPassword": "Будь ласка, введіть більш надійний пароль",
         "minLengthName": "Ім'я повинно містити більше ніж 2 символи",

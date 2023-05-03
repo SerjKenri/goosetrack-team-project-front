@@ -59,7 +59,6 @@ export const LoginForm = () => {
                 handleSubmit,
                 handleBlur,
                 handleChange,
-                isSubmitting,
             }) => (
                 <LoginFormWrap>
                     <LoginFormContainer>
@@ -137,7 +136,7 @@ export const LoginForm = () => {
                             <LoginButton
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-                                disabled={isSubmitting}
+                                disabled={!values.email || !values.password}
                                 title={t('loginPage.login')}
                                 isMobile={isMobile}
                                 isTablet={isTablet}
@@ -235,7 +234,7 @@ const LoginButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
         width: isMobile ? '287px' : isTablet ? '400px' : '400px',
         paddingLeft: '10px',
         height: '46px',
-        margin: '40px auto 0px',
+        margin: '48px auto 0px',
     },
 }))({});
 

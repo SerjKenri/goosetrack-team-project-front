@@ -21,6 +21,9 @@ import UserForgotPassPage from 'pages/UserForgetPassPage/UserForgetPassPage';
 import ResetPassPage from 'pages/ResetPassPage/ResetPassPage';
 import ResendVerifyEmailPage from 'pages/ResendVerifyEmailPage/ResendVerifyEmailPage';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const App = () => {
     return (
         <Suspense>
@@ -82,6 +85,7 @@ export const App = () => {
                     </Route>
                 </Route>
             </Routes>
+            <ToastContainer />
         </Suspense>
     );
 };

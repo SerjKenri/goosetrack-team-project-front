@@ -12,9 +12,10 @@ export const AuthNav = styled(Link)(({ theme }) => ({
     borderBottom: `1px solid ${theme.color.calendarDateColor}`,
     color: theme.color.accentTextColor,
     textShadow:
-        ' 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)',
+        ' 0px 47px 355px rgba(0, 0, 0, 0.07), 0px 9.4px 57.6875px, rgba(0, 0, 0, 0.035)',
     ' &:hover': {
         borderColor: theme.color.accentColor,
+        
     },
     ':focus ': {
         borderColor: theme.color.accentColor,

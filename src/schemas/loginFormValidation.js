@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-export const useLoginSchema = () => {
+export const useValidationSchema = () => {
     const { t } = useTranslation();
     const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
@@ -19,4 +19,5 @@ export const useLoginSchema = () => {
     return {
         validationSchema,
     };
-};
+}
+

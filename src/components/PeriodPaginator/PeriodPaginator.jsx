@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const PeriodPaginator = ({}) => {
+const PeriodPaginator = () => {
     const navigate = useNavigate();
     const { currentDay } = useParams();
 

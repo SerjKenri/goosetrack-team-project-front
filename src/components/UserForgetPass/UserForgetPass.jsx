@@ -10,11 +10,12 @@ import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
 import GooseLogIn from '../../assets/images/goose-login.png';
 import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
-import { userForgetPassSchema } from 'schemas/userForgetPassValidation';
+import { useForgetPassSchema } from 'schemas/userForgetPassValidation';
 import { useNavigate } from 'react-router-dom';
 
 export const SendMailForgetPass = () => {
     const { t } = useTranslation();
+    const { userForgetPassSchema } = useForgetPassSchema();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onSubmit = (values, { resetForm }) => {

@@ -4,7 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
 // to do translaion.json
-const FRONTEND_BASE_URL = 'http://localhost:3000';
+const FRONTEND_BASE_URL = 'https://serjkenri.github.io';
 
 i18next
     .use(initReactI18next)

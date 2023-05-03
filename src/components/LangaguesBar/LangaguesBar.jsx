@@ -54,18 +54,20 @@ const StyledButton = styled.button`
     text-decoration: none;
     text-align: center;
     text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     border-color: #3498db;
     color: ${props => props.theme.color.iconColor};
-    box-shadow: 0 0 15px 15px #3498db inset, 0 0 0 0 #3498db;
+    box-shadow: 0 0 15px 15px
+            ${props => props.theme.color.accentBackgroundColor} inset,
+        0 0 0 0 #3498db;
     -webkit-transition: all 150ms ease-in-out;
     transition: all 150ms ease-in-out;
     font-family: Georgia;
     :hover,
     :focus,
     :active {
-        color: #3498db;
+        color: ${props => props.theme.color.iconColor};
         box-shadow: 0 0 5px 0 #3498db inset, 0 0 5px 2px #3498db;
     }
 `;

@@ -50,7 +50,7 @@
         "newPassPlaceholder": "Enter your new password",
         "confNewPass": "Confirm password",
         "confPassPlaceholder": "Confirm your new password",
-        "errorRequired": "Required",
+        "errorRequired": "Required field",
         "errorPassword": "Please, enter stronger passwod",
         "minLengthPass": "Password should contain more then 5 characters"
     },
@@ -60,12 +60,13 @@
         "btnTitle": "Go to Login"
     },
     "ResendVerifyEmailForm": {
-        "labelTitleName": "You didn't pass email verification",
+        "labelTitleName": "Resend verification email",
         "textInstruction": "Type in the email you used to register in GooseTrack.",
         "text": "We'll send you a link to finish you verification.",
         "labelTitleEmail": "Email",
         "inputPlaceholderEmail": "Enter your email",
-        "sendEmail": "Send email"
+        "sendEmail": "Send email",
+        "resendEmail": "Resend verification email"
     },
     "sendMailForgetPass": {
         "labelTitleName": "Forgot password?",

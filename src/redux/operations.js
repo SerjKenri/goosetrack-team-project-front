@@ -23,7 +23,7 @@ export const signUpUser = createAsyncThunk(
             setAuthHeader(resp.data.user.token);
 
             // navigate('/calendar/month', { replace: true });
-            alert('You are successfully registered ');
+            alert('You are successfully registered');
             return resp.data;
         } catch (e) {
             alert(e.message);
@@ -72,6 +72,7 @@ export const loginUser = createAsyncThunk(
             console.log(resp);
             return resp.data;
         } catch (error) {
+            alert('Email is not verified');
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -204,10 +205,10 @@ export const resetNewPass = createAsyncThunk(
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchAll',
     async (getParams, thunkAPI) => {
-        // console.log('getParams=>', getParams);
+        console.log('getParams=>', getParams);
         try {
             const response = await axios.get('/tasks', { params: getParams });
-            console.log('response=>>', response);
+
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -231,7 +232,7 @@ export const addTask = createAsyncThunk(
 export const updateTask = createAsyncThunk(
     'tasks/updTask',
     async (task, thunkAPI) => {
-        const { _id, owner, ...update } = task;
+        const { _id, ...update } = task;
 
         try {
             const response = await axios.patch(`/tasks/${_id}`, update);
@@ -246,7 +247,40 @@ export const delTask = createAsyncThunk(
     'tasks/delTask',
     async (taskId, thunkAPI) => {
         try {
-            const response = await axios.delete(`/tasks/${taskId}`);
+            await axios.delete(`/tasks/${taskId}`);
+            return taskId;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const fetchColumns = createAsyncThunk(
+    'columns/fetchColumns',
+    async (_, thunkAPI) => {
+        try {
+            const { auth } = thunkAPI.getState();
+            setAuthHeader(auth.token);
+            const response = await axios.get(`/columns`);
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const updateColumns = createAsyncThunk(
+    'columns/updateColumns',
+    async (body, thunkAPI) => {
+        // console.log('body', body);
+        try {
+            const { auth } = thunkAPI.getState();
+            setAuthHeader(auth.token);
+            const response = await axios.patch(
+                `/columns/${body.source.id}`,
+                body
+            );
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);

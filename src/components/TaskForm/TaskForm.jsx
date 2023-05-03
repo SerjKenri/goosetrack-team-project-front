@@ -17,14 +17,26 @@ import { useMatchMedia } from 'core/hooks/useMatchMedia';
 import { RadioButton } from 'core/kit/RadioButtons';
 // import { taskFormSchema } from 'schemas/taskFormValidation';
 
+import { useLocation } from 'react-router-dom';
+
+
 const TaskForm = ({ columnId, currentTask, closeModal }) => {
+    const {pathname} = useLocation()
     const { t } = useTranslation();
     const { isMobile } = useMatchMedia();
     // const { current } = useParams();
     const dispatch = useDispatch();
     const PRIORITY = ['Low', 'Medium', 'High'];
     // const taskDay = currentTask?.date ? currentTask.date : current;
-    const currentDay = moment(Date.now()).format('YYYY-MM-DD');
+    // const currentDay = moment(Date.now()).format('YYYY-MM-DD');
+
+        // console.log(pathname.slice(14))
+
+    // const date = pathname.slice(14);
+    const date = new Date(pathname.slice(14))
+    const currentDay = moment(date).format('YYYY-MM-DD');
+
+
     // const userId = useSelector(selectUser)
     const taskCreateTime = currentTask?.start
         ? currentTask?.start

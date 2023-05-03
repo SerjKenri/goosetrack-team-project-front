@@ -31,25 +31,29 @@ const taskSlice = createSlice({
             .addCase(addTask.pending, handlePending)
             .addCase(addTask.rejected, handleRejected)
             .addCase(addTask.fulfilled, (state, { payload }) => {
-                state.tasks.items.push(payload);
-            })
+                state.tasks.isLoading = false;
+                state.tasks.error = null;            })
             .addCase(updateTask.pending, handlePending)
             .addCase(updateTask.rejected, handleRejected)
             .addCase(updateTask.fulfilled, (state, { payload }) => {
-                const index = state.tasks.items.findIndex(
-                    task => task._id === payload._id
-                    );
-                if (index !== -1) {
-                    state.tasks.items[index] = payload;
-                }
+                state.tasks.isLoading = false;
+                state.tasks.error = null;
+                // const index = state.tasks.items.findIndex(
+                //     task => task._id === payload._id
+                //     );
+                // if (index !== -1) {
+                //     state.tasks.items[index] = payload;
+                // }
             })
             .addCase(delTask.pending, handlePending)
             .addCase(delTask.rejected, handleRejected)
             .addCase(delTask.fulfilled, (state, action) => {
-                console.log('action', action);
-                state.tasks.items = state.tasks.items.filter(
-                    task => task._id !== action.payload
-                );
+                state.tasks.isLoading = false;
+                state.tasks.error = null;
+                // console.log('action', action);
+                // state.tasks.items = state.tasks.items.filter(
+                //     task => task._id !== action.payload
+                // );
             });
     },
 });

@@ -106,7 +106,7 @@ export const ResendVerifyEmailForm = () => {
                                 }}
                             ></Button>
                         </Form>
-                        <AuthNavigate route={ROUTING.LOGIN} content="Log In" />
+                        <AuthNavigate route={ROUTING.LOGIN} content={t('loginPage.login')} />
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
                             src={`${GooseLogIn}`}

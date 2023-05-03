@@ -11,7 +11,7 @@ import {
     selectUserBirthday,
     selectUserAvatar,
     selectUserTelegram,
-    selectUserState,
+    // selectUserState,
 } from '../../redux/auth/auth.selectors';
 
 import { useFormValidation } from 'schemas/userFormValidation';

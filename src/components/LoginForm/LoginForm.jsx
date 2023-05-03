@@ -41,13 +41,10 @@ export const LoginForm = () => {
                         })
                     );
                     if (result) {
-                        // toast.success('Login is successful');
-                        // toast.success(`${t('loginPage.toastSuccess')}`);
                         setSubmitting(false);
                         resetForm();
                     }
                 } catch (error) {
-                    // toast.error('Email or password is wrong');
                     toast.error(`${t('loginPage.toastError')}`);
                 }
             }}
@@ -59,7 +56,6 @@ export const LoginForm = () => {
                 handleSubmit,
                 handleBlur,
                 handleChange,
-                isSubmitting,
             }) => (
                 <LoginFormWrap>
                     <LoginFormContainer>
@@ -82,7 +78,7 @@ export const LoginForm = () => {
                                     marginTop: '32px',
                                 }}
                                 inputStyle={{
-                                    borderRadius: '8px',
+                                    fontWeight:'400',
                                     height: '46px',
                                     backgroundColor:
                                         theme.color.calendarCellColor,
@@ -90,6 +86,7 @@ export const LoginForm = () => {
                                         touched.email && errors.email
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
+                                    
                                 }}
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
@@ -115,7 +112,7 @@ export const LoginForm = () => {
                                     marginTop: '24px',
                                 }}
                                 inputStyle={{
-                                    borderRadius: '8px',
+                                    fontWeight:'400',
                                     height: '46px',
                                     backgroundColor:
                                         theme.color.calendarCellColor,
@@ -137,7 +134,7 @@ export const LoginForm = () => {
                             <LoginButton
                                 type="submit"
                                 differentStyles={ButtonDifference.primary}
-                                disabled={isSubmitting}
+                                disabled={!values.email || !values.password}
                                 title={t('loginPage.login')}
                                 isMobile={isMobile}
                                 isTablet={isTablet}
@@ -235,13 +232,13 @@ const LoginButton = styled(Button).attrs(({ theme, isTablet, isMobile }) => ({
         width: isMobile ? '287px' : isTablet ? '400px' : '400px',
         paddingLeft: '10px',
         height: '46px',
-        margin: '40px auto 0px',
+        margin: '48px auto 0px',
     },
 }))({});
 
-const LangWrap = styled.div`
+export const LangWrap = styled.div`
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
 `;
 
 

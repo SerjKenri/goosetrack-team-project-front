@@ -24,8 +24,8 @@ const PeriodPaginator = ({}) => {
     );
 
     const monthName = moment(currentDay).format('DD MMMM YYYY');
-    today.clone().subtract(1, 'day');
-    today.clone().add(1, 'day');
+    // today.clone().subtract(1, 'day');
+    // today.clone().add(1, 'day');
 
     const handlePrev = () => {
         const prev = today.clone().subtract(1, 'day');

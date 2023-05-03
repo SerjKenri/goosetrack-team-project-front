@@ -13,7 +13,6 @@ const PeriodPaginator = ({}) => {
     const { currentDay } = useParams();
 
     const [today, setToday] = useState(moment(currentDay));
-    console.log(today);
 
     // const periodTitle = usePeriodTitle(periodType, date);
 

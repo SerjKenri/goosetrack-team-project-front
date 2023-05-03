@@ -69,7 +69,7 @@ const Button = ({
             >
                 {iconName && (
                     <IconContainer>
-                        <Icon name={iconName} size={iconSize} />
+                        <Icon name={iconName} size={iconSize}/>
                     </IconContainer>
                 )}
 
@@ -94,7 +94,7 @@ Button.propTypes = {
     buttonStyle: propTypes.object,
     textStyle: propTypes.object,
     iconName: propTypes.string,
-    iconSize: propTypes.string,
+    iconSize: propTypes.string,    
 };
 
 // ===========================================================
@@ -162,4 +162,5 @@ const ButtonWrapper = styled.button(({ differentStyles, disabled, theme }) => ({
 
 const IconContainer = styled.div(({ theme }) => ({
     color: theme.color.btnTextColor,
+    marginTop:'5px'
 }));

@@ -98,7 +98,7 @@ const VerifySuccessFormTitle = styled.h1`
         text-align: center;
         font-weight: 600;
         font-size: 34px;
-        line-height: 24px;
+        line-height: 46px;
         color: ${theme.color.accentTextColor};
         text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07)
         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);

@@ -11,34 +11,48 @@ import { useNavigate } from 'react-router-dom';
 const PeriodPaginator = () => {
     const navigate = useNavigate();
     const { currentDay } = useParams();
+    console.log(useParams());
 
     const [today, setToday] = useState(moment(currentDay));
 
     // const periodTitle = usePeriodTitle(periodType, date);
 
     // const firstWeek = today.clone().startOf('isoWeek');
-    const day = today.clone().subtract(1, 'day');
+
+    let params = window.location.pathname.split('/');
+    let param = params[3];
+
+    console.log(param);
+
+    const day = today.clone().subtract(1, `${param}`);
     const daysInWeek = 7;
     const totalDays = [...Array(daysInWeek)].map(() =>
         day.add(1, 'day').clone()
     );
 
-    const monthName = moment(currentDay).format('DD MMMM YYYY');
+    const changePeriod = param === 'month' ? 'MMMM YYYY' : 'DD MMMM YYYY';
+    const changeNavigatePeriod = param === 'month' ? 'YYYY-MM' : 'YYYY-MM-DD';
+
+    const monthName = moment(currentDay).format(`${changePeriod}`);
     // today.clone().subtract(1, 'day');
     // today.clone().add(1, 'day');
 
     const handlePrev = () => {
-        const prev = today.clone().subtract(1, 'day');
+        const prev = today.clone().subtract(1, `${param}`);
 
         setToday(prev);
-        navigate(`/calendar/day/${prev.format('YYYY-MM-DD')}`);
+        navigate(
+            `/calendar/${param}/${prev.format(`${changeNavigatePeriod}`)}`
+        );
     };
 
     const handleNext = () => {
-        const next = today.clone().add(1, 'day');
+        const next = today.clone().add(1, `${param}`);
 
         setToday(next);
-        navigate(`/calendar/day/${next.format('YYYY-MM-DD')}`);
+        navigate(
+            `/calendar/${param}/${next.format(`${changeNavigatePeriod}`)}`
+        );
     };
 
     const firstDay = totalDays.slice(0, 1);

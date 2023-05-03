@@ -51,7 +51,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                     const dayTasks = tasks.filter(
                         task => task.date === day.format('YYYY-MM-DD')
                     );
-                    console.log(dayTasks, day.format('YYYY-MM-DD'));
+                    // console.log(dayTasks, day.format('YYYY-MM-DD'));
                     return (
                         <CalendarLink
                             to={`/calendar/day/${day.format('YYYY-MM-DD')}`}

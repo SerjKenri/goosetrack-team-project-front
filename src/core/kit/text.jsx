@@ -124,7 +124,12 @@ export const AuthFormTitleMobile = styled.p(({ theme }) => ({
     lineHeight: '1.25',
     fontWeight: '600',
     fontFamily: theme.font.mainFont,
-    color: theme.color.navTitleColor,
+    marginBottom:"10px",
+
+    [theme.media.up(`${theme.breakpoints.l}px`)]: {
+        fontSize: '18px',
+        lineHeight: '1.33',
+    },
 }));
 
 export const MainDate = styled.h3(({ theme }) => ({

@@ -11,6 +11,7 @@ import {
     selectUserBirthday,
     selectUserAvatar,
     selectUserTelegram,
+    selectUserState,
 } from '../../redux/auth/auth.selectors';
 
 import { useFormValidation } from 'schemas/userFormValidation';
@@ -43,9 +44,6 @@ export const UserForm = () => {
     const telegram = useSelector(selectUserTelegram);
     const avatarURL = useSelector(selectUserAvatar);
     const birthday = useSelector(selectUserBirthday) || Date.now();
-    
-    console.log(name)
-
     const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
 
     const [userImage, setUserImage] = useState(avatarURL);
@@ -87,7 +85,7 @@ export const UserForm = () => {
                         telegram,
                     }}
                     validationSchema={userFormSchema}
-                    onSubmit={async (values, { setSubmitting }) => {
+                    onSubmit={(values, { setSubmitting }) => {
                         if (email === values.email) {
                             if (userImage) {
                                 formData.append('avatarURL', userImage);
@@ -105,8 +103,8 @@ export const UserForm = () => {
                             if (values.telegram) {
                                 formData.append('messenger', values.telegram);
                             }
-                            console.log(formData);
-                            await dispatch(updateUser(formData)).unwrap();
+
+                            dispatch(updateUser(formData));
                             // window.location.reload();
                         } else {
                             setIsShow(true);
@@ -126,7 +124,7 @@ export const UserForm = () => {
                             if (values.telegram) {
                                 formData.append('messenger', values.telegram);
                             }
-                            await dispatch(updateUser(formData)).unwrap();
+                            dispatch(updateUser(formData));
                             // location.reload();
                         }
 

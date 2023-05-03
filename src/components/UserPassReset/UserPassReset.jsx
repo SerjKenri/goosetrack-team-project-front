@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { useParams } from 'react-router-dom';
 
 import { Button, ButtonDifference } from 'core/kit/Button';
@@ -16,6 +16,7 @@ import { useForgetPassSchema } from 'schemas/userPassResetSchema';
 
 export const UserPassReset = () => {
     const { t } = useTranslation();
+    const theme = useTheme();
     const { passResetSchema } = useForgetPassSchema();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -70,6 +71,8 @@ export const UserPassReset = () => {
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
+                                    backgroundColor:
+                                        theme.color.calendarCellColor,
                                     border:
                                         touched.newPassword &&
                                         errors.newPassword

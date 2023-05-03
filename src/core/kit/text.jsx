@@ -126,7 +126,7 @@ export const AuthFormTitleMobile = styled.p(({ theme }) => ({
     fontFamily: theme.font.mainFont,
     marginBottom:"10px",
 
-    [theme.media.up(`${theme.breakpoints.l}px`)]: {
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
         fontSize: '18px',
         lineHeight: '1.33',
     },

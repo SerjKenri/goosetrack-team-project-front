@@ -135,9 +135,9 @@ const ButtonWrapper = styled.button(({ differentStyles, disabled, theme }) => ({
         differentStyles === ButtonDifference.addTask
             ? `1px dashed ${theme.color.accentColor}`
             : 'none',
-    cursor: disabled ? 'default' : 'pointer',
+    cursor: disabled ? 'not-allowed' : 'pointer',
     fill: 'white',
-
+    
     boxShadow: disabled
         ? 'none'
         : differentStyles === ButtonDifference.primary
@@ -162,5 +162,5 @@ const ButtonWrapper = styled.button(({ differentStyles, disabled, theme }) => ({
 
 const IconContainer = styled.div(({ theme }) => ({
     color: theme.color.btnTextColor,
-    marginTop:'5px'
+    marginTop:'5px',
 }));

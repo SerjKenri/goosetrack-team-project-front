@@ -23,7 +23,7 @@ export const LoginForm = () => {
     
     const dispatch = useDispatch();
     const { validationSchema } = useValidationSchema();
-   
+
     return (
         <Formik
             initialValues={{
@@ -40,7 +40,7 @@ export const LoginForm = () => {
                         })
                     );
                     if (result) {
-                        toast.success('Login is successful');
+                        // toast.success('Login is successful');
                         setSubmitting(false);
                         resetForm();
                     }
@@ -48,7 +48,6 @@ export const LoginForm = () => {
                     toast.error('Email or password is wrong');
                 }
             }}
-            
         >
             {({
                 errors,
@@ -114,7 +113,6 @@ export const LoginForm = () => {
                                         touched.password && errors.password
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
-                                    
                                 }}
                                 handleBlur={handleBlur}
                                 onChange={handleChange}

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:4000/api';
 
@@ -23,10 +24,10 @@ export const signUpUser = createAsyncThunk(
             setAuthHeader(resp.data.user.token);
 
             // navigate('/calendar/month', { replace: true });
-            alert('You are successfully registered');
+            toast.success('You are successfully registered');
             return resp.data;
         } catch (e) {
-            alert(e.message);
+            toast.warning('User have been registered already');
             return thunkAPI.rejectWithValue(e.message);
         }
     }
@@ -55,7 +56,7 @@ export const sendMailForVerify = createAsyncThunk(
             //     userMailData
             // );
 
-            alert('Email is successfully send');
+            toast.success('Email is successfully send');
             return resp.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -69,10 +70,10 @@ export const loginUser = createAsyncThunk(
         try {
             const resp = await axios.post('/auth/login', userRegData);
             setAuthHeader(resp.data.user.token);
-            console.log(resp);
+            // console.log(resp);
             return resp.data;
         } catch (error) {
-            alert('Email is not verified');
+            toast.error('Email is not verified');
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -91,7 +92,7 @@ export const refreshUser = createAsyncThunk(
         setAuthHeader(state.user.token);
         try {
             const resp = await axios.get('/auth/login');
-            console.log(resp);
+            // console.log(resp);
             return resp.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -123,7 +124,7 @@ export const currentUser = createAsyncThunk(
             const { auth } = getState();
             setAuthHeader(auth.token);
             const response = await axios.get('/user/current');
-            console.log(response.data);
+            // console.log(response.data);
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);
@@ -153,8 +154,8 @@ export const changePass = createAsyncThunk(
         try {
             const resp = await axios.patch('/user/update-pass', userPassData);
             setAuthHeader(resp.data.user.token);
-            alert('Password is successfully updated');
-            console.log('pass resnonse resp.data', resp.data);
+            toast.success('Password is successfully updated');
+            // console.log('pass resnonse resp.data', resp.data);
             return resp.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -171,7 +172,7 @@ export const sendMailForPass = createAsyncThunk(
             //     userMailData
             // );
             const resp = await axios.post('/auth/restore-pass', userMailData);
-            alert('Email is successfully send');
+            toast.success('Email is successfully send');
             return resp.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -191,7 +192,7 @@ export const resetNewPass = createAsyncThunk(
             const resp = await axios.patch(`/auth/reset-pass/${passToken}`, {
                 newPassword: newPassword,
             });
-            alert('Password is successfully updated');
+            toast.success('Password is successfully updated');
             return resp.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -205,7 +206,7 @@ export const resetNewPass = createAsyncThunk(
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchAll',
     async (getParams, thunkAPI) => {
-        console.log('getParams=>', getParams);
+        // console.log('getParams=>', getParams);
         try {
             const response = await axios.get('/tasks', { params: getParams });
 
@@ -219,7 +220,7 @@ export const fetchTasks = createAsyncThunk(
 export const addTask = createAsyncThunk(
     'tasks/addTask',
     async (body, thunkAPI) => {
-        console.log(body);
+        // console.log(body);
         try {
             const response = await axios.post('/tasks', body);
             return response.data;

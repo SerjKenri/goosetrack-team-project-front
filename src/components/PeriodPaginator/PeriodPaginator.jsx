@@ -8,11 +8,12 @@ import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const PeriodPaginator = ({ periodType, date, setDate }) => {
+const PeriodPaginator = ({}) => {
     const navigate = useNavigate();
     const { currentDay } = useParams();
 
     const [today, setToday] = useState(moment(currentDay));
+    console.log(today);
 
     // const periodTitle = usePeriodTitle(periodType, date);
 
@@ -23,13 +24,27 @@ const PeriodPaginator = ({ periodType, date, setDate }) => {
         day.add(1, 'day').clone()
     );
 
-    // console.log(totalDays);
-
     const monthName = moment(currentDay).format('DD MMMM YYYY');
     today.clone().subtract(1, 'day');
     today.clone().add(1, 'day');
+
+    const handlePrev = () => {
+        const prev = today.clone().subtract(1, 'day');
+
+        setToday(prev);
+        navigate(`/calendar/day/${prev.format('YYYY-MM-DD')}`);
+    };
+
+    const handleNext = () => {
+        const next = today.clone().add(1, 'day');
+
+        setToday(next);
+        navigate(`/calendar/day/${next.format('YYYY-MM-DD')}`);
+    };
+
     const firstDay = totalDays.slice(0, 1);
     const TwoDay = totalDays.slice(1, 2);
+
     return (
         <RootWrapper>
             <DateParagraph>{monthName}</DateParagraph>
@@ -37,20 +52,7 @@ const PeriodPaginator = ({ periodType, date, setDate }) => {
                 {firstDay.map(i => {
                     // console.log(today);
                     return (
-                        <PrevBtn
-                            key={i}
-                            onClick={() => {
-                                setToday(
-                                    moment(i.format('YYYY-MM-DD')).subtract(
-                                        1,
-                                        'day'
-                                    )
-                                );
-                                navigate(
-                                    `/calendar/day/${i.format('YYYY-MM-DD')}`
-                                );
-                            }}
-                        >
+                        <PrevBtn key={i} onClick={handlePrev}>
                             <Icon name={iconNames.chevronLeft} size="18" />
                         </PrevBtn>
                     );
@@ -58,15 +60,7 @@ const PeriodPaginator = ({ periodType, date, setDate }) => {
                 {TwoDay.map(i => {
                     // console.log(today);
                     return (
-                        <NextBtn
-                            key={i}
-                            onClick={() => {
-                                setToday(moment(i.format('YYYY-MM-DD')));
-                                navigate(
-                                    `/calendar/day/${i.format('YYYY-MM-DD')}`
-                                );
-                            }}
-                        >
+                        <NextBtn key={i} onClick={handleNext}>
                             <Icon name={iconNames.chevronRight} size="18" />
                         </NextBtn>
                     );

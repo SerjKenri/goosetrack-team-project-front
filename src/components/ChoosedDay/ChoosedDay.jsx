@@ -18,7 +18,6 @@ export const ChoosedDay = () => {
     const currentMonth = currentDay.slice(5, 7);
     const chooseDay = moment().day(date - 3);
     const chooseWeek = [];
-
     let day = chooseDay;
     while (day <= chooseDay) {
         for (let i = chooseDay; i < chooseDay + 7; i++) {
@@ -35,7 +34,6 @@ export const ChoosedDay = () => {
 
     const isMobileView = window.innerWidth < 768;
 
-    console.log(day.format('YYYY-MM-DD'))
     return (
         <>
             <CalendarContainer>
@@ -68,7 +66,11 @@ export const ChoosedDay = () => {
                     })}
                 </CalendarWrapper>
             </CalendarContainer>
-            <TasksColumnsList tasks={currentTasks} />
+            <TasksColumnsList
+                currentDate={{ year: currentYear, month: currentMonth }} // u should use date here
+                withScrollableColumns
+                tasks={currentTasks}
+            />
         </>
     );
 };

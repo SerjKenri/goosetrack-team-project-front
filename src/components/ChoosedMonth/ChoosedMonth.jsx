@@ -12,16 +12,13 @@ export const ChoosedMonth = () => {
     const currentYear = currentDate.slice(0, 4);
     const currentMonth = currentDate.slice(5, 7);
 
-    console.log(currentMonth);
     const tasks = useSelector(selectTasks);
-    console.log(tasks);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchTasks({ year: currentYear, month: currentMonth }));
     }, [currentMonth, currentYear, dispatch]);
-    // const a = fetchTasks;
-    // console.log(a);
+
     return (
         <>
             <CalendarTable tasks={tasks} />

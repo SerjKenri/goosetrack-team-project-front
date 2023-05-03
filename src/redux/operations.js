@@ -23,7 +23,7 @@ export const signUpUser = createAsyncThunk(
             setAuthHeader(resp.data.user.token);
 
             // navigate('/calendar/month', { replace: true });
-            alert('You are successfully registered ');
+            alert('You are successfully registered');
             return resp.data;
         } catch (e) {
             alert(e.message);
@@ -72,6 +72,7 @@ export const loginUser = createAsyncThunk(
             console.log(resp);
             return resp.data;
         } catch (error) {
+            alert('Email is not verified');
             return thunkAPI.rejectWithValue(error.message);
         }
     }

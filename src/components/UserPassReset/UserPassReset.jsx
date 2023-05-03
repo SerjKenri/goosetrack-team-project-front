@@ -12,16 +12,16 @@ import { ROUTING } from 'core/utils/constantsRouting';
 import GooseLogIn from '../../assets/images/goose-login.png';
 import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 import { useNavigate } from 'react-router-dom';
-import { userPassResetSchema } from 'schemas/userPassResetSchema';
+import { useForgetPassSchema } from 'schemas/userPassResetSchema';
 
 export const UserPassReset = () => {
     const { t } = useTranslation();
+    const { passResetSchema } = useForgetPassSchema();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { passToken } = useParams();
 
     const onSubmit = (values, { resetForm }) => {
-        console.log('verificationToken', passToken);
         dispatch(
             resetNewPass({
                 newPassword: values.newPassword,
@@ -37,7 +37,7 @@ export const UserPassReset = () => {
                 newPassword: '',
                 confirmPassword: '',
             }}
-            validationSchema={userPassResetSchema}
+            validationSchema={passResetSchema}
             onSubmit={onSubmit}
         >
             {({

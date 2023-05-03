@@ -7,12 +7,14 @@ import { Button, ButtonDifference } from 'core/kit/Button';
 import { changePass } from 'redux/operations';
 import { Input } from 'core/kit/Input';
 import { useTranslation } from 'react-i18next';
-import { userUpdPassSchema } from 'schemas/userPassUpdValidation';
+import { useUpdPassSchema } from 'schemas/userPassUpdValidation';
 import { TextH2 } from 'core/kit/text';
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 export const ChangeUserPass = () => {
     const { t } = useTranslation();
+    const { updPassSchema } = useUpdPassSchema();
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -36,7 +38,7 @@ export const ChangeUserPass = () => {
                     newPassword: '',
                     confirmPassword: '',
                 }}
-                validationSchema={userUpdPassSchema}
+                validationSchema={updPassSchema}
                 onSubmit={onSubmit}
             >
                 {({
@@ -47,7 +49,6 @@ export const ChangeUserPass = () => {
                     handleBlur,
                     handleChange,
                 }) => (
-                    // <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
                             <TextH2>
@@ -178,17 +179,7 @@ export const ChangeUserPass = () => {
                                 title={t('chengePassPage.labelTitleName')}
                             />
                         </Form>
-                        {/* <AuthNavigate
-                            route={ROUTING.REGISTER}
-                            content="Sign up"
-                        /> */}
-                        {/* <LoginImg
-                                srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}
-                                src={`${GooseLogIn}`}
-                                alt="goose"
-                            /> */}
                     </LoginFormContainer>
-                    /* </LoginFormWrap> */
                 )}
             </Formik>
         </Container>

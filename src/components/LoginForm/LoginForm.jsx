@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { loginUser } from 'redux/operations';
 import { Formik } from 'formik';
-import { validationSchema } from 'schemas/loginFormValidation';
+import { useLoginSchema } from 'schemas/loginFormValidation';
 import { useTranslation } from 'react-i18next';
 
 import { ButtonDifference, Button } from '../../core/kit/Button';
@@ -17,7 +17,8 @@ import { ROUTING } from 'core/utils/constantsRouting';
 import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
+    const { validationSchema } = useLoginSchema();
 
     const dispatch = useDispatch();
     const onSubmit = (values, { resetForm }) => {
@@ -29,7 +30,6 @@ export const LoginForm = () => {
         );
         resetForm();
     };
-
     return (
         <Formik
             initialValues={{
@@ -51,12 +51,16 @@ export const LoginForm = () => {
                 <LoginFormWrap>
                     <LoginFormContainer>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
-                            <LoginFormTitle>{t('loginPage.login')}</LoginFormTitle>
+                            <LoginFormTitle>
+                                {t('loginPage.login')}
+                            </LoginFormTitle>
                             <Input
                                 name="email"
                                 type="email"
                                 labelTitle={t('loginPage.email')}
-                                placeholder={t('signUpPage.inputPlaceholderEmail')}
+                                placeholder={t(
+                                    'signUpPage.inputPlaceholderEmail'
+                                )}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -85,7 +89,9 @@ export const LoginForm = () => {
                                 name="password"
                                 type="password"
                                 labelTitle={t('loginPage.password')}
-                                placeholder={t('signUpPage.inputPlaceholderPassword')}
+                                placeholder={t(
+                                    'signUpPage.inputPlaceholderPassword'
+                                )}
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -133,6 +139,9 @@ export const LoginForm = () => {
                         />
                         <NavToRestorePass to={`/${ROUTING.RESTORE_PASS}`}>
                             {t('sendMailForgetPass.labelTitleName')}
+                        </NavToRestorePass>
+                        <NavToRestorePass to={`/${ROUTING.RESEND_VERIFY}`}>
+                            {t('ResendVerifyEmailForm.resendEmail')}
                         </NavToRestorePass>
                         <LoginImg
                             srcset={`${GooseLogIn} 1x, ${GooseLogIn2x} 2x`}

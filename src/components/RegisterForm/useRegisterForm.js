@@ -15,12 +15,16 @@ export const useRegisterForm = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email('errorEmail').required('errorRequired'),
-        name: Yup.string().min(2, 'minLengthName').required('errorRequired'),
+        email: Yup.string()
+            .email(`${t('signUpPage.errorEmail')}`)
+            .required(`${t('signUpPage.errorRequired')}`),
+        name: Yup.string()
+            .min(2, `${t('signUpPage.minLengthName')}`)
+            .required(`${t('signUpPage.errorRequired')}`),
         password: Yup.string()
-            .min(5, 'minLengthPass')
-            .matches(passwordRules, 'errorPassword')
-            .required('errorRequired'),
+            .min(5, `${t('signUpPage.minLengthPass')}`)
+            .matches(passwordRules, `${t('signUpPage.errorPassword')}`)
+            .required(`${t('signUpPage.errorRequired')}`),
     });
     return {
         t,

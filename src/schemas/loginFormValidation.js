@@ -1,13 +1,22 @@
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
-export const validationSchema = yup.object().shape({
-    email: yup
-        .string()
-        .email('Invalid email address')
-        .required('Email is a required field'),
-    password: yup
-        .string()
-        .min(5, 'Password must be at least 5 characters')
-        .max(16, 'Password must be at most 16 characters')
-        .required('Password is a required field'),
-});
+export const useLoginSchema = () => {
+    const { t } = useTranslation();
+    const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+
+    const validationSchema = yup.object().shape({
+        email: yup
+            .string()
+            .email(`${t('signUpPage.errorEmail')}`)
+            .required(`${t('signUpPage.errorRequired')}`),
+        password: yup
+            .string()
+            .min(5, `${t('signUpPage.minLengthPass')}`)
+            .matches(passwordRules, `${t('signUpPage.errorPassword')}`)
+            .required(`${t('signUpPage.errorRequired')}`),
+    });
+    return {
+        validationSchema,
+    };
+};

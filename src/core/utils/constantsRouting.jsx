@@ -9,5 +9,5 @@ export const ROUTING = {
     LOGIN: '/login',
     REGISTER: '/register',
     VERIFY: 'verify/:verificationToken',
-    RESEND_VERIFY: '/verify',
+    RESEND_VERIFY: 'verify',
 };

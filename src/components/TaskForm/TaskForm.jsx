@@ -30,9 +30,9 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const defaultEndTime = moment(addMinutes(60)).format('HH:mm');
     const columns = useSelector(state => state.columns.columns.items);
 
-    const [title, setTitle] = useState(currentTask?.title ?? '');
-    const [start, setStart] = useState(currentTask?.start ?? taskCreateTime);
-    const [end, setEnd] = useState(currentTask?.end ?? defaultEndTime);
+    // const [title, setTitle] = useState(currentTask?.title ?? '');
+    // const [start, setStart] = useState(currentTask?.start ?? taskCreateTime);
+    // const [end, setEnd] = useState(currentTask?.end ?? defaultEndTime);
     const [priority, setPriority] = useState(currentTask?.priority ?? 'low');
 
     // const isValidStartTime = (day, time) => {
@@ -41,11 +41,16 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     // };
     // const isValidEndTime = start <= end;
 
-    const onSubmit = e => {
-        e.preventDefault();
+    const onSubmit = values => {
+        // e.preventDefault();
 
         if (currentTask) {
-            const taskToUpdate = { title, start, end, priority };
+            const taskToUpdate = {
+                title: values.title,
+                start: values.start,
+                end: values.end,
+                priority,
+            };
 
             dispatch(
                 updateTask({
@@ -62,14 +67,14 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
             );
             const taskToAdd = {
                 columnId,
-                title,
-                start,
-                end,
+                title: values.title,
+                start: values.start,
+                end: values.end,
                 priority,
                 category: currentColumn[0].columnName,
                 date: currentDay,
             };
-
+            console.log(taskToAdd);
             dispatch(addTask(taskToAdd));
             closeModal();
             return;
@@ -79,9 +84,9 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     return (
         <Formik
             initialValues={{
-                title: '',
-                start: '',
-                end: '',
+                title: currentTask?.title || '',
+                start: currentTask?.start ?? taskCreateTime,
+                end: currentTask?.end ?? defaultEndTime,
             }}
             // validationSchema={userFormSchema}
             onSubmit={onSubmit}
@@ -94,23 +99,25 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                             'calendarPage.popup.todoName.placeholder'
                         )}
                         name="title"
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        value={formik.values.title}
+                        onChange={formik.handleChange}
                         errors={formik.errors}
                     />
                     <TimeContainer>
                         <FormInput
                             labelTitle={t('calendarPage.popup.period.start')}
                             type="time"
-                            value={start}
-                            onChange={e => setStart(e.target.value)}
+                            name="start"
+                            value={formik.values.start}
+                            onChange={formik.handleChange}
                             errors={formik.errors}
                         />
                         <FormInput
                             labelTitle={t('calendarPage.popup.period.end')}
                             type="time"
-                            value={end}
-                            onChange={e => setEnd(e.target.value)}
+                            name="end"
+                            value={formik.values.end}
+                            onChange={formik.handleChange}
                             errors={formik.errors}
                         />
                     </TimeContainer>
@@ -129,6 +136,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                                         {name}
                                         <RadioInput
                                             type="radio"
+                                            // name={name}
                                             value={name}
                                             checked={isSelected}
                                             onChange={e =>
@@ -170,7 +178,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
 export { TaskForm };
 
 const Form = styled.form(({ theme, isMobile, isDesktop }) => ({
-    outline: '2px solid red',
+    // outline: '2px solid red',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -185,8 +193,8 @@ const Form = styled.form(({ theme, isMobile, isDesktop }) => ({
     height: '336px',
     textTransform: 'capitalize',
     borderRadius: '8px',
-    border: '1px solid rgba(220, 227, 229, 0.8)',
-    boxShadow: '0px 4px 16px rgba(17, 17, 17, 0.1)',
+    // border: '1px solid rgba(220, 227, 229, 0.8)',
+    // boxShadow: '0px 4px 16px rgba(17, 17, 17, 0.1)',
     [theme.media.up(
         `${theme.breakpoints.m}px`
         // `${theme.breakpoints.l}px`

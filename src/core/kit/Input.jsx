@@ -77,7 +77,7 @@ Input.propTypes = {
 const Label = styled.label(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.space.x2,  
+    gap: theme.space.x2,
 }));
 
 const LabelText = styled.p(({ theme }) => ({
@@ -129,7 +129,7 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
 
 const InputContainer = styled.div({
     position: 'relative',
-    display: 'inline-flex',
+    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
 });
@@ -149,7 +149,7 @@ const IconWrapper = styled.div(({ theme, resetButton }) => ({
 const Error = styled.p`
     color: #e74a3b;
     font-size: 12px;
-    height:24px;
+    height: 24px;
     position: absolute;
-    bottom:-28px;
+    bottom: -28px;
 `;

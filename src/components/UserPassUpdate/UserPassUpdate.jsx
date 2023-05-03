@@ -61,12 +61,6 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.oldPassPlaceholder'
                                 )}
-                                labelTextStyle={{
-                                    fontWeight: '600',
-                                    lineHeight: '15px',
-                                    marginBottom: '2px',
-                                    marginTop: '24px',
-                                }}
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
@@ -98,12 +92,6 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.newPassPlaceholder'
                                 )}
-                                labelTextStyle={{
-                                    fontWeight: '600',
-                                    lineHeight: '15px',
-                                    marginBottom: '2px',
-                                    marginTop: '24px',
-                                }}
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
@@ -134,12 +122,6 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.confPassPlaceholder'
                                 )}
-                                labelTextStyle={{
-                                    fontWeight: '600',
-                                    lineHeight: '15px',
-                                    marginBottom: '2px',
-                                    marginTop: '24px',
-                                }}
                                 inputStyle={{
                                     borderRadius: '8px',
                                     height: '46px',
@@ -250,7 +232,8 @@ const FormInput = styled(Input).attrs(
         labelTextStyle: {
             fontSize: isMobile ? '12px' : '14px',
             lineHeight: isMobile ? '1.16' : '1.3',
-            fontWeight: '400',
+            fontWeight: '600',
+
             marginBottom: '2px',
             marginTop: '24px',
         },
@@ -265,9 +248,10 @@ const FormInput = styled(Input).attrs(
             color: theme.color.mainTextColor,
             marginLeft: isDesktop ? '-13%' : '0',
             border:
-                touched.email && errors.email
+                touched.newPassword && errors.newPassword
                     ? '1px solid' + theme.color.taskHighColor
                     : '1px solid' + theme.color.modalBorder,
+            borderRadius: '8px',
         },
     })
 )({});

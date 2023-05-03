@@ -5,28 +5,33 @@ import { SideBar } from 'components/SideBar/SideBar';
 import { Header } from 'components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from 'redux/operations';
-import { selectUserState } from 'redux/auth/auth.selectors';
+import { selectUserState, selectIsLoadingState } from 'redux/auth/auth.selectors';
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
+import { Loader } from 'components/Loader/Loader';
 
 const MainLayout = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
 
     const user = useSelector(selectUserState);
+    const isLoading = useSelector(selectIsLoadingState)
 
     const { isDesktop } = useMatchMedia();
 
-    useEffect(() => {
-        if (isDesktop) {
-            setIsOpen(true);
-        } else setIsOpen(false);
-    }, [isDesktop]);
+    // useEffect(() => {
+    //     if (isDesktop) {
+    //         setIsOpen(true);
+    //     } else setIsOpen(false);
+    // }, [isDesktop]);
 
     useEffect(() => {
         if (user.name === null) {
             dispatch(currentUser());
         }
-    }, [user.name, dispatch]);
+        if (isDesktop) {
+            setIsOpen(true);
+        } else setIsOpen(false);
+    }, [user.name, dispatch, isDesktop]);
 
     const handleClose = () => {
         setIsOpen(prev => !prev);
@@ -37,6 +42,7 @@ const MainLayout = () => {
             {isOpen && <SideBar onClick={handleClose} user={user} />}
             <SecondaryContainer>
                 <Header onClick={handleClose} />
+                {isLoading && <Loader />}
                 {user.name && <Outlet />}
             </SecondaryContainer>
         </LayoutContainer>
@@ -68,5 +74,6 @@ const SecondaryContainer = styled.div(({ theme }) => ({
         gap: '32px',
     },
 }));
+
 
 export default MainLayout;

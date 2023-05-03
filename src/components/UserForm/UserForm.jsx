@@ -44,7 +44,6 @@ export const UserForm = () => {
     const telegram = useSelector(selectUserTelegram);
     const avatarURL = useSelector(selectUserAvatar);
     const birthday = useSelector(selectUserBirthday) || Date.now();
-    console.log(useSelector(selectUserState));
     const formattedDate = format(new Date(birthday), 'yyyy-MM-dd');
 
     const [userImage, setUserImage] = useState(avatarURL);
@@ -55,12 +54,14 @@ export const UserForm = () => {
         setIsShow(false);
         dispatch(logoutUser());
     };
+
     const handleChangeAvatar = e => {
         const file = e.target.files[0];
         const objURL = URL.createObjectURL(file);
         setAvatar(objURL);
         setUserImage(file);
     };
+
     const handleUpload = async () => {
         if (!setUserImage) {
             toast.warning('Please select a file');

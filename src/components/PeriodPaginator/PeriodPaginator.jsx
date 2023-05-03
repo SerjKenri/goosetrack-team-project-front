@@ -1,42 +1,79 @@
-import propTypes from 'prop-types';
 import { Icon } from 'core/kit/Icon';
 import { iconNames } from 'assets/icons/iconNames';
 import styled from 'styled-components';
-import { usePeriodTitle } from 'core/hooks/usePeriodTitle';
-import { toPrevDate, toNextDate } from './tools/modifyDateByPeriod';
+// import { usePeriodTitle } from 'core/hooks/usePeriodTitle';
+// import { toPrevDate, toNextDate } from './tools/modifyDateByPeriod';
+import { useState } from 'react';
+import moment from 'moment';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PeriodPaginator = ({ periodType, date, setDate }) => {
-    const periodTitle = usePeriodTitle(periodType, date);
+    const navigate = useNavigate();
+    const { currentDay } = useParams();
 
-    const handlePrevPeriod = () => {
-        const prevPeriodDate = toPrevDate(date, periodType);
-        setDate(prevPeriodDate);
-    };
+    const [today, setToday] = useState(moment(currentDay));
 
-    const handleNextPeriod = () => {
-        const nextPeriodDate = toNextDate(date, periodType);
-        setDate(nextPeriodDate);
-    };
+    // const periodTitle = usePeriodTitle(periodType, date);
 
+    // const firstWeek = today.clone().startOf('isoWeek');
+    const day = today.clone().subtract(1, 'day');
+    const daysInWeek = 7;
+    const totalDays = [...Array(daysInWeek)].map(() =>
+        day.add(1, 'day').clone()
+    );
+
+    // console.log(totalDays);
+
+    const monthName = moment(currentDay).format('DD MMMM YYYY');
+    today.clone().subtract(1, 'day');
+    today.clone().add(1, 'day');
+    const firstDay = totalDays.slice(0, 1);
+    const TwoDay = totalDays.slice(1, 2);
     return (
         <RootWrapper>
-            <DateParagraph>{periodTitle}</DateParagraph>
+            <DateParagraph>{monthName}</DateParagraph>
             <BtnWrapper>
-                <PrevBtn onClick={handlePrevPeriod}>
-                    <Icon name={iconNames.chevronLeft} size="18" />
-                </PrevBtn>
-                <NextBtn onClick={handleNextPeriod}>
-                    <Icon name={iconNames.chevronRight} size="18" />
-                </NextBtn>
+                {firstDay.map(i => {
+                    // console.log(today);
+                    return (
+                        <PrevBtn
+                            key={i}
+                            onClick={() => {
+                                setToday(
+                                    moment(i.format('YYYY-MM-DD')).subtract(
+                                        1,
+                                        'day'
+                                    )
+                                );
+                                navigate(
+                                    `/calendar/day/${i.format('YYYY-MM-DD')}`
+                                );
+                            }}
+                        >
+                            <Icon name={iconNames.chevronLeft} size="18" />
+                        </PrevBtn>
+                    );
+                })}
+                {TwoDay.map(i => {
+                    // console.log(today);
+                    return (
+                        <NextBtn
+                            key={i}
+                            onClick={() => {
+                                setToday(moment(i.format('YYYY-MM-DD')));
+                                navigate(
+                                    `/calendar/day/${i.format('YYYY-MM-DD')}`
+                                );
+                            }}
+                        >
+                            <Icon name={iconNames.chevronRight} size="18" />
+                        </NextBtn>
+                    );
+                })}
             </BtnWrapper>
         </RootWrapper>
     );
-};
-
-PeriodPaginator.propTypes = {
-    periodType: propTypes.oneOf(['day', 'week', 'month', 'year']).isRequired,
-    date: propTypes.string.isRequired,
-    setDate: propTypes.func.isRequired,
 };
 
 export { PeriodPaginator };

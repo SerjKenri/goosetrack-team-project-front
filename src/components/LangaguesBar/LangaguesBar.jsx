@@ -73,5 +73,5 @@ const StyledButton = styled.button`
 `;
 
 const Wrapper = styled.ul`
-    display: flex;
+    display: flex;    
 `;

@@ -23,7 +23,9 @@
         "email": "Email",
         "password": "Password",
         "signUp": "Sign up",
-        "description": "Quickly come in and write down your tasks for the day!"
+        "description": "Quickly come in and write down your tasks for the day!",
+        "toastError": "Email or password is wrong",
+        "toastSuccess": "Login is successful"
     },
     "signUpPage": {
         "signUp": "Sign up",

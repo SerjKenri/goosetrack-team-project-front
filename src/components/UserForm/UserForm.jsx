@@ -31,6 +31,7 @@ import { useTranslation } from 'react-i18next';
 export const UserForm = () => {
     const filePicker = useRef('');
     const dispatch = useDispatch();
+
     const { isDesktop, isTablet, isMobile } = useMatchMedia();
     const { t } = useTranslation();
     const { userFormSchema } = useFormValidation();
@@ -101,6 +102,7 @@ export const UserForm = () => {
                             }
                             console.log(formData);
                             await dispatch(updateUser(formData)).unwrap();
+                            window.location.reload();
                         } else {
                             setIsShow(true);
                             formData.append('email', values.email);
@@ -120,6 +122,7 @@ export const UserForm = () => {
                                 formData.append('messenger', values.telegram);
                             }
                             await dispatch(updateUser(formData)).unwrap();
+                            // location.reload();
                         }
 
                         setSubmitting(false);

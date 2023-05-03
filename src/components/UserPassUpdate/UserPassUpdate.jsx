@@ -18,7 +18,6 @@ export const ChangeUserPass = () => {
 
     const { isDesktop, isTablet, isMobile } = useMatchMedia();
 
-
     const onSubmit = (values, { resetForm }) => {
         dispatch(
             changePass({
@@ -61,7 +60,6 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.oldPassPlaceholder'
                                 )}
-
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -77,10 +75,8 @@ export const ChangeUserPass = () => {
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
                                 }}
-
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
-
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.currentPassword}
@@ -101,7 +97,6 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.newPassPlaceholder'
                                 )}
-
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -117,10 +112,8 @@ export const ChangeUserPass = () => {
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
                                 }}
-
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
-
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.newPassword}
@@ -132,6 +125,7 @@ export const ChangeUserPass = () => {
                                 touched={touched}
                                 errors={errors}
                             />
+
                             <FormInput
                                 name="confirmPassword"
                                 type="password"
@@ -139,7 +133,6 @@ export const ChangeUserPass = () => {
                                 placeholder={t(
                                     'chengePassPage.confPassPlaceholder'
                                 )}
-
                                 labelTextStyle={{
                                     fontWeight: '600',
                                     lineHeight: '15px',
@@ -155,10 +148,8 @@ export const ChangeUserPass = () => {
                                             ? '1px solid #E74A3B'
                                             : '1px solid rgba(220, 227, 229, 0.6)',
                                 }}
-
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
-
                                 handleBlur={handleBlur}
                                 onChange={handleChange}
                                 value={values.confirmPassword}

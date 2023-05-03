@@ -4,9 +4,7 @@ import moment from 'moment';
 // import { useSelector } from 'react-redux';
 // import { selectTasks } from 'redux/tasks/tasks.selectors';
 
-
 export const CalendarTable = ({ startDay, today, tasks }) => {
-
     let day = moment(startDay).startOf('month').startOf('isoweek');
     const endWeek = moment().endOf('month').endOf('isoweek');
 
@@ -28,9 +26,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
         return today.isSame(month, 'month');
     };
 
-
     // const tasks = useSelector(selectTasks);
-
 
     const isMobileView = window.innerWidth < 768;
 
@@ -54,13 +50,12 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                 ))}
             </DayList>
             <CalendarWrapper>
-
                 {calendarDays.map(day => {
-                    console.log(tasks);
+                    // console.log(tasks);
                     const dayTasks = tasks.filter(
                         task => task.date === day.format('YYYY-MM-DD')
                     );
-                    console.log(dayTasks, day.format('YYYY-MM-DD'));
+                    // console.log(dayTasks, day.format('YYYY-MM-DD'));
                     return (
                         <CalendarLink
                             to={`/calendar/day/${day.format('YYYY-MM-DD')}`}
@@ -82,7 +77,6 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                         </CalendarLink>
                     );
                 })}
-
             </CalendarWrapper>
         </CalendarContainer>
     );

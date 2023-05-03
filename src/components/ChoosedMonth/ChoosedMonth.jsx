@@ -20,8 +20,7 @@ export const ChoosedMonth = () => {
     useEffect(() => {
         dispatch(fetchTasks({ year: currentYear, month: currentMonth }));
     }, [currentMonth, currentYear, dispatch]);
-    // const a = fetchTasks;
-    // console.log(a);
+
     return (
         <>
             <CalendarTable tasks={tasks} />

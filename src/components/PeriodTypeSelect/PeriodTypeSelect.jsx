@@ -12,7 +12,7 @@ export const PeriodTypeSelect = () => {
             <PeriodTypeSelectBtn
                 type="button"
                 onClick={() =>
-                    navigate(`/calendar/month/${moment().format('YYYY-MM-DD')}`)
+                    navigate(`/calendar/month/${moment().format('YYYY-MM')}`)
                 }
             >
                 {t('calendarPage.toggleButton.month')}

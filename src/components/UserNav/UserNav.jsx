@@ -7,7 +7,7 @@ import moment from 'moment';
 
 export const UserNav = () => {
     const { t } = useTranslation();
-    const currentDate = moment().format('YYYY-MM-DD');
+    const currentDate = moment().format('YYYY-MM');
     return (
         <UserNavContainer>
             <LinkWrapper>

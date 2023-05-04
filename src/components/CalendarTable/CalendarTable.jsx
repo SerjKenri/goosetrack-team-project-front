@@ -3,20 +3,19 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 export const CalendarTable = ({ startDay, today, tasks }) => {
-    let day = moment(startDay).startOf('month').startOf('isoweek');
-    const endWeek = moment().endOf('month').endOf('isoweek');
-
+    let calendarDay = moment(startDay).startOf('month');
+    let endWeek = moment(startDay).endOf('month');
     const calendarDays = [];
 
-    while (day <= endWeek) {
+    while (calendarDay <= endWeek) {
         for (let i = 0; i < 7; i++) {
-            calendarDays.push(moment(day));
-            day = moment(day).add(1, 'day');
+            calendarDays.push(moment(calendarDay));
+            calendarDay = moment(calendarDay).add(1, 'day');
         }
     }
 
-    const currentDay = day => {
-        return moment().isSame(day, 'day');
+    const currentDay = calendarDay => {
+        return moment().isSame(calendarDay, 'day');
     };
 
     const isSelectedMonth = month => {
@@ -46,27 +45,34 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                 ))}
             </DayList>
             <CalendarWrapper>
-                {calendarDays.map(day => {
-                    // console.log(tasks);
+                {calendarDays.map(calendarDay => {
                     const dayTasks = tasks.filter(
-                        task => task.date === day.format('YYYY-MM-DD')
+                        task => task.date === calendarDay.format('YYYY-MM-DD')
                     );
-                    // console.log(dayTasks, day.format('YYYY-MM-DD'));
                     return (
                         <CalendarLink
-                            to={`/calendar/day/${day.format('YYYY-MM-DD')}`}
-                            key={day.format('DD-MM-YY')}
+                            to={`/calendar/day/${calendarDay.format(
+                                'YYYY-MM-DD'
+                            )}`}
+                            key={calendarDay.format('DD-MM-YY')}
                         >
                             <CalendarCell
-                                isSelectedMonth={isSelectedMonth(day)}
+                                isSelectedMonth={isSelectedMonth(calendarDay)}
                             >
-                                <CalendarDate currentDay={currentDay(day)}>
-                                    {day.format('D')}
+                                <CalendarDate
+                                    currentDay={currentDay(calendarDay)}
+                                >
+                                    {calendarDay.format('D')}
                                 </CalendarDate>
                                 <DayTasks>
                                     {dayTasks !== [] ? (
                                         dayTasks.map(dayTask => (
-                                            <p>{dayTask.title}</p>
+                                            <DayTask
+                                                key={dayTask.title}
+                                                priority={dayTask.priority}
+                                            >
+                                                {dayTask.title}
+                                            </DayTask>
                                         ))
                                     ) : (
                                         <p></p>
@@ -149,20 +155,46 @@ const CalendarDay = styled.div`
     text-transform: uppercase;
 `;
 const DayTasks = styled.div`
-    text-align: center;
+    /* text-align: center; */
+    align-items: start;
     font-weight: 600;
     font-size: 6px;
     line-height: 1.125;
     text-transform: uppercase;
 `;
+
+const DayTask = styled.p(({ priority, theme }) => ({
+    // text- align: center;
+    fontWeight: '700',
+    fontSize: '14px',
+    lineHeight: '1.3',
+    borderRadius: '8px',
+    maxWidth: '50px',
+    backgroundColor:
+        priority === 'high'
+            ? theme.color.priorityHighColor
+            : priority === 'low'
+            ? theme.color.priorityLowColor
+            : theme.color.priorityMedColor,
+    color:
+        priority === 'high'
+            ? theme.color.taskHighColor
+            : priority === 'low'
+            ? theme.color.taskLowColor
+            : theme.color.taskMedColor,
+}));
+
 const CalendarCell = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
+    align-items: end;
     min-width: 100%;
     min-height: 94px;
-    text-align: right;
-    padding: 12px;
+    /* text-align: right; */
+    padding-top: 12px;
+    padding-right: 12px;
+
     border: 1px solid rgba(220, 227, 229, 0.8);
 `;
 
@@ -176,13 +208,4 @@ const CalendarDate = styled.div`
     border-radius: ${({ currentDay }) => (currentDay ? '6px' : 'none')};
     background-color: ${({ currentDay }) =>
         currentDay ? 'blue' : 'transparent'};
-`;
-
-export const TaskList = styled.ul`
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    list-style-position: inside;
-    padding-left: 4px;
-    gap: 2px;
 `;

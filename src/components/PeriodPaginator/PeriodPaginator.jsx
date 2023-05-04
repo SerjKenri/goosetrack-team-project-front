@@ -10,9 +10,9 @@ import { useNavigate } from 'react-router-dom';
 
 const PeriodPaginator = () => {
     const navigate = useNavigate();
-    const { currentDay } = useParams();
+    const { currentDate } = useParams();
 
-    const [today, setToday] = useState(moment(currentDay));
+    const [today, setToday] = useState(moment(currentDate));
 
     // const periodTitle = usePeriodTitle(periodType, date);
 
@@ -30,7 +30,7 @@ const PeriodPaginator = () => {
     const changePeriod = param === 'month' ? 'MMMM YYYY' : 'DD MMMM YYYY';
     const changeNavigatePeriod = param === 'month' ? 'YYYY-MM' : 'YYYY-MM-DD';
 
-    const monthName = moment(currentDay).format(`${changePeriod}`);
+    const monthName = moment(currentDate).format(`${changePeriod}`);
     // today.clone().subtract(1, 'day');
     // today.clone().add(1, 'day');
 

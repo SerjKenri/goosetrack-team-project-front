@@ -22,7 +22,7 @@ export const RadioButton = ({ value, onChange, checked, priority }) => {
 };
 
 RadioButton.propTypes = {
-    priority: propTypes.oneOf(['Low', 'Medium', 'High']).isRequired,
+    priority: propTypes.oneOf(['low', 'medium', 'high']).isRequired,
     value: propTypes.string.isRequired,
     checked: propTypes.bool.isRequired,
     onChange: propTypes.func.isRequired,

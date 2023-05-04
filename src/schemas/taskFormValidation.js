@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 export const useTaskFormSchema = () => {
     const { t } = useTranslation();
     const status = ['to-do', 'in-progress', 'done'];
-    const priority = ['Low', 'Medium', 'High'];
+    const priority = ['low', 'medium', 'high'];
 
     const taskFormSchema = yup.object().shape({
         title: yup

@@ -116,7 +116,7 @@ const InputComponent = styled.input(({ theme, icon, type, resetButton }) => ({
     //   },
 
     '&::placeholder': {
-        color: theme.color.modalBorder,
+        color: theme.color.inputFieldTextColor,
         fontSize: theme.space.x4 + 'px',
         lineHeight: theme.space.x5 + 'px',
         fontWeight: 400,

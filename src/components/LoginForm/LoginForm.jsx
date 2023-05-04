@@ -22,9 +22,10 @@ export const LoginForm = () => {
     const { t } = useTranslation();
     const { isTablet, isMobile } = useMatchMedia();
     const theme = useTheme();
-    const dispatch = useDispatch();
     const { validationSchema } = useValidationSchema();
 
+    const dispatch = useDispatch();
+    
     return (
         <Formik
             initialValues={{
@@ -205,8 +206,6 @@ const LoginFormTitle = styled.h1`
         font-size: 18px;
         line-height: 24px;
         color: ${theme.color.accentTextColor};
-        text-shadow: 0px 47px 355px rgba(0, 0, 0, 0.07)
-        0px 9.4px 57.6875px rgba(0, 0, 0, 0.035);
         margin-bottom: 8px;
         
         @media (min-width: 768px) {

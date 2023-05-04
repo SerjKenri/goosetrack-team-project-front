@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 export const CalendarTable = ({ startDay, today, tasks }) => {
-    let calendarDay = moment(startDay).startOf('month');
+    let calendarDay = moment(startDay).startOf('month').startOf('week');
     let endWeek = moment(startDay).endOf('month');
     const calendarDays = [];
 
@@ -19,10 +19,12 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
     };
 
     const isSelectedMonth = month => {
-        const today = moment();
+        const today = moment(startDay);
+
+        // const today = moment();
         return today.isSame(month, 'month');
     };
-
+    // console.log(isSelectedMonth());
     const isMobileView = window.innerWidth < 768;
 
     return (
@@ -121,6 +123,7 @@ const DayList = styled.ul`
     font-size: 14px;
     line-height: 1.286;
     color: #616161;
+    background-color: #fff;
 `;
 
 const DayItem = styled.li`
@@ -186,26 +189,29 @@ const DayTask = styled.p(({ priority, theme }) => ({
             : theme.color.taskMedColor,
 }));
 
-const CalendarCell = styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    min-height: 94px;
+const CalendarCell = styled.div(({ isSelectedMonth, theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: '100%',
+    minHeight: '94px',
 
-    padding: 8px;
+    padding: '8px',
+    backgroundColor: isSelectedMonth
+        ? theme.color.mainBackgroundColor
+        : theme.color.modalBorder,
+    border: '1px solid rgba(220, 227, 229, 0.8)',
+}));
 
-    border: 1px solid rgba(220, 227, 229, 0.8);
-`;
-
-const CalendarDate = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    width: 22px;
-    height: 22px;
-    color: ${({ currentDay }) => (currentDay ? 'white' : 'black')};
-    border-radius: ${({ currentDay }) => (currentDay ? '6px' : 'none')};
-    background-color: ${({ currentDay }) =>
-        currentDay ? 'blue' : 'transparent'};
-`;
+const CalendarDate = styled.div(({ currentDay, theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    width: '22px',
+    height: '22px',
+    color: currentDay ? theme.color.btnTextColor : theme.color.mainTextColor,
+    borderRadius: currentDay ? '6px' : 'none',
+    backgroundColor: currentDay
+        ? theme.color.accentBackgroundColor
+        : 'transparent',
+}));

@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 const PeriodPaginator = () => {
     const navigate = useNavigate();
     const { currentDate, currentDay } = useParams();
-    console.log(useParams());
 
     let params = window.location.pathname.split('/');
     let param = params[3];
@@ -23,8 +22,6 @@ const PeriodPaginator = () => {
     // const periodTitle = usePeriodTitle(periodType, date);
 
     // const firstWeek = today.clone().startOf('isoWeek');
-
-    console.log(param);
 
     const day = today.clone().subtract(1, `${param}`);
     const daysInWeek = 7;

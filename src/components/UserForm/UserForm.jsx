@@ -85,7 +85,7 @@ export const UserForm = () => {
                         telegram,
                     }}
                     validationSchema={userFormSchema}
-                    onSubmit={(values, { setSubmitting }) => {
+                    onSubmit={async (values, { setSubmitting }) => {
                         if (email === values.email) {
                             if (userImage) {
                                 formData.append('avatarURL', userImage);
@@ -104,8 +104,7 @@ export const UserForm = () => {
                                 formData.append('messenger', values.telegram);
                             }
 
-                            dispatch(updateUser(formData));
-                            // window.location.reload();
+                            await dispatch(updateUser(formData));
                         } else {
                             setIsShow(true);
                             formData.append('email', values.email);
@@ -124,8 +123,7 @@ export const UserForm = () => {
                             if (values.telegram) {
                                 formData.append('messenger', values.telegram);
                             }
-                            dispatch(updateUser(formData));
-                            // location.reload();
+                            await dispatch(updateUser(formData));
                         }
                         toast.success('Your account has been updated');
                         setSubmitting(false);
@@ -175,101 +173,119 @@ export const UserForm = () => {
                                 isMobile={isMobile}
                                 isDesktop={isDesktop}
                             >
-                                <FormInput
-                                    labelTitle={t('userProfilePage.userName')}
-                                    name="name"
-                                    placeholder={t(
-                                        'userProfilePage.userNamePlaceholder'
-                                    )}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.name}
-                                    {...formik.getFieldProps('name')}
-                                    isMobile={isMobile}
-                                    touched={formik.touched}
-                                    errors={formik.errors}
-                                />
-                                {formik.touched.name && formik.errors.name ? (
-                                    <ErrorMessage>
-                                        {formik.errors.name}
-                                    </ErrorMessage>
-                                ) : null}
-
-                                <FormInput
-                                    type="date"
-                                    labelTitle={t('userProfilePage.birthday')}
-                                    name="birthday"
-                                    placeholder={t(
-                                        'userProfilePage.userBirthdayPlaceholder'
-                                    )}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.birthday}
-                                    {...formik.getFieldProps('birthday')}
-                                    isMobile={isMobile}
-                                    touched={formik.touched}
-                                    errors={formik.errors}
-                                />
-                                {formik.touched.birthday &&
-                                formik.errors.birthday ? (
-                                    <ErrorMessage>
-                                        {formik.errors.birthday}
-                                    </ErrorMessage>
-                                ) : null}
-                                <FormInput
-                                    labelTitle={t('userProfilePage.email')}
-                                    name="email"
-                                    placeholder={t(
-                                        'userProfilePage.userEmailPlaceholder'
-                                    )}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    {...formik.getFieldProps('email')}
-                                    isMobile={isMobile}
-                                    touched={formik.touched}
-                                    errors={formik.errors}
-                                />
-                                {formik.touched.email && formik.errors.email ? (
-                                    <ErrorMessage>
-                                        {formik.errors.email}
-                                    </ErrorMessage>
-                                ) : null}
-                                <FormInput
-                                    type="phone"
-                                    labelTitle={t('userProfilePage.phone')}
-                                    name="phone"
-                                    placeholder={t(
-                                        'userProfilePage.userPhonePlaceholder'
-                                    )}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.phone}
-                                    {...formik.getFieldProps('phone')}
-                                    isMobile={isMobile}
-                                    touched={formik.touched}
-                                    errors={formik.errors}
-                                />
-                                {formik.touched.phone && formik.errors.phone ? (
-                                    <ErrorMessage>
-                                        {formik.errors.phone}
-                                    </ErrorMessage>
-                                ) : null}
-                                <FormInput
-                                    labelTitle={t('userProfilePage.telegram')}
-                                    name="telegram"
-                                    placeholder={t(
-                                        'userProfilePage.userTelegramPlaceholder'
-                                    )}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.telegram}
-                                    {...formik.getFieldProps('telegram')}
-                                    isMobile={isMobile}
-                                    touched={formik.touched}
-                                    errors={formik.errors}
-                                />
-                                {formik.touched.telegram &&
-                                formik.errors.telegram ? (
-                                    <ErrorMessage>
-                                        {formik.errors.telegram}
-                                    </ErrorMessage>
-                                ) : null}
+                                <ErrorWrapper>
+                                    <FormInput
+                                        labelTitle={t(
+                                            'userProfilePage.userName'
+                                        )}
+                                        name="name"
+                                        placeholder={t(
+                                            'userProfilePage.userNamePlaceholder'
+                                        )}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.name}
+                                        {...formik.getFieldProps('name')}
+                                        isMobile={isMobile}
+                                        touched={formik.touched.name}
+                                        errors={formik.errors.name}
+                                    />
+                                    {formik.touched.name &&
+                                    formik.errors.name ? (
+                                        <ErrorMessage>
+                                            {formik.errors.name}
+                                        </ErrorMessage>
+                                    ) : null}
+                                </ErrorWrapper>
+                                <ErrorWrapper>
+                                    <FormInput
+                                        type="date"
+                                        labelTitle={t(
+                                            'userProfilePage.birthday'
+                                        )}
+                                        name="birthday"
+                                        placeholder={t(
+                                            'userProfilePage.userBirthdayPlaceholder'
+                                        )}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.birthday}
+                                        {...formik.getFieldProps('birthday')}
+                                        isMobile={isMobile}
+                                        touched={formik.touched.birthday}
+                                        errors={formik.errors.birthday}
+                                    />
+                                    {formik.touched.birthday &&
+                                    formik.errors.birthday ? (
+                                        <ErrorMessage>
+                                            {formik.errors.birthday}
+                                        </ErrorMessage>
+                                    ) : null}
+                                </ErrorWrapper>
+                                <ErrorWrapper>
+                                    <FormInput
+                                        labelTitle={t('userProfilePage.email')}
+                                        name="email"
+                                        placeholder={t(
+                                            'userProfilePage.userEmailPlaceholder'
+                                        )}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.email}
+                                        {...formik.getFieldProps('email')}
+                                        isMobile={isMobile}
+                                        touched={formik.touched.email}
+                                        errors={formik.errors.email}
+                                    />
+                                    {formik.touched.email &&
+                                    formik.errors.email ? (
+                                        <ErrorMessage>
+                                            {formik.errors.email}
+                                        </ErrorMessage>
+                                    ) : null}
+                                </ErrorWrapper>
+                                <ErrorWrapper>
+                                    <FormInput
+                                        type="phone"
+                                        labelTitle={t('userProfilePage.phone')}
+                                        name="phone"
+                                        placeholder={t(
+                                            'userProfilePage.userPhonePlaceholder'
+                                        )}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.phone}
+                                        {...formik.getFieldProps('phone')}
+                                        isMobile={isMobile}
+                                        touched={formik.touched.phone}
+                                        errors={formik.errors.phone}
+                                    />
+                                    {formik.touched.phone &&
+                                    formik.errors.phone ? (
+                                        <ErrorMessage>
+                                            {formik.errors.phone}
+                                        </ErrorMessage>
+                                    ) : null}
+                                </ErrorWrapper>
+                                <ErrorWrapper>
+                                    <FormInput
+                                        labelTitle={t(
+                                            'userProfilePage.telegram'
+                                        )}
+                                        name="telegram"
+                                        placeholder={t(
+                                            'userProfilePage.userTelegramPlaceholder'
+                                        )}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.telegram}
+                                        {...formik.getFieldProps('telegram')}
+                                        isMobile={isMobile}
+                                        touched={formik.touched.telegram}
+                                        errors={formik.errors.telegram}
+                                    />
+                                    {formik.touched.telegram &&
+                                    formik.errors.telegram ? (
+                                        <ErrorMessage>
+                                            {formik.errors.telegram}
+                                        </ErrorMessage>
+                                    ) : null}
+                                </ErrorWrapper>
                             </InputWrapper>
                             <SaveButton
                                 differentStyles={ButtonDifference.secondary}
@@ -500,7 +516,12 @@ const PlusIconWrapper = styled.div(({ theme }) => ({
 }));
 
 const ErrorMessage = styled(Chip)(({ theme }) => ({
+    position: 'absolute',
+    bottom: '-25%',
     color: theme.color.taskHighColor,
     fontSize: '12px',
     marginTop: '-1%',
 }));
+const ErrorWrapper = styled.div({
+    position: 'relative',
+});

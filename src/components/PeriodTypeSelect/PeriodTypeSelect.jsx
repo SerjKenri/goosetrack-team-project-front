@@ -10,19 +10,11 @@ export const PeriodTypeSelect = () => {
     return (
         <PeriodTypeSelectWrap>
             <PeriodTypeSelectBtn
-                // type="button"
-                // onClick={() =>
-                //     navigate(`/calendar/month/${moment().format('YYYY-MM')}`)
-                // }
                 to={`/calendar/month/${moment(period).format('YYYY-MM')}`}
             >
                 {t('calendarPage.toggleButton.month')}
             </PeriodTypeSelectBtn>
             <PeriodTypeSelectBtn
-                // type="button"
-                // onClick={() =>
-                //     navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)
-                // }
                 to={`/calendar/day/${moment(period).format('YYYY-MM-DD')}`}
                 style={{ borderRadius: '0px 8px 8px 0px' }}
             >

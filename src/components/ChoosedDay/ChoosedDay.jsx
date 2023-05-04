@@ -16,9 +16,13 @@ export const ChoosedDay = () => {
     const date = currentDay.slice(8, 10);
     const currentYear = currentDay.slice(0, 4);
     const currentMonth = currentDay.slice(5, 7);
-    const chooseDay = moment().day(date - 3);
+    const chooseDay = moment()
+        .month(currentMonth - 1)
+        .day(date - 3);
+
     const chooseWeek = [];
     let day = chooseDay;
+
     while (day <= chooseDay) {
         for (let i = chooseDay; i < chooseDay + 7; i++) {
             chooseWeek.push(moment(day));

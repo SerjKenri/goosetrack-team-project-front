@@ -160,6 +160,20 @@ export const LoginLink = styled(NavLink)(({ theme }) => ({
     boxShadow: '4px 2px 16px rgba(136, 165, 191, 0.48)',
     backgroundColor: theme.color.strPgBackgroundColor,
     color: theme.color.accentTextColor,
+    transition: 'all 0.2s linear',
+    '&:focus': {
+        outline: 'none',
+        boxShadow: '0 0 0 2px rgba(136, 165, 191, 0.78)',
+    },
+    '&:hover': {
+        backgroundColor: '#DCEBF7',
+        color: theme.color.accentTextColor,
+    },
+    '&:active': {
+        backgroundColor: '#DCEBF7',
+        color: theme.color.accentTextColor,
+        boxShadow: '0 0 0 2px rgba(136, 165, 191, 0.78)',
+    },
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         margin: '0',
         marginLeft: '24px',
@@ -183,6 +197,19 @@ export const SignupLink = styled(NavLink)(({ theme }) => ({
     textShadow: `0px 47px 355px rgba(0, 0, 0, 0.07),
         0px 9.4px 57.6875px rgba(0, 0, 0, 0.035)`,
     color: theme.color.btnTextColor,
+    transition: 'all 0.25s ease-in-out',
+    '&:hover': {
+        color: theme.color.hoverColor,
+        cursor: 'pointer',
+        textDecoration: 'none',
+    },
+    '&:focus': {
+        outline: 'none',
+        boxShadow: `0px 0px 8px ${theme.color.focusColor}`,
+    },
+    '&:active': {
+        color: theme.color.activeColor,
+    },
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         fontSize: '14px',
         lineHeight: '18px',

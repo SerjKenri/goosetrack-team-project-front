@@ -104,7 +104,6 @@ const CalendarWrapper = styled.ul`
     font-weight: 700;
     font-size: 12px;
     line-height: 1.17;
-    text-transform: uppercase;
     padding: 10px 0;
 `;
 const CalendarItem = styled.li`
@@ -130,7 +129,7 @@ const CalendarDay = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 1.125;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     margin-bottom: 4px;
 `;
 

@@ -44,7 +44,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                     </DayItem>
                 ))}
             </DayList>
-            <CalendarWrapper>
+            <CalendarWrapper as={'ul'}>
                 {calendarDays.map(calendarDay => {
                     const dayTasks = tasks.filter(
                         task => task.date === calendarDay.format('YYYY-MM-DD')
@@ -55,6 +55,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                                 'YYYY-MM-DD'
                             )}`}
                             key={calendarDay.format('DD-MM-YY')}
+                            as={'li'}
                         >
                             <CalendarCell
                                 isSelectedMonth={isSelectedMonth(calendarDay)}
@@ -71,7 +72,12 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                                                 key={dayTask.title}
                                                 priority={dayTask.priority}
                                             >
-                                                {dayTask.title}
+                                                {dayTask.title.length <= 12
+                                                    ? dayTask.title
+                                                    : dayTask.title.slice(
+                                                          0,
+                                                          9
+                                                      ) + '...'}
                                             </DayTask>
                                         ))
                                     ) : (
@@ -142,7 +148,6 @@ const CalendarWrapper = styled.div`
     font-weight: 700;
     font-size: 12px;
     line-height: 1.17;
-    text-transform: uppercase;
 `;
 
 const CalendarLink = styled(NavLink)`
@@ -150,28 +155,25 @@ const CalendarLink = styled(NavLink)`
 `;
 
 const CalendarDay = styled.div`
+    display: flex;
+
     text-align: center;
     font-weight: 600;
     font-size: 16px;
     line-height: 1.125;
-    text-transform: uppercase;
 `;
 const DayTasks = styled.div`
-    /* text-align: center; */
-    align-items: start;
-    font-weight: 600;
-    font-size: 6px;
-    line-height: 1.125;
-    text-transform: uppercase;
+    margin-top: 18px;
 `;
 
 const DayTask = styled.p(({ priority, theme }) => ({
-    // text- align: center;
+    display: 'flex',
     fontWeight: '700',
     fontSize: '14px',
     lineHeight: '1.3',
     borderRadius: '8px',
-    maxWidth: '50px',
+    // maxWidth: '100%',
+    padding: '4px 10px',
     backgroundColor:
         priority === 'high'
             ? theme.color.priorityHighColor
@@ -189,13 +191,10 @@ const DayTask = styled.p(({ priority, theme }) => ({
 const CalendarCell = styled.div`
     display: flex;
     flex-direction: column;
-    /* justify-content: flex-end; */
-    align-items: end;
     max-width: 100%;
     min-height: 94px;
-    /* text-align: right; */
-    padding-top: 12px;
-    padding-right: 12px;
+
+    padding: 8px;
 
     border: 1px solid rgba(220, 227, 229, 0.8);
 `;
@@ -204,6 +203,7 @@ const CalendarDate = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto;
     width: 22px;
     height: 22px;
     color: ${({ currentDay }) => (currentDay ? 'white' : 'black')};

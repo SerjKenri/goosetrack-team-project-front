@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:4000/api';
 
+// axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
+
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };

@@ -83,7 +83,9 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                 start: currentTask?.start ?? taskCreateTime,
                 end: currentTask?.end ?? defaultEndTime,
             }}
-            // validationSchema={taskFormSchema}
+
+            validationSchema={taskFormSchema}
+
             onSubmit={onSubmit}
         >
             {formik => (

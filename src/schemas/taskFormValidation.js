@@ -37,7 +37,7 @@ export const useTaskFormSchema = () => {
             .required(`${t('taskForm.errorRequired')}`),
         priority: yup
             .string()
-            .oneOf(priority, `${t('taskForm.priority')}`)
+            .oneOf(Object.values(priority), `${t('taskForm.priority')}`)
             .required(`${t('taskForm.errorRequired')}`),
         date: yup
             .string()
@@ -45,7 +45,9 @@ export const useTaskFormSchema = () => {
                 message: `${t('taskForm.dateFormat')}`,
             })
             .required(`${t('taskForm.errorRequired')}`),
-        category: yup.string().oneOf(status, `${t('taskForm.category')}`),
+        category: yup
+            .string()
+            .oneOf(Object.values(status), `${t('taskForm.category')}`),
         // .required(`${t('taskForm.errorRequired')}`),
     });
     return {

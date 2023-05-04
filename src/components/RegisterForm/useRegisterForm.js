@@ -10,8 +10,9 @@ export const useRegisterForm = () => {
 
     const dispatch = useDispatch();
 
-    const onSubmit = values => {
+    const onSubmit = (values, { resetForm }) => {
         dispatch(signUpUser(values));
+        resetForm();
     };
 
     const validationSchema = Yup.object().shape({

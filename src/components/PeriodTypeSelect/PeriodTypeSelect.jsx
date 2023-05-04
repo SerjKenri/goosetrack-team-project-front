@@ -1,27 +1,29 @@
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 export const PeriodTypeSelect = () => {
     const { t } = useTranslation();
-
-    const navigate = useNavigate();
+    const periodParams = useParams();
+    const [period] = Object.values(periodParams);
     return (
         <PeriodTypeSelectWrap>
             <PeriodTypeSelectBtn
-                type="button"
-                onClick={() =>
-                    navigate(`/calendar/month/${moment().format('YYYY-MM')}`)
-                }
+                // type="button"
+                // onClick={() =>
+                //     navigate(`/calendar/month/${moment().format('YYYY-MM')}`)
+                // }
+                to={`/calendar/month/${moment(period).format('YYYY-MM')}`}
             >
                 {t('calendarPage.toggleButton.month')}
             </PeriodTypeSelectBtn>
             <PeriodTypeSelectBtn
-                type="button"
-                onClick={() =>
-                    navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)
-                }
+                // type="button"
+                // onClick={() =>
+                //     navigate(`/calendar/day/${moment().format('YYYY-MM-DD')}`)
+                // }
+                to={`/calendar/day/${moment(period).format('YYYY-MM-DD')}`}
                 style={{ borderRadius: '0px 8px 8px 0px' }}
             >
                 {t('calendarPage.toggleButton.day')}
@@ -35,7 +37,10 @@ const PeriodTypeSelectWrap = styled.div`
     justify-content: flex-end;
 `;
 
-const PeriodTypeSelectBtn = styled.button(({ theme }) => ({
+const PeriodTypeSelectBtn = styled(NavLink)(({ theme }) => ({
+    '&.active': {
+        backgroundColor: '#CAE8FF',
+    },
     width: '76px',
     padding: '8px 16px',
     border: 'none',

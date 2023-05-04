@@ -2,9 +2,9 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+// axios.defaults.baseURL = 'http://localhost:4000/api';
 
-// axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
+axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;

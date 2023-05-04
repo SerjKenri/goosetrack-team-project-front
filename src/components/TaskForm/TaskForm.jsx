@@ -21,7 +21,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const { pathname } = useLocation();
     const { t } = useTranslation();
 
-    // const { taskFormSchema } = useTaskFormSchema();
+    const { taskFormSchema } = useTaskFormSchema();
 
     const { isMobile } = useMatchMedia();
     const dispatch = useDispatch();
@@ -83,9 +83,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                 start: currentTask?.start ?? taskCreateTime,
                 end: currentTask?.end ?? defaultEndTime,
             }}
-
             validationSchema={taskFormSchema}
-
             onSubmit={onSubmit}
         >
             {formik => (

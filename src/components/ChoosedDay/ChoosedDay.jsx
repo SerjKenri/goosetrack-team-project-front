@@ -77,17 +77,20 @@ export const ChoosedDay = () => {
 
 const CalendarContainer = styled.div`
     width: 100%;
+
     /* padding-top: 12px;
     padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
-
+*/
     @media screen and (min-width: 768px) {
-        padding-top: 16px;
+        width: '1087px';
+
+        /* padding-top: 16px;
         padding-bottom: 32px;
         padding-left: 32px;
-        padding-right: 32px;
-    } */
+        padding-right: 32px; */
+    }
 `;
 
 const CalendarWrapper = styled.ul`

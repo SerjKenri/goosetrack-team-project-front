@@ -21,6 +21,7 @@ export const ToolbarWrap = styled.div`
     width: 600px;
 
     @media screen and (min-width: 768px) {
+        width: 1087px;
         flex-direction: row;
         justify-content: space-between;
         margin-top: 64px;

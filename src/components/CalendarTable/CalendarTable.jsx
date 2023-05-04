@@ -95,6 +95,8 @@ const CalendarContainer = styled.div`
     padding-right: 20px;
 
     @media screen and (min-width: 768px) {
+        width: 1087px;
+
         padding-top: 16px 32px 32px;
         padding-bottom: 32px;
         padding-left: 32px;
@@ -189,7 +191,7 @@ const CalendarCell = styled.div`
     flex-direction: column;
     /* justify-content: flex-end; */
     align-items: end;
-    min-width: 100%;
+    max-width: 100%;
     min-height: 94px;
     /* text-align: right; */
     padding-top: 12px;

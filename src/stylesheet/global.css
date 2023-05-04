@@ -1,4 +1,6 @@
-@import "./fonts.css";
+@import './fonts.css';
+
+@import-normalize;
 
 html,
 body,
@@ -23,8 +25,8 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 h1,
@@ -33,62 +35,64 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 100%;
-  font-weight: normal;
+    font-size: 100%;
+    font-weight: normal;
 }
 
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 button,
 input,
 select {
-  margin: 0;
+    margin: 0;
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 img,
 video {
-  display: block;
-  height: auto;
-  max-width: 100%;
+    display: block;
+    height: auto;
+    max-width: 100%;
 }
 
 iframe {
-  border: 0;
+    border: 0;
 }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 td,
 th {
-  padding: 0;
+    padding: 0;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 
 body {
-  color: #111111;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  line-height: 1.5;
-  /* background-color: #ffffff; */
+    color: #111111;
+    font-family: 'Inter', Coolvetica, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* background-color: #ffffff; */
 }
 
 /* .container {

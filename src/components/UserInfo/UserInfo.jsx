@@ -36,6 +36,7 @@ const UserInfoContainer = styled.div(({ theme }) => ({
     alignItems: 'center',
     gap: '14px',
     position: 'relative',
+    cursor: 'pointer',
 }));
 const UserNameText = styled(UserInfoText)(({ isMobile }) => ({
     fontSize: isMobile ? '14px' : ' 18px',

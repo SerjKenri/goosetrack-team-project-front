@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskColumnCard from 'components/TaskColumnCard/TaskColumnCard';
+// import { useTheme } from 'core/theme/ThemeContext';
 
 const InnerQuoteList = React.memo(function InnerQuoteList({ tasks }) {
 // console.log(tasks);
@@ -44,7 +45,9 @@ export function ColumnsTasksList({
     title,
     useClone,
 }) {
-    const height = window.innerHeight * 0.4;
+    // const { theme } = useTheme()
+    // console.log(theme.breakpoints.s);
+    const height = window.innerHeight * 0.36;
 
     return (
         <Droppable

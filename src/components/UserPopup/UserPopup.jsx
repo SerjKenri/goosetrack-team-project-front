@@ -15,6 +15,8 @@ import { Icon } from 'core/kit/Icon';
 import { logoutUser } from 'redux/operations';
 import { ButtonDifference } from 'core/kit/Button';
 import { Button } from 'core/kit/Button';
+import { IconButton } from 'core/kit/IconButton';
+import { Backdrop } from 'components/Loader/Loader';
 
 export const UserPopup = ({ setIsShowPopup }) => {
     const dispatch = useDispatch();
@@ -33,37 +35,46 @@ export const UserPopup = ({ setIsShowPopup }) => {
     const handleClosePopup = () => {
         setIsShowPopup(false);
     };
+    
     return (
-        <PopupWrapper>
-            <UserInfoContainer>
-                <Avatar
-                    size={isMobile ? '38px' : '44px'}
-                    username={mainLetter}
-                    avatar={avatar}
-                />
-                <UserNameText isMobile={isMobile}>{username}</UserNameText>
-                <IconCrossWrapper onClick={handleClosePopup}>
+        <>
+            <Backdrop color="transparent" onClick={handleClosePopup} />
+            <PopupWrapper>
+                <UserInfoContainer>
+                    <Avatar
+                        size={isMobile ? '38px' : '44px'}
+                        username={mainLetter}
+                        avatar={avatar}
+                    />
+                    <UserNameText isMobile={isMobile}>{username}</UserNameText>
+                    <IconCrossButton
+                        onClick={handleClosePopup}
+                        iconName={iconNames.cross}
+                        buttonSize={20}
+                    />
+                    {/* <IconCrossWrapper onClick={handleClosePopup}>
                     <Icon name={iconNames.cross} size="16px" />
-                </IconCrossWrapper>
-            </UserInfoContainer>
-            <LinkWrapper isMobile={isMobile}>
-                <NavLinkStyled to="/account">
-                    <IconWrapper>
-                        <Icon name={iconNames.user} size={'100%'} />
-                    </IconWrapper>
-                    {t('sidebar.userNav.myAcc')}
-                </NavLinkStyled>
-            </LinkWrapper>
-            <LogoutButton
-                type="button"
-                differentStyles={ButtonDifference.primary}
-                title={t('sidebar.logout')}
-                onClick={handleLogout}
-                iconName={iconNames.logout}
-                iconSize="16px"
-                disabled={token ? false : true}
-            />
-        </PopupWrapper>
+                </IconCrossWrapper> */}
+                </UserInfoContainer>
+                <LinkWrapper isMobile={isMobile}>
+                    <NavLinkStyled onClick={handleClosePopup} to="/account">
+                        <IconWrapper>
+                            <Icon name={iconNames.user} size={'100%'} />
+                        </IconWrapper>
+                        {t('sidebar.userNav.myAcc')}
+                    </NavLinkStyled>
+                </LinkWrapper>
+                <LogoutButton
+                    type="button"
+                    differentStyles={ButtonDifference.primary}
+                    title={t('sidebar.logout')}
+                    onClick={handleLogout}
+                    iconName={iconNames.logout}
+                    iconSize="16px"
+                    disabled={token ? false : true}
+                />
+            </PopupWrapper>
+        </>
     );
 };
 
@@ -74,6 +85,7 @@ const PopupWrapper = styled.div(({ theme }) => ({
     position: 'absolute',
     top: '2%',
     right: '1%',
+    paddingBottom: '12px',
 
     width: '197px',
     boxShadow: 'rgba(136, 165, 191, 0.48) 4px 2px 16px',
@@ -81,20 +93,10 @@ const PopupWrapper = styled.div(({ theme }) => ({
     zIndex: '100',
     backgroundColor: theme.color.outletBackgroundColor,
 }));
-const IconCrossWrapper = styled.div(({ theme }) => ({
-    position: 'absolute',
-    top: '7%',
-    right: '0%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '40px',
-    height: '40px',
-    color: theme.color.calendarDateColor,
-    '&:hover': {
-        cursor: 'pointer',
-    },
-}));
+const IconCrossButton = styled(IconButton).attrs({
+    buttonStyle: { position: 'absolute', top: '10%', right: '4%' },
+})({});
+
 const UserInfoContainer = styled.div(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -111,7 +113,8 @@ const UserNameText = styled(UserInfoText)(({ isMobile }) => ({
     lineHeight: '18px',
 }));
 
-const LinkWrapper = styled.li(({ theme, isMobile }) => ({
+const LinkWrapper = styled.div(({ theme, isMobile }) => ({
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     gap: '18px',
@@ -130,6 +133,7 @@ const NavLinkStyled = styled(Link)(({ theme }) => ({
     fontSize: '14px',
     lineHeight: '17px',
     fontWeight: '600',
+    transition: 'background-color linear 200ms',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         fontSize: '16px',
@@ -156,5 +160,5 @@ const IconWrapper = styled.div(({ theme }) => ({
     },
 }));
 const LogoutButton = styled(Button).attrs(({ theme }) => ({
-    buttonStyle: { marginLeft: '14px', marginBottom: '14px' },
+    buttonStyle: { margin: 'auto' },
 }))({});

@@ -52,7 +52,7 @@ export const ChoosedDay = () => {
                                               .format('ddd')
                                               .slice(0, 1)
                                         : moment()
-                                              .day(day.format('D'))
+                                              .day(day.format('d'))
                                               .format('ddd')
                                               .toUpperCase()}
                                 </CalendarDay>

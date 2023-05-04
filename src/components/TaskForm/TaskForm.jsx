@@ -38,7 +38,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
 
     const onSubmit = values => {
         // e.preventDefault();
-
+console.log(values);
         if (currentTask) {
             const taskToUpdate = {
                 title: values.title,
@@ -184,7 +184,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
 export { TaskForm };
 
 const Form = styled.form(({ theme, isMobile }) => ({
-    outline: '2px solid red',
+    // outline: '2px solid red',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -272,8 +272,8 @@ const AddButton = styled(Button).attrs(({ theme, isMobile }) => ({
         fontSize: '14px',
         lineHeight: '1.28',
         fontWeight: '600',
-        width: !isMobile ? '182px' : '135px',
-        height: !isMobile ? '48px' : '42px',
+        // width: !isMobile ? '182px' : '135px',
+        // height: !isMobile ? '48px' : '42px',
     },
 }))({});
 
@@ -281,10 +281,11 @@ const CancelButton = styled(Button).attrs(({ theme, isMobile }) => ({
     buttonStyle: {
         textTransform: 'capitalize',
         fontSize: '14px',
-        lineHeight: '1.28',
-        fontWeight: '600',
-        width: !isMobile ? '144px' : '118px',
-        height: !isMobile ? '48px' : '42px',
+        color: theme.color.mainTextColor,
+        // lineHeight: '1.28',
+        // fontWeight: '600',
+        // width: !isMobile ? '144px' : '118px',
+        // height: !isMobile ? '48px' : '42px',
     },
 }))({});
 

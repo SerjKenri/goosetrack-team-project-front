@@ -13,7 +13,6 @@ export const ThemeToggler = () => {
             onClick={toggleTheme}
             iconName={iconType}
             buttonSize={window.innerWidth > 768 ? 32 : 24}
-            stroke="none"
-        ></IconButton>
+        />
     );
 };

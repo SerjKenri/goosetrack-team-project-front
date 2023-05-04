@@ -26,6 +26,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
     };
     // console.log(isSelectedMonth());
     const isMobileView = window.innerWidth < 768;
+    // console.log(calendarDays);
 
     return (
         <CalendarContainer>
@@ -95,18 +96,18 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
 
 const CalendarContainer = styled.div`
     width: 100%;
-    padding-top: 12px;
-    padding-bottom: 5px;
+    /* padding-top: 12px; */
+    /* padding-bottom: 5px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px; */
 
     @media screen and (min-width: 768px) {
-        width: 1087px;
+        /* width: 1087px; */
 
-        padding-top: 16px 32px 32px;
+        /* padding-top: 16px 32px 32px;
         padding-bottom: 32px;
         padding-left: 32px;
-        padding-right: 32px;
+        padding-right: 32px; */
     }
 `;
 
@@ -140,10 +141,12 @@ const DayItem = styled.li`
 
 const CalendarWrapper = styled.div`
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(32px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(32px, 1fr));
 
+    justify-self: self-start;
     background: #ffffff;
-    border: 1px solid rgba(220, 227, 229, 0.8);
+    /* border: 1px solid rgba(220, 227, 229, 0.8); */
     border-radius: 8px;
     font-style: normal;
     font-weight: 700;
@@ -168,7 +171,10 @@ const DayTasks = styled.div`
 `;
 
 const DayTask = styled.p(({ priority, theme }) => ({
-    display: 'flex',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    // display: 'flex',
     fontWeight: '700',
     fontSize: '14px',
     lineHeight: '1.3',
@@ -209,6 +215,7 @@ const CalendarDate = styled.div(({ currentDay, isSelectedMonth, theme }) => ({
     marginLeft: 'auto',
     width: '22px',
     height: '22px',
+
     color: isSelectedMonth
         ? theme.color.secondaryTextColor
         : currentDay

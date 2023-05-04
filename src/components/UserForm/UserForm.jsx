@@ -127,7 +127,7 @@ export const UserForm = () => {
                             dispatch(updateUser(formData));
                             // location.reload();
                         }
-
+                        toast.success('Your account has been updated');
                         setSubmitting(false);
                     }}
                 >

@@ -30,7 +30,7 @@ const PeriodPaginator = () => {
     const changePeriod = param === 'month' ? 'MMMM YYYY' : 'DD MMMM YYYY';
     const changeNavigatePeriod = param === 'month' ? 'YYYY-MM' : 'YYYY-MM-DD';
 
-    const monthName = moment(today).format(`${changePeriod}`);
+    const monthName = moment(currentDay).format(`${changePeriod}`);
     // today.clone().subtract(1, 'day');
     // today.clone().add(1, 'day');
 

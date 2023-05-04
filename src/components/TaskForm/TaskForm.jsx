@@ -19,23 +19,29 @@ import { RadioButton } from 'core/kit/RadioButtons';
 
 import { useLocation } from 'react-router-dom';
 
+import { useTaskFormSchema } from 'schemas/taskFormValidation';
+// import { useMatchMedia } from 'core/hooks/useMatchMedia';
+
 
 const TaskForm = ({ columnId, currentTask, closeModal }) => {
-    const {pathname} = useLocation()
+    const { pathname } = useLocation();
     const { t } = useTranslation();
+
+    const { taskFormSchema } = useTaskFormSchema();
+
     const { isMobile } = useMatchMedia();
+
     // const { current } = useParams();
     const dispatch = useDispatch();
     const PRIORITY = ['Low', 'Medium', 'High'];
     // const taskDay = currentTask?.date ? currentTask.date : current;
     // const currentDay = moment(Date.now()).format('YYYY-MM-DD');
 
-        // console.log(pathname.slice(14))
+    // console.log(pathname.slice(14))
 
     // const date = pathname.slice(14);
-    const date = new Date(pathname.slice(14))
+    const date = new Date(pathname.slice(14));
     const currentDay = moment(date).format('YYYY-MM-DD');
-
 
     // const userId = useSelector(selectUser)
     const taskCreateTime = currentTask?.start
@@ -103,7 +109,9 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                 start: currentTask?.start ?? taskCreateTime,
                 end: currentTask?.end ?? defaultEndTime,
             }}
-            // validationSchema={taskFormSchema}
+
+            validationSchema={taskFormSchema}
+
             onSubmit={onSubmit}
         >
             {formik => (

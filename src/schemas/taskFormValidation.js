@@ -1,60 +1,54 @@
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
-const status = {
-    TODO: 'to-do',
-    IN_PROGRESS: 'in-progress',
-    DONE: 'done',
-};
+export const useTaskFormSchema = () => {
+    const { t } = useTranslation();
+    const status = {
+        TODO: 'to-do',
+        IN_PROGRESS: 'in-progress',
+        DONE: 'done',
+    };
+    const priority = {
+        LOW: 'Low',
+        MEDIUM: 'Medium',
+        HIGH: 'High',
+    };
 
-const priority = {
-    LOW: 'low',
-    MEDIUM: 'medium',
-    HIGH: 'high',
-};
-
-// to od add locales for notification
-const taskFormSchema = yup.object().shape({
-    title: yup
-        .string()
-        .max(250, 'Максимальна довжина 250 символів')
-        .required("Обов'язково введіть заголовок"),
-    start: yup
-        .string()
-        .matches(/^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, {
-            message: 'Формат часу повинен бути у форматі HH:MM',
-        })
-        .required("Обов'язково введіть початковий час"),
-    end: yup
-        .string()
-        .matches(/^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, {
-            message: 'Формат часу повинен бути у форматі HH:MM',
-        })
-        .test(
-            'timeCheck',
-            'Кінцевий час повинен бути пізніше за початковий час',
-            function (value) {
+    const taskFormSchema = yup.object().shape({
+        title: yup
+            .string()
+            .max(250, `${t('taskForm.labelTitle')}`)
+            .required(`${t('taskForm.errorRequired')}`),
+        start: yup
+            .string()
+            .matches(/^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, {
+                message: `${t('taskForm.timeFormat')}`,
+            })
+            .required(`${t('taskForm.errorRequired')}`),
+        end: yup
+            .string()
+            .matches(/^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, {
+                message: `${t('taskForm.timeFormat')}`,
+            })
+            .test(`${t('taskForm.timeAlert')}`, function (value) {
                 const { start } = this.parent;
                 return !start || !value || start < value;
-            }
-        )
-        .required("Обов'язково введіть кінцевий час"),
-    priority: yup
-        .string()
-        .oneOf(priority, 'Пріоритет повинен бути низький, середній або високий')
-        .required("Обов'язково вкажіть пріоритет"),
-    date: yup
-        .string()
-        .matches(/^\d{4}-\d{2}-\d{2}$/, {
-            message: 'Формат дати повинен бути у форматі YYYY-MM-DD',
-        })
-        .required("Обов'язково введіть дату"),
-    category: yup
-        .string()
-        .oneOf(
-            status,
-            'Категорія повинна бути "to-do", "in-progress" або "done"'
-        )
-        .required("Обов'язково виберіть категорію"),
-});
-
-export { taskFormSchema };
+            })
+            .required(`${t('taskForm.errorRequired')}`),
+        priority: yup
+            .string()
+            .oneOf(priority, `${t('taskForm.priority')}`)
+            .required(`${t('taskForm.errorRequired')}`),
+        date: yup
+            .string()
+            .matches(/^\d{4}-\d{2}-\d{2}$/, {
+                message: `${t('taskForm.dateFormat')}`,
+            })
+            .required(`${t('taskForm.errorRequired')}`),
+        category: yup.string().oneOf(status, `${t('taskForm.category')}`),
+        // .required(`${t('taskForm.errorRequired')}`),
+    });
+    return {
+        taskFormSchema,
+    };
+};

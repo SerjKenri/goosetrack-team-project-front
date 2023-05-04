@@ -11,7 +11,7 @@ const PeriodPaginator = () => {
     const { currentDate, currentDay } = useParams();
 
     const [today, setToday] = useState(moment(currentDate));
-    console.log(today);
+    // console.log(today);
 
     let params = window.location.pathname.split('/');
     let param = params[3];

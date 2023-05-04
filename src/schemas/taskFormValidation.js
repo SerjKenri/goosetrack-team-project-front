@@ -3,16 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 export const useTaskFormSchema = () => {
     const { t } = useTranslation();
-    const status = {
-        TODO: 'to-do',
-        IN_PROGRESS: 'in-progress',
-        DONE: 'done',
-    };
-    const priority = {
-        LOW: 'Low',
-        MEDIUM: 'Medium',
-        HIGH: 'High',
-    };
+    const status = ['to-do', 'in-progress', 'done'];
+    const priority = ['Low', 'Medium', 'High'];
 
     const taskFormSchema = yup.object().shape({
         title: yup
@@ -37,19 +29,20 @@ export const useTaskFormSchema = () => {
             .required(`${t('taskForm.errorRequired')}`),
         priority: yup
             .string()
-            .oneOf(Object.values(priority), `${t('taskForm.priority')}`)
-            .required(`${t('taskForm.errorRequired')}`),
+            .oneOf(priority, t('taskForm.priority'))
+            .min(1, t('taskForm.errorRequired')),
         date: yup
             .string()
             .matches(/^\d{4}-\d{2}-\d{2}$/, {
-                message: `${t('taskForm.dateFormat')}`,
+                message: t('taskForm.dateFormat'),
             })
-            .required(`${t('taskForm.errorRequired')}`),
+            .min(1, t('taskForm.errorRequired')),
         category: yup
             .string()
-            .oneOf(Object.values(status), `${t('taskForm.category')}`),
-        // .required(`${t('taskForm.errorRequired')}`),
+            .oneOf(status, t('taskForm.category'))
+            .min(1, t('taskForm.errorRequired')),
     });
+
     return {
         taskFormSchema,
     };

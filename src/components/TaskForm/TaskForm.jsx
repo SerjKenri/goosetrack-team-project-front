@@ -197,11 +197,11 @@ const FormTitleInput = styled(Input).attrs(({ theme, isMobile }) => ({
     inputStyle: {
         outline: 'none',
         border: 'none',
-        backgroundColor: theme.color.popUpInputBackgroundColor,
+        backgroundColor: theme.color.popUpInputBgrColor,
         width: isMobile ? '267px' : '340px',
         height: isMobile ? '42px' : '46px',
         lineHeight: '1.3',
-        color: theme.color.mainTextColor,
+        color: theme.color.popUpInputTextColor,
         borderRadius: '8px',
         padding: isMobile ? '12px 15px 12px 15px' : '14px 18px 14px 18px',
         marginBottom: isMobile ? '16px' : '18px',
@@ -211,6 +211,7 @@ const FormTitleInput = styled(Input).attrs(({ theme, isMobile }) => ({
         lineHeight: '1.16',
         fontWeight: '500',
         marginBottom: '8px',
+        color: theme.color.popUpLabelTextColor,
     },
 }))({});
 
@@ -228,11 +229,11 @@ const FormInput = styled(Input).attrs(({ theme, isMobile }) => ({
     inputStyle: {
         outline: 'none',
         border: 'none',
-        backgroundColor: theme.color.popUpInputBackgroundColor,
+        backgroundColor: theme.color.popUpInputBgrColor,
         width: isMobile ? '126px' : '163px',
         height: isMobile ? '42px' : '46px',
         lineHeight: '1.3',
-        color: theme.color.mainTextColor,
+        color: theme.color.popUpInputTextColor,
         borderRadius: '8px',
         padding: isMobile ? '12px 14px 12px 14px' : '14px 18px 14px 18px',
     },
@@ -241,7 +242,7 @@ const FormInput = styled(Input).attrs(({ theme, isMobile }) => ({
         lineHeight: '1.16',
         fontWeight: '500',
         marginBottom: '8px',
-        color: theme.color.inputFieldTextColor,
+        color: theme.color.popUpLabelTextColor,
     },
 }))({});
 
@@ -256,6 +257,7 @@ const PriorityButtonItem = styled.li(({ theme }) => ({
     display: 'flex',
     marginRight: '16px',
     textTransform: 'capitalized',
+    color: theme.color.popUpLabelTextColor,
 }));
 
 const ButtonGroupContainer = styled.div({

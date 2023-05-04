@@ -57,7 +57,11 @@ function TaskColumnCard({
                         {userURL ? (
                             <Image src={userURL} alt="user avatar" />
                         ) : (
-                            <Icon size={'30'} name={iconNames.avatar} />
+                            <Icon
+                                size={'30'}
+                                name={iconNames.avatar}
+                                stroke="none"
+                            />
                         )}
                         <Chip priority={task.priority} />
                     </InfoGroup>

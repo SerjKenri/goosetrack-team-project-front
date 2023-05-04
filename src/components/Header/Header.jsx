@@ -1,7 +1,6 @@
 import { iconNames } from 'assets/icons/iconNames';
 import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
-import gooseimg from 'assets/images/goose-motivate@2x.png';
 import { UserInfo } from 'components/UserInfo/UserInfo';
 import { ThemeToggler } from 'components/ThemeToggler/ThemeToggler';
 import { useLocation, useParams } from 'react-router-dom';
@@ -9,15 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { LangaguesBar } from 'components/LangaguesBar/LangaguesBar';
 import { useSelector } from 'react-redux';
 import { selectTasks } from 'redux/tasks/tasks.selectors';
+import gooseimg from 'assets/images/goose-motivate.png';
+import gooseimg2x from 'assets/images/goose-register@2x.png';
+import gooseimg3x from 'assets/images/goose-sidebar@3x.png';
 
 export const Header = ({ onClick }) => {
     const location = useLocation();
     const { t } = useTranslation();
-
+    const { currentDay } = useParams();
     const tasks = useSelector(selectTasks);
-
-        const { currentDay } = useParams();
-
 
     const title =
         location.pathname === '/account'
@@ -30,14 +29,16 @@ export const Header = ({ onClick }) => {
 
     const motivation = (currentDay && todayTasks.length > 0) ? true : false
 
-
     return (
         <Container>
             <SideBarButton type="button" onClick={onClick}>
                 <Icon name={iconNames.burgerMenu} size={'100%'} />
             </SideBarButton>
             <LeftContainer>
-                <Image src={gooseimg} alt="goose-motivate" />
+                <Picture>
+                    <source srcSet={`${gooseimg} 1x, ${gooseimg2x} 2x, ${gooseimg3x} 3x`}/>
+                    <img src={gooseimg} alt="goose-motivate" />
+                </Picture>
                 <TextContainer>
                     <Title>{title}</Title>
                     {motivation && <Text>
@@ -64,7 +65,7 @@ const LeftContainer = styled.div(({ theme }) => ({
     },
 }));
 
-const Image = styled.img(({ theme }) => ({
+const Picture = styled.picture(({ theme }) => ({
     width: '64px',
 }));
 

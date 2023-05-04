@@ -18,12 +18,6 @@ const MainLayout = () => {
 
     const { isDesktop } = useMatchMedia();
 
-    // useEffect(() => {
-    //     if (isDesktop) {
-    //         setIsOpen(true);
-    //     } else setIsOpen(false);
-    // }, [isDesktop]);
-
     useEffect(() => {
         if (user.name === null) {
             dispatch(currentUser());

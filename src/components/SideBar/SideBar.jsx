@@ -2,7 +2,9 @@ import { LogOutButton } from 'components/LogoutBtn/LogOutButton';
 import { iconNames } from 'assets/icons/iconNames';
 import styled from 'styled-components';
 import { Icon } from 'core/kit/Icon';
-import gooseimg from '../../assets/images/goose-sidebar@2x.png';
+import gooseimg from '../../assets/images/goose-sidebar.png';
+import gooseimg2x from '../../assets/images/goose-sidebar@2x.png';
+import gooseimg3x from '../../assets/images/goose-sidebar@3x.png';
 import { UserNav } from 'components/UserNav/UserNav';
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +16,10 @@ export const SideBar = ({ onClick }) => {
             <SecondaryContainer>
                 <SideBarHeader>
                     <Logo>
-                        <Image src={gooseimg} alt="goose" />
+                         <Picture>
+                            <source srcSet={`${gooseimg} 1x, ${gooseimg2x} 2x, ${gooseimg3x} 3x`}/>
+                            <img src={gooseimg} alt="goose" />
+                        </Picture>
                         <Title>
                             G<Italic>oo</Italic>seTrack
                         </Title>
@@ -49,9 +54,7 @@ const Container = styled.div(({ theme }) => ({
     },
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
-        // height: 'initial',
         padding: '32px 24px',
-        // position: 'relative',
     },
 }));
 
@@ -87,7 +90,7 @@ const Logo = styled.div(({ theme }) => ({
     },
 }));
 
-const Image = styled.img(({ theme }) => ({
+const Picture = styled.picture(({ theme }) => ({
     width: '36px',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {

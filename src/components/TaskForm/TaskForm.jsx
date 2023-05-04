@@ -4,19 +4,14 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import 'moment/locale/uk';
 import { useState } from 'react';
-// import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { addTask, updateTask } from 'redux/operations';
 import { Button, ButtonDifference } from 'core/kit/Button';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// import { selectUserId } from 'redux/auth/auth.selectors';
-
 import { Formik } from 'formik';
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
 import { RadioButton } from 'core/kit/RadioButtons';
-// import { taskFormSchema } from 'schemas/taskFormValidation';
-
 import { useLocation } from 'react-router-dom';
 
 import { useTaskFormSchema } from 'schemas/taskFormValidation';
@@ -26,40 +21,20 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const { pathname } = useLocation();
     const { t } = useTranslation();
 
-    const { taskFormSchema } = useTaskFormSchema();
+    // const { taskFormSchema } = useTaskFormSchema();
 
     const { isMobile } = useMatchMedia();
-
-    // const { current } = useParams();
     const dispatch = useDispatch();
     const PRIORITY = ['Low', 'Medium', 'High'];
-    // const taskDay = currentTask?.date ? currentTask.date : current;
-    // const currentDay = moment(Date.now()).format('YYYY-MM-DD');
-
-    // console.log(pathname.slice(14))
-
-    // const date = pathname.slice(14);
     const date = new Date(pathname.slice(14));
     const currentDay = moment(date).format('YYYY-MM-DD');
-
-    // const userId = useSelector(selectUser)
     const taskCreateTime = currentTask?.start
         ? currentTask?.start
         : moment(Date.now()).format('HH:mm');
     const addMinutes = minutes => Date.now() + minutes * 60 * 1000;
     const defaultEndTime = moment(addMinutes(60)).format('HH:mm');
     const columns = useSelector(state => state.columns.columns.items);
-
-    // const [title, setTitle] = useState(currentTask?.title ?? '');
-    // const [start, setStart] = useState(currentTask?.start ?? taskCreateTime);
-    // const [end, setEnd] = useState(currentTask?.end ?? defaultEndTime);
     const [priority, setPriority] = useState(currentTask?.priority ?? 'low');
-
-    // const isValidStartTime = (day, time) => {
-    //     if (day === currentDay && time >= taskCreateTime) return true;
-    //     if (day > currentDay) return true;
-    // };
-    // const isValidEndTime = start <= end;
 
     const onSubmit = values => {
         // e.preventDefault();
@@ -108,7 +83,9 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                 start: currentTask?.start ?? taskCreateTime,
                 end: currentTask?.end ?? defaultEndTime,
             }}
+
             validationSchema={taskFormSchema}
+
             onSubmit={onSubmit}
         >
             {formik => (
@@ -155,7 +132,6 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
 
                             return (
                                 <PriorityButtonItem key={name}>
-                                    {/* <label> */}
                                     <RadioButton
                                         type="radio"
                                         name={name}
@@ -166,7 +142,6 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                                             setPriority(e.target.value)
                                         }
                                     />
-                                    {/* </label> */}
                                 </PriorityButtonItem>
                             );
                         })}
@@ -320,7 +295,6 @@ const EditButton = styled(Button).attrs(({ theme, isMobile }) => ({
         fontSize: '14px',
         lineHeight: '1.28',
         fontWeight: '600',
-        // width: !isMobile ? '340px' : '118px',
         height: !isMobile ? '48px' : '42px',
     },
 }))({});

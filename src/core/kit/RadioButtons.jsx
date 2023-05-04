@@ -90,6 +90,10 @@ const PriorityItem = styled.label`
 `;
 
 const PriorityButton = styled.span(({ theme, priority }) => ({
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '10px',
     height: '10px',
     borderRadius: '50%',
@@ -115,6 +119,8 @@ const PriorityInput = styled.input`
         border-radius: 50%;
         opacity: 0.5;
         border: 1px solid white;
+
+        border: 1px solid white;
     }
 `;
 
@@ -127,6 +133,7 @@ const PriorityChecked = styled.span(({ theme, priority }) => ({
     borderRadius: '50%',
     opacity: '0.5',
     border: '2px solid',
+
     borderColor:
         priority === 'Low'
             ? theme.color.taskLowColor

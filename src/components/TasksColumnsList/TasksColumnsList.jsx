@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 import { Loader } from 'components/Loader/Loader';
 import { selectIsLoadingColumns } from 'redux/columns/columns.selectors';
 import { selectIsLoadingTasks } from 'redux/tasks/tasks.selectors';
+import { reorder, reorderedTasksMap } from './utils';
 
 // <TasksColumnsList
 //     currentDate={{ year: '2023', month: '05' }} // u should use date here
@@ -35,10 +36,10 @@ const TasksColumnsList = ({
     const [columns, setColumns] = useState(null);
     const [ordered, setOrdered] = useState([]);
 
-    const loadingColumns = useSelector(selectIsLoadingColumns)
-    const loadingTasks = useSelector(selectIsLoadingTasks)
+    const loadingColumns = useSelector(selectIsLoadingColumns);
+    const loadingTasks = useSelector(selectIsLoadingTasks);
 
-    console.log(loadingColumns, loadingTasks)
+    // console.log(loadingColumns, loadingTasks);
 
     // const [isReadyRender, setIsreadyRender] = useState(false);
     // const [isLoading, setIsLoading] = useState(false);
@@ -139,6 +140,9 @@ const TasksColumnsList = ({
             // console.log('column', ordered);
             // console.log('source', source.index);
             // console.log('destination', destination.index);
+            const reordered = reorder(ordered, source.index, destination.index);
+            setOrdered(reordered);
+
             await dispatch(
                 updateColumns({
                     operationType: 'replaceColumn',
@@ -154,9 +158,6 @@ const TasksColumnsList = ({
             );
             await dispatch(fetchColumns());
             await dispatch(fetchTasks(currentDate));
-            // const reordered = reorder(ordered, source.index, destination.index);
-
-            // setOrdered(reordered);
 
             return;
         }
@@ -166,13 +167,12 @@ const TasksColumnsList = ({
             const destinationId =
                 columns[source.droppableId][result.destination.index]['_id'];
 
-            // const data = reorderedTasksMap({
-            //     tasksMap: columns,
-            //     source,
-            //     destination,
-            // });
-
-            // setColumns(data.tasksMap);
+            const data = reorderedTasksMap({
+                tasksMap: columns,
+                source,
+                destination,
+            });
+            setColumns(data.tasksMap);
 
             await dispatch(
                 updateTask({
@@ -188,8 +188,8 @@ const TasksColumnsList = ({
                     },
                 })
             );
-            await dispatch(fetchColumns());
             await dispatch(fetchTasks(currentDate));
+            await dispatch(fetchColumns());
             // setIsreadyRender(true);
 
             return;
@@ -201,6 +201,13 @@ const TasksColumnsList = ({
         ]?._id
             ? columns[destination.droppableId][result.destination.index]?._id
             : null;
+
+        const data = reorderedTasksMap({
+            tasksMap: columns,
+            source,
+            destination,
+        });
+        setColumns(data.tasksMap);
 
         await dispatch(
             updateTask({
@@ -218,63 +225,55 @@ const TasksColumnsList = ({
                 },
             })
         );
-        await dispatch(fetchColumns());
         await dispatch(fetchTasks(currentDate));
-
-        // const data = reorderedTasksMap({
-        //     tasksMap: columns,
-        //     source,
-        //     destination,
-        // });
-        // setColumns(data.tasksMap);
+        await dispatch(fetchColumns());
 
         // setIsLoading(false);
         // setIsreadyRender(true);
     };
 
     return (
-        (
-            <>
-                {(loadingColumns || loadingTasks) && <Loader />}
-                <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable
-                        droppableId="board"
-                        type="COLUMN"
-                        direction="horizontal"
-                        ignoreContainerClipping={Boolean(containerHeight)}
-                        isCombineEnabled={isCombineEnabled}
-                    >
-                        {provided => (
-                            <TasksColumnsListContainer
-                                innerHeight={height}
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                            >
-                                {ordered.map(column => {
-                                    return (
-                                        <TasksColumn
-                                            key={column?._id}
-                                            index={column?.position}
-                                            columnId={column?._id}
-                                            title={column.columnName}
-                                            tasks={columns[
-                                                column.columnName
-                                            ].sort((a, b) => {
+        <>
+            {(loadingColumns || loadingTasks) && <Loader />}
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable
+                    droppableId="board"
+                    type="COLUMN"
+                    direction="horizontal"
+                    ignoreContainerClipping={Boolean(containerHeight)}
+                    isCombineEnabled={isCombineEnabled}
+                >
+                    {provided => (
+                        <TasksColumnsListContainer
+                            innerHeight={height}
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {ordered.map(column => {
+                                return (
+                                    <TasksColumn
+                                        key={column?._id}
+                                        index={column?.position}
+                                        columnId={column?._id}
+                                        title={column.columnName}
+                                        tasks={columns[column.columnName].sort(
+                                            (a, b) => {
                                                 return a.position - b.position;
-                                            })}
-                                            isScrollable={withScrollableColumns}
-                                            isCombineEnabled={isCombineEnabled}
-                                            useClone={useClone}
-                                        />
-                                    );
-                                })}
-                                {provided.placeholder}
-                            </TasksColumnsListContainer>
-                        )}
-                    </Droppable>
-                </DragDropContext>
-            </>
-        )
+                                            }
+                                        )}
+                                        isScrollable={withScrollableColumns}
+                                        isCombineEnabled={isCombineEnabled}
+                                        useClone={useClone}
+                                    />
+                                );
+                            })}
+                            {provided.placeholder}
+                        </TasksColumnsListContainer>
+                    )}
+                </Droppable>
+            </DragDropContext>
+            
+        </>
     );
 };
 

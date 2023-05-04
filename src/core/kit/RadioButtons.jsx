@@ -97,10 +97,12 @@ const PriorityButton = styled.span(({ theme, priority }) => ({
     width: '10px',
     height: '10px',
     borderRadius: '50%',
+    opacity: '50%',
+    // border: '1px solid white',
     backgroundColor:
-        priority === 'Low'
+        priority === 'low'
             ? theme.color.taskLowColor
-            : priority === 'Medium'
+            : priority === 'medium'
             ? theme.color.taskMedColor
             : theme.color.taskHighColor,
 }));
@@ -117,29 +119,24 @@ const PriorityInput = styled.input`
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        opacity: 0.5;
-        border: 1px solid white;
-
-        border: 1px solid white;
+        opacity: 1;
     }
 `;
 
 const PriorityChecked = styled.span(({ theme, priority }) => ({
     position: 'absolute',
-    // top: '-3px',
-    // left: '-3px',
-    top: '-2px',
-    left: '-2px',
+    // top: '-2px',
+    // left: '-2px',
     width: '14px',
     height: '14px',
     borderRadius: '50%',
     opacity: '0.5',
-    border: '2px solid',
+    border: '1px solid',
 
     borderColor:
-        priority === 'Low'
+        priority === 'low'
             ? theme.color.taskLowColor
-            : priority === 'Medium'
+            : priority === 'medium'
             ? theme.color.taskMedColor
             : theme.color.taskHighColor,
 }));

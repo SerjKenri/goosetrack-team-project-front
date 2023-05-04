@@ -3,19 +3,16 @@ import { useTranslation } from 'react-i18next';
 
 export const useTaskFormSchema = () => {
     const { t } = useTranslation();
-
-    const STATUS = {
-        TODO: 'To-do',
-        IN_PROGRESS: 'In-progress',
-        DONE: 'Done',
+    const status = {
+        TODO: 'to-do',
+        IN_PROGRESS: 'in-progress',
+        DONE: 'done',
     };
-    const PRIORITY = {
-        LOW: 'low',
-        MEDIUM: 'medium',
-        HIGH: 'high',
+    const priority = {
+        LOW: 'Low',
+        MEDIUM: 'Medium',
+        HIGH: 'High',
     };
-
-    const TIME_REGEXP = /^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
     const taskFormSchema = yup.object().shape({
         title: yup
@@ -24,13 +21,13 @@ export const useTaskFormSchema = () => {
             .required(`${t('taskForm.errorRequired')}`),
         start: yup
             .string()
-            .matches(TIME_REGEXP, {
+            .matches(/^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, {
                 message: `${t('taskForm.timeFormat')}`,
             })
             .required(`${t('taskForm.errorRequired')}`),
         end: yup
             .string()
-            .matches(TIME_REGEXP, {
+            .matches(/^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, {
                 message: `${t('taskForm.timeFormat')}`,
             })
             .test(`${t('taskForm.timeAlert')}`, function (value) {
@@ -40,7 +37,7 @@ export const useTaskFormSchema = () => {
             .required(`${t('taskForm.errorRequired')}`),
         priority: yup
             .string()
-            .oneOf(Object.values(PRIORITY), `${t('taskForm.priority')}`)
+            .oneOf(Object.values(priority), `${t('taskForm.priority')}`)
             .required(`${t('taskForm.errorRequired')}`),
         date: yup
             .string()
@@ -50,9 +47,9 @@ export const useTaskFormSchema = () => {
             .required(`${t('taskForm.errorRequired')}`),
         category: yup
             .string()
-            .oneOf(Object.values(STATUS), `${t('taskForm.category')}`),
+            .oneOf(Object.values(status), `${t('taskForm.category')}`),
+        // .required(`${t('taskForm.errorRequired')}`),
     });
-
     return {
         taskFormSchema,
     };

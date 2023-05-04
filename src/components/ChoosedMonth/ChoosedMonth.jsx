@@ -21,7 +21,7 @@ export const ChoosedMonth = () => {
 
     return (
         <>
-            <CalendarTable tasks={tasks} />
+            <CalendarTable tasks={tasks} startDay={currentDate} />
         </>
     );
 };

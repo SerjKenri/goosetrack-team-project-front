@@ -49,43 +49,41 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                     const dayTasks = tasks.filter(
                         task => task.date === calendarDay.format('YYYY-MM-DD')
                     );
+                    const oneTask = dayTasks[0];
                     return (
-                        <CalendarLink
-                            to={`/calendar/day/${calendarDay.format(
-                                'YYYY-MM-DD'
-                            )}`}
-                            key={calendarDay.format('DD-MM-YY')}
-                            as={'li'}
-                        >
-                            <CalendarCell
-                                isSelectedMonth={isSelectedMonth(calendarDay)}
+                        <li key={calendarDay.format('DD-MM-YY')}>
+                            <CalendarLink
+                                to={`/calendar/day/${calendarDay.format(
+                                    'YYYY-MM-DD'
+                                )}`}
                             >
-                                <CalendarDate
-                                    currentDay={currentDay(calendarDay)}
+                                <CalendarCell
+                                    isSelectedMonth={isSelectedMonth(
+                                        calendarDay
+                                    )}
                                 >
-                                    {calendarDay.format('D')}
-                                </CalendarDate>
-                                <DayTasks>
-                                    {dayTasks !== [] ? (
-                                        dayTasks.map(dayTask => (
+                                    <CalendarDate
+                                        currentDay={currentDay(calendarDay)}
+                                    >
+                                        {calendarDay.format('D')}
+                                    </CalendarDate>
+                                    <DayTasks>
+                                        {oneTask !== undefined && (
                                             <DayTask
-                                                key={dayTask.title}
-                                                priority={dayTask.priority}
+                                                priority={oneTask.priority}
                                             >
-                                                {dayTask.title.length <= 12
-                                                    ? dayTask.title
-                                                    : dayTask.title.slice(
+                                                {oneTask.title.length <= 12
+                                                    ? oneTask.title
+                                                    : oneTask.title.slice(
                                                           0,
                                                           9
                                                       ) + '...'}
                                             </DayTask>
-                                        ))
-                                    ) : (
-                                        <p></p>
-                                    )}
-                                </DayTasks>
-                            </CalendarCell>
-                        </CalendarLink>
+                                        )}
+                                    </DayTasks>
+                                </CalendarCell>
+                            </CalendarLink>
+                        </li>
                     );
                 })}
             </CalendarWrapper>

@@ -202,14 +202,18 @@ const CalendarCell = styled.div(({ isSelectedMonth, theme }) => ({
     border: '1px solid rgba(220, 227, 229, 0.8)',
 }));
 
-const CalendarDate = styled.div(({ currentDay, theme }) => ({
+const CalendarDate = styled.div(({ currentDay, isSelectedMonth, theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 'auto',
     width: '22px',
     height: '22px',
-    color: currentDay ? theme.color.btnTextColor : theme.color.mainTextColor,
+    color: isSelectedMonth
+        ? theme.color.secondaryTextColor
+        : currentDay
+        ? theme.color.btnTextColor
+        : theme.color.mainTextColor,
     borderRadius: currentDay ? '6px' : 'none',
     backgroundColor: currentDay
         ? theme.color.accentBackgroundColor

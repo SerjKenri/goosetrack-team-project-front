@@ -56,14 +56,6 @@ export const App = () => {
                             element={<Navigate to={ROUTING.CALENDAR} />}
                         />
                         <Route
-                            path={ROUTING.ACCOUNT}
-                            element={<AccountPage />}
-                        />
-                        <Route
-                            path={ROUTING.CHANGE_PASS}
-                            element={<ChangePassPage />}
-                        />
-                        <Route
                             path={ROUTING.CALENDAR}
                             element={<CalendarPage />}
                         >
@@ -74,14 +66,23 @@ export const App = () => {
                                 }
                             />
                             <Route
-                                path={ROUTING.CURRENT_DAY}
-                                element={<CalendarDayPage />}
-                            />
-                            <Route
                                 path={ROUTING.CURRENT_MONTH}
                                 element={<CalendarMonthPage />}
                             />
+                            <Route
+                                path={ROUTING.CURRENT_DAY}
+                                element={<CalendarDayPage />}
+                            />
                         </Route>
+
+                        <Route
+                            path={ROUTING.ACCOUNT}
+                            element={<AccountPage />}
+                        />
+                        <Route
+                            path={ROUTING.CHANGE_PASS}
+                            element={<ChangePassPage />}
+                        />
                     </Route>
                 </Route>
             </Routes>

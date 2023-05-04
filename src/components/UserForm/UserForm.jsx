@@ -183,6 +183,7 @@ export const UserForm = () => {
                                             'userProfilePage.userNamePlaceholder'
                                         )}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.onBlur}
                                         value={formik.values.name}
                                         {...formik.getFieldProps('name')}
                                         isMobile={isMobile}
@@ -207,6 +208,7 @@ export const UserForm = () => {
                                             'userProfilePage.userBirthdayPlaceholder'
                                         )}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.onBlur}
                                         value={formik.values.birthday}
                                         {...formik.getFieldProps('birthday')}
                                         isMobile={isMobile}
@@ -228,6 +230,7 @@ export const UserForm = () => {
                                             'userProfilePage.userEmailPlaceholder'
                                         )}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.onBlur}
                                         value={formik.values.email}
                                         {...formik.getFieldProps('email')}
                                         isMobile={isMobile}
@@ -250,6 +253,7 @@ export const UserForm = () => {
                                             'userProfilePage.userPhonePlaceholder'
                                         )}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.onBlur}
                                         value={formik.values.phone}
                                         {...formik.getFieldProps('phone')}
                                         isMobile={isMobile}
@@ -273,6 +277,7 @@ export const UserForm = () => {
                                             'userProfilePage.userTelegramPlaceholder'
                                         )}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.onBlur}
                                         value={formik.values.telegram}
                                         {...formik.getFieldProps('telegram')}
                                         isMobile={isMobile}
@@ -431,7 +436,7 @@ const FormInput = styled(Input).attrs(
         inputStyle: {
             outline: 'none',
             border:
-                !errors && !touched
+                errors && touched
                     ? '1px solid' + theme.color.taskHighColor
                     : '1px solid' + theme.color.modalBorder,
             backgroundColor: theme.color.calendarCellColor,

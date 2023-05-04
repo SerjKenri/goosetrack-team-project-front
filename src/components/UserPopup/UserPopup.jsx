@@ -73,7 +73,7 @@ const Backdrop = styled.div(({ isOpen }) => ({
     left: 0,
     bottom: 0,
     right: 0,
-    zIndex: 900,
+    zIndex: 2,
     backgroundColor: 'transparent',
     transform: isOpen ? 'scale(1)' : 'scale(0)',
 }));
@@ -89,7 +89,7 @@ const PopupWrapper = styled.div(({ theme }) => ({
     width: '197px',
     boxShadow: 'rgba(136, 165, 191, 0.48) 4px 2px 16px',
     borderRadius: '8px',
-    zIndex: '100',
+    zIndex: '3',
     backgroundColor: theme.color.outletBackgroundColor,
 }));
 
@@ -110,12 +110,16 @@ const UserNameText = styled(UserInfoText)(({ isMobile }) => ({
 }));
 
 const LinkWrapper = styled.li(({ theme, isMobile }) => ({
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     gap: '18px',
     color: theme.color.inactiveBtnTextColor,
     borderBottom: '1px solid rgba(220, 227, 229, 0.3)',
     marginBottom: isMobile ? '32px' : '40px',
+    '&:hover': {
+        cursor: 'pointer',
+    },
 }));
 
 const NavLinkStyled = styled(Link)(({ theme }) => ({
@@ -154,5 +158,11 @@ const IconWrapper = styled.div(({ theme }) => ({
     },
 }));
 const LogoutButton = styled(Button).attrs(({ theme }) => ({
-    buttonStyle: { marginLeft: '14px', marginBottom: '14px' },
+    buttonStyle: {
+        marginLeft: '14px',
+        marginBottom: '14px',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
 }))({});

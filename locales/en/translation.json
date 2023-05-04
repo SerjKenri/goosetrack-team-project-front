@@ -139,6 +139,15 @@
             "actions": { "add": "add", "edit": "edit", "cancel": "cancel" }
         }
     },
+    "taskForm": {
+        "labelTitle": "Maximum length is 250 characters",
+        "errorRequired": "Це поле є обов'язковим",
+        "timeFormat": "Time format must be in HH:MM format",
+        "timeAlert": "End time must be later than the start time",
+        "priority": "Priority should be low, medium or high",
+        "dateFormat": "Date format must be in YYYY-MM-DD format",
+        "category": "Category must be \"to-do\", \"in-progress\" or \"done\""
+    },
     "userRoles": {
         "user": "user",
         "admin": "admin"

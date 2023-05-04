@@ -10,16 +10,21 @@ import { useNavigate } from 'react-router-dom';
 
 const PeriodPaginator = () => {
     const navigate = useNavigate();
-    const { currentDate } = useParams();
+    const { currentDate, currentDay } = useParams();
+    console.log(useParams());
 
-    const [today, setToday] = useState(moment(currentDate));
+    let params = window.location.pathname.split('/');
+    let param = params[3];
+
+    const changeUseParams = param === 'month' ? currentDate : currentDay;
+
+    const [today, setToday] = useState(moment(changeUseParams));
 
     // const periodTitle = usePeriodTitle(periodType, date);
 
     // const firstWeek = today.clone().startOf('isoWeek');
 
-    let params = window.location.pathname.split('/');
-    let param = params[3];
+    console.log(param);
 
     const day = today.clone().subtract(1, `${param}`);
     const daysInWeek = 7;
@@ -30,7 +35,7 @@ const PeriodPaginator = () => {
     const changePeriod = param === 'month' ? 'MMMM YYYY' : 'DD MMMM YYYY';
     const changeNavigatePeriod = param === 'month' ? 'YYYY-MM' : 'YYYY-MM-DD';
 
-    const monthName = moment(currentDate).format(`${changePeriod}`);
+    const monthName = moment(changeUseParams).format(`${changePeriod}`);
     // today.clone().subtract(1, 'day');
     // today.clone().add(1, 'day');
 

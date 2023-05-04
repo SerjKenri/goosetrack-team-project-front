@@ -29,6 +29,7 @@ import { ROUTING } from 'core/utils/constantsRouting';
 import { Modal } from 'core/Modal/Modal';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+// import { Calendar } from 'components/styledCalendar/styledCalendar';
 
 export const UserForm = () => {
     const filePicker = useRef('');
@@ -214,6 +215,7 @@ export const UserForm = () => {
                                         {formik.errors.birthday}
                                     </ErrorMessage>
                                 ) : null}
+                                {/* <Calendar /> */}
                                 <FormInput
                                     labelTitle={t('userProfilePage.email')}
                                     name="email"
@@ -283,7 +285,6 @@ export const UserForm = () => {
                         </Form>
                     )}
                 </Formik>
-
                 <ChangePassword
                     route={`/${ROUTING.CHANGE_PASS}`}
                     content={t('userProfilePage.changePassword')}

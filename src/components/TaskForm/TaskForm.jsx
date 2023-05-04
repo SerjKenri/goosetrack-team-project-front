@@ -22,7 +22,6 @@ import { useLocation } from 'react-router-dom';
 import { useTaskFormSchema } from 'schemas/taskFormValidation';
 // import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
-
 const TaskForm = ({ columnId, currentTask, closeModal }) => {
     const { pathname } = useLocation();
     const { t } = useTranslation();
@@ -109,9 +108,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
                 start: currentTask?.start ?? taskCreateTime,
                 end: currentTask?.end ?? defaultEndTime,
             }}
-
             validationSchema={taskFormSchema}
-
             onSubmit={onSubmit}
         >
             {formik => (

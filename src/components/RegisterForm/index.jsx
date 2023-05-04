@@ -194,31 +194,34 @@ export const RegisterForm = () => {
     );
 };
 
-const Form = styled.form`
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 24px 40px;
-    width: 335px;
-    margin-bottom: 18px;
-    background-color: #ffffff;
-    border-radius: 8px;
+const Form = styled.form(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px 24px 40px 24px',
+    width: '335px',
+    marginBottom: '18px',
+    backgroundColor: theme.color.mainBackgroundColor,
+    borderRadius: '8px',
 
-    @media (min-width: 768px) {
-        padding: 40px;
-        width: 480px;
-        margin-bottom: 24px;
-    }
-`;
-
-const SignUpFormTitle = styled.h1(({ theme }) => ({
-    fontFamily: 'Inter',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '18px',
-    lineHeight: 1.33,
-    color: theme.color.accentTextColor,
+    [theme.media.up(`${theme.breakpoints.m}px`)]: {
+        padding: '20px 40px 40px 40px',
+        width: '480px',
+        marginBottom: '24px',
+    },
 }));
+
+const SignUpFormTitle = styled.h1`
+    ${({ theme }) => `
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        color: ${theme.color.accentTextColor};
+        margin-bottom: 8px;
+        
+        @media (min-width: 768px) {
+            font-size:24px;
+        }`}
+`;
 
 const SignUpFormWrap = styled.div(({ theme }) => ({
     height: '100vh',

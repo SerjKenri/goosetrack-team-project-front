@@ -25,7 +25,7 @@ const TaskForm = ({ columnId, currentTask, closeModal }) => {
 
     const { isMobile } = useMatchMedia();
     const dispatch = useDispatch();
-    const PRIORITY = ['Low', 'Medium', 'High'];
+    const PRIORITY = ['low', 'medium', 'high'];
     const date = new Date(pathname.slice(14));
     const currentDay = moment(date).format('YYYY-MM-DD');
     const taskCreateTime = currentTask?.start

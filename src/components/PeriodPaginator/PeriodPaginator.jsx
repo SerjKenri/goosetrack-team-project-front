@@ -1,9 +1,7 @@
 import { Icon } from 'core/kit/Icon';
 import { iconNames } from 'assets/icons/iconNames';
 import styled from 'styled-components';
-// import { usePeriodTitle } from 'core/hooks/usePeriodTitle';
-// import { toPrevDate, toNextDate } from './tools/modifyDateByPeriod';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -12,16 +10,18 @@ const PeriodPaginator = () => {
     const navigate = useNavigate();
     const { currentDate, currentDay } = useParams();
 
+    const [today, setToday] = useState(moment(currentDate));
+    console.log(today);
+
     let params = window.location.pathname.split('/');
     let param = params[3];
+    let useDate = params[4];
+
+    useEffect(() => {
+        setToday(moment(useDate));
+    }, [useDate]);
 
     const changeUseParams = param === 'month' ? currentDate : currentDay;
-
-    const [today, setToday] = useState(moment(changeUseParams));
-
-    // const periodTitle = usePeriodTitle(periodType, date);
-
-    // const firstWeek = today.clone().startOf('isoWeek');
 
     const day = today.clone().subtract(1, `${param}`);
     const daysInWeek = 7;

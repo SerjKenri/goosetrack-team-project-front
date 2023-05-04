@@ -13,6 +13,12 @@ const colorsLight = {
     columnBackGroundColor: '#FFFFFF',
     modalShadow: '#1111111A',
 
+    /* pop-up modal window */
+    popUpBackGroundColor: '#FFFFFF',
+    popUpInputTextColor: '#616161',
+    popUpLabelTextColor: '#343434CC',
+    popUpInputBgrColor: '#F6F6F6',
+
     /* backgroung */
     mainBackgroundColor: '#ffffff',
     authBackgroundColor: '#dcebf7',
@@ -59,6 +65,14 @@ const colorsDark = {
     hoverColor: '#7aaff3',
     columnBackGroundColor: '#21222C',
     modalShadow: '#1111111A',
+
+    /* pop-up modal window */
+    popUpBackGroundColor: '#171820',
+    popUpInputTextColor: '#FFFFFF',
+    popUpLabelTextColor: '#FFFFFF',
+    popUpInputBgrColor: '#171820',
+    popUpCancelBtnColor: '#EFEFEF',
+    popUpAddBtnColor: '#3E85F3',
 
     /* backgroung */
     mainBackgroundColor: '#21222c',

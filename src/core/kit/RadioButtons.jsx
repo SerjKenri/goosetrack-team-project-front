@@ -126,8 +126,10 @@ const PriorityInput = styled.input`
 
 const PriorityChecked = styled.span(({ theme, priority }) => ({
     position: 'absolute',
-    top: '-3px',
-    left: '-3px',
+    // top: '-3px',
+    // left: '-3px',
+    top: '-2px',
+    left: '-2px',
     width: '14px',
     height: '14px',
     borderRadius: '50%',

@@ -17,8 +17,7 @@ const PeriodPaginator = () => {
     let param = params[3];
     let useDate = params[4];
 
-    console.log(`params: ${params}`, `param: ${param}`, `useDate: ${useDate}`)
-
+    // console.log(`params: ${params}`, `param: ${param}`, `useDate: ${useDate}`)
 
     const choosePer = param === 'day';
 

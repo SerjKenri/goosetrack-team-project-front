@@ -2,24 +2,20 @@ import { NavLink, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-
 export const PeriodTypeSelect = () => {
     const { t } = useTranslation();
     const periodParams = useParams();
     const [period] = Object.values(periodParams);
+
     return (
         <PeriodTypeSelectWrap>
             <PeriodTypeSelectBtn
-                to={`/calendar/month/${moment()
-                    .date(period)
-                    .format('YYYY-MM')}`}
+                to={`/calendar/month/${moment(period).format('YYYY-MM')}`}
             >
                 {t('calendarPage.toggleButton.month')}
             </PeriodTypeSelectBtn>
             <PeriodTypeSelectBtn
-                to={`/calendar/day/${moment()
-                    .date(period)
-                    .format('YYYY-MM-DD')}`}
+                to={`/calendar/day/${moment(period).format('YYYY-MM-DD')}`}
                 style={{ borderRadius: '0px 8px 8px 0px' }}
             >
                 {t('calendarPage.toggleButton.day')}

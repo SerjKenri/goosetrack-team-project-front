@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom';
 // import styled from 'styled-components';
 export const ChoosedMonth = () => {
     const { currentDate } = useParams();
-    console.log(currentDate);
     const currentYear = currentDate.slice(0, 4);
     const currentMonth = currentDate.slice(5, 7);
 

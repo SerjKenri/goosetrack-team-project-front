@@ -114,7 +114,7 @@
         "validation": {
             "validName": "The max length of the username is 16 characters",
             "validEmail": "The mail was entered incorrectly",
-            "validPhone": "The phone number must be in the format 380xxxxxxxxx",
+            "validPhone": "The phone number must be in the format +380xxxxxxxxx",
             "validTelegram": "The max length of the Telegram username is 16 characters",
             "required": " This field is required"
         }

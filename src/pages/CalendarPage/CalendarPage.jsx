@@ -19,7 +19,7 @@ const CalendarPage = () => {
     useEffect(() => {
         if (pathname.endsWith('calendar'))
         {navigate(`/calendar/month/${currentDate}`) }
-        // eslint-disable-next-line no-use-before-define
+        // eslint-disable-next-line
     }, [pathname])
 
     return (

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -19,6 +20,7 @@ import { IconButton } from 'core/kit/IconButton';
 import { Backdrop } from 'components/Loader/Loader';
 
 export const UserPopup = ({ isOpen, setIsOpen }) => {
+    const [showPopup, setIsShowPopup] = useState(false);
     const dispatch = useDispatch();
     const { isMobile } = useMatchMedia();
     const { t } = useTranslation();
@@ -36,10 +38,10 @@ export const UserPopup = ({ isOpen, setIsOpen }) => {
     const handleClosePopup = () => {
         setIsShowPopup(false);
     };
-    
+
     return (
         <>
-            <Backdrop color="transparent" onClick={handleClosePopup} />
+            <BackdropEl color="transparent" onClick={handleClosePopup} />
 
             <PopupWrapper>
                 <UserInfoContainer>
@@ -61,7 +63,6 @@ export const UserPopup = ({ isOpen, setIsOpen }) => {
                 </UserInfoContainer>
                 <LinkWrapper isMobile={isMobile}>
                     <NavLinkStyled onClick={handleClosePopup} to="/account">
-
                         <IconWrapper>
                             <Icon name={iconNames.user} size={'100%'} />
                         </IconWrapper>
@@ -81,7 +82,8 @@ export const UserPopup = ({ isOpen, setIsOpen }) => {
         </>
     );
 };
-const Backdrop = styled.div(({ isOpen }) => ({
+
+const BackdropEl = styled.div(({ isOpen }) => ({
     position: 'fixed',
     top: 0,
     left: 0,
@@ -112,7 +114,6 @@ const IconCrossButton = styled(IconButton).attrs({
     buttonStyle: { position: 'absolute', top: '10%', right: '4%' },
 })({});
 
-
 const UserInfoContainer = styled.div(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -129,9 +130,7 @@ const UserNameText = styled(UserInfoText)(({ isMobile }) => ({
     lineHeight: '18px',
 }));
 
-
 const LinkWrapper = styled.div(({ theme, isMobile }) => ({
-
     width: '100%',
     display: 'flex',
     alignItems: 'center',
@@ -181,7 +180,5 @@ const IconWrapper = styled.div(({ theme }) => ({
     },
 }));
 const LogoutButton = styled(Button).attrs(({ theme }) => ({
-
     buttonStyle: { margin: 'auto' },
-
 }))({});

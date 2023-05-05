@@ -12,7 +12,6 @@ const PeriodPaginator = () => {
     const { currentDate, currentDay } = useParams();
     const { t } = useTranslation();
     const [today, setToday] = useState(moment(currentDate));
-    // console.log(today);
 
     let params = window.location.pathname.split('/');
     let param = params[3];
@@ -66,6 +65,7 @@ const PeriodPaginator = () => {
     const monthName = moment(useDate).format('MMMM').toLowerCase();
     const currentYear = moment(currentDate).format('YYYY').toLowerCase();
     const currentD = moment(currentDay).format('DD');
+
     return (
         <RootWrapper>
             <DateParagraph>

@@ -4,8 +4,7 @@ import styled from 'styled-components';
 const LangaguesBar = () => {
     const LANGAGUES = ['en', 'ua'];
     const { i18n } = useTranslation();
-
-    console.log(i18n.resolvedLanguage)
+    // console.log(i18n.resolvedLanguage)
 
     return (
         <div>

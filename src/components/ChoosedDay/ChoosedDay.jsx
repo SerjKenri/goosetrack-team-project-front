@@ -119,7 +119,7 @@ const CalendarLink = styled(NavLink)`
     text-decoration: none;
     &.active {
         border-radius: 6px;
-        background-color: blue;
+        background-color: ${({ theme }) => theme.color.accentColor};
         color: white;
     }
 `;

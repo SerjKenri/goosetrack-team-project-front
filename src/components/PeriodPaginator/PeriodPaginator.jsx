@@ -18,6 +18,8 @@ const PeriodPaginator = () => {
     let param = params[3];
     let useDate = params[4];
 
+    const choosePer = param === 'day';
+
     useEffect(() => {
         setToday(moment(useDate));
     }, [useDate]);
@@ -60,10 +62,15 @@ const PeriodPaginator = () => {
     moment.locale('en');
     const monthName = moment(currentDate).format('MMMM').toLowerCase();
     const currentYear = moment(currentDate).format('YYYY').toLowerCase();
+    const currentD = moment(currentDay).format('DD');
     return (
         <RootWrapper>
             <DateParagraph>
-                {t(`months.${monthName}`) + ` ${currentYear}`}
+                {choosePer
+                    ? `${currentD} ` +
+                      t(`months.${monthName}`) +
+                      ` ${currentYear}`
+                    : t(`months.${monthName}`) + ` ${currentYear}`}
             </DateParagraph>
             <BtnWrapper>
                 {firstDay.map(i => {

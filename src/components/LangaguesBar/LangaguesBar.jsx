@@ -57,7 +57,7 @@ const StyledButton = styled.button`
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     border-color: #3498db;
-    color: ${props => props.theme.color.iconColor};
+    color: ${props => props.theme.color.mainTextColor};
     box-shadow: 0 0 15px 15px
             ${props => props.theme.color.accentBackgroundColor} inset,
         0 0 0 0 #3498db;
@@ -73,5 +73,5 @@ const StyledButton = styled.button`
 `;
 
 const Wrapper = styled.ul`
-    display: flex;    
+    display: flex;
 `;

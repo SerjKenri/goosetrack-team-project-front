@@ -1,11 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+
+const daysOfWeek = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+
 
 export const CalendarTable = ({ startDay, today, tasks }) => {
     let calendarDay = moment(startDay).startOf('month').startOf('week');
     let endWeek = moment(startDay).endOf('month');
+    const {t} = useTranslation()
     const calendarDays = [];
+
 
     while (calendarDay <= endWeek) {
         for (let i = 0; i < 7; i++) {
@@ -31,18 +37,14 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
     return (
         <CalendarContainer>
             <DayList>
-                {[...Array(7)].map((_, idx) => (
+                {daysOfWeek.map((day, idx) => (
                     <DayItem key={idx}>
                         <CalendarDay>
                             {isMobileView
-                                ? moment()
-                                      .day(idx + 1)
-                                      .format('ddd')
-                                      .slice(0, 1)
-                                : moment()
-                                      .day(idx + 1)
-                                      .format('ddd')
-                                      .toUpperCase()}
+                                ?
+                                t(`days.${day}`).toUpperCase().slice(0, 1)
+                                :
+                            t(`days.${day}`).toUpperCase().slice(0, 3)}
                         </CalendarDay>
                     </DayItem>
                 ))}

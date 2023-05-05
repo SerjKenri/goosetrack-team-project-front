@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/goosetrack-team-project-front/static/css/main.a763b200.css",
-    "main.js": "/goosetrack-team-project-front/static/js/main.1c23270a.js",
+    "main.js": "/goosetrack-team-project-front/static/js/main.9a21cae1.js",
     "static/media/Inter-Bold.eot": "/goosetrack-team-project-front/static/media/Inter-Bold.7e9fff4114e0ea385c94.eot",
     "static/media/Inter-Bold.ttf": "/goosetrack-team-project-front/static/media/Inter-Bold.44e2216a9e0d20ee04b6.ttf",
     "static/media/Inter-SemiBold.eot": "/goosetrack-team-project-front/static/media/Inter-SemiBold.d7ced04b4dc4d21fd205.eot",
@@ -30,6 +30,7 @@
     "static/media/Calendar3.jpg": "/goosetrack-team-project-front/static/media/Calendar3.4c2c7cdb440b6a114023.jpg",
     "static/media/CoolveticaRg-Italic.woff": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.d2afb6348017cacb5a92.woff",
     "static/media/CoolveticaRg-Regular.woff": "/goosetrack-team-project-front/static/media/CoolveticaRg-Regular.d7bc4174b8f5b1d10a2d.woff",
+    "static/media/goose@3x.png": "/goosetrack-team-project-front/static/media/goose@3x.2f0ba040f96711c23997.png",
     "static/media/goose-register.png": "/goosetrack-team-project-front/static/media/goose-register.1aedececc7c0f148895c.png",
     "static/media/goose-login.png": "/goosetrack-team-project-front/static/media/goose-login.b4670060498c1e79cd6c.png",
     "static/media/CoolveticaRg-Italic.woff2": "/goosetrack-team-project-front/static/media/CoolveticaRg-Italic.354b20eb1b8d25af62a1.woff2",
@@ -41,10 +42,10 @@
     "index.html": "/goosetrack-team-project-front/index.html",
     "static/media/getFetch.cjs": "/goosetrack-team-project-front/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.a763b200.css.map": "/goosetrack-team-project-front/static/css/main.a763b200.css.map",
-    "main.1c23270a.js.map": "/goosetrack-team-project-front/static/js/main.1c23270a.js.map"
+    "main.9a21cae1.js.map": "/goosetrack-team-project-front/static/js/main.9a21cae1.js.map"
   },
   "entrypoints": [
     "static/css/main.a763b200.css",
-    "static/js/main.1c23270a.js"
+    "static/js/main.9a21cae1.js"
   ]
 }

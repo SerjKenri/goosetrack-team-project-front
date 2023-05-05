@@ -18,6 +18,10 @@ export const ChoosedMonth = () => {
     useEffect(() => {
         dispatch(fetchTasks({ year: currentYear, month: currentMonth }));
     }, [currentMonth, currentYear, dispatch]);
+    // console.log('currentDate', currentDate);
+    // console.log('currentYear', currentYear);
+    // console.log('currentMonth', currentMonth);
+    // console.log('currentDate', currentDate);
 
     return (
         <>

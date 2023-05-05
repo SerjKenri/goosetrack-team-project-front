@@ -3,15 +3,21 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
-const daysOfWeek = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-
+const daysOfWeek = [
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+];
 
 export const CalendarTable = ({ startDay, today, tasks }) => {
-    let calendarDay = moment(startDay).startOf('month').startOf('week');
-    let endWeek = moment(startDay).endOf('month');
-    const {t} = useTranslation()
+    let calendarDay = moment(startDay).startOf('month').startOf('isoweek');
+    let endWeek = moment(startDay).endOf('month').endOf('isoweek');
+    const { t } = useTranslation();
     const calendarDays = [];
-
 
     while (calendarDay <= endWeek) {
         for (let i = 0; i < 7; i++) {
@@ -26,13 +32,9 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
 
     const isSelectedMonth = month => {
         const today = moment(startDay);
-
-        // const today = moment();
         return today.isSame(month, 'month');
     };
-    // console.log(isSelectedMonth());
     const isMobileView = window.innerWidth < 768;
-    // console.log(calendarDays);
 
     return (
         <CalendarContainer>
@@ -41,10 +43,8 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                     <DayItem key={idx}>
                         <CalendarDay>
                             {isMobileView
-                                ?
-                                t(`days.${day}`).toUpperCase().slice(0, 1)
-                                :
-                            t(`days.${day}`).toUpperCase().slice(0, 3)}
+                                ? t(`days.${day}`).toUpperCase().slice(0, 1)
+                                : t(`days.${day}`).toUpperCase().slice(0, 3)}
                         </CalendarDay>
                     </DayItem>
                 ))}
@@ -58,7 +58,7 @@ export const CalendarTable = ({ startDay, today, tasks }) => {
                     return (
                         <li key={calendarDay.format('DD-MM-YY')}>
                             <CalendarLink
-                                to={`/calendar/day/${calendarDay.format(
+                                to={`/calendar/day/${moment(calendarDay).format(
                                     'YYYY-MM-DD'
                                 )}`}
                             >

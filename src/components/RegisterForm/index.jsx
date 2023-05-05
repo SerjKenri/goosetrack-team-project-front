@@ -1,6 +1,6 @@
 // import { useTranslation } from 'react-i18next';
 import { useRegisterForm } from 'components/RegisterForm/useRegisterForm';
-import styled, {useTheme} from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Input } from 'core/kit/Input';
 import { Button, ButtonDifference } from 'core/kit/Button';
 import { iconNames } from 'assets/icons/iconNames';
@@ -15,14 +15,18 @@ import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
 
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
+import { useSelector } from 'react-redux';
+import { selectIsLoadingState } from 'redux/auth/auth.selectors';
+import { Loader } from 'components/Loader/Loader';
 
 export const RegisterForm = () => {
     const { t, onSubmit, validationSchema } = useRegisterForm();
     const { isDesktop, isMobile, isTablet } = useMatchMedia();
     const theme = useTheme();
+    const loading = useSelector(selectIsLoadingState)
 
     return (
-        <>
+        <>{loading && <Loader/>}
             <Formik
                 initialValues={{
                     email: '',
@@ -75,13 +79,14 @@ export const RegisterForm = () => {
                                                 : ''
                                         }
                                         inputStyle={{
-                                            fontWeight:'400',
+                                            fontWeight: '400',
                                             height: '46px',
                                             border:
                                                 touched.email && errors.email
                                                     ? '1px solid #E74A3B'
                                                     : '1px solid rgba(220, 227, 229, 0.6)',
-                                            backgroundColor: theme.color.calendarCellColor,
+                                            backgroundColor:
+                                                theme.color.calendarCellColor,
                                         }}
                                     />
                                 </SignUpLabel>
@@ -110,13 +115,14 @@ export const RegisterForm = () => {
                                                 : ''
                                         }
                                         inputStyle={{
-                                            fontWeight:'400',
+                                            fontWeight: '400',
                                             height: '46px',
                                             border:
                                                 touched.email && errors.email
                                                     ? '1px solid #E74A3B'
                                                     : '1px solid rgba(220, 227, 229, 0.6)',
-                                            backgroundColor: theme.color.calendarCellColor,
+                                            backgroundColor:
+                                                theme.color.calendarCellColor,
                                         }}
                                     />
                                 </SignUpLabel>
@@ -145,20 +151,25 @@ export const RegisterForm = () => {
                                                 : ''
                                         }
                                         inputStyle={{
-                                            fontWeight:'400',
+                                            fontWeight: '400',
                                             height: '46px',
                                             border:
                                                 touched.email && errors.email
                                                     ? '1px solid tomato'
                                                     : '1px solid #DCE3E5',
-                                            backgroundColor: theme.color.calendarCellColor,
+                                            backgroundColor:
+                                                theme.color.calendarCellColor,
                                         }}
                                     />
                                 </SignUpLabel>
                                 <SignButton
                                     type="submit"
                                     differentStyles={ButtonDifference.primary}
-                                    disabled={!values.email || !values.password || !values.name}
+                                    disabled={
+                                        !values.email ||
+                                        !values.password ||
+                                        !values.name
+                                    }
                                     title={t('signUpPage.signUp')}
                                     buttonStyle={{
                                         backgroundColor: '#3e85f3',

@@ -18,7 +18,7 @@ import { Button } from 'core/kit/Button';
 import { IconButton } from 'core/kit/IconButton';
 import { Backdrop } from 'components/Loader/Loader';
 
-export const UserPopup = ({ setIsShowPopup }) => {
+export const UserPopup = ({ isOpen, setIsOpen }) => {
     const dispatch = useDispatch();
     const { isMobile } = useMatchMedia();
     const { t } = useTranslation();
@@ -32,6 +32,7 @@ export const UserPopup = ({ setIsShowPopup }) => {
     const handleLogout = () => {
         dispatch(logoutUser());
     };
+
     const handleClosePopup = () => {
         setIsShowPopup(false);
     };
@@ -39,6 +40,7 @@ export const UserPopup = ({ setIsShowPopup }) => {
     return (
         <>
             <Backdrop color="transparent" onClick={handleClosePopup} />
+
             <PopupWrapper>
                 <UserInfoContainer>
                     <Avatar
@@ -47,6 +49,7 @@ export const UserPopup = ({ setIsShowPopup }) => {
                         avatar={avatar}
                     />
                     <UserNameText isMobile={isMobile}>{username}</UserNameText>
+
                     <IconCrossButton
                         onClick={handleClosePopup}
                         iconName={iconNames.cross}
@@ -58,6 +61,7 @@ export const UserPopup = ({ setIsShowPopup }) => {
                 </UserInfoContainer>
                 <LinkWrapper isMobile={isMobile}>
                     <NavLinkStyled onClick={handleClosePopup} to="/account">
+
                         <IconWrapper>
                             <Icon name={iconNames.user} size={'100%'} />
                         </IconWrapper>
@@ -77,6 +81,16 @@ export const UserPopup = ({ setIsShowPopup }) => {
         </>
     );
 };
+const Backdrop = styled.div(({ isOpen }) => ({
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 2,
+    backgroundColor: 'transparent',
+    transform: isOpen ? 'scale(1)' : 'scale(0)',
+}));
 
 const PopupWrapper = styled.div(({ theme }) => ({
     display: 'flex',
@@ -90,12 +104,14 @@ const PopupWrapper = styled.div(({ theme }) => ({
     width: '197px',
     boxShadow: 'rgba(136, 165, 191, 0.48) 4px 2px 16px',
     borderRadius: '8px',
-    zIndex: '100',
+    zIndex: '3',
     backgroundColor: theme.color.outletBackgroundColor,
 }));
+
 const IconCrossButton = styled(IconButton).attrs({
     buttonStyle: { position: 'absolute', top: '10%', right: '4%' },
 })({});
+
 
 const UserInfoContainer = styled.div(({ theme }) => ({
     display: 'flex',
@@ -113,7 +129,9 @@ const UserNameText = styled(UserInfoText)(({ isMobile }) => ({
     lineHeight: '18px',
 }));
 
+
 const LinkWrapper = styled.div(({ theme, isMobile }) => ({
+
     width: '100%',
     display: 'flex',
     alignItems: 'center',
@@ -121,6 +139,9 @@ const LinkWrapper = styled.div(({ theme, isMobile }) => ({
     color: theme.color.inactiveBtnTextColor,
     borderBottom: '1px solid rgba(220, 227, 229, 0.3)',
     marginBottom: isMobile ? '32px' : '40px',
+    '&:hover': {
+        cursor: 'pointer',
+    },
 }));
 
 const NavLinkStyled = styled(Link)(({ theme }) => ({
@@ -160,5 +181,7 @@ const IconWrapper = styled.div(({ theme }) => ({
     },
 }));
 const LogoutButton = styled(Button).attrs(({ theme }) => ({
+
     buttonStyle: { margin: 'auto' },
+
 }))({});

@@ -4,7 +4,7 @@ const media = {
             vertical ? 'height' : 'width'
         }: ${breakpoint})`,
     down: (breakpoint, vertical = false) =>
-        `@media (max-${vertical ? 'height' : 'width'}: ${breakpoint})`,
+        `@media (max-${vertical ? 'height' : 'width'}: calc(${breakpoint} - 0.02px))`,
     between: (breakpointMin, breakpointMax, vertical = false) =>
         `@media (max-${
             vertical ? 'height' : 'width'

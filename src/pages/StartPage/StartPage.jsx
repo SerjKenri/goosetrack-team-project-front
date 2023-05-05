@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import gooseimg from '../../assets/images/goose-sidebar@2x.png';
+import gooseimg from '../../assets/images/startPage/goose@3x.png';
 import ImageCalendar1 from '../../assets/images/startPage/Calendar1.jpg';
 import ImageCalendar2 from '../../assets/images/startPage/Calendar2.jpg';
 import ImageCalendar3 from '../../assets/images/startPage/Calendar3.jpg';
@@ -48,11 +48,12 @@ const StartPage = () => {
                     </ContentBox>
                     <ImageBox>
                         <ImageEllipse className="calendar" />
-                        <Images className="calendarOne" src={ImageCalendar1} />
-                        <Images className="calendarTwo" src={ImageCalendar2} />
+                        <Images className="calendarOne" src={ImageCalendar1} alt="calendar lite"/>
+                        <Images className="calendarTwo" src={ImageCalendar2} alt="calendar dark"/>
                         <Images
                             className="calendarThree"
                             src={ImageCalendar3}
+                            alt="calendar small"
                         />
                     </ImageBox>
                 </ContentItem>
@@ -67,10 +68,12 @@ const StartPage = () => {
                         <Images
                             className="navigationdark"
                             src={ImageNavigationDark}
+                            alt="navigation dark"
                         />
                         <Images
                             className="navigationlite"
                             src={ImageNavigationLite}
+                            alt="navigation lite"
                         />
                     </ImageBox>
                 </ContentItem>
@@ -83,7 +86,7 @@ const StartPage = () => {
                     </ContentBox>
                     <ImageBox>
                         <ImageEllipse className="day" />
-                        <Images className="day" src={ImageDay} />
+                        <Images className="day" src={ImageDay} alt="chosed day"/>
                     </ImageBox>
                 </ContentItem>
             </ContentList>
@@ -425,18 +428,19 @@ export const Images = styled.img(({ theme }) => ({
         },
     },
     '&.day': {
-        width: '496px',
-        height: '310px',
+        width: '518px',
+        height: '332px',
         left: '59px',
         top: '102px',
         padding: '11px',
         borderRadius: '8px',
         border: '1.5px solid rgba(62, 133, 243, 0.4)',
         [theme.media.up(`${theme.breakpoints.m}px`)]: {
-            width: '851px',
-            height: '532px',
+            width: '704px',
+            height: '568px',
             left: '84px',
             top: '84px',
+            padding: '18px',
         },
     },
 }));

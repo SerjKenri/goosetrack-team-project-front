@@ -4,14 +4,16 @@ import { signUpUser } from '../../redux/operations';
 import { useDispatch } from 'react-redux';
 
 export const useRegisterForm = () => {
-    const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+    const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,128})/;
+    
 
     const { t } = useTranslation();
 
     const dispatch = useDispatch();
 
-    const onSubmit = values => {
+    const onSubmit = (values, { resetForm }) => {
         dispatch(signUpUser(values));
+        resetForm();
     };
 
     const validationSchema = Yup.object().shape({

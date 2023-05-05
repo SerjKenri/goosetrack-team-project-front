@@ -4,7 +4,8 @@ import { signUpUser } from '../../redux/operations';
 import { useDispatch } from 'react-redux';
 
 export const useRegisterForm = () => {
-    const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+    const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,128})/;
+    
 
     const { t } = useTranslation();
 

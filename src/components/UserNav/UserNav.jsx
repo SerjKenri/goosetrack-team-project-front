@@ -3,11 +3,9 @@ import { Icon } from 'core/kit/Icon';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import moment from 'moment';
 
 export const UserNav = () => {
     const { t } = useTranslation();
-    const currentDate = moment().format('YYYY-MM');
     return (
         <UserNavContainer>
             <LinkWrapper>
@@ -19,7 +17,7 @@ export const UserNav = () => {
                 </NavLinkStyled>
             </LinkWrapper>
             <LinkWrapper>
-                <NavLinkStyled to={`/calendar/month/${currentDate}`}>
+                <NavLinkStyled to="/calendar">
                     <IconWrapper>
                         <Icon name={iconNames.calendar} size={'100%'} />
                     </IconWrapper>

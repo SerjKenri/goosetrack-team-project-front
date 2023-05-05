@@ -15,14 +15,18 @@ import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
 
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
+import { useSelector } from 'react-redux';
+import { selectIsLoadingState } from 'redux/auth/auth.selectors';
+import { Loader } from 'components/Loader/Loader';
 
 export const RegisterForm = () => {
     const { t, onSubmit, validationSchema } = useRegisterForm();
     const { isDesktop, isMobile, isTablet } = useMatchMedia();
     const theme = useTheme();
+    const loading = useSelector(selectIsLoadingState)
 
     return (
-        <>
+        <>{loading && <Loader/>}
             <Formik
                 initialValues={{
                     email: '',

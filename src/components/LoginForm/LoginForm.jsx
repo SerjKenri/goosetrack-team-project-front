@@ -17,16 +17,21 @@ import GooseLogIn2x from '../../assets/images/goose-login@2x.png';
 
 import { AuthNavigate } from 'components/AuthNavigate/AuthNavigate';
 import { ROUTING } from 'core/utils/constantsRouting';
+import { useSelector } from 'react-redux';
+import { selectIsLoadingState } from 'redux/auth/auth.selectors';
+import { Loader } from 'components/Loader/Loader';
 
 export const LoginForm = () => {
     const { t } = useTranslation();
     const { isTablet, isMobile } = useMatchMedia();
     const theme = useTheme();
     const { validationSchema } = useValidationSchema();
+    const loading = useSelector(selectIsLoadingState)
 
     const dispatch = useDispatch();
     
-    return (
+    return (<>
+        {loading && <Loader/>}
         <Formik
             initialValues={{
                 email: '',
@@ -164,6 +169,7 @@ export const LoginForm = () => {
                 </LoginFormWrap>
             )}
         </Formik>
+        </>
     );
 };
 

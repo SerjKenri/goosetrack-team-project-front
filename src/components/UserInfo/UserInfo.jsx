@@ -10,7 +10,7 @@ import { UserInfoText } from 'core/kit/text';
 import { useMatchMedia } from 'core/hooks/useMatchMedia';
 
 export const UserInfo = () => {
-    const [isShowPopup, setIsShowPopup] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const { isMobile } = useMatchMedia();
     const avatar = useSelector(selectUserAvatar);
     const username = useSelector(selectUserName) || '';
@@ -18,7 +18,7 @@ export const UserInfo = () => {
 
     return (
         <>
-            <UserInfoContainer onClick={() => setIsShowPopup(true)}>
+            <UserInfoContainer onClick={() => setIsOpen(true)}>
                 <UserNameText isMobile={isMobile}>{username}</UserNameText>
                 <Avatar
                     size={isMobile ? '32px' : '44px'}
@@ -26,7 +26,7 @@ export const UserInfo = () => {
                     avatar={avatar}
                 />
             </UserInfoContainer>
-            {isShowPopup && <UserPopup setIsShowPopup={setIsShowPopup} />}
+            {isOpen && <UserPopup setIsOpen={setIsOpen} isOpen={isOpen} />}
         </>
     );
 };
@@ -36,6 +36,9 @@ const UserInfoContainer = styled.div(({ theme }) => ({
     alignItems: 'center',
     gap: '14px',
     position: 'relative',
+    '&:hover': {
+        cursor: 'pointer',
+    },
 }));
 const UserNameText = styled(UserInfoText)(({ isMobile }) => ({
     fontSize: isMobile ? '14px' : ' 18px',

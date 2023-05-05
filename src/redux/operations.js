@@ -2,9 +2,9 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+// axios.defaults.baseURL = 'http://localhost:4000/api';
 
-// axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
+axios.defaults.baseURL = 'https://gooseplanner.onrender.com/api';
 
 const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -26,11 +26,13 @@ export const signUpUser = createAsyncThunk(
             setAuthHeader(resp.data.user.token);
 
             // navigate('/calendar/month', { replace: true });
-            toast.success('You are successfully registered! Verification send to your e-mail');
+            toast.success(
+                'You are successfully registered! Verification send to your e-mail'
+            );
             return resp.data;
         } catch (e) {
             toast.warning('User have been registered already');
-                        // toast.warning(e.message);
+            // toast.warning(e.message);
             return thunkAPI.rejectWithValue(e.message);
         }
     }

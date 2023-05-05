@@ -204,9 +204,7 @@ const CalendarCell = styled.div(({ isSelectedMonth, theme }) => ({
     minHeight: '94px',
 
     padding: '8px',
-    backgroundColor: isSelectedMonth
-        ? theme.color.mainBackgroundColor
-        : theme.color.modalBorder,
+    backgroundColor: isSelectedMonth ? theme.color.mainBackgroundColor : 'gray',
     border: '1px solid rgba(220, 227, 229, 0.8)',
 }));
 

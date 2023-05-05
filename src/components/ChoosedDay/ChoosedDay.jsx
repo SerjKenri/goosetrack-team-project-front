@@ -20,6 +20,9 @@ export const ChoosedDay = () => {
         .month(currentMonth - 1)
         .day(date - 3);
 
+    console.log(date);
+    console.log(chooseDay);
+
     const chooseWeek = [];
     let day = chooseDay;
 

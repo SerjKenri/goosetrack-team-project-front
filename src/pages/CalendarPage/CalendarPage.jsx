@@ -15,8 +15,9 @@ const CalendarPage = () => {
     const tasks = useSelector(selectTasks)
 
     useEffect(() => {
-        navigate(`/calendar/month/${currentDate}`)
-    }, [currentDate, navigate])
+        navigate(`/calendar/month/${currentDate}`) 
+        // eslint-disable-next-line no-use-before-define
+    }, [])
 
     return (
         <>

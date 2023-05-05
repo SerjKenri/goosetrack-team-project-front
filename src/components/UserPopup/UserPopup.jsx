@@ -15,7 +15,6 @@ import { Icon } from 'core/kit/Icon';
 import { logoutUser } from 'redux/operations';
 import { ButtonDifference } from 'core/kit/Button';
 import { Button } from 'core/kit/Button';
-import { IconButton } from 'core/kit/IconButton';
 
 export const UserPopup = ({ isOpen, setIsOpen }) => {
     const dispatch = useDispatch();
@@ -38,7 +37,11 @@ export const UserPopup = ({ isOpen, setIsOpen }) => {
 
     return (
         <>
-            <BackdropEl color="transparent" onClick={handleClosePopup} isOpen={isOpen} />
+            <BackdropEl
+                color="transparent"
+                onClick={handleClosePopup}
+                isOpen={isOpen}
+            />
 
             <PopupWrapper>
                 <UserInfoContainer>
@@ -48,15 +51,6 @@ export const UserPopup = ({ isOpen, setIsOpen }) => {
                         avatar={avatar}
                     />
                     <UserNameText isMobile={isMobile}>{username}</UserNameText>
-
-                    <IconCrossButton
-                        onClick={handleClosePopup}
-                        iconName={iconNames.cross}
-                        buttonSize={20}
-                    />
-                    {/* <IconCrossWrapper onClick={handleClosePopup}>
-                    <Icon name={iconNames.cross} size="16px" />
-                </IconCrossWrapper> */}
                 </UserInfoContainer>
                 <LinkWrapper isMobile={isMobile}>
                     <NavLinkStyled onClick={handleClosePopup} to="/account">
@@ -106,10 +100,6 @@ const PopupWrapper = styled.div(({ theme }) => ({
     zIndex: '3',
     backgroundColor: theme.color.outletBackgroundColor,
 }));
-
-const IconCrossButton = styled(IconButton).attrs({
-    buttonStyle: { position: 'absolute', top: '10%', right: '4%' },
-})({});
 
 const UserInfoContainer = styled.div(({ theme }) => ({
     display: 'flex',

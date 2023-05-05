@@ -70,14 +70,14 @@ const TaskColumn = styled.li(({ theme }) => ({
         theme.breakpoints.s + 'px',
         theme.breakpoints.m + 'px'
     )]: {
-        gridTemplateRows: `${theme.space.x10}px minmax(0, max-content)
- ${theme.space.x10}px`,
+        gridTemplateRows: `${theme.space.x9}px minmax(0, max-content)
+ ${theme.space.x9}px`,
         gap: theme.space.x5,
     },
 
     [theme.media.up(theme.breakpoints.m + 'px')]: {
-        gridTemplateRows: `${theme.space.x13}px minmax(0, max-content)
- ${theme.space.x13}px`,
+        gridTemplateRows: `${theme.space.x11}px minmax(0, max-content)
+ ${theme.space.x11}px`,
         padding: `${theme.space.x7}px ${theme.space.x6}px`,
         gap: theme.space.x7,
     },

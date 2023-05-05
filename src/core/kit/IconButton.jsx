@@ -12,6 +12,7 @@ const IconButton = ({
     buttonStyle,
     buttonSize = 16,
     stroke,
+    iconColor="currentColor",
 }) => {
     return (
         <>
@@ -21,7 +22,12 @@ const IconButton = ({
                 disabled={disabled}
                 buttonSize={buttonSize}
             >
-                <Icon name={iconName} size={'100%'} stroke={stroke} />
+                <Icon
+                    name={iconName}
+                    size={'100%'}
+                    color={iconColor}
+                    stroke={stroke}
+                />
             </ButtonWrapper>
         </>
     );

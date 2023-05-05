@@ -5,11 +5,12 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const PeriodPaginator = () => {
     const navigate = useNavigate();
     const { currentDate, currentDay } = useParams();
-
+    const { t } = useTranslation();
     const [today, setToday] = useState(moment(currentDate));
     // console.log(today);
 
@@ -21,7 +22,7 @@ const PeriodPaginator = () => {
         setToday(moment(useDate));
     }, [useDate]);
 
-    const changeUseParams = param === 'month' ? currentDate : currentDay;
+    // const changeUseParams = param === 'month' ? currentDate : currentDay;
 
     const day = today.clone().subtract(1, `${param}`);
     const daysInWeek = 7;
@@ -29,10 +30,10 @@ const PeriodPaginator = () => {
         day.add(1, 'day').clone()
     );
 
-    const changePeriod = param === 'month' ? 'MMMM YYYY' : 'DD MMMM YYYY';
+    // const changePeriod = param === 'month' ? 'MMMM YYYY' : 'DD MMMM YYYY';
     const changeNavigatePeriod = param === 'month' ? 'YYYY-MM' : 'YYYY-MM-DD';
 
-    const monthName = moment(changeUseParams).format(`${changePeriod}`);
+    // const monthName = moment(changeUseParams).format(`${changePeriod}`);
     // today.clone().subtract(1, 'day');
     // today.clone().add(1, 'day');
 
@@ -56,10 +57,14 @@ const PeriodPaginator = () => {
 
     const firstDay = totalDays.slice(0, 1);
     const TwoDay = totalDays.slice(1, 2);
-
+    moment.locale('en');
+    const monthName = moment(currentDate).format('MMMM').toLowerCase();
+    const currentYear = moment(currentDate).format('YYYY').toLowerCase();
     return (
         <RootWrapper>
-            <DateParagraph>{monthName}</DateParagraph>
+            <DateParagraph>
+                {t(`months.${monthName}`) + ` ${currentYear}`}
+            </DateParagraph>
             <BtnWrapper>
                 {firstDay.map(i => {
                     // console.log(today);

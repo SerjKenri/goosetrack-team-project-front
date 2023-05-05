@@ -44,7 +44,7 @@ const MainLayout = () => {
 };
 
 const LayoutContainer = styled.div(({ theme }) => ({
-    display: 'flex',
+    // display: 'flex',
     backgroundColor: theme.color.outletBackgroundColor,
     width: '100vw',
     height: '100%',
@@ -54,10 +54,11 @@ const SecondaryContainer = styled.div(({ theme }) => ({
     padding: '24px 20px 20px 20px',
     display: 'flex',
     width: '100%',
-    minHeight: '100vh',
+    height: '100vh',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '64px',
+    // justifyContent:'center',
+    gap: '14px',
 
     [theme.media.up(`${theme.breakpoints.m}px`)]: {
         padding: '24px 32px 32px 32px',
@@ -65,7 +66,7 @@ const SecondaryContainer = styled.div(({ theme }) => ({
 
     [theme.media.up(`${theme.breakpoints.l}px`)]: {
         padding: '24px 32px 32px 300px',
-        gap: '32px',
+        // gap: '32px',
     },
 }));
 

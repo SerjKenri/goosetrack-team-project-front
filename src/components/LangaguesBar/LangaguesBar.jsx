@@ -5,6 +5,8 @@ const LangaguesBar = () => {
     const LANGAGUES = ['en', 'ua'];
     const { i18n } = useTranslation();
 
+    console.log(i18n.resolvedLanguage)
+
     return (
         <div>
             <Wrapper>
@@ -18,6 +20,7 @@ const LangaguesBar = () => {
                                         : 'langId'
                                 }
                                 onClick={() => i18n.changeLanguage(langague)}
+                                className={i18n.resolvedLanguage === langague && 'active'}
                             >
                                 {langague}
                             </StyledButton>
@@ -66,7 +69,7 @@ const StyledButton = styled.button`
     font-family: Georgia;
     :hover,
     :focus,
-    :active {
+    &.active {
         color: ${props => props.theme.color.iconColor};
         box-shadow: 0 0 5px 0 #3498db inset, 0 0 5px 2px #3498db;
     }

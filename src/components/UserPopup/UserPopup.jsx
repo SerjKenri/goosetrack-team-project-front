@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -17,10 +16,8 @@ import { logoutUser } from 'redux/operations';
 import { ButtonDifference } from 'core/kit/Button';
 import { Button } from 'core/kit/Button';
 import { IconButton } from 'core/kit/IconButton';
-import { Backdrop } from 'components/Loader/Loader';
 
 export const UserPopup = ({ isOpen, setIsOpen }) => {
-    const [showPopup, setIsShowPopup] = useState(false);
     const dispatch = useDispatch();
     const { isMobile } = useMatchMedia();
     const { t } = useTranslation();
@@ -36,12 +33,12 @@ export const UserPopup = ({ isOpen, setIsOpen }) => {
     };
 
     const handleClosePopup = () => {
-        setIsShowPopup(false);
+        setIsOpen(false);
     };
 
     return (
         <>
-            <BackdropEl color="transparent" onClick={handleClosePopup} />
+            <BackdropEl color="transparent" onClick={handleClosePopup} isOpen={isOpen} />
 
             <PopupWrapper>
                 <UserInfoContainer>

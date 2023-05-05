@@ -9,8 +9,8 @@ import { LangaguesBar } from 'components/LangaguesBar/LangaguesBar';
 import { useSelector } from 'react-redux';
 import { selectTasks } from 'redux/tasks/tasks.selectors';
 import gooseimg from 'assets/images/goose-motivate.png';
-import gooseimg2x from 'assets/images/goose-register@2x.png';
-import gooseimg3x from 'assets/images/goose-sidebar@3x.png';
+import gooseimg2x from 'assets/images/goose-motivate@2x.png';
+import gooseimg3x from 'assets/images/goose-motivate@3x.png';
 
 export const Header = ({ onClick }) => {
     const location = useLocation();

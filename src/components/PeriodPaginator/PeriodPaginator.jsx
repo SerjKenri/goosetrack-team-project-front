@@ -18,6 +18,9 @@ const PeriodPaginator = () => {
     let param = params[3];
     let useDate = params[4];
 
+    console.log(`params: ${params}`, `param: ${param}`, `useDate: ${useDate}`)
+
+
     const choosePer = param === 'day';
 
     useEffect(() => {
@@ -60,7 +63,7 @@ const PeriodPaginator = () => {
     const firstDay = totalDays.slice(0, 1);
     const TwoDay = totalDays.slice(1, 2);
     moment.locale('en');
-    const monthName = moment(currentDate).format('MMMM').toLowerCase();
+    const monthName = moment(useDate).format('MMMM').toLowerCase();
     const currentYear = moment(currentDate).format('YYYY').toLowerCase();
     const currentD = moment(currentDay).format('DD');
     return (

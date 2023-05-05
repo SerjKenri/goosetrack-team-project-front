@@ -25,9 +25,12 @@ const CalendarPage = () => {
 
     return (
         <>
-            <CalendarToolbar />
+            
             {isLoading && <Loader />}
-            {tasks && <Outlet />}
+            {tasks && <>
+                <CalendarToolbar />
+                <Outlet />
+            </>}
         </>
     );
 };

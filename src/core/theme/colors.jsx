@@ -35,7 +35,7 @@ const colorsLight = {
     inputFieldColor: '#f6f6f6',
     taskCancelColor: '#efefef',
     inputFieldTextColor: '#616161',
-    iconColor: '#111111',
+    iconColor: '#3E85F3',
 
     /* calendar */
     priorityHighColor: '#ffd2dd',

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import {  Outlet, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-use';
 import { selectIsLoadingTasks, selectTasks } from 'redux/tasks/tasks.selectors';
 
 const CalendarPage = () => {
@@ -13,11 +14,13 @@ const CalendarPage = () => {
     const currentDate = moment().format('YYYY-MM')
     const isLoading = useSelector(selectIsLoadingTasks)
     const tasks = useSelector(selectTasks)
+    const { pathname }=useLocation()
 
     useEffect(() => {
-        navigate(`/calendar/month/${currentDate}`) 
+        if (pathname.endsWith('calendar'))
+        {navigate(`/calendar/month/${currentDate}`) }
         // eslint-disable-next-line no-use-before-define
-    }, [])
+    }, [pathname])
 
     return (
         <>
